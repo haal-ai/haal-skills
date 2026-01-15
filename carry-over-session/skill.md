@@ -15,18 +15,19 @@ metadata:
 # Create Carry-Over Session Note
 
 ## Purpose
-Based in the conversation we add uo to now, get the latest and most  imoortant informat and cCreate a  carry-over note with TWO items only:
-- **Next Prompt**: Exact prompt  you recommend to continue next session
-- **Files Needed**: Absolute paths to files  that will supoort best eth continuation of teh work 
+Based on the conversation up to now, create a carry-over note with TWO items only:
+- **Next Prompt**: Exact prompt you recommend to continue the next session
+- **Files Needed**: Absolute paths to files that will best support continuation of the work
 - **Optional - Brief Context**: Only if critical: 1–2 lines on current state
 
-## Instructions. 
+## Instructions
 **Write Next Prompt**
    - One clear, actionable prompt to resume work
-   - Include just enough context to start immediately2. 
+   - Include just enough context to start immediately
 **List Files Needed**
    - Use ABSOLUTE paths from workspace root (e.g., `c:\Users\<user>\coderepos\project\...`)
-   - Include all files to read and modify3. **Save File**
+   - Include all files to read and modify
+**Save File**
    - Path: `.olaf/work/carry-over/carry-over-YYYYMMDD-HHmm.txt`
 
 ## Template
