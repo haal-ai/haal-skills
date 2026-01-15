@@ -1,7 +1,7 @@
 ---
 task_id: "validate-review-parameters"
 task_name: "Validate Review Parameters and Environment"
-dependencies: ["context.timestamp"]
+dependencies: []
 conditions: []
 ---
 
@@ -9,7 +9,7 @@ conditions: []
 
 ## Input Context
 **Required Context Variables**: 
-- `context.timestamp`: Session timestamp from environment retrieval
+- `context.timestamp`: Session timestamp (YYYYMMDD-HHMMSS) from master skill initialization
 **Required Files**: None
 **Required Tools**: Git repository access
 

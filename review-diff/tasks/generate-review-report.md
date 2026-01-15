@@ -1,7 +1,7 @@
 ---
 task_id: "generate-review-report"
 task_name: "Generate Review Report"
-dependencies: ["context.findings", "context.save_report", "context.include_actions", "context.timestamp"]
+dependencies: ["context.findings", "context.save_report", "context.include_actions"]
 conditions: []
 ---
 
@@ -15,7 +15,7 @@ conditions: []
 - `context.actionable_commands`: Fix commands (if enabled)
 - `context.save_report`: Boolean - save to file or display
 - `context.include_actions`: Boolean - include fix commands
-- `context.timestamp`: Session timestamp
+- `context.timestamp`: Session timestamp (YYYYMMDD-HHMMSS) from master skill initialization
 - `context.language_categories`: Detected languages
 - `context.files_by_language`: Files categorized by language
 **Required Files**: None

@@ -41,23 +41,16 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 - **compliance_requirements**: array[string] - (Optional) Specific compliance standards (OWASP, NIST, company policies)
 
 **DEFAULT STANDARDS**: You MUST apply these universal coding standards:
-- **Universal Standards**: `.olaf/data/practices/standards/universal-coding-standards.md` - Universal coding principles, including
-  the default **Evolution/Refactoring Mode** for existing code and **Creation/New Code Mode** for new modules.
+- **Universal Standards**: `.olaf/data/practices/standards/universal-coding-standards.md` - Universal coding principles, including the default **Evolution/Refactoring Mode** for existing code and **Creation/New Code Mode** for new modules.
 - **Team Standards Search**: Automatically search `.olaf/data/practices/standards/` for team-specific standards files
 - **Integration Standards**: `.olaf/data/practices/standards/integration-testing-standards.md` - If applicable
-- **OLAF Framework**: Only apply `.olaf/docs/core-features/best-practices.md` for OLAF-specific development
 
 When the code under review is part of an **existing system**, treat the
 **Evolution/Refactoring Mode** as default:
-- Assume public APIs and observable behavior are frozen unless the user
-  explicitly requests API changes.
-- Focus feedback on internal structure: SRP, DI for externals, function size,
-  complexity, naming, error handling, and test coverage.
+- Assume public APIs and observable behavior are frozen unless the user explicitly requests API changes.
+- Focus feedback on internal structure: SRP, DI for externals, function size, complexity, naming, error handling, and test coverage.
 
-When the user explicitly asks for feedback on a **new module/tool/feature**
-(greenfield), also apply the **Creation/New Code Mode** from the universal
-standards (small design first, module boundaries, file size discipline,
-public API coherence, tests alongside new behavior).
+When the user explicitly asks for feedback on a **new module/tool/feature** (greenfield), also apply the **Creation/New Code Mode** from the universal standards (small design first, module boundaries, file size discipline, public API coherence, tests alongside new behavior).
 
 **CRITICAL**: Never assume what code to review. Always explicitly ask the user to specify:
 1. What code they want reviewed (copy-paste, file, folder, or repo)

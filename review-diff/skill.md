@@ -29,13 +29,33 @@ and `analyze-diff-with-router`) load and apply the same standards stack as
   **Creation/New Code Mode** only when the diff introduces new modules.
 
 **STARTUP REQUIREMENT**:
-Task Chain
+1. **Initialize Session**: Get current timestamp once at start
+2. **Task Chain Execution**: Execute all tasks with passed timestamp
 Task 1: Validate review parameters and environment
 Task 2: Collect git diff content
 Task 3: Detect file languages
 Task 4: Load repository practices for changed files
 Task 5: Analyze diff with language router (applying practices first)
 Task 6: Generate review report
+
+## Master Execution Protocol
+
+### Phase 1: Initialize Session
+1. **Get Current Timestamp**: 
+   - Use time tools to get current timestamp
+   - Format: YYYYMMDD-HHMMSS
+   - Store in `context.timestamp`
+
+### Phase 2: Execute Task Chain Loop
+For each task in task_chain:
+
+1. **Load Task Prompt**: Read task-specific prompt file
+2. **Check Dependencies**: Verify required context variables exist
+3. **Execute Task**: Run task with available context (including timestamp)
+4. **Pass Context**: Make results available to next task
+5. **Continue to Next**: Move to next task in chain
+
+**Critical**: Timestamp is passed automatically to all tasks - no individual time requests needed.
 
 ## Task Chain Definition
 
@@ -81,15 +101,18 @@ task_chain:
 
 ### Simple Context Passing
 Context is passed between tasks using simple variables:
-- `timestamp`: Session timestamp (YYYYMMDD-HHMMSS)
-- `os_info`: Operating system information
-- `shell_info`: Shell information
+- `timestamp`: Session timestamp (YYYYMMDD-HHMMSS) - collected once at start
+- `diff_content`: Git diff content
+- `review_scope`: Review scope (workspace, folder, file)
+- `target_path`: Target path for review
+- `languages_detected`: List of programming languages detected
+- `practices_loaded`: Repository practices loaded flag
+- `analysis_results`: Diff analysis results
 
-### Task 0 Outputs (retrieve-timestamp)
-- `timestamp`: Extracted timestamp string
-- `environment_extracted`: Boolean flag
-- `os_info`: OS details
-- `shell_info`: Shell details
+### Initial Session Setup
+**Collected Once at Start**:
+- `timestamp`: Current timestamp in YYYYMMDD-HHMMSS format
+- `session_initialized`: Boolean flag indicating session is ready
 
 ### Task 1 Outputs (validate-review-parameters)
 - `diff_content`: Pre-provided diff content or null
