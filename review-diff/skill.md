@@ -12,7 +12,6 @@ metadata:
 ## Master Chain Protocol
 
 **CRITICAL EXECUTION RULES**:
-- ALWAYS display the complete task list at the start of execution
 - Execute tasks in STRICT SEQUENTIAL ORDER
 - Load only ONE task prompt at a time
 - Pass context between tasks via simple variables
@@ -30,34 +29,22 @@ and `analyze-diff-with-router`) load and apply the same standards stack as
   **Creation/New Code Mode** only when the diff introduces new modules.
 
 **STARTUP REQUIREMENT**:
-Before executing any tasks, MUST display:
-```
-📋 Review Diff - Git Code Review
-================================
-Task 0: Retrieve timestamp and environment info
+Task Chain
 Task 1: Validate review parameters and environment
 Task 2: Collect git diff content
 Task 3: Detect file languages
 Task 4: Load repository practices for changed files
 Task 5: Analyze diff with language router (applying practices first)
 Task 6: Generate review report
-================================
-```
 
 ## Task Chain Definition
 
 ```yaml
 task_chain:
-  - id: "retrieve-timestamp"
-    name: "Retrieve timestamp and environment info"
-    prompt: "../../common/tasks/retrieve-timestamp.md"
-    required: true
-    
   - id: "validate-review-parameters"
     name: "Validate review parameters and environment"
     prompt: "tasks/validate-review-parameters.md"
     required: true
-    depends_on: ["retrieve-timestamp"]
     
   - id: "collect-git-diff"
     name: "Collect git diff content"

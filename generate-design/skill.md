@@ -16,7 +16,6 @@ metadata:
 ## Master Chain Protocol
 
 **CRITICAL EXECUTION RULES**:
-- ALWAYS display the complete task list at the start of execution
 - Execute tasks in STRICT SEQUENTIAL ORDER
 - Load only ONE task prompt at a time
 - Pass context between tasks via simple variables
@@ -24,17 +23,12 @@ metadata:
 - Each task must complete fully before next
 
 **STARTUP REQUIREMENT**:
-Before executing any tasks, MUST display:
-```
-📋 Generate System Design - Task Chain
-================================
-Task 0: Analyze EARS Specification
-Task 1: Identify Application Type
-Task 2: Design Layer Architecture
-Task 3: Create Task Breakdown
-Task 4: Generate Design Document
-================================
-```
+Task Chain
+Task 1: Analyze EARS Specification
+Task 2: Identify Application Type
+Task 3: Design Layer Architecture
+Task 4: Create Task Breakdown
+Task 5: Generate Design Document
 
 ## Task Chain Definition
 
@@ -84,7 +78,7 @@ Context is passed between tasks using simple variables:
 specification output from Phase 2 (transform-raw-spec), typically named `specification.md` or 
 `specification-final.md` in the ESDI output directory.
 
-**Task 0 Output** (Analyze Specification):
+**Task 1 Output** (Analyze Specification):
 - `functional_requirements[]`: Key functional requirements
 - `quality_attributes[]`: Performance, reliability, security
 - `constraints[]`: Limitations and restrictions
@@ -93,33 +87,30 @@ specification output from Phase 2 (transform-raw-spec), typically named `specifi
 - `interaction_model`: sync | async | batch | interactive
 - `complexity_level`: simple | moderate | complex
 
-**Task 1 Output** (Identify Application Type):
+**Task 2 Output** (Identify Application Type):
 - `application_type`: etl | frontend | backend-api | cli-tool | data-analysis | event-driven | batch-processing | microservice
 - `confidence_level`: high | medium | low
 - `type_rationale`: Why this type was chosen
 - `selected_pattern`: Pattern number and name
 - `expected_layers`: Number of layers (3-5)
 
-**Task 2 Output** (Design Layer Architecture):
+**Task 3 Output** (Design Layer Architecture):
 - `layer_definitions[]`: Complete layer specs
 - `architecture_diagram`: ASCII diagram of layers
 
-**Task 3 Output** (Create Task Breakdown):
+**Task 4 Output** (Create Task Breakdown):
 - `task_breakdown[]`: Executable task definitions
 - `critical_path[]`: Longest sequential chain
 - `parallelizable_tasks[]`: Concurrent execution groups
 - `total_execution_time`: Sum estimate
 
-**Task 4 Output** (Generate Design Document):
+**Task 5 Output** (Generate Design Document):
 - `design_document_path`: Path to created file
 - `design_complete`: true
 
 ## Master Execution Protocol
 
-### 1. Display Task Chain
-Show complete task list to user before starting.
-
-### 2. Execute Task Chain Loop
+### 1. Execute Task Chain Loop
 For each task in task_chain:
 
 1. **Load Task Prompt**: Read task-specific prompt file from `tasks/` directory
@@ -128,7 +119,7 @@ For each task in task_chain:
 4. **Pass Context**: Make results available to next task
 5. **Continue to Next**: Move to next task in chain
 
-### 3. Propose-Act Protocol
+### 2. Propose-Act Protocol
 After Task 2 (Design Layer Architecture), MUST get user approval:
 
 ```

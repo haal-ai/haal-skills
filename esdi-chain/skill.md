@@ -81,8 +81,7 @@ Use it as a reference guide for the 4-phase process.
 
 ```
 1. Get environment information and timestamp:
-   Run: python skills/common/tools/get-env.py
-   Extract: timestamp (YYYYMMDD format)
+   Initialize session context for tracking.
 
 2. List existing ESDI sessions:
    Execute task: tasks/list-esdi-sessions.md

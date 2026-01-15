@@ -348,7 +348,7 @@ You WILL record:
 
 **Generate Carry-Over Document:**
 
-You WILL create carry-over using `[id:ack_dir]competencies/common/prompts/carry-over-session.md`:
+You WILL create carry-over using `prompts/carry-over-session.md`:
 
 Execute carry-over creation with this context:
 

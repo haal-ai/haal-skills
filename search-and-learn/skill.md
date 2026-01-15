@@ -78,7 +78,7 @@ task_chain:
     name: "Generate learning report"
     prompt: "tasks/generate-learning-report.md"
     required: true
-    depends_on: ["apply-test-learning", "retrieve-timestamp"]
+    depends_on: ["apply-test-learning"]
 ```
 
 ## State Management

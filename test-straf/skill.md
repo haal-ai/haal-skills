@@ -12,7 +12,6 @@ metadata:
 ## Master Chain Protocol
 
 **CRITICAL EXECUTION RULES**:
-- ALWAYS display the complete task list at the start of execution
 - Execute tasks in STRICT SEQUENTIAL ORDER
 - Load only ONE task prompt at a time
 - Pass context between tasks via simple variables
@@ -20,27 +19,16 @@ metadata:
 - Each task must complete fully before next
 
 **STARTUP REQUIREMENT**:
-Before executing any tasks, MUST display:
-```
-📋 STRAF Code Review Test - Task Chain
-========================================
-Task 0: Retrieve timestamp and environment information
+Task Chain
 Task 1: Detect language from code files
 Task 2: Prepare code context for review
 Task 3: Execute STRAF code review
 Task 4: Display review results
-========================================
-```
 
 ## Task Chain Definition
 
 ```yaml
 task_chain:
-  - id: "retrieve-timestamp"
-    name: "Retrieve timestamp and environment information"
-    prompt: "../common/tasks/retrieve-timestamp.md"
-    required: true
-    
   - id: "detect-language"
     name: "Detect language from code files"
     prompt: "tasks/task-1-detect-language.md"
@@ -53,7 +41,7 @@ task_chain:
     
   - id: "execute-straf"
     name: "Execute STRAF code review"
-    prompt: "../common/tasks/call-straf-agent.md"
+    prompt: "tasks/call-straf-agent.md"
     required: true
     
   - id: "display-results"
@@ -63,10 +51,6 @@ task_chain:
 ```
 
 ## Chain Execution Flow
-
-### Task 0: Retrieve Timestamp
-- Run common timestamp retrieval task
-- Store timestamp in context
 
 ### Task 1: Detect Language
 - Examine file extensions in workspace

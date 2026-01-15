@@ -1,6 +1,6 @@
 ---
 name: generate-implementation-plan
-description: Transform design document into executable implementation task plan with Task 0.0, requirement traceability, and bootstrap integration
+description: Transform design document into executable implementation task plan with requirement traceability and bootstrap integration
 license: Apache-2.0
 ---
 
@@ -12,7 +12,7 @@ license: Apache-2.0
 
 ## Mission
 
-Transform layered system design into detailed, executable implementation plan following the onboarding competency pattern with Task 0.0 for context extraction and bootstrap orchestrator integration.
+Transform layered system design into detailed, executable implementation plan following the onboarding competency pattern with bootstrap orchestrator integration.
 
 ## Context Variables
 
@@ -29,44 +29,44 @@ Transform layered system design into detailed, executable implementation plan fo
 
 ## Task Chain
 
-This coordinator executes **7 sequential tasks** using the Propose-Act protocol:
+This coordinator executes **6 sequential tasks** using the Propose-Act protocol:
 
 ```yaml
 workflow:
   type: master-chain
   protocol: Propose-Act
   tasks:
-    - id: 0
+    - id: 1
       name: extract-requirements-and-design
       file: tasks/extract-requirements-and-design.md
       propose_after: true
       
-    - id: 1
+    - id: 2
       name: generate-task-zero
       file: tasks/generate-task-zero.md
       propose_after: true
       
-    - id: 2
+    - id: 3
       name: create-task-breakdown
       file: tasks/create-task-breakdown.md
       propose_after: true
       
-    - id: 3
+    - id: 4
       name: validate-requirement-coverage
       file: tasks/validate-requirement-coverage.md
       propose_after: true
       
-    - id: 4
+    - id: 5
       name: generate-execution-steps
       file: tasks/generate-execution-steps.md
       propose_after: true
       
-    - id: 5
+    - id: 6
       name: create-bootstrap-integration
       file: tasks/create-bootstrap-integration.md
       propose_after: true
       
-    - id: 6
+    - id: 7
       name: generate-plan-document
       file: tasks/generate-plan-document.md
       propose_after: false  # Final task, just execute
@@ -76,7 +76,7 @@ workflow:
 
 ## Execution Flow
 
-### PHASE 1: Extract Requirements and Design (Task 0)
+### PHASE 1: Extract Requirements and Design (Task 1)
 
 **Objective**: Parse specification.md and design.md to extract EARS requirements, layers, components, and dependencies
 
@@ -133,7 +133,7 @@ Propose-Act Gate:
 
 ---
 
-### PHASE 2: Generate Task 0.0 (Task 1)
+### PHASE 2: Generate Task 0.0 (Task 2)
 
 **Objective**: Create Task 0.0 following current onboarding 0.3 pattern
 
@@ -169,7 +169,7 @@ Propose-Act Gate:
 
 ---
 
-### PHASE 3: Create Task Breakdown (Task 2)
+### PHASE 3: Create Task Breakdown (Task 3)
 
 **Objective**: Map layers to phases and generate task structure
 
@@ -209,7 +209,7 @@ Phase 2: Layer 2 - Validation (3 tasks)
 
 ---
 
-### PHASE 4: Validate Requirement Coverage (Task 3)
+### PHASE 4: Validate Requirement Coverage (Task 4)
 
 **Objective**: Verify all EARS requirements from Phase 2 are addressed in task breakdown
 
@@ -245,7 +245,7 @@ Propose-Act Gate:
 
 ---
 
-### PHASE 5: Generate Execution Steps (Task 4)
+### PHASE 5: Generate Execution Steps (Task 5)
 
 **Objective**: Create execution steps for each task
 
@@ -273,7 +273,7 @@ Propose-Act Gate:
 
 ---
 
-### PHASE 6: Create Bootstrap Integration (Task 5)
+### PHASE 6: Create Bootstrap Integration (Task 6)
 
 **Objective**: Generate bootstrap orchestrator execution instructions
 
@@ -300,7 +300,7 @@ Propose-Act Gate:
 
 ---
 
-### PHASE 7: Generate Plan Document (Task 6)
+### PHASE 7: Generate Plan Document (Task 7)
 
 **Objective**: Write final IMPLEMENTATION-TASK-PLAN.md
 
@@ -352,7 +352,6 @@ Track progress across tasks:
 
 ## Success Criteria
 
-✅ **Task 0.0** included with current onboarding 0.3 pattern
 ✅ **All EARS requirements** from Phase 2 extracted and mapped
 ✅ **Requirement traceability matrix** generated
 ✅ **Requirement coverage** validated (>95% recommended)

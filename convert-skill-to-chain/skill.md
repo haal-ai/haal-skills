@@ -20,7 +20,6 @@ metadata:
 ## Master Chain Protocol
 
 **CRITICAL EXECUTION RULES**:
-- ALWAYS display the complete task list at the start of execution
 - Execute tasks in STRICT SEQUENTIAL ORDER
 - Load only ONE task prompt at a time
 - Pass context between tasks via simple variables
@@ -28,11 +27,7 @@ metadata:
 - Each task must complete fully before next
 
 **STARTUP REQUIREMENT**:
-Before executing any tasks, MUST display:
-```
-📋 Convert Skill to Master Chain Pattern
-=========================================
-Task 0: Retrieve time and environment information
+Task Chain
 Task 1: Select skill to convert
 Task 2: Backup original skill prompt
 Task 3: Analyze existing skill structure
@@ -44,81 +39,73 @@ Task 8: Extract individual tasks
 Task 9: Create master coordinator prompt
 Task 10: Update task registry with new tasks
 Task 11: Generate conversion summary
-=========================================
-```
 
 ## Task Chain Definition
 
 ```yaml
 task_chain:
-  - id: "retrieve-timestamp"
-    name: "Retrieve time and environment information"
-    prompt: "../../common/tasks/retrieve-timestamp.md"
-    required: true
-    
   - id: "select-skill"
     name: "Select skill to convert"
-    prompt: "../tasks/select-skill.md"
+    prompt: "tasks/select-skill.md"
     required: true
-    depends_on: ["retrieve-timestamp"]
     
   - id: "backup-original-skill"
     name: "Backup original skill prompt"
-    prompt: "../../common/tasks/backup-file.md"
+    prompt: "tasks/backup-file.md"
     required: true
     depends_on: ["select-skill"]
     
   - id: "analyze-skill-structure"
     name: "Analyze existing skill structure"
-    prompt: "../tasks/analyze-skill-structure.md"
+    prompt: "tasks/analyze-skill-structure.md"
     required: true
     depends_on: ["backup-original-skill"]
     
   - id: "detect-workflow-pattern"
     name: "Detect workflow pattern"
-    prompt: "../tasks/detect-workflow-pattern.md"
+    prompt: "tasks/detect-workflow-pattern.md"
     required: true
     depends_on: ["analyze-skill-structure"]
     
   - id: "evaluate-conversion-necessity"
     name: "Evaluate if conversion is necessary"
-    prompt: "../tasks/evaluate-conversion-necessity.md"
+    prompt: "tasks/evaluate-conversion-necessity.md"
     required: true
     depends_on: ["detect-workflow-pattern", "analyze-skill-structure"]
     
   - id: "search-common-tasks"
     name: "Search for reusable common tasks"
-    prompt: "../tasks/search-common-tasks.md"
+    prompt: "tasks/search-common-tasks.md"
     required: true
     depends_on: ["evaluate-conversion-necessity"]
     
   - id: "identify-task-boundaries"
     name: "Identify task boundaries"
-    prompt: "../tasks/identify-task-boundaries.md"
+    prompt: "tasks/identify-task-boundaries.md"
     required: true
     depends_on: ["analyze-skill-structure", "search-common-tasks"]
     
   - id: "extract-tasks"
     name: "Extract individual tasks"
-    prompt: "../tasks/extract-tasks.md"
+    prompt: "tasks/extract-tasks.md"
     required: true
     depends_on: ["identify-task-boundaries"]
     
   - id: "create-master-coordinator"
     name: "Create master coordinator prompt"
-    prompt: "../tasks/create-master-coordinator.md"
+    prompt: "tasks/create-master-coordinator.md"
     required: true
     depends_on: ["extract-tasks"]
     
   - id: "update-task-registry"
     name: "Update task registry with new tasks"
-    prompt: "../tasks/update-task-registry.md"
+    prompt: "tasks/update-task-registry.md"
     required: true
     depends_on: ["extract-tasks"]
     
   - id: "generate-summary"
     name: "Generate conversion summary"
-    prompt: "../tasks/generate-summary.md"
+    prompt: "tasks/generate-summary.md"
     required: true
     depends_on: ["create-master-coordinator", "update-task-registry"]
 ```
@@ -127,7 +114,6 @@ task_chain:
 
 ### Simple Context Passing
 Context is passed between tasks using simple variables:
-- `timestamp`: Session timestamp (YYYYMMDD-HHMMSS)
 - `skill_name`: Name of skill to convert
 - `skill_path`: Path to skill directory
 - `skill_prompt_file`: Path to main skill prompt
@@ -150,13 +136,7 @@ Context is passed between tasks using simple variables:
 
 ## Master Execution Protocol
 
-### 1. Initialize Session
-Get environment info and timestamp:
-```bash
-python skills/common/tools/get-env.py
-```
-
-### 2. Execute Task Chain Loop
+### 1. Execute Task Chain Loop
 For each task in task_chain:
 
 1. **Load Task Prompt**: Read task-specific prompt file
@@ -165,12 +145,11 @@ For each task in task_chain:
 4. **Pass Context**: Make results available to next task
 5. **Continue to Next**: Move to next task in chain
 
-### 3. Task Execution Template
+### 2. Task Execution Template
 ```markdown
 **EXECUTING TASK: [task_name]**
 
 **Context Available**:
-- Session Timestamp: [timestamp]
 - Previous Results: [available variables]
 
 **Task-Specific Instructions**:
@@ -180,7 +159,7 @@ For each task in task_chain:
 - Store results in simple variables for next tasks
 ```
 
-### 4. Error Handling
+### 3. Error Handling
 - **Task Failure**: Stop chain, report error
 - **Missing Dependencies**: Show clear dependency requirements
 - **Script Failures**: Display script output and exit
@@ -245,21 +224,19 @@ dependencies: ["context-variable-Y"]
 
 When invoked, execute this pattern:
 
-1. **Display Task List** (mandatory startup)
-2. **Execute Task 0**: Load and run retrieve-timestamp task
-3. **Execute Task 1**: Load and run select-skill task
-3. **Execute Task 2**: Load and run backup-original-skill task
-4. **Execute Task 3**: Load and run analyze-skill-structure task
-5. **Execute Task 4**: Load and run detect-workflow-pattern task
-6. **Execute Task 5**: Load and run evaluate-conversion-necessity task
+1. **Execute Task 1**: Load and run select-skill task
+2. **Execute Task 2**: Load and run backup-original-skill task
+3. **Execute Task 3**: Load and run analyze-skill-structure task
+4. **Execute Task 4**: Load and run detect-workflow-pattern task
+5. **Execute Task 5**: Load and run evaluate-conversion-necessity task
    - **CRITICAL**: If `conversion_necessary = false`, STOP chain here
    - Display decision message and exit gracefully
    - Only proceed if `conversion_necessary = true`
-7. **Execute Task 6**: Load and run search-common-tasks task
-8. **Execute Task 7**: Load and run identify-task-boundaries task
-9. **Execute Task 8**: Load and run extract-tasks task
-10. **Execute Task 9**: Load and run create-master-coordinator task
-11. **Execute Task 10**: Load and run update-task-registry task
-12. **Execute Task 11**: Load and run generate-summary task
+6. **Execute Task 6**: Load and run search-common-tasks task
+7. **Execute Task 7**: Load and run identify-task-boundaries task
+8. **Execute Task 8**: Load and run extract-tasks task
+9. **Execute Task 9**: Load and run create-master-coordinator task
+10. **Execute Task 10**: Load and run update-task-registry task
+11. **Execute Task 11**: Load and run generate-summary task
 
 **NO SHORTCUTS**: Load each task prompt individually and execute completely before next task.

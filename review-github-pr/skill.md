@@ -12,7 +12,6 @@ metadata:
 ## Master Chain Protocol
 
 **CRITICAL EXECUTION RULES**:
-- ALWAYS display the complete task list at the start of execution
 - Execute tasks in STRICT SEQUENTIAL ORDER
 - Load only ONE task prompt at a time
 - Pass context between tasks via simple variables
@@ -20,11 +19,7 @@ metadata:
 - Each task must complete fully before next
 
 **STARTUP REQUIREMENT**:
-Before executing any tasks, MUST display:
-```
-📋 GitHub PR Review - Task Chain
-================================
-Task 0: Retrieve time and environment information
+Task Chain
 Task 1: Select which Pull Request to analyze
 Task 2: Get PR Data from GitHub (metadata and Diff)
 Task 3: Load PR Metadata for analysis
@@ -36,29 +31,21 @@ Task 8: Review Documentation [CONDITIONAL]
 Task 9: Cleanup temporary extraction files
 Task 10: Ask user what output he/she/it wants
 Task 11: Generate Final Report
-================================
-```
 
 ## Task Chain Definition
 
 ```yaml
 task_chain:
-  - id: "retrieve-timestamp"
-    name: "Retrieve time and environment information"
-    prompt: "../common/tasks/retrieve-timestamp.md"
-    required: true
-    
   - id: "select-pr" 
     name: "Select which Pull Request to analyze"
     prompt: "tasks/select-pr.md"
     required: true
-    depends_on: ["retrieve-timestamp"]
     
   - id: "extract-pr-data"
     name: "Get PR Data from GitHub (metadata and Diff)" 
     prompt: "tasks/extract-pr-data.md"
     required: true
-    depends_on: ["retrieve-timestamp", "select-pr"]
+    depends_on: ["select-pr"]
     
   - id: "analyze-metadata"
     name: "Load PR Metadata for analysis"
@@ -135,10 +122,7 @@ Context is passed between tasks using simple variables:
 ## Master Execution Protocol
 
 ### 1. Initialize Session
-Get environment info and timestamp:
-```bash
-python skills/common/tools/get-env.py
-```
+Initialize session context for tracking.
 
 ### 2. Execute Task Chain Loop
 For each task in task_chain:
