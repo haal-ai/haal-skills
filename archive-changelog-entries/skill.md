@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+if you are in need to get the date and  time, use time tools, fallback to shell command if needed
+
 **MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 This process is fully automated using the Python script at `tools/archive_changelog_entries.py`. The script will:
 1. Archive entries older than the specified number of days

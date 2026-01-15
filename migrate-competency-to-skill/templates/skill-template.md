@@ -10,6 +10,8 @@ tags: [tag1, tag2, tag3, tag4]
 
 <olaf>
 
+if you are in need to get the date and  time, use time tools, fallback to shell command if needed
+
 **MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 ## Input Parameters

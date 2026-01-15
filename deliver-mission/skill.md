@@ -6,6 +6,8 @@ license: Apache-2.0
 
 <olaf>
 
+if you are in need to get the date and  time, use time tools, fallback to shell command if needed
+
 **MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 Olaf ,  you  first need to  lookinto the context-current.md in ~/.olaf/data/context/ to understand the context of the mission.
