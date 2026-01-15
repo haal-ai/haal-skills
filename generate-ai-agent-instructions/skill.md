@@ -9,6 +9,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **target_platform**: string - Target AI platform ("auto" | "copilot" | "cursor" | "windsurf" | "cline" | "kiro" | "generic") (OPTIONAL - defaults to "auto")

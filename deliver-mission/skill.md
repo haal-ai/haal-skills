@@ -6,6 +6,8 @@ license: Apache-2.0
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 Olaf ,  you  first need to  lookinto the context-current.md in ~/.olaf/data/context/ to understand the context of the mission.
 It should be in between  teh tag <olaf-mission> and </olaf-mission>
 IF it is not then you need to aply the  instruction given to yu  below in between the tags <init-mission> and </init-mission>

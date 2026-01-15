@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **topic**: string - Presentation subject and key objectives (REQUIRED)

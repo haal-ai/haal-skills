@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 You MUST also load and apply the **Universal Coding Standards**:
 - Read `.olaf/data/practices/standards/universal-coding-standards.md`.
 - Treat the **Evolution/Refactoring Mode** as default:

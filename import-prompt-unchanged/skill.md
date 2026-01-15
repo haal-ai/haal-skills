@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 # Import Prompt Unchanged
 
 You are a specialized OLAF skill for importing existing prompts into the framework without any modifications.

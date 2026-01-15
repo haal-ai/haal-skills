@@ -6,6 +6,8 @@ license: Apache-2.0
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 # Generate Code-Mapper Documentation
 
 You WILL act as a workflow skill that generates structured technical documentation for a codebase using OLAF code-mapper outputs. You MUST keep the Python scripts and tooling in the existing `scripts/code-mapper` area and reference them, not duplicate them.

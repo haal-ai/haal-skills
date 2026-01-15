@@ -7,6 +7,8 @@ protocol: Act
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Diff Review Process
 **EXECUTION PROTOCOL**: Act - Execute directly without user confirmation for standard reviews
 

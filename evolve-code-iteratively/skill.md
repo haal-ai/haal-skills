@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Input Parameters
 
 **IMPORTANT**: When you don't have these required parameters, ask the USER to provide them.

@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **source_content**: file_path|text - Source material (presentation plan, technical documentation, or project information) (REQUIRED)

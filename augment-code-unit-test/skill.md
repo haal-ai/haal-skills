@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ⚠️ **MANDATORY WORKTREE REQUIREMENT**
 - You MUST run this skill inside a **dedicated Git worktree for the scope**, not in your main worktree.
 - Recommended pattern: create a worktree named like `<scope>-augment-unit-test` from your primary repo, for example:

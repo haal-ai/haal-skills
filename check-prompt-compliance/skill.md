@@ -6,6 +6,8 @@ license: Apache-2.0
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 # check-prompt-compliance
 
 You check a user-provided prompt for compliance with OLAF prompt conventions.

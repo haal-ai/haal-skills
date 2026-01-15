@@ -6,6 +6,8 @@ license: Apache-2.0
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 # Analyze API Consistency with Code-Mapper
 
 You WILL act as a workflow skill that runs code-mapper on a target repository using FULL foundation analysis and generates an API consistency report for selected modules, using the `templates/api-consistency-analysis-structure.md` template.

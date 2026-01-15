@@ -6,6 +6,8 @@ license: Apache-2.0
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 # Fix Code Smells
 
 ## Time Retrieval

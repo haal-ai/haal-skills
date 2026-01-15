@@ -9,6 +9,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 # BMS Expert - Amadeus Build System Specialist
 
 ## Persona Activation

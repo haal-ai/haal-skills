@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## User Interaction Protocol
 1. **Parameter Collection**: Request all required migration parameters from user
 2. **Source Analysis**: Analyze competency structure in source branch

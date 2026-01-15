@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Purpose
 
 Create a complete work stash that preserves both context documentation AND all unstaged files in a dedicated folder structure for seamless restoration in future sessions.

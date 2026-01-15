@@ -12,6 +12,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 # Inputs to request from the user
 - evidence_type: one of [file, commit, comment]
 - evidence_path_or_sha: if file → absolute/relative path; if commit → SHA or range; if comment → free text

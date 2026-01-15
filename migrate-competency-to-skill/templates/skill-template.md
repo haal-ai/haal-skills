@@ -10,6 +10,8 @@ tags: [tag1, tag2, tag3, tag4]
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **param_name**: type|options - Description (REQUIRED/OPTIONAL)

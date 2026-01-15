@@ -16,6 +16,8 @@ tags: [project-management, documentation-automation, source-analysis, systematic
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Intent
 
 Execute systematic redocumentation of any multi-repository or complex application by following an orchestrator plan, tracking progress, and generating carry-over files at each step. This competency uses **FRESH ASSESSMENT methodology** - focusing on direct source code analysis rather than reading previous analysis documents to ensure maximum value generation.

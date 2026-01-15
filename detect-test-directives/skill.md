@@ -8,6 +8,8 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Input Parameters
 - repo_path (REQUIRED): absolute path to the repository root
 - branch (OPTIONAL): branch to analyze; default is currently checked out
