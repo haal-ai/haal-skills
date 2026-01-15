@@ -16,12 +16,14 @@
       "experimental",
       "createchangelogentry"
     ],
-    "status": "deprecated",
+    "status": "experimental",
     "exposure": "export",
-    "protocol": "Propose-Confirm-Act",
+    "protocol": "Act",
     "aliases": [
       "create changelog entry",
-      "create-changelog-entry skill"
+      "changelog entry",
+      "product changelog",
+      "update changelog"
     ],
     "version": "1.0.0",
     "author": "OLAF Framework Core Team",
@@ -43,23 +45,19 @@
     ],
     "templates": [
       {
-        "name": "changelog-template",
-        "path": "templates/project-manager/changelog-template.md",
-        "description": "Template for changelog-template"
+        "name": "functional-changelog-template",
+        "path": "templates/functional-changelog-template.md",
+        "type": "markdown",
+        "description": "Entry and detail-file template for functional product changelog updates"
+      },
+      {
+        "name": "technical-changelog-template",
+        "path": "templates/technical-changelog-template.md",
+        "type": "markdown",
+        "description": "Entry and detail-file template for technical product changelog updates"
       }
     ],
     "tools": [],
-    "docs": [
-      {
-        "name": "description",
-        "path": "/docs/description.md",
-        "description": "Documentation for description"
-      },
-      {
-        "name": "tutorial",
-        "path": "/docs/tutorial.md",
-        "description": "Documentation for tutorial"
-      }
-    ]
+    "docs": []
   }
 }
