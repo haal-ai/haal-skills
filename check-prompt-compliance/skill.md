@@ -2,6 +2,12 @@
 name: check-prompt-compliance
 description: Check a prompt for compliance with OLAF prompt standards
 license: Apache-2.0
+metadata:
+  olaf_tags: [prompt, compliance, validation, standards]
+  copyright: Copyright (c) 2026 pjmp020564
+  author: pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 <olaf>

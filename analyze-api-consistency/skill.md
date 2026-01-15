@@ -2,6 +2,12 @@
 name: analyze-api-consistency
 description: Workflow skill that runs full code-mapper foundation analysis on a target repository, extracts public API signatures from the code-map output, and generates a structured API consistency report for selected modules or packages.
 license: Apache-2.0
+metadata:
+  olaf_tags: [api-analysis, consistency, code-mapper, workflow]
+  copyright: Copyright (c) 2026 pjmp020564
+  author: pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 <olaf>

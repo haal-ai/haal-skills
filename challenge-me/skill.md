@@ -4,12 +4,14 @@ description: Interactive ideation engine that challenges ideas through iterative
 license: Apache-2.0
 metadata:
   olaf_tags: [ideation, challenge, research, collaboration, cyclic]
-  olaf_protocol: Act
+  olaf_protocol: Propose-Act
+  copyright: Copyright (c) 2026 pjmp020564
+  author: pjmp020564 (on github)
+  repository: https://github.com/haal-ai/haal-ide
+  provider: Haal AI
 ---
 
 <olaf>
-
-**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 **MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
