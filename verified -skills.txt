@@ -1,3 +1,14 @@
 carry-over-session
 carry-on-session    
 create-changelog-entry 
+challenge-me
+tell-me
+search-and-learn
+research -and report
+review code
+review-diff
+analyze-function-complexity 
+analyze contributor risk
+review user story
+shoul i use ai
+scaffol

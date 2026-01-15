@@ -17,11 +17,11 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 **MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
+You MUST request these parameters if not provided by the user. Present as a numbered list to ease user response:
 - **user_request**: string - The user's requirement or task description for the skill (REQUIRED)
 - **skill_name**: string - Desired name for the skill (max 4 words, kebab-case) (REQUIRED)
 - **skill_type**: string - Type of skill: "orchestrator", "workflow", "prompt" (REQUIRED)
-- **target_competency**: string - Existing competency name or "new:[competency-name]" to create new (REQUIRED - default: "team-competencies")
+- **target_plugin**: string - Existing plugin name or "new:[plugin-name]" to create new (REQUIRED - default: "team-competencies")
 - **needs_templates**: boolean - Whether skill needs external template files (OPTIONAL - default: false)
 - **template_list**: array - List of template names/descriptions if needs_templates=true (OPTIONAL)
 - **needs_tools**: boolean - Whether skill needs tool/script files (OPTIONAL - default: false)
@@ -42,9 +42,9 @@ You MUST follow the established interaction protocol strictly:
 You WILL verify all requirements:
 - Confirm user request is clear and actionable
 - Validate skill name follows kebab-case convention (max 4 words)
-- Check both global (`~/.olaf/core/skills/`) and local (`skills/`) for existing skills with similar functionality
+- Check both global local (`skills/`) for existing skills with similar functionality
 - Validate skill type selection (orchestrator/workflow/prompt)
-- Validate target competency: check if exists in both global (`~/.olaf/core/competencies/`) and local (`.olaf/core/competencies/`) directories, or validate new competency name
+- Validate target competency: check if exists in both global (`~/.olaf//competencies/`) and local (`.olaf/core/competencies/`) directories, or validate new competency name
 - Check access to required template and principles files from skill templates
 
 ### 1.b Skill Location Discovery Phase
