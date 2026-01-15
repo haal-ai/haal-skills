@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "id": "tell-me",
+    "name": "Tell Me",
+    "shortDescription": "Lightweight knowledge retrieval from existing artifacts with smart fallback to analysis",
+    "description": "Search-first knowledge retrieval that searches existing documentation in .olaf/data/product/ and .olaf/data/practices/ before suggesting which analysis skill to run if no artifacts are found.",
+    "version": "2.0.0",
+    "objectives": [
+      "Search existing artifacts in product and practices folders",
+      "Return answers from found documentation with source citations",
+      "Suggest appropriate analysis skill if no documentation exists",
+      "Provide fast responses without unnecessary analysis"
+    ],
+    "tags": [
+      "knowledge-retrieval",
+      "search",
+      "artifacts",
+      "documentation",
+      "onboarding"
+    ],
+    "author": "OLAF Framework",
+    "status": "proven",
+    "exposure": "export",
+    "protocol": "Act",
+    "aliases": [
+      "ask about",
+      "question about",
+      "info about"
+    ],
+    "created": "2025-11-24",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "tell-me",
+        "path": "/skill.md",
+        "description": "Main prompt for knowledge retrieval and search"
+      }
+    ],
+    "skill_dependencies": [
+      {
+        "name": "onboard-me",
+        "skill_id": "onboard-me",
+        "path": "skills/onboard-me/prompts/onboard-me.md",
+        "description": "Suggested when project documentation doesn't exist"
+      }
+    ]
+  }
+}

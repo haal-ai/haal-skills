@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "id": "transform-raw-spec",
+    "name": "Transform Raw Spec",
+    "shortDescription": "P1 business-analyst skill: transform-raw-spec",
+    "description": "Enhanced P1 skill migrated from business-analyst competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide business-analyst capabilities for transform-raw-spec",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "business-analyst",
+      "p1-priority",
+      "experimental",
+      "transformrawspec"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "transform raw spec",
+      "transform-raw-spec skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "business-analyst",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "transform-raw-spec",
+        "path": "/skill.md",
+        "description": "Main transform-raw-spec prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [
+      {
+        "name": "step1-clarify-group-template",
+        "path": "templates/step1-clarify-group-template.md",
+        "description": "Template for step1-clarify-group-template"
+      },
+      {
+        "name": "step2-ears-template",
+        "path": "templates/step2-ears-template.md",
+        "description": "Template for step2-ears-template"
+      },
+      {
+        "name": "step3-quality-check-template",
+        "path": "templates/step3-quality-check-template.md",
+        "description": "Template for step3-quality-check-template"
+      },
+      {
+        "name": "step4-completeness-consistency-template",
+        "path": "templates/step4-completeness-consistency-template.md",
+        "description": "Template for step4-completeness-consistency-template"
+      },
+      {
+        "name": "step5-challenge-template",
+        "path": "templates/step5-challenge-template.md",
+        "description": "Template for step5-challenge-template"
+      },
+      {
+        "name": "step6-visuals-template",
+        "path": "templates/step6-visuals-template.md",
+        "description": "Template for step6-visuals-template"
+      }
+    ],
+    "tools": [],
+    "docs": []
+  }
+}

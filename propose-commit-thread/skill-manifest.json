@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "id": "propose-commit-thread",
+    "name": "Propose Commit Thread",
+    "shortDescription": "P1 git-assistant skill: propose-commit-thread",
+    "description": "Enhanced P1 skill migrated from git-assistant competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide git-assistant capabilities for propose-commit-thread",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "git-assistant",
+      "p1-priority",
+      "experimental",
+      "proposecommitthread"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Act",
+    "aliases": [
+      "propose commit thread",
+      "propose-commit-thread skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "git-assistant",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "propose-commit-thread",
+        "path": "/skill.md",
+        "description": "Main propose-commit-thread prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [],
+    "tools": [],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "description": "Documentation for description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "description": "Documentation for tutorial"
+      }
+    ]
+  }
+}

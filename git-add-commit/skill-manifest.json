@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "id": "git-add-commit",
+    "name": "Git Add Commit",
+    "shortDescription": "Intelligent git commit with dependency-aware file discovery",
+    "description": "LLM-driven git commit workflow that uses dependency analysis (imports, references, links) to find all related changes and generate semantic commit messages following Conventional Commits format",
+    "objectives": [
+      "Discover related files through dependency chasing (imports, references, links)",
+      "Perform deep semantic analysis of code changes",
+      "Generate meaningful conventional commit messages",
+      "Execute safe git operations with validation"
+    ],
+    "tags": [
+      "git",
+      "version-control",
+      "commit",
+      "developer-workflow",
+      "automation",
+      "dependency-analysis"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "git commit",
+      "commit changes",
+      "commit files"
+    ],
+    "version": "2.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "git-assistant",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced refactoring from P1 migration"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "git-add-commit",
+        "path": "/skill.md",
+        "description": "Main prompt implementing dependency-aware git commit workflow"
+      }
+    ],
+    "templates": [],
+    "tools": [],
+    "helpers": [],
+    "kb": [],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "description": "Comprehensive skill overview and usage guide"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "description": "Step-by-step tutorial for using git-add-commit"
+      }
+    ]
+  }
+}

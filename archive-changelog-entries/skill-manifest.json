@@ -1,0 +1,45 @@
+{
+  "name": "archive-changelog-entries",
+  "version": "1.0.0",
+  "description": "Enhanced Archive Changelog Entries skill migrated from project-manager competency",
+  "pack": "project-manager",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "project-manager",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "archive-changelog-entries",
+    "name": "archive-changelog-entries",
+    "description": "Enhanced Archive Changelog Entries skill migrated from project-manager competency",
+    "shortDescription": "Enhanced Archive Changelog Entries skill migrated from project-manager competency",
+    "objectives": [
+      "Use the archive-changelog-entries skill"
+    ],
+    "tags": [
+      "project-manager"
+    ],
+    "status": "deprecated",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "archive changelog",
+      "archive entries",
+      "cleanup changelog",
+      "move old entries"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "archive-changelog-entries",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

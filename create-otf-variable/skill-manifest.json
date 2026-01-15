@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "id": "create-otf-variable",
+    "name": "Create OTF Variable",
+    "shortDescription": "Guide developers through adding OTF variables with proper XML configuration and C++ accessor code",
+    "description": "Assists developers in creating OTF (Open Transaction Framework) variables by generating proper XML configuration, environment-specific overrides, and C++ accessor code following Amadeus best practices for feature flags and runtime configuration management.",
+    "version": "1.0.0",
+    "objectives": [
+      "Gather requirements for new OTF variables (name, purpose, values, environments)",
+      "Generate proper XML configuration with common and phase-specific sections",
+      "Provide C++ accessor code using PropertiesManager patterns",
+      "Ensure naming conventions and best practices are followed",
+      "Guide gradual rollout strategy from LOCAL to production environments"
+    ],
+    "tags": [
+      "otf",
+      "configuration",
+      "feature-flags",
+      "c-cpp",
+      "xml",
+      "amadeus",
+      "enterprise"
+    ],
+    "author": "OLAF Team",
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Act",
+    "aliases": [
+      "add otf variable",
+      "create feature flag",
+      "otf config"
+    ],
+    "created": "2025-11-24",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "create-otf-variable",
+        "path": "/skill.md",
+        "description": "Main prompt that guides OTF variable creation workflow"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ],
+    "references": [
+      {
+        "name": "Shared Context OTF Prompt",
+        "path": ".olaf/your-repos/shared-context/.github/prompts/create-otfvar.prompt.md",
+        "description": "Original OTF variable creation prompt from shared-context"
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "create-competency-package",
+  "version": "1.0.0",
+  "description": "Enhanced Create Competency Package skill migrated from prompt-engineer competency",
+  "pack": "prompt-engineer",
+  "protocol": "Propose-Confirm-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "prompt-engineer",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "create-competency-package",
+    "name": "create-competency-package",
+    "description": "Enhanced Create Competency Package skill migrated from prompt-engineer competency",
+    "shortDescription": "Enhanced Create Competency Package skill migrated from prompt-engineer competency",
+    "objectives": [
+      "Use the create-competency-package skill"
+    ],
+    "tags": [
+      "prompt-engineer"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "new competency",
+      "create competency",
+      "build competency package",
+      "competency package"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "create-competency-package",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

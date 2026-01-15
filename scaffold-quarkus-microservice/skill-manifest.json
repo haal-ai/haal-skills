@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "id": "scaffold-quarkus-microservice",
+    "name": "Scaffold Quarkus Microservice",
+    "shortDescription": "Scaffold a new Quarkus microservice from team practices, Quarkus guidance, and Git workflow standards",
+    "description": "This skill scaffolds a Quarkus microservice by strictly enforcing practices from the local practices folder. It follows Propose-Confirm-Act, verifies Git worktree + branch safety before writing files, and applies universal coding standards plus Quarkus microservice scaffolding guidance.",
+    "objectives": [
+      "Load and enforce relevant practices before scaffolding",
+      "Verify Git worktree + new branch before writing files",
+      "Propose a minimal, standards-compliant Quarkus microservice baseline",
+      "Generate a runnable Quarkus microservice with tests and quality gates"
+    ],
+    "tags": [
+      "java",
+      "quarkus",
+      "microservice",
+      "scaffolding",
+      "developer",
+      "practices",
+      "git"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "scaffold quarkus service",
+      "quarkus microservice scaffold",
+      "create quarkus service",
+      "scaffold qurkus microservice",
+      "scaffold-qurkus-microservice"
+    ],
+    "version": "1.0.0",
+    "author": "GitHub Copilot",
+    "created": "2026-01-13",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "team-competencies",
+      "primary_maintainer": "GitHub Copilot",
+      "created_by": "GitHub Copilot"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "scaffold-quarkus-microservice",
+        "path": "/skill.md",
+        "description": "Main skill prompt for scaffolding a Quarkus microservice"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

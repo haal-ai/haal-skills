@@ -1,0 +1,45 @@
+{
+  "name": "deepen-tech-spec-developer",
+  "version": "1.0.0",
+  "description": "Enhanced Deepen Tech Spec Developer skill migrated from developer competency",
+  "pack": "developer",
+  "protocol": "Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "developer",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "deepen-tech-spec-developer",
+    "name": "deepen-tech-spec-developer",
+    "description": "Enhanced Deepen Tech Spec Developer skill migrated from developer competency",
+    "shortDescription": "Enhanced Deepen Tech Spec Developer skill migrated from developer competency",
+    "objectives": [
+      "Use the deepen-tech-spec-developer skill"
+    ],
+    "tags": [
+      "developer"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Act",
+    "aliases": [
+      "deepen spec",
+      "enhance tech spec",
+      "detailed specification",
+      "expand technical spec"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "deepen-tech-spec-developer",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "id": "plan-javafx-angular-migration",
+    "name": "Plan JavaFX to Angular Migration",
+    "shortDescription": "Phase 0 discovery skill to plan a JavaFX frontend migration to Angular 18 for a specific application repo",
+    "description": "Analyze the current JavaFX UI implementation and produce a thorough, discovery-led plan to analyze, design, and execute a migration to an Angular 18 frontend, including an agentic execution approach suitable for AWS Strands (Python).",
+    "version": "1.0.0",
+    "objectives": [
+      "Collect key migration inputs and assumptions",
+      "Inventory the current JavaFX UI and integration surface",
+      "Define a target Angular 18 architecture/design approach",
+      "Produce a phased execution plan with risks and success criteria",
+      "Outline an agentic implementation approach using AWS Strands (Python)"
+    ],
+    "tags": [
+      "migration",
+      "javafx",
+      "angular",
+      "frontend",
+      "discovery",
+      "architecture",
+      "plan",
+      "strands"
+    ],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "internal",
+    "protocol": "Act",
+    "aliases": [
+      "plan javafx angular migration",
+      "migrate javafx to angular",
+      "javafx to angular plan",
+      "angular 18 migration discovery"
+    ],
+    "created": "2025-12-16",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "architecture",
+      "primary_maintainer": "OLAF Framework Core Team"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Compatible with LLMs that support structured outputs",
+      "tool_dependency": "Optional: filesystem read/search tools for repository inspection",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "plan-javafx-angular-migration",
+        "path": "/skill.md",
+        "description": "Main prompt for planning a JavaFX to Angular 18 migration (Phase 0 discovery)"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

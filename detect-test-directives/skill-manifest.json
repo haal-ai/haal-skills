@@ -1,0 +1,45 @@
+{
+  "name": "detect-test-directives",
+  "version": "1.0.0",
+  "description": "Enhanced Detect Test Directives skill migrated from developer competency",
+  "pack": "developer",
+  "protocol": "Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "developer",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "detect-test-directives",
+    "name": "detect-test-directives",
+    "description": "Enhanced Detect Test Directives skill migrated from developer competency",
+    "shortDescription": "Enhanced Detect Test Directives skill migrated from developer competency",
+    "objectives": [
+      "Use the detect-test-directives skill"
+    ],
+    "tags": [
+      "developer"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Act",
+    "aliases": [
+      "test directives",
+      "find test instructions",
+      "detect test markers",
+      "test annotations"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "detect-test-directives",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

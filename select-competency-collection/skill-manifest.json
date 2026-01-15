@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "id": "select-competency-collection",
+    "name": "Select Competency Collection",
+    "shortDescription": "P1 prompt-engineer skill: select-competency-collection",
+    "description": "Enhanced P1 skill migrated from prompt-engineer competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide prompt-engineer capabilities for select-competency-collection",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "prompt-engineer",
+      "p1-priority",
+      "experimental",
+      "selectcompetencycollection"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Act",
+    "aliases": [
+      "select competency collection",
+      "select-competency-collection skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "prompt-engineer",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "select-competency-collection",
+        "path": "/skill.md",
+        "description": "Main select-competency-collection prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [],
+    "tools": [],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "description": "Documentation for description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "description": "Documentation for tutorial"
+      }
+    ]
+  }
+}

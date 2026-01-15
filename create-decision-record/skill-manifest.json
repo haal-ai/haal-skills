@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "id": "create-decision-record",
+    "name": "Create Decision Record",
+    "shortDescription": "P1 project-manager skill: create-decision-record",
+    "description": "Enhanced P1 skill migrated from project-manager competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide project-manager capabilities for create-decision-record",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "project-manager",
+      "p1-priority",
+      "experimental",
+      "createdecisionrecord"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "create decision record",
+      "create-decision-record skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "project-manager",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "create-decision-record",
+        "path": "/skill.md",
+        "description": "Main create-decision-record prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [
+      {
+        "name": "decision-record-template",
+        "path": "templates/project-manager/decision-record-template.md",
+        "description": "Template for decision-record-template"
+      }
+    ],
+    "tools": [],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "description": "Documentation for description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "description": "Documentation for tutorial"
+      }
+    ]
+  }
+}

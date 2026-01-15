@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "id": "analyze-db-api-fit",
+    "name": "Analyze DB API Fit",
+    "shortDescription": "Analyze functional spec + OpenAPI against existing database schemas to identify data gaps and integration risks for microservices.",
+    "description": "Extract data requirements from a functional specification and OpenAPI contract, request/ingest existing DB artifacts (DDL/migrations/ERD), and produce a structured DB ↔ API fit analysis including field-level mappings, missing data gaps, and decisions needed to implement business logic without changing the database.",
+    "objectives": [
+      "Extract a data-requirements inventory from functional spec and OpenAPI",
+      "Propose candidate microservice boundaries and data ownership assumptions",
+      "Map required domain data to existing DB schema artifacts",
+      "Identify gaps, risks, and decisions needed to implement the API",
+      "Produce a reusable report suitable for stakeholders"
+    ],
+    "tags": [
+      "api",
+      "openapi",
+      "database",
+      "microservices",
+      "gap-analysis",
+      "data-fit"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Confirm-Act",
+    "author": "OLAF Framework",
+    "created": "2025-12-15",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "analyze-db-api-fit",
+        "path": "/skill.md",
+        "description": "Main workflow entry point"
+      }
+    ],
+    "templates": [
+      {
+        "name": "db-api-fit-output-format",
+        "path": "templates/db-api-fit-output-format.md",
+        "type": "markdown"
+      },
+      {
+        "name": "questions-table-format",
+        "path": "templates/questions-table-format.md",
+        "type": "markdown"
+      }
+    ],
+    "kb": [
+      {
+        "name": "db-artifacts-request-checklist",
+        "path": "/kb/db-artifacts-request-checklist.md",
+        "type": "reference"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

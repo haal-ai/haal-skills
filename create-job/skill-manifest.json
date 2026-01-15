@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "id": "create-job",
+    "name": "Create Job",
+    "shortDescription": "P1 project-manager skill: create-job",
+    "description": "Enhanced P1 skill migrated from project-manager competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide project-manager capabilities for create-job",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "project-manager",
+      "p1-priority",
+      "experimental",
+      "createjob"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "create job",
+      "create-job skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "project-manager",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "create-job",
+        "path": "/skill.md",
+        "description": "Main create-job prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [
+      {
+        "name": "job-template",
+        "path": "templates/project-manager/job-template.md",
+        "description": "Template for job-template"
+      },
+      {
+        "name": "job-template",
+        "path": "templates/project-manager/job-template.md",
+        "description": "Template for job-template"
+      }
+    ],
+    "tools": [],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "description": "Documentation for description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "description": "Documentation for tutorial"
+      }
+    ]
+  }
+}

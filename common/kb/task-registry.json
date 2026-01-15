@@ -1,0 +1,817 @@
+{
+  "$schema": "../../../schemas/task-registry.schema.json",
+  "version": "1.0.0",
+  "description": "Centralized registry of reusable tasks across OLAF skills",
+  "last_updated": "2025-11-24",
+  "tasks": [
+    {
+      "id": "retrieve-timestamp",
+      "name": "Environment Information Retrieval",
+      "description": "Retrieves current timestamp and environment details (OS, shell) by executing get-env.py script and reading olaf-env.txt",
+      "category": "environment",
+      "tags": ["timestamp", "environment", "initialization"],
+      "current_location": "skills/common/tasks/retrieve-timestamp.md",
+      "used_in_skills": [
+        "review-github-pr",
+        "convert-skill-to-chain",
+        "search-and-learn",
+        "review-diff",
+        "git-add-commit"
+      ],
+      "dependencies": {
+        "tools": [
+          {
+            "name": "get-env.py",
+            "location": "skills/review-github-pr/tools/get-env.py",
+            "description": "Python script to capture environment information"
+          }
+        ],
+        "templates": [],
+        "state_variables": []
+      },
+      "outputs": {
+        "state_variables": [
+          "context.timestamp",
+          "context.environment_extracted",
+          "context.os_info",
+          "context.shell_info"
+        ],
+        "files_created": [
+          ".olaf/work/staging/olaf-env.txt"
+        ]
+      },
+      "reusability_score": 10,
+      "notes": "Highly reusable for any skill requiring timestamp or environment context"
+    },
+    {
+      "id": "backup-file",
+      "name": "Backup File with Timestamp",
+      "description": "Creates a timestamped backup copy of any file to preserve original before modifications",
+      "category": "filesystem",
+      "tags": ["backup", "file-operations", "safety", "preservation"],
+      "current_location": "skills/common/tasks/backup-file.md",
+      "used_in_skills": [
+        "convert-skill-to-chain"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.file_to_backup",
+          "context.timestamp"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.backup_file",
+          "context.backup_created",
+          "context.backup_timestamp"
+        ],
+        "files_created": [
+          "[original-dir]/backups/[filename]-backup-[timestamp].[ext]"
+        ]
+      },
+      "reusability_score": 10,
+      "notes": "Universal file backup utility - works for any file type, highly reusable across all skills that modify files"
+    },
+    {
+      "id": "collect-parameters",
+      "name": "Collect Git Add Commit Parameters",
+      "description": "Gathers and validates user-provided parameters for git add and commit operations including message mode, staging control, and safety settings",
+      "category": "git",
+      "tags": ["git", "parameters", "user-input", "configuration"],
+      "current_location": "skills/git-add-commit/tasks/collect-parameters.md",
+      "used_in_skills": ["git-add-commit"],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": ["context.timestamp"]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.message", "context.files", "context.skill_name", "context.pattern",
+          "context.include_untracked", "context.staged_action", "context.skip_safety_checks",
+          "context.auto_confirm", "context.dry_run", "context.commit_context",
+          "context.commit_type", "context.message_template", "context.interactive_mode"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 4,
+      "notes": "Created from git-add-commit conversion - specific to git operations"
+    },
+    {
+      "id": "analyze-git-status",
+      "name": "Analyze Git Repository Status",
+      "description": "Executes git status --porcelain and parses output into categorized file lists (staged, unstaged, untracked)",
+      "category": "git",
+      "tags": ["git", "status", "parsing", "analysis"],
+      "current_location": "skills/git-add-commit/tasks/analyze-git-status.md",
+      "used_in_skills": ["git-add-commit"],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": []
+      },
+      "outputs": {
+        "state_variables": [
+          "context.staged_files", "context.unstaged_files", "context.untracked_files",
+          "context.staged_count", "context.unstaged_count", "context.untracked_count",
+          "context.git_state_category", "context.git_status_raw"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 8,
+      "notes": "Created from git-add-commit conversion - highly reusable for any git workflow analysis"
+    },
+    {
+      "id": "filter-files",
+      "name": "Filter Files by Criteria",
+      "description": "Applies skill_name, pattern, or specific file filters to git file lists based on user criteria",
+      "category": "git",
+      "tags": ["git", "filtering", "file-selection"],
+      "current_location": "skills/git-add-commit/tasks/filter-files.md",
+      "used_in_skills": ["git-add-commit"],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.staged_files", "context.unstaged_files", "context.untracked_files",
+          "context.skill_name", "context.pattern"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.filtered_staged", "context.filtered_unstaged", "context.filtered_untracked",
+          "context.filtered_files_count", "context.filter_applied", "context.files_to_stage"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 6,
+      "notes": "Created from git-add-commit conversion - reusable for filtered git operations"
+    },
+    {
+      "id": "determine-staging-scenario",
+      "name": "Determine Staging Scenario and Action",
+      "description": "Identifies git staging scenario (A/B/C/D) based on file states and determines appropriate action",
+      "category": "git",
+      "tags": ["git", "staging", "decision", "branching"],
+      "current_location": "skills/git-add-commit/tasks/determine-staging-scenario.md",
+      "used_in_skills": ["git-add-commit"],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.git_state_category", "context.filtered_staged",
+          "context.filtered_unstaged", "context.staged_action"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.scenario_type", "context.scenario_description", "context.action_decision",
+          "context.files_for_commit", "context.files_to_add", "context.proceed_to_commit"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 5,
+      "notes": "Created from git-add-commit conversion - scenario logic specific to staging workflows"
+    },
+    {
+      "id": "generate-commit-message",
+      "name": "Generate Commit Message",
+      "description": "Creates context-aware commit messages from file changes, supporting multiple template styles (conventional, descriptive, minimal)",
+      "category": "git",
+      "tags": ["git", "commit", "message-generation", "conventions"],
+      "current_location": "skills/git-add-commit/tasks/generate-commit-message.md",
+      "used_in_skills": ["git-add-commit"],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": ["context.files_for_commit", "context.message"]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.commit_message", "context.message_source", "context.message_approved"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 7,
+      "notes": "Created from git-add-commit conversion - reusable for any commit message generation"
+    },
+    {
+      "id": "perform-safety-checks",
+      "name": "Perform Safety Checks",
+      "description": "Validates files for large sizes (>10MB) and sensitive data patterns (API keys, passwords, tokens) before commit",
+      "category": "git",
+      "tags": ["git", "safety", "validation", "security"],
+      "current_location": "skills/git-add-commit/tasks/perform-safety-checks.md",
+      "used_in_skills": ["git-add-commit"],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": ["context.files_for_commit", "context.skip_safety_checks"]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.safety_warnings", "context.large_files_count",
+          "context.sensitive_patterns_count", "context.proceed_with_commit",
+          "context.safety_check_passed"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 8,
+      "notes": "Created from git-add-commit conversion - highly reusable for pre-commit validation"
+    },
+    {
+      "id": "execute-git-operations",
+      "name": "Execute Git Add and Commit",
+      "description": "Executes git add and git commit commands with error handling and result parsing",
+      "category": "git",
+      "tags": ["git", "commit", "execution", "automation"],
+      "current_location": "skills/git-add-commit/tasks/execute-git-operations.md",
+      "used_in_skills": ["git-add-commit"],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.files_to_add", "context.commit_message", "context.proceed_with_commit"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.commit_result", "context.commit_hash", "context.commit_hash_full",
+          "context.files_changed", "context.insertions", "context.deletions",
+          "context.git_add_output", "context.git_commit_output"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 6,
+      "notes": "Created from git-add-commit conversion - reusable for git commit automation"
+    },
+    {
+      "id": "select-pr",
+      "name": "Pull Request Selection",
+      "description": "Allows user to select a specific PR by number or defaults to current branch's PR",
+      "category": "github",
+      "tags": ["github", "pull-request", "user-interaction"],
+      "current_location": "skills/review-github-pr/tasks/select-pr.md",
+      "used_in_skills": [
+        "review-github-pr"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.timestamp"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.pr_number",
+          "task_status.select-pr"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 8,
+      "notes": "Reusable for any skill working with GitHub PRs"
+    },
+    {
+      "id": "extract-pr-data",
+      "name": "Extract PR Data from GitHub",
+      "description": "Retrieves PR metadata and diff from GitHub API and saves to staging files",
+      "category": "github",
+      "tags": ["github", "pull-request", "api", "extraction"],
+      "current_location": "skills/review-github-pr/tasks/extract-pr-data.md",
+      "used_in_skills": [
+        "review-github-pr"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.pr_number",
+          "context.timestamp"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.pr_metadata_file",
+          "context.pr_diff_file",
+          "task_status.extract-pr-data"
+        ],
+        "files_created": [
+          ".olaf/work/staging/pr-{number}-metadata-{timestamp}.json",
+          ".olaf/work/staging/pr-{number}-diff-{timestamp}.txt"
+        ]
+      },
+      "reusability_score": 9,
+      "notes": "Core GitHub PR data extraction - reusable for any PR-related skill"
+    },
+    {
+      "id": "analyze-metadata",
+      "name": "Load PR Metadata for Analysis",
+      "description": "Reads and parses PR metadata file to prepare for analysis",
+      "category": "analysis",
+      "tags": ["metadata", "parsing", "analysis-prep"],
+      "current_location": "skills/review-github-pr/tasks/analyze-metadata.md",
+      "used_in_skills": [
+        "review-github-pr"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.pr_metadata_file"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.pr_title",
+          "context.pr_description",
+          "context.pr_author",
+          "context.pr_state",
+          "task_status.analyze-metadata"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 7,
+      "notes": "Specialized for PR metadata but pattern reusable for other metadata parsing"
+    },
+    {
+      "id": "cleanup-extraction-files",
+      "name": "Cleanup Temporary Extraction Files",
+      "description": "Removes temporary staging files created during task execution",
+      "category": "cleanup",
+      "tags": ["cleanup", "filesystem", "housekeeping"],
+      "current_location": "skills/review-github-pr/tasks/cleanup-extraction-files.md",
+      "used_in_skills": [
+        "review-github-pr"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.files_to_cleanup"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "task_status.cleanup-extraction-files"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 10,
+      "notes": "Highly reusable cleanup pattern for any skill creating temporary files"
+    },
+    {
+      "id": "collect-user-parameters",
+      "name": "Collect User Parameters",
+      "description": "Requests and validates required input parameters from user for search and learn workflow",
+      "category": "user-interaction",
+      "tags": ["user-input", "validation", "learning"],
+      "current_location": "skills/search-and-learn/tasks/collect-user-parameters.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.timestamp"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.learning_objective",
+          "context.current_knowledge",
+          "context.application_context"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 6,
+      "notes": "Pattern reusable for any multi-parameter collection workflow"
+    },
+    {
+      "id": "validate-prerequisites",
+      "name": "Validate Prerequisites",
+      "description": "Verifies all requirements, tool access, and validates scope before execution",
+      "category": "validation",
+      "tags": ["validation", "prerequisites", "verification"],
+      "current_location": "skills/search-and-learn/tasks/validate-prerequisites.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.learning_objective",
+          "context.current_knowledge",
+          "context.application_context"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.prerequisites_met",
+          "context.validation_notes"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 7,
+      "notes": "General prerequisite validation pattern applicable to many workflows"
+    },
+    {
+      "id": "define-learning-goals",
+      "name": "Define Learning Goals",
+      "description": "Clarifies learning objectives, breaks down complex topics, establishes success criteria and scope boundaries",
+      "category": "learning",
+      "tags": ["learning", "goal-setting", "planning"],
+      "current_location": "skills/search-and-learn/tasks/define-learning-goals.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.learning_objective",
+          "context.current_knowledge",
+          "context.application_context"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.learning_goals",
+          "context.success_criteria",
+          "context.scope_boundaries"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 5,
+      "notes": "Specific to learning workflows but pattern could apply to other goal-setting tasks"
+    },
+    {
+      "id": "develop-search-strategy",
+      "name": "Develop Search Strategy",
+      "description": "Formulates precise search queries and identifies authoritative information sources",
+      "category": "research",
+      "tags": ["research", "search", "strategy", "planning"],
+      "current_location": "skills/search-and-learn/tasks/develop-search-strategy.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.learning_goals",
+          "context.current_knowledge",
+          "context.scope_boundaries"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.search_queries",
+          "context.information_sources",
+          "context.search_sequence"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 6,
+      "notes": "Applicable to any research or information gathering workflow"
+    },
+    {
+      "id": "execute-systematic-search",
+      "name": "Execute Systematic Search",
+      "description": "Performs systematic searches across sources, documents findings with mandatory URLs, tracks quality",
+      "category": "research",
+      "tags": ["research", "search", "documentation", "url-collection"],
+      "current_location": "skills/search-and-learn/tasks/execute-systematic-search.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.search_queries",
+          "context.information_sources",
+          "context.search_sequence"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.sources_found",
+          "context.raw_information",
+          "context.information_gaps"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 7,
+      "notes": "Search execution pattern reusable for various research tasks"
+    },
+    {
+      "id": "evaluate-synthesize-information",
+      "name": "Evaluate and Synthesize Information",
+      "description": "Assesses source credibility, synthesizes information from multiple sources, creates concept connections",
+      "category": "analysis",
+      "tags": ["analysis", "synthesis", "credibility", "knowledge-building"],
+      "current_location": "skills/search-and-learn/tasks/evaluate-synthesize-information.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.sources_found",
+          "context.raw_information",
+          "context.learning_goals"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.synthesized_knowledge",
+          "context.key_insights",
+          "context.concept_relationships",
+          "context.credibility_assessment"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 6,
+      "notes": "Information synthesis pattern applicable to research and analysis workflows"
+    },
+    {
+      "id": "apply-test-learning",
+      "name": "Apply and Test Learning",
+      "description": "Creates practical applications, tests understanding through exercises, validates against success criteria",
+      "category": "learning",
+      "tags": ["learning", "application", "validation", "testing"],
+      "current_location": "skills/search-and-learn/tasks/apply-test-learning.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.synthesized_knowledge",
+          "context.learning_goals",
+          "context.application_context",
+          "context.success_criteria"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.practical_applications",
+          "context.understanding_validation",
+          "context.actionable_takeaways",
+          "context.knowledge_gaps"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 5,
+      "notes": "Learning-specific but validation pattern could apply to other domains"
+    },
+    {
+      "id": "generate-learning-report",
+      "name": "Generate Learning Report",
+      "description": "Creates structured learning report with summary, sources, applications, and next steps",
+      "category": "reporting",
+      "tags": ["reporting", "documentation", "learning", "output"],
+      "current_location": "skills/search-and-learn/tasks/generate-learning-report.md",
+      "used_in_skills": [
+        "search-and-learn"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [
+          {
+            "name": "learning-report-template.md",
+            "location": "templates/learning-report-template.md",
+            "description": "Template for learning report structure"
+          }
+        ],
+        "state_variables": [
+          "context.timestamp",
+          "context.learning_objective",
+          "context.learning_goals",
+          "context.sources_found",
+          "context.synthesized_knowledge",
+          "context.practical_applications",
+          "context.understanding_validation"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.report_file",
+          "context.report_created"
+        ],
+        "files_created": [
+          ".olaf/work/staging/learning-reports/search-and-learn-[topic]-[timestamp].md"
+        ]
+      },
+      "reusability_score": 4,
+      "notes": "Learning report specific but report generation pattern could be adapted"
+    },
+    {
+      "id": "validate-review-parameters",
+      "name": "Validate Review Parameters and Environment",
+      "description": "Validates input parameters for code review (diff_content, review_scope, target_path, save_report, include_actions) and checks git repository availability",
+      "category": "validation",
+      "tags": ["validation", "parameters", "git", "code-review"],
+      "current_location": "skills/review-diff/tasks/validate-review-parameters.md",
+      "used_in_skills": [
+        "review-diff"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": ["context.timestamp"]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.diff_content",
+          "context.review_scope",
+          "context.target_path",
+          "context.save_report",
+          "context.include_actions",
+          "context.git_repo_valid"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 6,
+      "notes": "Parameter validation pattern adaptable to other review workflows"
+    },
+    {
+      "id": "collect-git-diff",
+      "name": "Collect Git Diff Content",
+      "description": "Executes git diff command based on review scope or uses pre-provided diff content, extracts changed file list",
+      "category": "github",
+      "tags": ["git", "diff", "code-review", "extraction"],
+      "current_location": "skills/review-diff/tasks/collect-git-diff.md",
+      "used_in_skills": [
+        "review-diff"
+      ],
+      "dependencies": {
+        "tools": [
+          {
+            "name": "git",
+            "location": "system",
+            "description": "Git command-line tool"
+          }
+        ],
+        "templates": [],
+        "state_variables": [
+          "context.diff_content",
+          "context.review_scope",
+          "context.target_path",
+          "context.git_repo_valid"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.diff_text",
+          "context.diff_file_list",
+          "context.diff_empty"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 7,
+      "notes": "Git diff collection pattern reusable for other diff-based workflows"
+    },
+    {
+      "id": "detect-file-languages",
+      "name": "Detect File Languages",
+      "description": "Analyzes file extensions from diff and categorizes files by programming language (Python, C++, Java, Go, JavaScript), filters exclusions",
+      "category": "analysis",
+      "tags": ["language-detection", "file-analysis", "categorization"],
+      "current_location": "skills/review-diff/tasks/detect-file-languages.md",
+      "used_in_skills": [
+        "review-diff"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": ["context.diff_file_list"]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.language_categories",
+          "context.files_by_language",
+          "context.excluded_files",
+          "context.reviewable_file_count"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 8,
+      "notes": "Language detection logic broadly applicable to multi-language codebases"
+    },
+    {
+      "id": "analyze-diff-with-router",
+      "name": "Analyze Diff with Language Router",
+      "description": "Applies language-specific code review standards using router helper, performs security scan and quality assessment, categorizes findings by severity",
+      "category": "analysis",
+      "tags": ["code-review", "security", "quality", "router", "language-specific"],
+      "current_location": "skills/review-diff/tasks/analyze-diff-with-router.md",
+      "used_in_skills": [
+        "review-diff"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [
+          "helpers/review-diff-router.md",
+          ".olaf/data/practices/code-reviews/review-standard-python.md",
+          ".olaf/data/practices/code-reviews/review-standard-cplusplus.md",
+          ".olaf/data/practices/code-reviews/review-standard-java.md",
+          ".olaf/data/practices/code-reviews/review-standard-go.md"
+        ],
+        "state_variables": [
+          "context.diff_text",
+          "context.files_by_language"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.findings",
+          "context.security_issues",
+          "context.quality_issues",
+          "context.actionable_commands",
+          "context.findings_count"
+        ],
+        "files_created": []
+      },
+      "reusability_score": 6,
+      "notes": "Router-based analysis pattern specific to review-diff but demonstrates reusable architecture"
+    },
+    {
+      "id": "generate-review-report",
+      "name": "Generate Review Report",
+      "description": "Creates comprehensive code review report with language detection, security assessment, quality findings, and actionable commands; supports file save or screen display",
+      "category": "reporting",
+      "tags": ["reporting", "code-review", "documentation", "output"],
+      "current_location": "skills/review-diff/tasks/generate-review-report.md",
+      "used_in_skills": [
+        "review-diff"
+      ],
+      "dependencies": {
+        "tools": [],
+        "templates": [],
+        "state_variables": [
+          "context.findings",
+          "context.save_report",
+          "context.include_actions",
+          "context.timestamp"
+        ]
+      },
+      "outputs": {
+        "state_variables": [
+          "context.report_file",
+          "context.actions_file",
+          "context.report_displayed",
+          "context.report_summary"
+        ],
+        "files_created": [
+          ".olaf/work/staging/diff-reviews/review-report-[timestamp].md",
+          ".olaf/work/staging/diff-reviews/actions-[timestamp].md"
+        ]
+      },
+      "reusability_score": 5,
+      "notes": "Report generation structure adaptable to other review/analysis workflows"
+    }
+  ],
+  "categories": {
+    "environment": {
+      "description": "Tasks related to environment detection and system information"
+    },
+    "github": {
+      "description": "Tasks for GitHub API interactions and data extraction"
+    },
+    "analysis": {
+      "description": "Tasks for analyzing data and preparing reports"
+    },
+    "cleanup": {
+      "description": "Tasks for cleaning up temporary files and resources"
+    },
+    "user-interaction": {
+      "description": "Tasks requiring user input or selections"
+    },
+    "filesystem": {
+      "description": "Tasks for file operations like backup, copy, move"
+    },
+    "validation": {
+      "description": "Tasks for validating prerequisites, requirements, and constraints"
+    },
+    "learning": {
+      "description": "Tasks specific to learning workflows and knowledge acquisition"
+    },
+    "research": {
+      "description": "Tasks for research, information gathering, and search operations"
+    },
+    "reporting": {
+      "description": "Tasks for generating reports and documentation"
+    },
+    "git": {
+      "description": "Tasks for git operations including status analysis, commit automation, and repository management"
+    }
+  }
+}

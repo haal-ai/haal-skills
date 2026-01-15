@@ -1,0 +1,45 @@
+{
+  "name": "evolve-code-iteratively",
+  "version": "1.0.0",
+  "description": "Enhanced Evolve Code Iteratively skill migrated from developer competency",
+  "pack": "developer",
+  "protocol": "Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "developer",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "evolve-code-iteratively",
+    "name": "evolve-code-iteratively",
+    "description": "Enhanced Evolve Code Iteratively skill migrated from developer competency",
+    "shortDescription": "Enhanced Evolve Code Iteratively skill migrated from developer competency",
+    "objectives": [
+      "Use the evolve-code-iteratively skill"
+    ],
+    "tags": [
+      "developer"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Act",
+    "aliases": [
+      "iterative development",
+      "evolve code",
+      "incremental refactor",
+      "step by step coding"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "evolve-code-iteratively",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

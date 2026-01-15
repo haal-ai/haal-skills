@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "id": "generate-jsdoc",
+    "name": "Generate JSDoc Documentation",
+    "shortDescription": "Generate comprehensive inline JSDoc comments for JavaScript/TypeScript source files",
+    "description": "Generates inline JSDoc documentation for JavaScript and TypeScript files using AWS Strands multi-agent system. MODIFIES source code by adding comprehensive @param, @returns, @throws, @example, and @remarks comments. Runs in spawn mode to allow parallel work. Creates git branch by default for safety. Supports in-place modification or copy-to-folder mode.",
+    "version": "1.0.0",
+    "objectives": [
+      "Accept repository folder path for analysis (defaults to workspace root)",
+      "Determine output mode: in-place (modifies source) or copy-to-folder",
+      "Create git branch automatically for safety (unless explicitly disabled)",
+      "Execute jsdoc-gen command via straf-cli in spawn mode",
+      "Allow user to continue working while JSDoc generation runs",
+      "Report completion status and file locations with warnings about code modification"
+    ],
+    "tags": [
+      "documentation",
+      "jsdoc",
+      "inline-docs",
+      "spawn",
+      "async",
+      "strands",
+      "code-modification"
+    ],
+    "author": "OLAF Framework",
+    "status": "mainstream",
+    "exposure": "export",
+    "protocol": "Act",
+    "aliases": [
+      "generate jsdoc",
+      "add jsdoc comments",
+      "document code",
+      "jsdoc generation",
+      "inline documentation"
+    ],
+    "created": "2025-11-25",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "documentation",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "generate-jsdoc",
+        "path": "/skill.md",
+        "description": "Main prompt for JSDoc inline documentation generation"
+      }
+    ],
+    "tools": [
+      {
+        "name": "spawn-jsdoc-generator",
+        "path": "/tools/spawn-jsdoc-generator.py",
+        "type": "python",
+        "description": "Spawn wrapper for background JSDoc generation"
+      },
+      {
+        "name": "check-jsdoc-processes",
+        "path": "/tools/check-jsdoc-processes.py",
+        "type": "python",
+        "description": "Check status of spawned JSDoc generation processes"
+      },
+      {
+        "name": "straf-cli",
+        "path": "/.olaf/core/agentic/straf-cli/cli.py",
+        "type": "python",
+        "description": "AWS Strands CLI for multi-agent JSDoc generation"
+      }
+    ]
+  }
+}

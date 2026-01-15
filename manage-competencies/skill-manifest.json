@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "id": "manage-competencies",
+    "name": "Manage Competencies",
+    "shortDescription": "Complete competency lifecycle management - create, edit, delete, and validate OLAF competencies",
+    "description": "Comprehensive competency management skill that handles the full lifecycle of OLAF competencies including creation of new competencies from scratch or existing files, editing existing competencies (structure, files, manifest), safe deletion with dependency checking, and validation of competency structure and integrity.",
+    "objectives": [
+      "Create new competencies with proper structure, manifest, and documentation",
+      "Edit existing competencies safely (files, structure, dependencies, manifest)",
+      "Delete competencies with dependency validation and backup",
+      "Validate competency structure, manifest, and file integrity",
+      "Manage dependencies and ensure competency follows OLAF standards and best practices"
+    ],
+    "tags": [
+      "competency",
+      "management",
+      "lifecycle",
+      "create",
+      "edit",
+      "delete",
+      "validate",
+      "structure"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "manage competencies",
+      "competency manager",
+      "create competency",
+      "edit competency",
+      "delete competency",
+      "validate competency"
+    ],
+    "version": "1.0.0",
+    "author": "GitHub Copilot",
+    "created": "2025-11-18",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "olaf-core",
+      "primary_maintainer": "copilot",
+      "created_by": "copilot"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "manage-competencies",
+        "path": "/skill.md",
+        "description": "Main prompt that calls Python script for competency operations"
+      }
+    ],
+    "templates": [],
+    "tools": [],
+    "helpers": [],
+    "kb": [],
+    "scripts": [
+      {
+        "name": "manage_competencies",
+        "path": "/scripts/manage_competencies.py",
+        "description": "Python script handling create, edit, delete, validate operations"
+      }
+    ]
+  },
+  "dependencies": {
+    "competencies": [],
+    "external_tools": [],
+    "system_requirements": {
+      "os": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "shell": [
+        "powershell",
+        "bash"
+      ],
+      "disk_space": "10MB",
+      "memory": "256MB"
+    }
+  },
+  "compatibility": {
+    "olaf_version": ">=1.6.0",
+    "platforms": [
+      "windows",
+      "linux",
+      "macos"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "validate-all-competency-packs",
+  "version": "1.0.0",
+  "description": "Validate all competency packs in the workspace for schema and structure compliance",
+  "pack": "olaf-specific-tools",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "olaf-specific-tools",
+    "complexity": "standard",
+    "usage_frequency": "low",
+    "id": "validate-all-competency-packs",
+    "name": "validate-all-competency-packs",
+    "description": "Validate all competency packs in the workspace for schema and structure compliance",
+    "shortDescription": "Validate competency packs",
+    "objectives": [
+      "Detect invalid competency-manifest.json and skill-manifest.json files",
+      "Report missing files and structural issues"
+    ],
+    "tags": [
+      "validation",
+      "competency",
+      "schema"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Act"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "validate-all-competency-packs",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

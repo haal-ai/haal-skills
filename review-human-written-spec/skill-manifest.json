@@ -1,0 +1,102 @@
+{
+  "metadata": {
+    "id": "review-human-written-spec",
+    "name": "Review Human Written Spec",
+    "shortDescription": "Thoroughly analyze a human specification to challenge it and prepare API design questions for an SME.",
+    "description": "Multi-phase review workflow that analyzes a human-written specification, identifies ambiguities and missing decisions needed for API design, and produces a structured question set for the subject matter expert (with rationale and options).",
+    "objectives": [
+      "Extract and normalize requirements and assumptions from a human-written specification",
+      "Identify ambiguities, missing decisions, and risks that block API design",
+      "Produce SME questions with rationale and proposed options",
+      "Package results as a review document suitable to drive OpenAPI design"
+    ],
+    "tags": [
+      "api",
+      "openapi",
+      "requirements",
+      "spec-review",
+      "questionnaire"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Confirm-Act",
+    "created": "2025-12-15",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "review-human-written-spec",
+        "path": "/skill.md",
+        "description": "Main workflow entry point"
+      },
+      {
+        "name": "workflow-phase-1-intake",
+        "path": "/helpers/workflow-phase-1-intake.md",
+        "description": "Phase 1: intake and scoping"
+      },
+      {
+        "name": "workflow-phase-2-domain-model",
+        "path": "/helpers/workflow-phase-2-domain-model.md",
+        "description": "Phase 2: domain model and lifecycle extraction"
+      },
+      {
+        "name": "workflow-phase-3-api-capabilities",
+        "path": "/helpers/workflow-phase-3-api-capabilities.md",
+        "description": "Phase 3: API capability mapping"
+      },
+      {
+        "name": "workflow-phase-4-questions-for-sme",
+        "path": "/helpers/workflow-phase-4-questions-for-sme.md",
+        "description": "Phase 4: SME questions with rationale and options"
+      },
+      {
+        "name": "workflow-phase-5-review-packaging",
+        "path": "/helpers/workflow-phase-5-review-packaging.md",
+        "description": "Phase 5: package final review output"
+      }
+    ],
+    "templates": [
+      {
+        "name": "review-output-format",
+        "path": "templates/review-output-format.md",
+        "type": "markdown"
+      },
+      {
+        "name": "business-decisions-output-format",
+        "path": "templates/business-decisions-output-format.md",
+        "type": "markdown"
+      },
+      {
+        "name": "functional-spec-detailed-output-format",
+        "path": "templates/functional-spec-detailed-output-format.md",
+        "type": "markdown"
+      },
+      {
+        "name": "questions-table-format",
+        "path": "templates/questions-table-format.md",
+        "type": "markdown"
+      }
+    ],
+    "kb": [
+      {
+        "name": "api-design-question-catalog",
+        "path": "/kb/api-design-question-catalog.md",
+        "type": "reference"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

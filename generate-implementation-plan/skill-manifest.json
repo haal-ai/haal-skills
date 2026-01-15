@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "generate-implementation-plan",
+    "name": "Generate Implementation Plan",
+    "shortDescription": "Transform design document into executable implementation task plan",
+    "description": "Converts layered architecture design into detailed implementation plan with task breakdown, execution instructions, and bootstrap preparation. Generates Task 0.0 for context extraction and creates executable task sequence following the onboarding competency pattern.",
+    "objectives": [
+      "Extract layers and components from design document",
+      "Generate Task 0.0 for extracting task contexts (current 0.3 pattern)",
+      "Create task breakdown with dependencies, sequencing, and execution information",
+      "Prepare bootstrap orchestrator integration",
+      "Document execution strategy and output structure"
+    ],
+    "tags": [
+      "implementation",
+      "task-planning",
+      "bootstrap",
+      "esdi"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "generate implementation plan",
+      "create task breakdown"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-22",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "esdi",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "generate-implementation-plan",
+        "path": "/skill.md",
+        "description": "Main coordinator that transforms design to implementation plan"
+      }
+    ],
+    "knowledge_bases": [
+      {
+        "name": "task-planning-patterns",
+        "path": "/kb/task-planning-patterns.md",
+        "description": "Patterns for breaking down designs into executable tasks"
+      },
+      {
+        "name": "execution-templates",
+        "path": "/kb/execution-templates.md",
+        "description": "Templates for task execution information"
+      }
+    ],
+    "templates": [
+      {
+        "name": "implementation-plan-template",
+        "path": "templates/implementation-plan-template.md",
+        "description": "Template structure for implementation plans"
+      },
+      {
+        "name": "bootstrap-command-template",
+        "path": "templates/bootstrap-command-template.md",
+        "description": "Template for bootstrap command instructions"
+      }
+    ],
+    "tasks": [
+      {
+        "name": "extract-design-layers",
+        "path": "/tasks/extract-design-layers.md",
+        "description": "Task 0 - Extract layers and components from design.md"
+      },
+      {
+        "name": "generate-task-zero",
+        "path": "/tasks/generate-task-zero.md",
+        "description": "Task 1 - Generate Task 0.0 for context extraction"
+      },
+      {
+        "name": "create-task-breakdown",
+        "path": "/tasks/create-task-breakdown.md",
+        "description": "Task 2 - Break layers into implementation tasks with dependencies"
+      },
+      {
+        "name": "generate-execution-steps",
+        "path": "/tasks/generate-execution-steps.md",
+        "description": "Task 3 - Create execution information for each task"
+      },
+      {
+        "name": "create-bootstrap-integration",
+        "path": "/tasks/create-bootstrap-integration.md",
+        "description": "Task 4 - Generate bootstrap orchestrator configuration"
+      },
+      {
+        "name": "generate-plan-document",
+        "path": "/tasks/generate-plan-document.md",
+        "description": "Task 5 - Write final IMPLEMENTATION-TASK-PLAN.md"
+      }
+    ],
+    "definitions": [],
+    "docs": [
+      {
+        "name": "README",
+        "path": "/README.md",
+        "description": "Skill documentation and usage guide"
+      }
+    ]
+  },
+  "execution": {
+    "entryPoint": "/prompts/generate-implementation-plan.md",
+    "requiredTools": [
+      "file_read",
+      "file_write",
+      "spawn_straf_child_agent"
+    ],
+    "estimatedDuration": "20-30 minutes",
+    "toolMode": "standard"
+  },
+  "dependencies": {
+    "skills": [],
+    "artifacts": [
+      "design.md (from generate-design skill)"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "merge-branch-with-safety",
+  "version": "1.0.0",
+  "description": "Enhanced Merge Branch With Safety skill migrated from git-assistant competency",
+  "pack": "git-assistant",
+  "protocol": "Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "git-assistant",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "merge-branch-with-safety",
+    "name": "merge-branch-with-safety",
+    "description": "Enhanced Merge Branch With Safety skill migrated from git-assistant competency",
+    "shortDescription": "Enhanced Merge Branch With Safety skill migrated from git-assistant competency",
+    "objectives": [
+      "Use the merge-branch-with-safety skill"
+    ],
+    "tags": [
+      "git-assistant"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Act",
+    "aliases": [
+      "safe merge",
+      "merge safely",
+      "merge with checks",
+      "safe branch merge"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "merge-branch-with-safety",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

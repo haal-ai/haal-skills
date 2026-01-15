@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "id": "stash-restart-session",
+    "name": "Stash Restart Session",
+    "shortDescription": "Resume stashed work sessions",
+    "description": "This skill enables resuming work from previously stashed sessions, restoring files and context to continue work that was temporarily set aside.",
+    "version": "1.0.0",
+    "objectives": [
+      "List available stashes",
+      "Check for file conflicts",
+      "Restore stashed files safely",
+      "Resume interrupted work sessions"
+    ],
+    "tags": [
+      "common",
+      "stash-management",
+      "resume",
+      "restore"
+    ],
+    "author": "OLAF Framework",
+    "status": "deprecated",
+    "exposure": "internal",
+    "protocol": "Act",
+    "aliases": [
+      "stash restart",
+      "restart stash",
+      "resume stash",
+      "resume stashed work",
+      "restore stash"
+    ],
+    "created": "2025-11-14",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "admin",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "OLAF Migration Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Python 3.12+ for stash_manager.py",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "stash-restart-session",
+        "path": "/skill.md",
+        "description": "Stash restoration workflow"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ],
+    "skill_dependencies": [
+      {
+        "name": "time-retrieval",
+        "skill_id": "time-retrieval",
+        "path": "skills/time-retrieval/prompts/time-retrieval.md",
+        "description": "Timestamp generation for stash operations"
+      }
+    ],
+    "tools": [
+      {
+        "path": "/tools/stash_manager.py",
+        "description": "Stash management utility",
+        "name": "stash_manager",
+        "type": "python"
+      }
+    ]
+  }
+}

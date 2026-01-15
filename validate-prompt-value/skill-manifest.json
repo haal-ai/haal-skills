@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "id": "validate-prompt-value",
+    "name": "Validate Prompt Value",
+    "shortDescription": "Comprehensive evaluation of prompt effectiveness and business value",
+    "description": "Systematic assessment tool for evaluating prompt quality across multiple dimensions including effectiveness, business value, and technical implementation. Provides quantified scores and actionable improvement recommendations.",
+    "objectives": [
+      "Evaluate prompt effectiveness and clarity",
+      "Assess business value and ROI potential",
+      "Review technical quality and best practices compliance",
+      "Generate actionable improvement recommendations",
+      "Provide quantified assessment scores for comparison"
+    ],
+    "tags": [
+      "validation",
+      "effectiveness",
+      "value-assessment",
+      "quality-assurance",
+      "prompt-engineering"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "validate prompt",
+      "assess prompt value",
+      "evaluate prompt effectiveness",
+      "prompt quality check"
+    ],
+    "version": "1.0.0",
+    "created": "2025-11-19",
+    "updated": "2026-01-14",
+    "author": "User Created",
+    "maintenance": {
+      "team": "user-managed",
+      "primary_maintainer": "user",
+      "created_by": "create-prompt-skill"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "validate-prompt-value",
+        "path": "/skill.md",
+        "type": "primary"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "docs/description.md",
+        "type": "documentation"
+      },
+      {
+        "name": "tutorial",
+        "path": "docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "verify-competency-compliance",
+  "version": "1.0.0",
+  "description": "Verify a competency package complies with OLAF standards and required artifacts",
+  "pack": "olaf-specific-tools",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "olaf-specific-tools",
+    "complexity": "standard",
+    "usage_frequency": "low",
+    "id": "verify-competency-compliance",
+    "name": "verify-competency-compliance",
+    "description": "Verify a competency package complies with OLAF standards and required artifacts",
+    "shortDescription": "Verify competency compliance",
+    "objectives": [
+      "Validate competency-manifest.json structure",
+      "Validate referenced skill paths exist",
+      "Check basic packaging conventions"
+    ],
+    "tags": [
+      "validation",
+      "competency",
+      "compliance"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Act"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "verify-competency-compliance",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

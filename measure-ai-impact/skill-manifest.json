@@ -1,0 +1,232 @@
+{
+  "metadata": {
+    "id": "measure-ai-impact",
+    "name": "Measure AI Impact",
+    "version": "1.0.0",
+    "description": "Measure AI's impact on code quality and team productivity through file analysis and quarterly metrics",
+    "shortDescription": "Measure AI impact on code quality and team productivity",
+    "objectives": [
+      "Detect AI signatures in files using Halstead metrics and Maintainability Index",
+      "Track team productivity and code quality trends across quarters",
+      "Create historical snapshots for future comparison",
+      "Provide insights into AI-driven code changes",
+      "Support data-driven decisions about AI tooling adoption"
+    ],
+    "protocol": "Act",
+    "status": "mainstream",
+    "exposure": "export",
+    "tags": [
+      "ai",
+      "impact",
+      "metrics",
+      "productivity",
+      "quality",
+      "halstead",
+      "maintainability",
+      "analytics"
+    ],
+    "created": "2025-01-24",
+    "updated": "2026-01-14",
+    "author": "OLAF Framework",
+    "aliases": [
+      "ai impact",
+      "measure productivity",
+      "code metrics"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "measure-ai-impact",
+        "path": "/skill.md",
+        "description": "Main prompt for AI impact measurement"
+      }
+    ],
+    "tools": [
+      {
+        "name": "ai_impact_analyzer.py",
+        "path": "/tools/ai_impact_analyzer.py",
+        "description": "Detects AI-generated code changes via Halstead metrics"
+      },
+      {
+        "name": "git_productivity_analyzer.py",
+        "path": "/tools/git_productivity_analyzer.py",
+        "description": "Tracks productivity trends across quarters"
+      }
+    ],
+    "templates": [
+      {
+        "name": "ai-impact-file-analysis-template",
+        "path": "templates/ai-impact-file-analysis-template.md",
+        "description": "Template for file-level analysis reports"
+      },
+      {
+        "name": "quarterly-trends-template",
+        "path": "templates/quarterly-trends-template.md",
+        "description": "Template for quarterly trend reports"
+      }
+    ]
+  },
+  "legacy_metadata": {
+    "skill": {
+      "name": "measure-ai-impact",
+      "version": "1.0.0",
+      "description": "Measure AI's impact on code quality and team productivity through file analysis and quarterly metrics",
+      "protocol": "Act",
+      "tags": [
+        "ai",
+        "impact",
+        "metrics",
+        "productivity",
+        "quality",
+        "halstead",
+        "maintainability",
+        "analytics"
+      ],
+      "created": "2025-01-24",
+      "last_updated": "2025-01-24",
+      "author": "OLAF Framework",
+      "status": "active"
+    },
+    "competencies": [
+      {
+        "name": "file-level-ai-detection",
+        "description": "Detect AI signatures in specific files using Halstead metrics and Maintainability Index",
+        "entry_point": "prompts/measure-ai-impact.md",
+        "mode": "file-analysis",
+        "tools": [
+          "ai_impact_analyzer.py"
+        ],
+        "outputs": [
+          "ai-impact-file-analysis-template.md"
+        ]
+      },
+      {
+        "name": "quarterly-productivity-trends",
+        "description": "Track team productivity and code quality trends across quarters",
+        "entry_point": "prompts/measure-ai-impact.md",
+        "mode": "quarterly-trends",
+        "tools": [
+          "git_productivity_analyzer.py"
+        ],
+        "outputs": [
+          "quarterly-trends-template.md"
+        ]
+      },
+      {
+        "name": "baseline-snapshot-creation",
+        "description": "Create historical snapshots for future comparison",
+        "entry_point": "prompts/measure-ai-impact.md",
+        "mode": "snapshot",
+        "tools": [
+          "ai_impact_analyzer.py",
+          "git_productivity_analyzer.py"
+        ],
+        "outputs": [
+          "snapshot JSON files"
+        ]
+      }
+    ],
+    "tools": {
+      "ai_impact_analyzer.py": {
+        "path": "tools/ai_impact_analyzer.py",
+        "description": "Detects AI-generated code changes via Halstead metrics",
+        "language": "python",
+        "version": "1.0.0",
+        "commands": {
+          "snapshot": {
+            "description": "Create metrics snapshot for baseline",
+            "parameters": {
+              "--name": "Snapshot name (e.g., 'baseline', '2025-Q1')",
+              "--months": "Months back for historical baseline (default: 6)",
+              "--no-halstead": "Skip Halstead metrics for faster execution"
+            },
+            "example": "python ai_impact_analyzer.py snapshot --name baseline --months 6"
+          },
+          "compare": {
+            "description": "Compare two snapshots to detect AI signatures",
+            "parameters": {
+              "baseline_snapshot": "Name of baseline snapshot",
+              "current_snapshot": "Name of current snapshot (or 'latest')"
+            },
+            "example": "python ai_impact_analyzer.py compare baseline latest"
+          }
+        }
+      },
+      "git_productivity_analyzer.py": {
+        "path": "tools/git_productivity_analyzer.py",
+        "description": "Generates quarterly snapshots from Git history",
+        "language": "python",
+        "version": "1.0.0",
+        "commands": {
+          "snapshots": {
+            "description": "Generate snapshots for all quarters since date",
+            "parameters": {
+              "--since": "Start date (YYYY-MM-DD, e.g., '2024-01-01')"
+            },
+            "example": "python git_productivity_analyzer.py snapshots --since 2024-01-01"
+          },
+          "snapshot": {
+            "description": "Generate snapshot for specific quarter",
+            "parameters": {
+              "--quarter": "Quarter in YYYY-QN format (e.g., '2025-Q1')"
+            },
+            "example": "python git_productivity_analyzer.py snapshot --quarter 2025-Q1"
+          },
+          "compare": {
+            "description": "Compare two quarters",
+            "parameters": {
+              "quarter1": "First quarter (YYYY-QN)",
+              "quarter2": "Second quarter (YYYY-QN)"
+            },
+            "example": "python git_productivity_analyzer.py compare 2024-Q4 2025-Q1"
+          },
+          "report": {
+            "description": "Generate comprehensive productivity report",
+            "parameters": {},
+            "example": "python git_productivity_analyzer.py report"
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "python": ">=3.10",
+      "git": "required for all operations",
+      "radon": "optional for Halstead metrics (pip install radon)"
+    },
+    "related_skills": [
+      "onboard-me",
+      "review-code",
+      "report-my-daily"
+    ],
+    "use_cases": [
+      "Validate AI-assisted refactoring improvements",
+      "Track quarterly team productivity trends",
+      "Measure ROI of AI coding tool adoption",
+      "Identify files needing AI assistance",
+      "Generate leadership reports on AI impact",
+      "Create baselines before major changes"
+    ],
+    "output_locations": {
+      "reports": "olaf-data/ai-impact/",
+      "snapshots": "olaf-data/ai-impact/snapshots/",
+      "file_analysis": "ai-impact-file-analysis-[YYYYMMDD-HHmm].md",
+      "quarterly_trends": "ai-impact-quarterly-trends-[YYYYMMDD-HHmm].md"
+    },
+    "limitations": [
+      "Cannot definitively prove code was AI-generated (statistical detection only)",
+      "Best results with Python files (limited language support)",
+      "Requires 6+ months Git history for accurate baselines",
+      "Manual refactoring can trigger false positives",
+      "Cannot attribute specific commits to AI vs human"
+    ],
+    "documentation": {
+      "description": "docs/description.md",
+      "tutorial": "docs/tutorial.md",
+      "templates": [
+        "templates/ai-impact-file-analysis-template.md",
+        "templates/quarterly-trends-template.md"
+      ]
+    }
+  }
+}

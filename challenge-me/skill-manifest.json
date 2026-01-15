@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "id": "challenge-me",
+    "name": "Challenge Me",
+    "shortDescription": "Interactive ideation engine that challenges ideas, provides insights, and tracks collaborative refinement trajectory",
+    "description": "Enhanced multi-source research ideation engine that challenges your ideas through iterative cycles using a master-chain pattern. Integrates codebase analysis, documentation review, and web research to provide evidence-based insights and honest actionable recommendations through structured task execution.",
+    "version": "3.0.0",
+    "objectives": [
+      "Challenge and refine ideas through collaborative dialogue",
+      "Integrate multi-source research for evidence-based insights",
+      "Track ideation trajectory and evolution of thinking",
+      "Generate honest actionable recommendations with go/no-go decisions",
+      "Provide comprehensive source citations and documentation"
+    ],
+    "tags": [
+      "ideation",
+      "challenge",
+      "research",
+      "collaboration",
+      "multi-source",
+      "trajectory",
+      "recommendations",
+      "citations"
+    ],
+    "author": "OLAF Framework",
+    "status": "proven",
+    "exposure": "export",
+    "protocol": "Act",
+    "aliases": [
+      "challenge me",
+      "ideation session",
+      "challenge my ideas",
+      "interactive brainstorm",
+      "collaborative ideation",
+      "idea refinement",
+      "challenge and refine"
+    ],
+    "created": "2025-11-19",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "OLAF Core Team",
+      "primary_maintainer": "OLAF Framework",
+      "created_by": "Migration from researcher competency"
+    },
+    "technical_requirements": {
+      "recommended_llm": "GPT-4 or equivalent for complex reasoning",
+      "tool_dependency": "Web search capabilities, file system access",
+      "platform_limitations": "Requires read access to provided codebase and documentation paths"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "challenge-me",
+        "path": "/skill.md",
+        "description": "Master chain coordinator for interactive ideation with cyclic workflow pattern"
+      }
+    ],
+    "tasks": [
+      {
+        "name": "collect-parameters",
+        "path": "/tasks/collect-parameters.md",
+        "description": "Collect session parameters from user"
+      },
+      {
+        "name": "initialize-session",
+        "path": "/tasks/initialize-session.md",
+        "description": "Initialize ideation session with identifier and tracking"
+      },
+      {
+        "name": "setup-research-sources",
+        "path": "/tasks/setup-research-sources.md",
+        "description": "Setup multi-source research indexes"
+      },
+      {
+        "name": "execute-ideation-cycle",
+        "path": "/tasks/execute-ideation-cycle.md",
+        "description": "Execute single ideation cycle (loop body)"
+      },
+      {
+        "name": "update-trajectory",
+        "path": "/tasks/update-trajectory.md",
+        "description": "Update trajectory documentation after each cycle"
+      },
+      {
+        "name": "generate-deliverables",
+        "path": "/tasks/generate-deliverables.md",
+        "description": "Generate final deliverables (think.md, path.md, sources.md, reco.md)"
+      }
+    ],
+    "templates": [
+      {
+        "name": "think-tank-think-template",
+        "path": "templates/think-tank-think-template.md",
+        "type": "markdown"
+      },
+      {
+        "name": "think-tank-path-template",
+        "path": "templates/think-tank-path-template.md",
+        "type": "markdown"
+      },
+      {
+        "name": "think-tank-sources-template",
+        "path": "templates/think-tank-sources-template.md",
+        "type": "markdown"
+      },
+      {
+        "name": "think-tank-reco-template",
+        "path": "templates/think-tank-reco-template.md",
+        "type": "markdown"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "review-progress",
+  "version": "1.0.0",
+  "description": "Enhanced Review Progress skill migrated from project-manager competency",
+  "pack": "project-manager",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "project-manager",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "review-progress",
+    "name": "review-progress",
+    "description": "Enhanced Review Progress skill migrated from project-manager competency",
+    "shortDescription": "Enhanced Review Progress skill migrated from project-manager competency",
+    "objectives": [
+      "Use the review-progress skill"
+    ],
+    "tags": [
+      "project-manager"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "check progress",
+      "progress review",
+      "review status",
+      "status update"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "review-progress",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

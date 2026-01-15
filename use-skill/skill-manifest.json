@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "id": "use-skill",
+    "name": "Use Skill",
+    "shortDescription": "Intelligent skill discovery and execution router",
+    "description": "This skill provides intelligent skill discovery, routing user requests to the appropriate skill based on intent analysis and keyword matching.",
+    "version": "1.0.0",
+    "objectives": [
+      "Discover skills by intent",
+      "Route requests to appropriate skills",
+      "Enable fuzzy skill search",
+      "Provide skill recommendations"
+    ],
+    "tags": [
+      "common",
+      "skill-router",
+      "discovery",
+      "execution"
+    ],
+    "author": "OLAF Framework",
+    "status": "proven",
+    "exposure": "kernel",
+    "protocol": "Act",
+    "aliases": [
+      "find skill",
+      "search skill",
+      "use workflow",
+      "execute skill",
+      "run skill"
+    ],
+    "created": "2025-11-14",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "admin",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "OLAF Migration Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Minimal - mostly pure LLM capabilities",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "use-skill",
+        "path": "/skill.md",
+        "description": "Competency discovery and routing workflow"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

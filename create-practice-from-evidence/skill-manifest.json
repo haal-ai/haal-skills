@@ -1,0 +1,58 @@
+{
+  "name": "create-practice-from-evidence",
+  "version": "1.0.0",
+  "description": "Generate a standardized practice document (good vs bad) from evidence such as files, commits, and user intent.",
+  "pack": "practices",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "practices",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "create-practice-from-evidence",
+    "name": "create-practice-from-evidence",
+    "description": "Generate a standardized practice document (good vs bad) from evidence such as files, commits, and user intent.",
+    "shortDescription": "Create a practice doc from evidence (file/commit/comment)",
+    "objectives": [
+      "Collect user inputs and evidence",
+      "Analyze evidence according to the user's intent",
+      "Generate a practice file using the external template",
+      "Store output under .olaf/data/practices/good-bad"
+    ],
+    "tags": [
+      "practices",
+      "documentation",
+      "git",
+      "merge",
+      "review",
+      "good-bad"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "extract practices",
+      "generate practice",
+      "create practice from evidence"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "create-practice-from-evidence",
+        "path": "/skill.md"
+      }
+    ],
+    "templates": [
+      {
+        "name": "practice-template",
+        "path": "templates/practice-template.md"
+      }
+    ]
+  }
+}

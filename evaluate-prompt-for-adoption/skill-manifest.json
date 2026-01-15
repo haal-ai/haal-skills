@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "id": "evaluate-prompt-for-adoption",
+    "name": "Evaluate Prompt for Adoption",
+    "shortDescription": "Fetch and evaluate external prompts for potential adoption into OLAF",
+    "description": "Systematically evaluate prompts from GitHub, awesome lists, registries, or the web for potential adoption into OLAF. Analyzes similarity to existing skills, evaluates quality, clarity, genericity, parameterizability, LLM-independence, target personas, and value-add to determine if prompt is worth importing.",
+    "version": "1.0.0",
+    "objectives": [
+      "Fetch prompts from external sources and check similarity to existing OLAF skills",
+      "Evaluate prompt quality, clarity, structure, genericity and parameterizability",
+      "Determine LLM/agent independence and identify target personas",
+      "Estimate value-add (frequency vs specificity, AI-required vs scriptable)",
+      "Provide adoption recommendation with rating and rationale"
+    ],
+    "tags": [
+      "evaluation",
+      "adoption",
+      "quality-assessment",
+      "prompt-curation",
+      "external-sources",
+      "prompt-engineer"
+    ],
+    "author": "OLAF Team",
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Act",
+    "aliases": [
+      "rate prompt",
+      "evaluate external prompt",
+      "assess prompt quality",
+      "should i adopt this prompt"
+    ],
+    "created": "2025-11-24",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "evaluate-prompt-for-adoption",
+        "path": "/skill.md",
+        "description": "Main evaluation workflow for external prompts"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md"
+      }
+    ]
+  }
+}

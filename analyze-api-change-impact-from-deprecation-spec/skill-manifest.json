@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "id": "analyze-api-change-impact-from-deprecation-spec",
+    "name": "Analyze API Change Impact From Deprecation Spec",
+    "shortDescription": "Analyze consumer code impact from changed/evolved/deprecated endpoints and generate a modification + retest tasklist.",
+    "description": "From a change/deprecation specification (and optional OpenAPI old/new contracts), identify impacted endpoints, search consumer code for usage, and produce a complete impact map and tasklist for modifications and retesting.",
+    "objectives": [
+      "Read change/deprecation documentation and optionally OpenAPI diffs",
+      "Identify impacted endpoints, fields, and behavioral changes",
+      "Search consumer code roots for usage (routes, clients, tests)",
+      "Produce an impact map and a prioritized tasklist",
+      "Write outputs under docs/specifications/{demand_folder}/10-consumer-change-impact"
+    ],
+    "tags": [
+      "api",
+      "openapi",
+      "consumer",
+      "impact-analysis",
+      "deprecation",
+      "migration",
+      "testing"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "api change impact",
+      "consumer change impact",
+      "deprecation impact analysis",
+      "endpoint deprecation tasklist"
+    ],
+    "author": "OLAF Framework",
+    "created": "2025-12-15",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "analyze-api-change-impact-from-deprecation-spec",
+        "path": "/skill.md",
+        "description": "Main workflow entry point"
+      }
+    ],
+    "templates": [
+      {
+        "name": "consumer-impact-tasklist-template",
+        "path": "templates/consumer-impact-tasklist-template.md",
+        "type": "markdown"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

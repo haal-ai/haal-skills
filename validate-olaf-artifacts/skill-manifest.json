@@ -1,0 +1,45 @@
+{
+  "name": "validate-olaf-artifacts",
+  "version": "1.0.0",
+  "description": "Enhanced Validate Olaf Artifacts skill migrated from olaf-specific-tools competency",
+  "pack": "olaf-specific-tools",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "olaf-specific-tools",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "validate-olaf-artifacts",
+    "name": "validate-olaf-artifacts",
+    "description": "Enhanced Validate Olaf Artifacts skill migrated from olaf-specific-tools competency",
+    "shortDescription": "Enhanced Validate Olaf Artifacts skill migrated from olaf-specific-tools competency",
+    "objectives": [
+      "Use the validate-olaf-artifacts skill"
+    ],
+    "tags": [
+      "olaf-specific-tools"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "validate artifacts",
+      "check olaf artifacts",
+      "artifact validation",
+      "validate framework"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "validate-olaf-artifacts",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

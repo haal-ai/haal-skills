@@ -1,0 +1,123 @@
+{
+  "metadata": {
+    "id": "assess-code-quality-principles",
+    "name": "Assess Code Quality Principles",
+    "shortDescription": "Critical evaluation of codebase against established engineering principles (SOLID, DRY, YAGNI) with evidence-based scoring and specific improvement recommendations",
+    "description": "Provides systematic evaluation of code quality against industry-standard principles including SOLID principles, DRY/YAGNI compliance, testing quality, architecture assessment, security practices, and performance patterns. Generates comprehensive quality scorecards with evidence-based grading (A-F scale), specific code examples, and prioritized improvement recommendations with effort estimates.",
+    "objectives": [
+      "Evaluate codebase against SOLID principles with specific violation examples",
+      "Assess code quality metrics including DRY, YAGNI, and complexity analysis",
+      "Generate evidence-based quality scorecard with A-F grading scale",
+      "Provide prioritized improvement recommendations with effort estimates",
+      "Create baseline quality metrics for tracking improvements over time"
+    ],
+    "tags": [
+      "code-quality",
+      "assessment",
+      "solid-principles",
+      "best-practices",
+      "evaluation",
+      "metrics",
+      "refactoring",
+      "technical-debt"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "author": "OLAF Framework",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "developer",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "competency-to-skills-migration"
+    },
+    "protocol": "Propose-Act",
+    "aliases": [
+      "code quality",
+      "assess quality",
+      "quality principles",
+      "evaluate code quality"
+    ]
+  },
+  "templates": [
+    {
+      "id": "code-quality-assessment-template",
+      "name": "Code Quality Assessment Template",
+      "description": "Comprehensive quality assessment report template with scoring framework",
+      "path": "templates/code-quality-assessment-template.md"
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "file_analysis",
+      "code_metrics"
+    ],
+    "external": []
+  },
+  "parameters": {
+    "required": [
+      {
+        "name": "application_name",
+        "type": "string",
+        "description": "Name of the application for file naming (kebab-case format)"
+      },
+      {
+        "name": "code_path",
+        "type": "string",
+        "description": "Path to the codebase directory to assess"
+      }
+    ],
+    "optional": [
+      {
+        "name": "tech_spec_path",
+        "type": "string",
+        "description": "Path to existing technical specification for context"
+      },
+      {
+        "name": "focus_areas",
+        "type": "array",
+        "description": "Specific assessment areas to focus on (defaults to all categories)"
+      }
+    ]
+  },
+  "outputs": {
+    "primary": {
+      "type": "assessment_report",
+      "format": "markdown",
+      "location": ".olaf/work/staging/assessments/code-quality-assessment-{application_name}-YYYYMMDD-NNN.md",
+      "description": "Comprehensive quality assessment report with scorecard and recommendations"
+    },
+    "artifacts": [
+      {
+        "type": "quality_scorecard",
+        "description": "Overall and category-specific grades with evidence"
+      },
+      {
+        "type": "improvement_plan",
+        "description": "Prioritized recommendations with effort estimates"
+      },
+      {
+        "type": "code_examples",
+        "description": "Specific violation and improvement examples"
+      }
+    ]
+  },
+  "success_criteria": [
+    "Complete codebase analysis performed with comprehensive coverage",
+    "Quality scorecard generated with evidence-based grades",
+    "Specific code examples collected for all major staging",
+    "Prioritized improvement recommendations created with effort estimates",
+    "User review completed with feedback incorporated",
+    "Assessment document created following template structure"
+  ],
+  "bom": {
+    "prompts": [
+      {
+        "name": "assess-code-quality-principles",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "id": "generate-code-mapper-docs",
+    "name": "Generate Code-Mapper Documentation",
+    "shortDescription": "Generate technical project documentation using OLAF code-mapper analysis outputs.",
+    "description": "Workflow skill that guides the user to run OLAF code-mapper foundation analysis and contextual reads, then uses the generated artifacts to produce structured technical project documentation.",
+    "version": "1.0.0",
+    "objectives": [
+      "Guide the user to run code-mapper foundation analysis on a target repository",
+      "Leverage structural and index outputs from code-mapper to understand the project",
+      "Drive contextual reads for key entry points in each application or tool",
+      "Generate a consistent technical documentation bundle for the analyzed repository"
+    ],
+    "tags": [
+      "code-mapper",
+      "documentation",
+      "repository-analysis",
+      "developer",
+      "workflow"
+    ],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "generate code-mapper docs",
+      "generate documentation from code-mapper",
+      "code-mapper documentation"
+    ],
+    "created": "2025-12-09",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "code-mapper",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Cascade"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Same class of models validated for core OLAF skills",
+      "tool_dependency": "Python runtime capable of executing scripts/code-mapper/run.py and related utilities.",
+      "platform_limitations": "Assumes access to the target repository filesystem and ability to run Python scripts."
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "generate-code-mapper-docs",
+        "path": "/skill.md",
+        "description": "Main workflow prompt that orchestrates code-mapper analysis and documentation generation."
+      }
+    ],
+    "templates": [
+      {
+        "name": "project-documentation-structure",
+        "path": "templates/project-documentation-structure.md",
+        "type": "markdown"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "id": "generate-step-by-step-tutorial",
+    "name": "Generate Step By Step Tutorial",
+    "shortDescription": "P1 prompt-engineer skill: generate-step-by-step-tutorial",
+    "description": "Enhanced P1 skill migrated from prompt-engineer competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide prompt-engineer capabilities for generate-step-by-step-tutorial",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "prompt-engineer",
+      "p1-priority",
+      "experimental",
+      "generatestepbysteptutorial"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "generate step by step tutorial",
+      "generate-step-by-step-tutorial skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "prompt-engineer",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "generate-step-by-step-tutorial",
+        "path": "/skill.md",
+        "description": "Main generate-step-by-step-tutorial prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [
+      {
+        "name": "step-by-step-tutorial-template",
+        "path": "templates/technical-writer/step-by-step-tutorial-template.md",
+        "description": "Template for step-by-step-tutorial-template"
+      },
+      {
+        "name": "step-by-step-tutorial-template",
+        "path": "templates/technical-writer/step-by-step-tutorial-template.md",
+        "description": "Template for step-by-step-tutorial-template"
+      }
+    ],
+    "tools": [],
+    "docs": []
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "id": "create-changelog-entry",
+    "name": "Create Changelog Entry",
+    "shortDescription": "P1 project-manager skill: create-changelog-entry",
+    "description": "Enhanced P1 skill migrated from project-manager competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide project-manager capabilities for create-changelog-entry",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "project-manager",
+      "p1-priority",
+      "experimental",
+      "createchangelogentry"
+    ],
+    "status": "deprecated",
+    "exposure": "export",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "create changelog entry",
+      "create-changelog-entry skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "project-manager",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "create-changelog-entry",
+        "path": "/skill.md",
+        "description": "Main create-changelog-entry prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [
+      {
+        "name": "changelog-template",
+        "path": "templates/project-manager/changelog-template.md",
+        "description": "Template for changelog-template"
+      }
+    ],
+    "tools": [],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "description": "Documentation for description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "description": "Documentation for tutorial"
+      }
+    ]
+  }
+}

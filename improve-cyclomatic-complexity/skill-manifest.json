@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "id": "improve-cyclomatic-complexity",
+    "name": "Improve Cyclomatic Complexity",
+    "shortDescription": "P1 developer skill: improve-cyclomatic-complexity",
+    "description": "Enhanced P1 skill migrated from developer competency pack with comprehensive reference detection",
+    "objectives": [
+      "Provide developer capabilities for improve-cyclomatic-complexity",
+      "Support P1 operational requirements",
+      "Maintain compatibility with existing workflows",
+      "Preserve all template and tool dependencies"
+    ],
+    "tags": [
+      "developer",
+      "p1-priority",
+      "experimental",
+      "improvecyclomaticcomplexity"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "improve cyclomatic complexity",
+      "improve-cyclomatic-complexity skill"
+    ],
+    "version": "1.0.0",
+    "author": "OLAF Framework Core Team",
+    "created": "2025-11-15",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "developer",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "Enhanced P1 Migration Analyzer"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "improve-cyclomatic-complexity",
+        "path": "/skill.md",
+        "description": "Main improve-cyclomatic-complexity prompt with enhanced reference detection"
+      }
+    ],
+    "templates": [
+      {
+        "name": "complexity-reduction-report-template",
+        "path": "templates/complexity-reduction-report-template.md",
+        "description": "Template for complexity-reduction-report-template"
+      }
+    ],
+    "tools": [],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "description": "Documentation for description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "description": "Documentation for tutorial"
+      }
+    ]
+  }
+}

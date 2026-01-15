@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "id": "code-in-rust",
+    "name": "Code in Rust",
+    "shortDescription": "Assist developers coding in Rust by enforcing team practices, SOLID principles, and Git workflow standards",
+    "description": "This skill provides Rust coding assistance while strictly enforcing team practices loaded from the local practices folder. It ensures code follows SOLID principles (SRP, DI), Rust idioms, proper error handling, and Git workflow best practices including worktree usage and small, frequent commits.",
+    "objectives": [
+      "Load and enforce Rust coding practices from local practices folder",
+      "Ensure all generated code follows SOLID principles and Rust idioms",
+      "Verify Git worktree setup before code modifications",
+      "Guide developers toward small, frequent commits"
+    ],
+    "tags": [
+      "rust",
+      "coding",
+      "developer",
+      "practices",
+      "solid",
+      "git"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "protocol": "Propose-Confirm-Act",
+    "aliases": [
+      "rust coding",
+      "code rust",
+      "rust assistance",
+      "rust development"
+    ],
+    "version": "1.0.0",
+    "author": "Windsurf AI",
+    "created": "2026-01-13",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "team-competencies",
+      "primary_maintainer": "Windsurf AI",
+      "created_by": "Windsurf AI"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "code-in-rust",
+        "path": "/skill.md",
+        "description": "Main skill prompt for Rust coding assistance with practice enforcement"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

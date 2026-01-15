@@ -1,0 +1,42 @@
+{
+  "name": "check-prompt-compliance",
+  "version": "1.0.0",
+  "description": "Check a prompt for compliance with OLAF prompt standards",
+  "pack": "haal-prompt-engineer",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "prompt-engineering",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "check-prompt-compliance",
+    "name": "check-prompt-compliance",
+    "description": "Check a prompt for compliance with OLAF prompt standards",
+    "shortDescription": "Validate prompt compliance",
+    "objectives": [
+      "Review a prompt against the OLAF prompt conventions",
+      "Propose corrections when non-compliant"
+    ],
+    "tags": [
+      "prompt",
+      "compliance",
+      "validation"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Act"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "check-prompt-compliance",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}

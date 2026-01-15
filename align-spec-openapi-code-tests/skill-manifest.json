@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "id": "align-spec-openapi-code-tests",
+    "name": "Align Spec, OpenAPI, Code, and Tests",
+    "shortDescription": "Detect drift and align functional spec, OpenAPI, implementation code, and tests with least-impact recommendations.",
+    "description": "For a demand folder, select the latest functional spec + OpenAPI contract, compare them to the implementation code and tests, produce a drift report and least-impact alignment plan, and (after approval) apply the selected alignment without modifying DB/DDL artifacts.",
+    "objectives": [
+      "Select latest demand spec artifacts and validate paths",
+      "Detect drift across functional spec, OpenAPI, code, and tests",
+      "Recommend least-impact alignment steps with an explicit source-of-truth",
+      "Write drift analysis outputs under docs/specifications/{demand_folder}/08-drift-analysis",
+      "Apply alignment changes after approval without modifying DB/DDL artifacts"
+    ],
+    "tags": [
+      "api",
+      "openapi",
+      "drift",
+      "alignment",
+      "testing",
+      "bruno",
+      "quarkus",
+      "spec"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Confirm-Act",
+    "author": "OLAF Framework",
+    "created": "2025-12-15",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "align-spec-openapi-code-tests",
+        "path": "/skill.md",
+        "description": "Main workflow entry point"
+      }
+    ],
+    "templates": [
+      {
+        "name": "drift-alignment-report-template",
+        "path": "templates/drift-alignment-report-template.md",
+        "type": "markdown"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

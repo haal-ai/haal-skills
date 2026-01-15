@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "id": "generate-external-docs",
+    "name": "Generate External Documentation",
+    "shortDescription": "Generate comprehensive external documentation (MkDocs) from codebase analysis",
+    "description": "Generates external documentation files (index.md, architecture.md, control-flow.md, use-cases.md, mkdocs.yml) using AWS Strands multi-agent system. Runs in spawn mode to allow parallel work. Output defaults to .olaf/data/product/documentations/<repo>/<folder>.",
+    "version": "1.0.0",
+    "objectives": [
+      "Accept root folder path for analysis (defaults to workspace root)",
+      "Determine output path based on repository name and root folder",
+      "Execute doc-external command via straf-cli in spawn mode",
+      "Allow user to continue working while documentation generates",
+      "Report completion status and file locations"
+    ],
+    "tags": [
+      "documentation",
+      "mkdocs",
+      "external-docs",
+      "spawn",
+      "async",
+      "strands"
+    ],
+    "author": "OLAF Framework",
+    "status": "experimental",
+    "exposure": "internal",
+    "protocol": "Act",
+    "aliases": [
+      "generate external docs",
+      "create external documentation",
+      "mkdocs generation",
+      "external documentation"
+    ],
+    "created": "2025-11-25",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "documentation",
+      "primary_maintainer": "OLAF Framework Core Team"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "generate-external-docs",
+        "path": "/skill.md",
+        "description": "Main prompt for external documentation generation"
+      }
+    ],
+    "tools": [
+      {
+        "name": "spawn-doc-generator",
+        "path": "/tools/spawn-doc-generator.py",
+        "type": "python",
+        "description": "Spawn wrapper for background documentation generation"
+      },
+      {
+        "name": "check-doc-processes",
+        "path": "/tools/check-doc-processes.py",
+        "type": "python",
+        "description": "Check status of spawned documentation generation processes"
+      },
+      {
+        "name": "straf-cli",
+        "path": "/.olaf/core/agentic/straf-cli/cli.py",
+        "type": "python",
+        "description": "AWS Strands CLI for multi-agent documentation generation"
+      }
+    ]
+  }
+}

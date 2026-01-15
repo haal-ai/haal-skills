@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "id": "delete-stash",
+    "name": "Delete Stash",
+    "shortDescription": "Permanently delete unwanted stash directories",
+    "description": "This skill provides a safe way to permanently delete stash directories that are no longer needed, freeing up disk space and keeping the stash system organized.",
+    "version": "1.0.0",
+    "objectives": [
+      "List available stashes for selection",
+      "Safely delete unwanted stash directories",
+      "Confirm deletion before executing",
+      "Maintain clean stash organization"
+    ],
+    "tags": [
+      "common",
+      "stash-management",
+      "cleanup"
+    ],
+    "author": "OLAF Framework",
+    "status": "deprecated",
+    "exposure": "internal",
+    "protocol": "Act",
+    "aliases": [
+      "remove stash",
+      "clean stash",
+      "stash delete"
+    ],
+    "created": "2025-11-14",
+    "updated": "2026-01-14",
+    "maintenance": {
+      "team": "admin",
+      "primary_maintainer": "OLAF Framework Core Team",
+      "created_by": "OLAF Migration Assistant"
+    },
+    "technical_requirements": {
+      "recommended_llm": "Validated primarily with Windsurf using GPT Low Reasoning and GitHub Sonnet 4.x",
+      "tool_dependency": "Python 3.12+ for stash_manager.py",
+      "platform_limitations": "Cross-platform compatible"
+    }
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "delete-stash",
+        "path": "/skill.md",
+        "description": "Delete stash workflow"
+      }
+    ],
+    "tools": [
+      {
+        "path": "/tools/stash_manager.py",
+        "description": "Stash management utility",
+        "name": "stash_manager",
+        "type": "python"
+      }
+    ]
+  }
+}

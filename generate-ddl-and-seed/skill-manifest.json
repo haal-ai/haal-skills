@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "id": "generate-ddl-and-seed",
+    "name": "Generate DDL And Seed",
+    "shortDescription": "Generate a new database schema (DDL) and initialization data from the latest OpenAPI contract and DB↔API fit analysis when no DB exists yet.",
+    "description": "For greenfield demands without existing database artifacts, read the latest OpenAPI contract and the latest DB↔API fit analysis, propose a normalized schema, and generate DDL + seed data scripts. Defaults to PostgreSQL but can target H2 or MySQL.",
+    "objectives": [
+      "Select latest OpenAPI and DB↔API fit analysis artifacts for a demand",
+      "Derive a new relational schema aligned to API domain and use-cases",
+      "Generate DDL for the chosen database engine (PostgreSQL default)",
+      "Generate deterministic seed/init data suitable for basic testing",
+      "Package outputs under docs/specifications/{demand_folder}/07-db-artifacts"
+    ],
+    "tags": [
+      "database",
+      "ddl",
+      "seed-data",
+      "postgres",
+      "h2",
+      "mysql",
+      "openapi",
+      "api"
+    ],
+    "status": "experimental",
+    "exposure": "internal",
+    "version": "1.0.0",
+    "protocol": "Propose-Confirm-Act",
+    "author": "OLAF Framework",
+    "created": "2025-12-15",
+    "updated": "2026-01-14"
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "generate-ddl-and-seed",
+        "path": "/skill.md",
+        "description": "Main workflow entry point"
+      }
+    ],
+    "docs": [
+      {
+        "name": "description",
+        "path": "/docs/description.md",
+        "type": "description"
+      },
+      {
+        "name": "tutorial",
+        "path": "/docs/tutorial.md",
+        "type": "tutorial"
+      }
+    ]
+  }
+}

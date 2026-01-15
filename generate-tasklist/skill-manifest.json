@@ -1,0 +1,45 @@
+{
+  "name": "generate-tasklist",
+  "version": "1.0.0",
+  "description": "Enhanced Generate Tasklist skill migrated from project-manager competency",
+  "pack": "project-manager",
+  "protocol": "Propose-Act",
+  "dependencies": {
+    "templates": [],
+    "tools": [],
+    "external": []
+  },
+  "metadata": {
+    "category": "project-manager",
+    "complexity": "standard",
+    "usage_frequency": "medium",
+    "id": "generate-tasklist",
+    "name": "generate-tasklist",
+    "description": "Enhanced Generate Tasklist skill migrated from project-manager competency",
+    "shortDescription": "Enhanced Generate Tasklist skill migrated from project-manager competency",
+    "objectives": [
+      "Use the generate-tasklist skill"
+    ],
+    "tags": [
+      "project-manager"
+    ],
+    "status": "experimental",
+    "exposure": "export",
+    "version": "1.0.0",
+    "protocol": "Propose-Act",
+    "aliases": [
+      "create tasklist",
+      "generate tasks",
+      "task list",
+      "todo list"
+    ]
+  },
+  "bom": {
+    "prompts": [
+      {
+        "name": "generate-tasklist",
+        "path": "/skill.md"
+      }
+    ]
+  }
+}
