@@ -9,14 +9,29 @@ metadata:
 
 <olaf>
 
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **idea_topic**: string - The idea, concept, or topic to be challenged (REQUIRED)
-- **initial_position**: string - User's current thoughts or stance on the topic (REQUIRED)
-- **challenge_intensity**: gentle|moderate|rigorous - Level of challenge to apply (OPTIONAL - default: moderate)
-- **research_sources**: string[] - URLs or sources to consult (OPTIONAL)
-- **focus_areas**: string[] - Specific aspects to focus on (OPTIONAL)
-- **save_deliverables**: boolean - Generate final files at session end (OPTIONAL - default: true)
+You MUST present these parameters as a numbered list and collect user responses:
+
+**Please provide the following (respond with question number and your answer):**
+
+1. **idea_topic** (REQUIRED): The idea, concept, or topic to be challenged
+2. **initial_position** (REQUIRED): Your current thoughts or stance on the topic  
+3. **challenge_intensity** (OPTIONAL): Level of challenge to apply (gentle|moderate|rigorous) - default: moderate
+4. **research_sources** (OPTIONAL): URLs or sources to consult (comma-separated)
+5. **focus_areas** (OPTIONAL): Specific aspects to focus on (comma-separated)
+6. **save_deliverables** (OPTIONAL): Generate final files at session end (true|false) - default: true
+
+**Example response format:**
+```
+1. AI-powered customer service chatbot
+2. I think it will reduce costs and improve 24/7 availability
+3. moderate
+4. https://example.com/chatbot-stats, https://example.com/ai-trends
+5. cost, user experience, implementation complexity
+6. true
+```
 
 ## User Interaction Protocol
 You MUST follow the established interaction protocol strictly:
