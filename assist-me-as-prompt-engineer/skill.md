@@ -19,7 +19,7 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
 - **task_description**: string - What the user wants to accomplish (REQUIRED)
-- **expertise_level**: string - User's prompt engineering skill level: beginner/trained/advanced/expert (OPTIONAL - will assess if not provided)
+- **expertise_level**: string - User's prompt engineering skill level: beginner/trained/advanced (OPTIONAL - will assess if not provided)
 
 ## User Interaction Protocol
 You MUST follow the established interaction protocol:
@@ -31,90 +31,61 @@ You MUST follow the established interaction protocol:
 ### 1. Skill Level Assessment Phase
 If expertise_level not provided, you WILL assess based on task complexity and user's question:
 - **Beginner**: Creating first prompts, learning basics, following templates
-- **Trained**: Converting/importing existing prompts, organizing collections
-- **Advanced**: Building workflows, managing competencies, complex validations
-- **Expert**: Framework contributions, architecture changes, system optimization
+- **Trained**: Creating skills, converting prompts into skills, evaluating prompts
+- **Advanced**: Building orchestrators/chains, validating prompts and artifacts
 
 ### 2. Skill Mapping Phase
 You WILL identify appropriate skills based on user's level and task:
 
 #### Beginner Level Skills
 **Core Capabilities:**
-- `create-prompt` - Generate structured prompts from templates
-- `share-my-prompts` - Share prompts with team members
-- `import-prompt-unchanged` - Import existing prompts without modification
+- `create-prompt` - Draft a prompt and stage it under `.olaf/staging/generated-prompts/`
+- `check-prompt-compliance` - Check prompt compliance and directive quality
 
 **When to Recommend:**
 - User needs to create their first prompt
-- User wants to share prompts they've created
-- User has prompts from other sources to import as-is
+- User wants to verify whether a prompt is compliant
 
 **Example Tasks:**
 - "I need to create a prompt for code reviews"
-- "How do I share my prompt with the team?"
-- "I have a prompt from ChatGPT I want to use"
+- "Is this prompt compliant with our principles?"
 
 #### Trained Level Skills
 **Core Capabilities:**
 - `create-skill` - Build complete skills with prompts and workflows
-- `convert-prompt` - Modernize legacy prompts to OLAF standards
+- `convert-prompt-to-skill` - Convert or wrap prompt content into a skill structure
 - `evaluate-prompt-for-adoption` - Assess prompts for framework integration
-- `select-competency-collection` - Choose and manage competency collections
+- `create-skill-description` - Generate docs/description.md for an existing skill
 
 **When to Recommend:**
 - User understands prompt basics, ready for skill development
-- User has legacy prompts needing modernization
+- User has existing prompt text and wants a proper skill package
 - User needs to evaluate external prompts for adoption
-- User wants to organize competencies into collections
+- User needs documentation for an existing prompt
 
 **Example Tasks:**
 - "I want to create a skill with multiple prompts"
-- "I have old prompts that need updating"
 - "Should we adopt this prompt from the community?"
-- "How do I organize my competencies?"
+- "Generate docs for this prompt"
 
 #### Advanced Level Skills
 **Core Capabilities:**
-- `generate-workflow` - Create multi-step workflows combining skills
+- `generate-orchestrator` - Create orchestrator skills combining other skills
 - `convert-skill-to-chain` - Transform skills into executable chains
-- `manage-competencies` - Full competency lifecycle management
 - `validate-prompt-value` - Deep analysis of prompt effectiveness
-- `share-skills-with-team` - Share skills and competencies with team repository
 
 **When to Recommend:**
 - User needs to orchestrate multiple skills together
 - User wants to create reusable skill chains
-- User manages competency packages across teams
 - User needs metrics on prompt performance
-- User wants to share curated skills with team via git
+- User wants to validate the local skills/artifacts holistically
 
 **Example Tasks:**
 - "I need a workflow that validates then deploys prompts"
 - "How do I chain multiple skills together?"
-- "I manage several competency packages"
 - "What's the ROI of this prompt?"
-- "I want to share these skills with my team"
+- "How do I validate prompt effectiveness?"
 
-#### Expert Level Skills
-**Core Capabilities:**
-- `condense-olaf-framework` - Optimize framework for performance
-- `share-prompt-to-olaf` - Contribute prompts to OLAF core
-- `verify-competency-compliance` - Deep framework validation
-- `migrate-competency-to-skill` - Architectural refactoring
-- `create-competency-package` - Build distributable packages
-- `validate-olaf-artifacts` - System-wide validation
-
-**When to Recommend:**
-- User contributes to OLAF framework development
-- User performs architectural changes
-- User needs system-level optimizations
-- User creates framework extensions
-
-**Example Tasks:**
-- "The framework is loading slowly"
-- "I want to contribute this prompt to OLAF core"
-- "I need to refactor this competency architecture"
-- "How do I validate all framework artifacts?"
 
 ### 3. Recommendation Phase
 You WILL provide clear, actionable guidance:
@@ -161,14 +132,11 @@ Would you like me to execute this workflow for you? (yes/no)
 ### 5. Learning Path Guidance Phase
 When appropriate, you WILL suggest advancement opportunities:
 
-**For Beginners → Trained:**
+**For Beginners to Trained:**
 "Once comfortable with `create-prompt`, try `create-skill` to build complete capabilities"
 
-**For Trained → Advanced:**
-"Ready to combine skills? Explore `generate-workflow` to orchestrate multi-step processes"
-
-**For Advanced → Expert:**
-"Consider `share-prompt-to-olaf` to contribute your work to the framework core"
+**For Trained to Advanced:**
+"Ready to combine skills? Explore `generate-orchestrator` to orchestrate other skills"
 
 ## Error Handling
 You WILL handle these scenarios:
@@ -177,11 +145,10 @@ You WILL handle these scenarios:
 **Trigger**: User request doesn't map to any known skill
 **Action**: 
 1. Ask clarifying questions about the goal
-2. Suggest browsing available skills with `list-skills`
-3. Offer to help refine the requirement
+2. Offer to route the question via `help-me-olaf` or `tell-me`
 
 ### Skill Level Mismatch
-**Trigger**: Beginner attempting expert-level task
+**Trigger**: Beginner attempting advanced-level task
 **Action**:
 1. Acknowledge the goal
 2. Recommend prerequisite skills to build up to it
@@ -241,14 +208,14 @@ Recommendation: `create-prompt`
 
 This skill will guide you through creating a structured code review prompt using proven templates.
 
-Usage: `olaf create prompt`
+Usage: Use the `create-prompt` skill
 
 Expected Outcome: 
-- Complete prompt in skills/[your-prompt-name]/
-- Validation against best practices
+- Staged prompt file in `.olaf/staging/generated-prompts/`
+- Prompt follows prompt engineering principles
 - Ready-to-use code review capability
 
-Next Step: Run `olaf create prompt` and I'll guide you through the process.
+Next Step: I can draft the prompt text now—what should the prompt review (language, security focus, standards)?
 ```
 
 **Advanced Example:**
@@ -260,11 +227,11 @@ Recommendation: Multi-step workflow
 
 Workflow:
 1. `evaluate-prompt-for-adoption` - Assess prompt quality
-2. `convert-prompt` - Ensure OLAF compliance
-3. `deploy-imported-prompts` - Deploy to framework
+2. `check-prompt-compliance` - Validate directive quality and compliance
+3. `convert-prompt-to-skill` - Package prompt content into a skill structure
 4. `validate-prompt-value` - Verify effectiveness
 
-Alternative: Use `generate-workflow` to create a reusable chain for this process.
+Alternative: Use `generate-orchestrator` to create an orchestrator for this process.
 
 Next Step: Would you like me to execute this workflow, or create a permanent workflow chain?
 ```

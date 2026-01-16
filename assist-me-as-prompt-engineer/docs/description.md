@@ -5,7 +5,7 @@ The Prompt Engineering Assistant is your intelligent guide through OLAF's compre
 
 ## Purpose
 - **Smart Skill Discovery**: Automatically recommends appropriate skills based on your task and expertise
-- **Leveled Learning**: Organizes skills by expertise level (beginner → trained → advanced → expert)
+- **Leveled Learning**: Organizes skills by expertise level (beginner -> trained -> advanced)
 - **Workflow Orchestration**: Guides complex multi-skill workflows
 - **Progressive Learning**: Suggests advancement paths as you grow
 
@@ -14,9 +14,8 @@ The Prompt Engineering Assistant is your intelligent guide through OLAF's compre
 ### Beginner Level
 **Focus**: Creating and sharing basic prompts
 **Available Skills**:
-- `create-prompt` - Generate structured prompts from templates
-- `share-my-prompts` - Share prompts with team members
-- `import-prompt-unchanged` - Import existing prompts as-is
+- `create-prompt` - Draft a prompt and stage it under `.olaf/staging/generated-prompts/`
+- `check-prompt-compliance` - Check prompt compliance and directive quality
 
 **Typical Goals**:
 - Creating first prompts
@@ -27,9 +26,9 @@ The Prompt Engineering Assistant is your intelligent guide through OLAF's compre
 **Focus**: Skill development and prompt management
 **Available Skills**:
 - `create-skill` - Build complete skills with prompts
-- `convert-prompt` - Modernize legacy prompts
 - `evaluate-prompt-for-adoption` - Assess external prompts
-- `select-competency-collection` - Organize competencies
+- `convert-prompt-to-skill` - Convert prompt content into a skill structure
+- `create-skill-description` - Generate docs for an existing skill
 
 **Typical Goals**:
 - Building reusable skills
@@ -37,34 +36,17 @@ The Prompt Engineering Assistant is your intelligent guide through OLAF's compre
 - Managing prompt collections
 
 ### Advanced Level
-**Focus**: Workflow orchestration and competency management
+**Focus**: Orchestration and validation
 **Available Skills**:
-- `generate-workflow` - Create multi-step workflows
+- `generate-orchestrator` - Create orchestrator skills
 - `convert-skill-to-chain` - Build executable skill chains
-- `manage-competencies` - Full competency lifecycle
 - `validate-prompt-value` - Deep effectiveness analysis
+- `validate-olaf-artifacts` - System-wide validation of local artifacts
 
 **Typical Goals**:
 - Orchestrating multiple skills
 - Creating workflow chains
-- Managing competency packages
 - Measuring prompt ROI
-
-### Expert Level
-**Focus**: Framework contribution and optimization
-**Available Skills**:
-- `condense-olaf-framework` - Optimize framework performance
-- `share-prompt-to-olaf` - Contribute to OLAF core
-- `verify-competency-compliance` - Deep framework validation
-- `migrate-competency-to-skill` - Architectural refactoring
-- `create-competency-package` - Build distributable packages
-- `validate-olaf-artifacts` - System-wide validation
-
-**Typical Goals**:
-- Contributing to framework
-- Performance optimization
-- Architectural changes
-- System validation
 
 ## How It Works
 
@@ -137,29 +119,27 @@ Progressive skill suggestions:
 **Works With**:
 - All prompt engineering skills
 - Learning and documentation skills
-- Competency management tools
 - Workflow generation capabilities
 
 **Complements**:
-- `list-skills` - Discover all available skills
-- `use-skill` - Execute specific skills
 - `help-me-olaf` - General OLAF assistance
+- `tell-me` - Contextual help and knowledge routing
 
 ## Success Criteria
 
 You'll know this skill is effective when:
-- ✓ You quickly find the right skill for your task
-- ✓ You understand how to use recommended skills
-- ✓ You progress through expertise levels smoothly
-- ✓ Complex tasks are broken into clear workflows
-- ✓ You know exactly what to do next
+- You quickly find the right skill for your task
+- You understand how to use recommended skills
+- You progress through expertise levels smoothly
+- Complex tasks are broken into clear workflows
+- You know exactly what to do next
 
 ## Getting Started
 
 Simply describe your goal:
 ```
 olaf prompt assistant "I need to create a code review prompt"
-olaf prompt help "How do I share my prompts with the team?"
+olaf prompt help "Is this prompt compliant?"
 olaf guide me "I want to build a workflow for prompt deployment"
 ```
 

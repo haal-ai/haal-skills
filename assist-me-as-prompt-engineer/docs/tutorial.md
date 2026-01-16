@@ -28,38 +28,31 @@ Recommendation: create-prompt
 This skill guides you through creating a structured code review 
 prompt using proven templates.
 
-Usage: olaf create prompt
+Usage: use the `create-prompt` skill
 
 Expected Outcome: 
-- Complete prompt in skills/[your-prompt-name]/
-- Validation against best practices
+- Staged prompt file in `.olaf/staging/generated-prompts/`
+- Prompt follows prompt engineering principles
 - Ready-to-use code review capability
 
-Next Step: Run `olaf create prompt` and I'll guide you through the process.
+Next Step: Tell me what you want the prompt to do and I’ll draft it.
 ```
 
-**Step 2**: Follow the recommendation
-```bash
-olaf create prompt
-```
-
-**Step 3**: Complete the guided creation process
-
-#### Scenario 2: Sharing Your Prompts
-**Goal**: Share prompts with team
+#### Scenario 2: Checking Prompt Compliance
+**Goal**: Validate a prompt before using it
 
 **Command**:
 ```bash
-olaf prompt help "How do I share my prompts?"
+olaf prompt help "Is this prompt compliant?"
 ```
 
 **Expected Guidance**:
-- Recommendation: `share-my-prompts`
-- Export process explained
-- Team distribution steps
+- Recommendation: `check-prompt-compliance`
+- What is non-compliant and why
+- Concrete edits to make it compliant
 
 #### Scenario 3: Importing Existing Prompts
-**Goal**: Import a ChatGPT prompt unchanged
+**Goal**: Bring a ChatGPT prompt into OLAF
 
 **Command**:
 ```bash
@@ -67,7 +60,7 @@ olaf guide me "I have a prompt from ChatGPT to import"
 ```
 
 **Expected Guidance**:
-- Recommendation: `import-prompt-unchanged`
+- Recommendation: `convert-prompt-to-skill`
 - Import process steps
 - Where prompt will be stored
 
@@ -95,7 +88,6 @@ Expected Outcome:
 - Complete skill structure
 - Multiple prompts organized
 - Documentation generated
-- Manifest created
 
 Next Step: Run `olaf create skill` to begin.
 ```
@@ -111,22 +103,21 @@ olaf prompt help "I have old prompts that need updating"
 ```
 
 **Expected Guidance**:
-- Recommendation: `convert-prompt`
-- Conversion process explained
+- Recommendation: `convert-prompt-to-skill`
+- Conversion/packaging steps explained
 - Validation steps included
 
-#### Scenario 6: Organizing Competencies
-**Goal**: Choose competency collection for project
+#### Scenario 6: Creating Prompt Documentation
+**Goal**: Generate documentation for a prompt/skill
 
 **Command**:
 ```bash
-olaf guide me "How do I organize my competencies?"
+olaf guide me "Generate docs for this prompt"
 ```
 
 **Expected Guidance**:
-- Recommendation: `select-competency-collection`
-- Collection management explained
-- Best practices provided
+- Recommendation: `create-skill-description`
+- What it will extract and how it structures the docs
 
 ### Level 3: Advanced Tasks
 
@@ -145,11 +136,12 @@ Recommendation: Multi-step workflow
 
 Workflow:
 1. evaluate-prompt-for-adoption - Assess prompt quality
-2. convert-prompt - Ensure OLAF compliance
-3. deploy-imported-prompts - Deploy to framework
+2. check-prompt-compliance - Ensure directive quality and compliance
+3. convert-prompt-to-skill - Package prompt content into a skill structure
 4. validate-prompt-value - Verify effectiveness
+5. validate-olaf-artifacts - Validate local artifacts holistically (optional)
 
-Alternative: Use generate-workflow to create a reusable chain.
+Alternative: Use generate-orchestrator to create an orchestrator.
 
 Next Step: Would you like me to execute this workflow, or create 
 a permanent workflow chain? (workflow/chain)
@@ -176,75 +168,6 @@ olaf prompt help "How do I chain multiple skills together?"
 - Recommendation: `convert-skill-to-chain`
 - Chain architecture explained
 - Execution model described
-
-#### Scenario 9: Competency Management
-**Goal**: Manage competency package lifecycle
-
-**Command**:
-```bash
-olaf guide me "I manage several competency packages"
-```
-
-**Expected Guidance**:
-- Recommendation: `manage-competencies`
-- Lifecycle management explained
-- Best practices for teams
-
-### Level 4: Expert Tasks
-
-#### Scenario 10: Framework Optimization
-**Goal**: Improve framework loading performance
-
-**Command**:
-```bash
-olaf prompt assistant "The framework is loading slowly"
-```
-
-**Expected Response**:
-```
-Assessment: Expert level task - framework optimization
-Recommendation: condense-olaf-framework
-
-This optimizes framework loading by condensing competencies
-into an efficient format.
-
-Usage: olaf condense olaf framework
-
-Expected Outcome:
-- Reduced loading time
-- Optimized framework structure
-- Maintained functionality
-
-Next Step: Run condensation and benchmark improvements.
-```
-
-#### Scenario 11: Contributing to OLAF Core
-**Goal**: Share prompt with framework
-
-**Command**:
-```bash
-olaf prompt help "I want to contribute this prompt to OLAF core"
-```
-
-**Expected Guidance**:
-- Recommendation: `share-prompt-to-olaf`
-- Contribution process explained
-- Quality requirements outlined
-- Review process described
-
-#### Scenario 12: Architectural Refactoring
-**Goal**: Restructure competency as skill
-
-**Command**:
-```bash
-olaf guide me "I need to refactor this competency architecture"
-```
-
-**Expected Guidance**:
-- Recommendation: `migrate-competency-to-skill`
-- Migration strategy explained
-- Backward compatibility addressed
-- Validation steps included
 
 ## Common Patterns
 
@@ -278,7 +201,7 @@ olaf guide me "What should I learn next?"
 
 ## Progression Path
 
-### Beginner → Trained
+### Beginner to Trained
 **When Ready**:
 - Comfortable with `create-prompt`
 - Created several prompts successfully
@@ -286,30 +209,19 @@ olaf guide me "What should I learn next?"
 
 **Next Steps**:
 - Try `create-skill`
-- Explore `convert-prompt`
-- Learn `select-competency-collection`
+- Explore `convert-prompt-to-skill`
+- Try `create-skill-description`
 
-### Trained → Advanced
+### Trained to Advanced
 **When Ready**:
 - Built multiple skills
 - Managed prompt collections
 - Understand skill architecture
 
 **Next Steps**:
-- Try `generate-workflow`
+- Try `generate-orchestrator`
 - Explore `convert-skill-to-chain`
-- Learn `manage-competencies`
-
-### Advanced → Expert
-**When Ready**:
-- Created complex workflows
-- Managed competency packages
-- Contributed to team capabilities
-
-**Next Steps**:
-- Try `share-prompt-to-olaf`
-- Explore `condense-olaf-framework`
-- Learn `verify-competency-compliance`
+- Try `validate-olaf-artifacts`
 
 ## Tips and Best Practices
 
@@ -371,18 +283,16 @@ Then describe to assistant which one matches your need
 
 ## Related Skills
 
-- `list-skills` - Browse all available skills
-- `use-skill` - Execute specific skills directly
 - `help-me-olaf` - General OLAF assistance
 - `tell-me` - Learn about OLAF features
 
 ## Summary
 
 The Prompt Engineering Assistant is your guide through OLAF's capabilities:
-- ✓ Assesses your expertise automatically
-- ✓ Recommends appropriate skills
-- ✓ Guides complex workflows
-- ✓ Suggests learning paths
-- ✓ Adapts to your growth
+- Assesses your expertise automatically
+- Recommends appropriate skills
+- Guides complex workflows
+- Suggests learning paths
+- Adapts to your growth
 
-Start with simple tasks, progress naturally, and let the assistant guide your journey from beginner to expert prompt engineer.
+Start with simple tasks, progress naturally, and let the assistant guide your journey from beginner to advanced prompt engineer.
