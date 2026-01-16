@@ -1,103 +1,57 @@
-# Convert Prompt
+# Convert Prompt to Skill
 
 ## Overview
 
-Convert Prompt transforms existing prompts from any format into OLAF's standardized template structure. It analyzes the original prompt's intent, extracts key components, and restructures them to follow OLAF conventions while preserving the original functionality and improving clarity.
+Convert Prompt to Skill turns one or more existing prompt files (legacy prompts, external prompts, ad-hoc docs) into a new skill folder that matches the current OLAF skill layout.
+
+It preserves the original intent while restructuring it into a single `skill.md` entry point, plus `docs/` and any optional component folders (templates/tools/helpers/kb) as needed.
 
 ## Purpose
 
-Many teams have valuable existing prompts that don't follow OLAF's structured format. This competency solves the challenge of migrating legacy prompts without losing their effectiveness. It ensures consistency across your prompt library by converting diverse prompt styles into a unified, maintainable structure that includes proper error handling, success criteria, and user communication patterns.
+Teams often have valuable prompts that are:
+- not written as OLAF skills
+- missing clear input parameters and success criteria
+- embedding templates inline instead of referencing external files
+
+This skill provides a repeatable conversion workflow so your skill library stays consistent and maintainable.
 
 ## Usage
 
-**Command**: `convert prompt`
+- **Skill**: `convert-prompt-to-skill`
+- **Protocol**: Propose-Confirm-Act
 
-**Protocol**: Propose-Act
-
-**When to Use**: Use this competency when you have existing prompts that need to be migrated to OLAF format, when importing prompts from external sources, or when refactoring old prompts to meet current OLAF standards. It's particularly useful during initial OLAF adoption or when consolidating prompts from multiple sources.
+Use this when you want to create a new skill from existing prompt material rather than starting from scratch.
 
 ## Parameters
 
 ### Required Inputs
-- **source_prompt_path**: Path to the existing prompt file that needs conversion
-- **target_competency**: The competency pack where the converted prompt will be saved
-- **new_prompt_name**: Desired name for the converted prompt (kebab-case, max 4 words)
+- **existing_prompt_path**: path or list of paths to source prompt file(s)
+- **target_plugin**: plugin name to assign the created skill to
 
 ### Optional Inputs
-- **preserve_original**: Whether to keep the original prompt file (default: true)
-- **conversion_notes**: Specific aspects to preserve or modify during conversion
-
-### Context Requirements
-- Read access to source prompt file
-- Write access to target competency's prompts folder
-- Access to OLAF prompt template and prompting principles
-- Understanding of the original prompt's purpose and usage
+- **skill_name**: new skill folder name (kebab-case, max 4 words)
+- **user_request**: extra constraints (what to preserve, what to change)
+- **needs_templates/tools/helpers/kb** (+ corresponding lists): whether to create optional component folders
 
 ## Output
 
-**Deliverables**:
-- Converted prompt file following OLAF template structure
-- Conversion report detailing changes made
-- Updated competency manifest with new entry point
-- Original prompt preserved (if preserve_original=true)
+Creates a new skill folder at the repo root:
 
-**Format**: Markdown file with YAML frontmatter, saved to `[competencies_dir]/[target_competency]/prompts/[new_prompt_name].md`
+- `[skill_name]/skill.md`
+- `[skill_name]/docs/description.md`
+- `[skill_name]/docs/tutorial.md`
 
-## Examples
+Optional folders created only when requested:
+- `templates/`, `tools/`, `helpers/`, `kb/`
 
-### Example 1: Converting a Simple Task Prompt
+The new `skill.md` frontmatter includes plugin assignment (`plugins: [target_plugin]`).
 
-**Scenario**: You have a basic prompt that generates unit tests but lacks structure
+## Related Skills
 
-**Command**:
-```
-olaf convert prompt
-```
-
-**Input**:
-- source_prompt_path: "legacy-prompts/test-generator.txt"
-- target_competency: "developer"
-- new_prompt_name: "generate-unit-tests"
-
-**Result**: Converted the simple prompt into a structured OLAF prompt with proper phases (Validation, Execution, Validation), added comprehensive error handling, created success criteria checklist, and integrated it into the developer competency manifest.
-
-### Example 2: Migrating External Prompt Library
-
-**Scenario**: Importing a well-designed prompt from another framework
-
-**Command**:
-```
-olaf convert prompt
-```
-
-**Input**:
-- source_prompt_path: "external/code-analyzer.md"
-- target_competency: "architect"
-- new_prompt_name: "analyze-code-structure"
-- conversion_notes: "Preserve the detailed analysis sections and add OLAF error handling"
-
-**Result**: Successfully migrated the external prompt while preserving its analytical depth, added OLAF-standard error handling scenarios, restructured into proper phases, and updated the architect manifest.
-
-## Related Competencies
-
-- **Create Prompt**: Use this when you need to create entirely new prompts rather than converting existing ones
-- **Check Prompt Compliance**: Run this after conversion to validate the converted prompt meets all OLAF standards
-- **Import Prompts To Competency**: Use this for batch analysis and planning when converting multiple prompts
-- **Deploy Imported Prompts**: Use this for batch conversion of multiple prompts following an approved mapping plan
-
-## Tips & Best Practices
-
-- Review the original prompt thoroughly before conversion to understand its intent and usage patterns
-- Preserve the core logic and domain expertise from the original prompt
-- Use conversion_notes to specify particular aspects that must be maintained
-- Always validate the converted prompt with Check Prompt Compliance after conversion
-- Test the converted prompt with real use cases to ensure functionality is preserved
-- Keep the original prompt file for reference during testing and validation
+- `create-skill`: create a brand new skill without a source prompt
+- `check-prompt-compliance`: validate the converted `skill.md` quality and conventions
 
 ## Limitations
 
-- Cannot automatically infer missing information (e.g., proper error handling if not in original)
-- Requires human judgment for complex prompts with ambiguous instructions
-- May need manual refinement for prompts with highly specialized domain logic
-- Cannot convert prompts that rely on framework-specific features not available in OLAF
-- Conversion quality depends on the clarity and structure of the original prompt
+- Conversion quality depends on the clarity of the source prompt(s)
+- Some prompts may require follow-up iterations to clarify missing inputs/outputs
