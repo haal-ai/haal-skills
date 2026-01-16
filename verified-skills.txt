@@ -30,3 +30,12 @@ assess-genai-initiative-idea
 code-in-go
 code-in-rust
 augment-unittest
+run-redocumentation
+generat-commits-fron-changelog
+esdi ( explore, specify, design , implement) (need challenge-me, transform-raw-spec, generate-design, generate-implementation-plan)
+run-implementation-plan
+onboard-me
+
+
+get-bms-expertise (amadeus specific)
+create-otf-varibale (amadeus specific)
