@@ -1,9 +1,9 @@
 ---
 name: switch-context
-description: IDE-aware context switching with automatic repository discovery and transitive loading
+description:   switching  between pre-existing context  file stored in local folder
 license: Apache-2.0
 metadata:
-  olaf_tags: [context, switching, ide, discovery, transitive, repository]
+  olaf_tags: [context files, switching, olaf context, session management]
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide
@@ -16,13 +16,7 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 
 **MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
-## Framework Validation
-You MUST apply the <olaf-work-instructions> framework.
-**HIERARCHY**: Framework principles OVERRIDE competency specifications:
-- <olaf-general-role-and-behavior> - Be concise, no elaboration
-- <core-principles> - Mandatory rules supersede competency details
-- <olaf-interaction-protocols> - Protocol only, not verbosity
-You MUST strictly apply <olaf-framework-validation>.
+
 
 ## Output Constraints
 **CONCISENESS MANDATORY**: Apply framework's "Be concise. Use as few words as possible."

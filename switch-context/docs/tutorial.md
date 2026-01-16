@@ -7,7 +7,7 @@ This tutorial shows exactly how to switch between different project contexts in 
 ## Prerequisites
 
 - OLAF framework installed and active
-- At least one context template file in `docs/data/context/`
+- At least one context template file in `.olaf/data/context/`
 - Access to GitHub Copilot Chat or compatible IDE
 
 ## Step-by-Step Instructions
@@ -43,7 +43,7 @@ Select context by number:
 ### Step 3: Context Switch Execution
 **What Copilot Does:**
 - Validates the selected context file exists
-- Copies `docs/data/context/context-springboot-hexagonal.md` to `docs/data/context/context-current.md`
+- Copies `.olaf/data/context/context-springboot-hexagonal.md` to `.olaf/data/context/context-current.md`
 - Confirms the switch
 
 **You Should See:** 
@@ -59,13 +59,13 @@ Select context by number:
 3. The new context is now automatically loaded via bootstrap
 
 **What Happens:**
-- OLAF bootstrap reads `context-current.md`
+- OLAF bootstrap loads the active context file
 - Project-specific context is applied to the session
 - You're now working with the new context active
 
 ## Verification Checklist
 
-✅ **Context file copied** - Check `docs/data/context/context-current.md` exists
+✅ **Context file copied** - Check `.olaf/data/context/context-current.md` exists
 ✅ **New session started** - Opened fresh Copilot conversation
 ✅ **Context loaded** - Bootstrap loaded the new context automatically
 ✅ **Ready to work** - Can now work with project-specific context
@@ -79,12 +79,12 @@ Context changes only take effect in fresh sessions.
 ```
 
 **If no contexts are listed:**
-- Check `docs/data/context/` directory exists
+- Check `.olaf/data/context/` directory exists
 - Ensure you have at least one `context-*.md` file
 - File naming must follow pattern: `context-{name}.md`
 
 **If "context not found" error:**
-- Verify the context file exists in `docs/data/context/`
+- Verify the context file exists in `.olaf/data/context/`
 - Check file name matches pattern exactly
 
 ## Key Learning Points
@@ -93,11 +93,14 @@ Context changes only take effect in fresh sessions.
 
 2. **context-current.md is the active file:** This file gets overwritten each time you switch. The template files (context-*.md) remain unchanged.
 
-3. **Bootstrap automatic loading:** You don't need to manually load the context. The `.github/copilot-instructions.md` bootstrap file automatically loads `context-current.md` at the start of each session.
+3. **Bootstrap automatic loading:** You don't need to manually load the context. In this repo, bootstrap behavior is defined in `.windsurf/rules/olaf-bootstrap-skills.md` and loads (in order):
+	- `.olaf/context/current-context.md` (preferred)
+	- `.olaf/data/context/context-current.md` (legacy)
+	- `.olaf/data/context/context-default.md` (fallback)
 
 ## Next Steps to Try
 
-- Create your own custom context template in `docs/data/context/context-myproject.md`
+- Create your own custom context template in `.olaf/data/context/context-myproject.md`
 - Use `context status` to check which context is currently active
 - Use `context clear` to remove the active context and return to default OLAF framework
 - Switch between multiple project contexts as you work on different codebases
