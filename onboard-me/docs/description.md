@@ -37,7 +37,7 @@ For a TypeScript/React + Python/FastAPI project, generates:
 - `QUICKSTART-QA-ENGINEER.md`
 - `QUICKSTART-DEVOPS-ENGINEER.md`
 - `QUICKSTART-ARCHITECT.md`
-- `QUICKSTART-OVERVIEW.md` (index of all guides)
+- `QUICKSTART-OVERVIEW.md` (linked index of all guides)
 
 Each guide contains:
 - What you'll build (concrete goal)

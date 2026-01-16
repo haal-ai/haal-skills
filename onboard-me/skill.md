@@ -20,14 +20,24 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 
 ## Workflow
 
-1. Run: `python skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me`
-   - This script is **discovery-only**. It MUST NOT generate any guides by itself.
+1. Run the repository analyzer.
+   1. 
+   - use /tools/analyze-repository.py from this skill 
+     - `python ./tools/analyze-repository.py <repo-path> --output ./.olaf/work/onboard-me`
    - **If you can execute terminal commands, you MUST run this command yourself instead of asking the user to run it manually.**
 2. Read: `.olaf/work/onboard-me/repository-analysis.json`
    - **You (the skill) MUST parse this JSON and act on it directly. Do NOT wait for another tool.**
 3. Detect personas (3-6 based on tech stack) **using the persona rules in this prompt**.
 4. Generate: ONE guide per persona (`QUICKSTART-<PERSONA>.md`) in `.olaf/data/product/context/<repo-name>/` **by writing full Markdown files yourself using the Guide Template below and real data from the JSON (`languages`, `commands`, `entry_points`, `key_files`, `architecture`).**
 5. Create: Overview file listing all guides in `.olaf/data/product/context/<repo-name>/` **by writing `QUICKSTART-OVERVIEW.md` yourself.**
+
+**Regeneration behavior (MANDATORY)**:
+- If any `QUICKSTART-*.md` files already exist in the output folder, you MUST update them in-place (overwrite/regenerate) using the same filenames.
+- Do NOT create duplicate or timestamped variants.
+
+**Linking requirement (MANDATORY)**:
+- `QUICKSTART-OVERVIEW.md` MUST contain a dedicated "Guides" section with Markdown links to every `QUICKSTART-<PERSONA>.md` file you generated.
+- Every `QUICKSTART-<PERSONA>.md` MUST include a "Back to Overview" link near the top that points to `./QUICKSTART-OVERVIEW.md`.
 
 ---
 
@@ -53,6 +63,8 @@ Generate ONE guide per persona with this structure:
 
 ````markdown
 # {{repo_name}} - {{Persona}} Quick Start
+
+[(Back to Overview)](./QUICKSTART-OVERVIEW.md)
 
 **Get productive in 30 minutes**
 
@@ -145,6 +157,47 @@ git commit -m "{{commit_format}}"
 {{key_commands_summary}}
 \`\`\`
 ````
+
+---
+
+## Overview Template (QUICKSTART-OVERVIEW.md)
+
+Write `QUICKSTART-OVERVIEW.md` in the SAME folder as the persona guides, using this structure:
+
+````markdown
+# {{repo_name}} - Quick Start Overview
+
+Use this page to pick the guide that matches your role and jump straight into a 30-minute onboarding path.
+
+## Guides
+- [Frontend Developer](./QUICKSTART-FRONTEND-DEVELOPER.md)
+- [Backend Developer](./QUICKSTART-BACKEND-DEVELOPER.md)
+- [QA Engineer](./QUICKSTART-QA-ENGINEER.md)
+- [DevOps Engineer](./QUICKSTART-DEVOPS-ENGINEER.md)
+- [Architect](./QUICKSTART-ARCHITECT.md)
+- [Business Analyst](./QUICKSTART-BUSINESS-ANALYST.md)
+- [Docs Contributor](./QUICKSTART-DOCS-CONTRIBUTOR.md)
+
+## Choose Your Path
+{{Decision tree / short guidance to pick a persona}}
+
+## Repo Snapshot
+{{2-6 bullets derived from repository-analysis.json: languages, frameworks, how to run tests, main entry point(s)}}
+
+## General Setup
+\`\`\`bash
+{{best default install + run command(s) for the repo from commands{}}}
+\`\`\`
+
+## Where Things Live
+- README: \`{{key_files.README.md}}\`
+- Contributing: \`{{key_files.CONTRIBUTING.md}}\`
+- Main entry points: {{list entry_points}}
+````
+
+**Rules**:
+- Only include links for persona guides you actually generated.
+- Links MUST be relative Markdown links (e.g. `./QUICKSTART-ARCHITECT.md`) so they work in GitHub and local Markdown viewers.
 
 ---
 
@@ -254,7 +307,9 @@ Store analysis JSON in `.olaf/work/onboard-me/repository-analysis.json`
 
 ## Execution Checklist
 
-- [ ] Run analysis tool: `python skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me` (for **facts discovery only**; **execute it yourself when tools/terminal are available, do NOT delegate this to the user**)
+- [ ] Run analysis tool (do NOT assume a `./skills/` folder exists in the target repo):
+  - `python <path-to-onboard-me>/tools/analyze-repository.py <repo-path> --output <repo-path>/.olaf/work/onboard-me`
+  (for **facts discovery only**; **execute it yourself when tools/terminal are available, do NOT delegate this to the user**)
 - [ ] Read `.olaf/work/onboard-me/repository-analysis.json` and **treat it as your primary input**
 - [ ] Detect 3-6 personas using the rules in this prompt
 - [ ] Generate one guide per persona in `.olaf/data/product/context/<repo-name>/` by **creating new Markdown files**

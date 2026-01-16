@@ -41,7 +41,12 @@ Onboarding guides ready! Share QUICKSTART-OVERVIEW.md with new team members.
 The skill automatically runs the repository analyzer:
 
 ```bash
-python skills/onboard-me/tools/analyze-repository.py <repo-path> --output .olaf/work/onboard-me
+# From anywhere (recommended): run the analyzer from where the skill is installed,
+# and write output into the target repo.
+python <path-to-onboard-me>/tools/analyze-repository.py <repo-path> --output <repo-path>/.olaf/work/onboard-me
+
+# If you are running from the haal-skills repo root, <path-to-onboard-me> is `onboard-me`:
+python onboard-me/tools/analyze-repository.py <repo-path> --output <repo-path>/.olaf/work/onboard-me
 ```
 
 This extracts:
@@ -127,16 +132,18 @@ Edit the prompt or analyzer script to change output directory (default: `.olaf/d
 
 ### Re-run Analysis
 
-Simply run `olaf onboard me` again - it will regenerate all guides with updated information.
+Simply run `olaf onboard me` again - it will regenerate all guides with updated information (overwriting existing `QUICKSTART-*.md` files in place).
 
 ## Understanding the Output
 
 ### QUICKSTART-OVERVIEW.md
 
 Index file listing all generated guides with:
-- Quick links to each persona guide
+- Quick links to each persona guide (Markdown links)
 - Repository overview
 - General setup instructions
+
+Each persona guide also includes a "Back to Overview" link at the top for easy navigation.
 
 ### Persona Guides
 
