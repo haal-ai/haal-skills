@@ -4,11 +4,11 @@
 
 ## Overview
 
-Create Skill is a comprehensive skill that generates new structured skills following OLAF's established skills architecture and best practices. It guides you through the entire skill creation lifecycle, from initial requirements gathering to skill manifest creation and proper directory structure setup.
+Create Skill is a comprehensive skill that generates new structured skills following OLAF's established skills architecture and best practices. It guides you through the entire skill creation lifecycle, from initial requirements gathering to proper directory structure setup.
 
 ## Purpose
 
-Creating high-quality, consistent skills is essential for maintaining OLAF's effectiveness and reliability in the new skills-based architecture. This skill solves the challenge of ensuring all skills follow the proper structure, include complete manifests, have proper dependency management, and integrate seamlessly with the OLAF framework. It eliminates the guesswork from skill engineering by providing a structured, validated approach.
+Creating high-quality, consistent skills is essential for maintaining OLAF's effectiveness and reliability in the skills-based architecture. This skill solves the challenge of ensuring all skills follow the proper structure, include clear input parameters and success criteria, and integrate seamlessly with the OLAF framework.
 
 ## Usage
 
@@ -31,19 +31,16 @@ None - all parameters are required for proper skill creation
 ### Context Requirements
 - Access to OLAF skills directory structure
 - Read access to skill templates and prompting principles
-- Write access to skills folder for new skill creation
+- Write access to the repository for new skill creation
 - Terminal access for timestamp generation
-- Access to skill manifest schema for validation
 
 ## Output
 
 **Deliverables**:
-- Complete skill directory structure under `skills/[skill_name]/`
+- Complete skill directory structure at repo root under `[skill_name]/`
 - Main skill prompt file following OLAF template
-- Skill manifest (skill-manifest.json) conforming to schema
 - Documentation files (description.md, tutorial.md)
-- Proper BOM (Bill of Materials) with all dependencies
-- Validation checklist confirming schema compliance
+- Validation checklist confirming structure and conventions
 
 **Format**: Complete skill package with proper directory structure and manifest
 
@@ -56,9 +53,8 @@ None - all parameters are required for proper skill creation
 - skill_name: "analyze-code-quality"
 - skill_type: "prompt"
 
-**Output**: Complete skill at `skills/analyze-code-quality/` with:
-- `prompts/analyze-code-quality.md` - Main skill prompt
-- `skill-manifest.json` - Complete metadata and BOM
+**Output**: Complete skill at `analyze-code-quality/` with:
+- `skill.md` - Main skill prompt
 - `docs/description.md` - Skill documentation
 - `docs/tutorial.md` - Step-by-step usage guide
 
@@ -94,7 +90,7 @@ None - all parameters are required for proper skill creation
 - Cannot automatically migrate dependencies from other systems
 - Generated skills require manual testing and refinement
 - Complex orchestrator skills may need additional workflow coordination setup
-- BOM dependencies must be manually populated for external tool dependencies
+
 
 ## Best Practices
 

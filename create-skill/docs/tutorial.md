@@ -1,7 +1,7 @@
 # Tutorial: Create Skill
 
 ## Overview
-This tutorial guides you through creating a new structured skill for OLAF using the Create Skill skill. You'll learn how to generate skills that follow OLAF's skills architecture, include proper manifests, and integrate seamlessly with the framework.
+This tutorial guides you through creating a new structured skill for OLAF using the Create Skill skill. You'll learn how to generate skills that follow OLAF's skills architecture and integrate seamlessly with the framework.
 
 ## Prerequisites
 - OLAF framework installed and configured
@@ -55,46 +55,20 @@ Example: "prompt"
 ### Step 5: Review Generated Skill Structure
 The skill generates a complete directory structure:
 ```
-.olaf/skills/analyze-code-quality/
-├── prompts/
-│   └── analyze-code-quality.md
-├── templates/
-├── tools/
-├── kb/
+analyze-code-quality/
+├── skill.md
 ├── docs/
 │   ├── description.md
 │   └── tutorial.md
-├── helpers/
-└── skill-manifest.json
+├── templates/   # optional
+├── tools/       # optional
+├── kb/          # optional
+└── helpers/     # optional
 ```
 
 **Expected Result**: Complete skill structure created with proper organization.
 
-### Step 6: Review Skill Manifest
-Examine the generated skill-manifest.json:
-```json
-{
-  "metadata": {
-    "id": "analyze-code-quality",
-    "name": "Analyze Code Quality",
-    "protocol": "Propose-Confirm-Act",
-    "status": "experimental",
-    "exposure": "internal"
-  },
-  "bom": {
-    "prompts": [
-      {
-        "name": "analyze-code-quality",
-        "path": "/prompts/analyze-code-quality.md"
-      }
-    ]
-  }
-}
-```
-
-**Expected Result**: Manifest validates against schema and includes complete metadata.
-
-### Step 7: Review Main Skill Prompt
+### Step 6: Review Main Skill Prompt
 Examine the generated main prompt file:
 - Follows OLAF skill template structure
 - Uses imperative language consistently
@@ -103,22 +77,22 @@ Examine the generated main prompt file:
 
 **Expected Result**: Skill prompt meets all OLAF standards.
 
-### Step 8: Approve or Request Changes
+### Step 7: Approve or Request Changes
 Use the Propose-Confirm-Act protocol:
 - **Approve**: Type "approved" to create the skill
 - **Request Changes**: Provide specific feedback for modifications
 
 **Expected Result**: Skill creation proceeds based on your response.
 
-### Step 9: Verify Skill Creation
+### Step 8: Verify Skill Creation
 After approval, verify the skill was created successfully:
 ```
-Check: skills/analyze-code-quality/ exists with all files
+Check: analyze-code-quality/ exists with all files
 ```
 
 **Expected Result**: Complete skill package available for use.
 
-### Step 10: Test Your New Skill
+### Step 9: Test Your New Skill
 Test the skill to ensure it works correctly:
 ```
 olaf analyze code quality
@@ -129,23 +103,19 @@ olaf analyze code quality
 ## Expected Outcomes
 
 ### Successful Completion
-- Complete skill directory structure under `skills/[skill-name]/`
-- Valid skill manifest conforming to schema
+- Complete skill directory structure under `[skill-name]/`
 - Functional main skill prompt following OLAF standards
 - Complete documentation package
 - Skill discoverable through OLAF framework
 
 ### Files Created
-- `prompts/[skill-name].md` - Main skill prompt
-- `skill-manifest.json` - Complete metadata and BOM
+- `skill.md` - Main skill prompt
 - `docs/description.md` - Skill overview and usage
 - `docs/tutorial.md` - Step-by-step guide
 - Template files (if applicable)
 - Tool files (if applicable)
 
 ### Validation Checklist
-- [ ] Skill manifest validates against schema
-- [ ] All BOM paths are correct and relative to skill root
 - [ ] Main prompt follows OLAF template structure
 - [ ] Documentation is complete and accurate
 - [ ] Skill can be invoked through OLAF framework
@@ -157,9 +127,6 @@ olaf analyze code quality
 
 **Issue**: "Skill name already exists"
 **Solution**: Choose a different, more specific name or review existing skill for potential merge
-
-**Issue**: "Schema validation failed"
-**Solution**: Review manifest structure and correct invalid fields
 
 **Issue**: "Directory creation failed"
 **Solution**: Check permissions and available disk space
@@ -184,9 +151,3 @@ After creating your skill:
 4. **Update documentation**: Enhance docs based on actual usage
 5. **Share with team**: Make the skill available to other team members
 
-## Related Resources
-
-- **Skill Architecture Guide**: Understanding OLAF skills structure
-- **Manifest Schema**: Complete schema documentation
-- **Template Guidelines**: Best practices for skill templates
-- **Testing Framework**: How to test your skills effectively

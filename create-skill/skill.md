@@ -22,6 +22,8 @@ You MUST request these parameters if not provided by the user. Present  it as a 
 2. **skill_name**: string - Desired name for the skill (max 4 words, kebab-case) (OPTIONAL)
 3. **skill_type**: string - Type of skill: "orchestrator", "workflow", "prompt" (OPTIONAL - default: "prompt")
 4. **target_plugin**: string - Plugin name to assign the skill to (REQUIRED)
+5. **agent_runtime**: string - One of: "windsurf", "cascade", "github-copilot", "claude-code", "other" (OPTIONAL - you SHOULD infer, else ask)
+6. **skills_root**: string - Explicit destination root folder for skills, relative to workspace root (OPTIONAL - preferred when user knows it)
 5. **needs_templates**: boolean - Whether skill needs external template files (OPTIONAL - default: false)
 6. **template_list**: array - List of template names/descriptions if needs_templates=true (OPTIONAL)
 7. **needs_tools**: boolean - Whether skill needs tool/script files (OPTIONAL - default: false)
@@ -42,7 +44,15 @@ You MUST follow the established interaction protocol strictly:
 You MUST verify all requirements:
 - Confirm user request is clear and actionable
 - Validate skill name follows kebab-case convention (max 4 words)
-- Check both local (`skills/`) for existing skills with similar functionality
+- Duplicate avoidance: you MUST check for a folder named `[skill_name]/` across ALL supported local skill roots:
+  - `.windsurf/skills/[skill_name]/`
+  - `.claude/skills/[skill_name]/`
+  - `agents/skills/[skill_name]/`
+  - AND the resolved `${skills_root}/[skill_name]/` (if different)
+  If any exist, you MUST stop and ask the user what to do (numbered list):
+  1. Pick a different `skill_name`, OR
+  2. Choose which existing skill to update in place (preferred), OR
+  3. Overwrite the chosen one (delete and recreate).
 - Validate skill type selection (prompt/workflow/orchestrator)
 - Validate target plugin: check if it exists in `.olaf/plugins.json` or add it if missing
 - Check access to required templates, tools, helpers, kb articles, principles files for newskill
@@ -50,33 +60,52 @@ You MUST verify all requirements:
 ### 1.a Skill Location Discovery Phase
 You WILL determine where to create the skill:
 
-**Skill Location Discovery:**
-- You MUST create skills locally (project-specific) under `skills/`
-- You MUST NOT propose creating skills under other locations
+**Skill Location Discovery (Local Destination):**
+- You MUST create skills locally in the user's workspace, under a skills root directory determined by the active agent runtime.
+- You MUST determine `skills_root` using this priority order:
+  1. If user provided `skills_root`, you MUST use it.
+  2. Else you MUST infer `skills_root` from the workspace:
+     - If `.windsurf/skills/` exists → use `.windsurf/skills`
+     - Else if `.claude/skills/` exists → use `.claude/skills`
+     - Else if `agents/skills/` exists → use `agents/skills`
+     - Else you MUST ask the user to choose `agent_runtime` (numbered list) and set `skills_root` using the mapping below.
+  3. If you must rely on `agent_runtime`, use this mapping:
+     - `windsurf` or `cascade` → `.windsurf/skills`
+     - `github-copilot` or `claude-code` → `.claude/skills`
+     - `other` → `agents/skills`
+
+**Critical Save Rules:**
+- Final destination for the new skill MUST be: `${skills_root}/[skill_name]/`
+- Before creating files, you MUST check whether `${skills_root}/[skill_name]/` already exists.
+- If it exists, you MUST stop and ask for an explicit choice (numbered list):
+  1. Pick a different `skill_name`, OR
+  2. Overwrite (delete and recreate), OR
+  3. Update in place (preserve existing files; only add/modify what is necessary).
+- You MUST NOT overwrite any existing skill folder without explicit user confirmation.
 
 **Template Validation:**
 - If needs_templates=true, ask user: "Provide links to the template files"
-- Copy those to the  `templates/` folder  under the `skill/<skill_name>` folder so that they are available to the skill and kept separate from `skill.md`
+- Copy those to the  `templates/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
 
 **Tool Discovery:**
 - if needs_tools=true, ask user: "Provide links to the tool/script files"
-- Copy those to the  `tools/` folder  under the `skill/<skill_name>` folder so that they are available to the skill and kept separate from `skill.md`
+- Copy those to the  `tools/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
 - Ask for tool type: python|shell|javascript|powershell
 
 **Helper Discovery:**
 - if needs_helpers=true, ask user: "Provide links to the helper files"
-- Copy those to the  `helpers/` folder  under the `skill/<skill_name>` folder so that they are available to the skill and kept separate from `skill.md`
+- Copy those to the  `helpers/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
 - Explain: "Helpers are reusable prompt fragments used by the main skill"
 
 **Knowledge Base Discovery:**
 - if needs_kb=true, ask user: "Provide links to the KB articles"
-- Copy those to the  `kb/` folder  under the `skill/<skill_name>` folder so that they are available to the skill and kept separate from `skill.md`
+- Copy those to the  `kb/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
 
 ### 2. Execution Phase
 
 **Critical Knowledge Loading:**
 <!-- <structure_schema> -->
-You MUST read in full the canonical structure reference: `skills/create-skill/kb/skill-structure-schema.md` and strictly conform to it
+You MUST read in full the canonical structure reference: `create-skill/kb/skill-structure-schema.md` and strictly conform to it
 <!-- </structure_schema> -->
 
 **Template and Principles Loading:**
@@ -91,10 +120,10 @@ You MUST read in full and apply: `templates/prompting-principles.md`
 **Core Logic**: You WILL execute following protocol requirements
 - You MUST apply Propose-Confirm-Act protocol for user approval
 - You WILL generate structured skill following template structure exactly:
-  - Main prompt `skill.md`file following prompt template structure with EXTERNAL references only
+  - Main prompt `skill.md` file following the skill template structure with EXTERNAL references only
   - Documentation structure (description.md, tutorial.md)
   - Optional component files based on user requirements
-  - Proper folder organization under `skills/[skill-name]/`
+  - Proper folder organization under `[skill-name]/`
 - You MUST use imperative language throughout ("You WILL", "You MUST")
 - You WILL include XML markup for complex sections
 - You MUST ensure generated skill includes comprehensive error handling
@@ -106,11 +135,11 @@ You MUST read in full and apply: `templates/prompting-principles.md`
 You WILL scaffold the complete skill structure:
 
 **Determine Skills Directory:**
-- Use /skills/`
-- Set base_path accordingly for all subsequent operations
+- Use `skills_root` (resolved in Phase 1.a)
+- Set `base_path = ${skills_root}/[skill_name]/` for all subsequent operations
 
 **Create Skill Directory Structure:**
-- Create base folder: `skills/[skill_name]/`
+- Create base folder: `${skills_root}/[skill_name]/`
 - Create required subdirectories:
   - `docs/` - Skill documentation
 - Create optional subdirectories based on user requirements:
@@ -195,13 +224,13 @@ You WILL validate the generated skill meets all requirements:
 - Generated skill presented for review via Propose-Confirm-Act
 - Validation checklist results showing schema compliance
 - Save location confirmation: 
-  - `./skills/[skill_name]/`
+  - `${skills_root}/[skill_name]/`
 
 ### Next Steps
 You WILL clearly define:
 - Skill ready for use (pending user approval)
 - Skill location: 
-  - `./skills/[skill_name]/`
+  - `${skills_root}/[skill_name]/`
 - Confirmation that skill meets all quality standards
 - Instructions for invoking the new skill
 
@@ -213,7 +242,7 @@ You MUST follow these constraints:
 - Rule 4: Generated skill MUST include comprehensive error handling
 - Rule 5: Skill name MUST be kebab-case, max 4 words
 - Rule 6: Generated skill MUST include measurable success criteria
-- Rule 7: Skill directory MUST be created locally in this repo at `skills/`
+- Rule 7: Skill directory MUST be created locally under the resolved skills root: `${skills_root}/[skill_name]/`
 - Rule 8: **CRITICAL**: Main prompt MUST reference external files, NOT embed template content
 - Rule 9: **TEMPLATE SEPARATION**: Templates must be separate files in `templates/`, not embedded in prompt
 - Rule 10: Component files MUST only be created if user explicitly requests them
@@ -246,7 +275,6 @@ You WILL handle these scenarios:
 - **Duplicate Skill Found**: Present existing skill and ask for modification preferences
 - **Component Requirements Unclear**: Ask specific questions about each component type needed
 - **Template Separation Issues**: Guide user to separate embedded templates from external references
-- **Schema Validation Failed**: Show specific validation errors and correct manifest
 - **User Rejection During Propose-Confirm-Act**: Request specific feedback and iterate
 - **File Save Failures**: Provide alternative save methods and troubleshooting steps
 - **Component File Creation Failed**: Show specific errors for templates/tools/helpers/kb creation
