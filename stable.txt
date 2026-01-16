@@ -2,3 +2,14 @@
 # Example:
 # create-skill
 
+analyze-function-complexity
+carry-on-session
+carry-over-session
+challenge-me
+create-changelog-entry
+create-prompt
+research-and-report
+review-code
+review-diff
+search-and-learn
+tell-me
