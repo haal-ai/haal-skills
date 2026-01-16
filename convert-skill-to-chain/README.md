@@ -7,10 +7,10 @@ This skill automates the conversion of existing OLAF skills to the **master-chai
 ## What It Does
 
 Converts a monolithic skill prompt into:
-- ✅ **Master coordinator** - Orchestrates task execution
-- ✅ **Individual task prompts** - Isolated, single-responsibility units
-- ✅ **Task registry entries** - Tracks reusable tasks
-- ✅ **Conversion summary** - Documents the transformation
+- **Master coordinator** - Orchestrates task execution
+- **Individual task prompts** - Isolated, single-responsibility units
+- **Task registry entries** - Tracks reusable tasks
+- **Conversion summary** - Documents the transformation
 
 ## Key Features
 
@@ -146,7 +146,6 @@ This skill itself was converted using the master-chain pattern and serves as the
 
 After conversion, verify:
 - [ ] Original skill backed up in backups/ directory
-- [ ] Master coordinator displays task list at startup
 - [ ] Tasks have clear input/output definitions
 - [ ] No forward references between tasks
 - [ ] Common tasks properly referenced

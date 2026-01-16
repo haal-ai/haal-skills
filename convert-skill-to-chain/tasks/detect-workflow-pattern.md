@@ -130,7 +130,7 @@ pattern_interactions: [description of how patterns combine]
 
 **Display to User**:
 ```
-🔍 Pattern Detection Results
+Pattern Detection Results
 ===========================
 Skill: {{skill_name}}
 Detected Pattern: {{detected_pattern}}

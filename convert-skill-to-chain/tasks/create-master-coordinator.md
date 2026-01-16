@@ -91,23 +91,11 @@ Select model based on `detected_pattern`:
    ## Master Chain Protocol
 
    **CRITICAL EXECUTION RULES**:
-   - ALWAYS display the complete task list at the start of execution
    - Execute tasks in STRICT SEQUENTIAL ORDER
    - Load only ONE task prompt at a time
    - Pass context between tasks via simple variables
    - NO anticipation or optimization across tasks
    - Each task must complete fully before next
-
-   **STARTUP REQUIREMENT**:
-   Before executing any tasks, MUST display:
-   ```
-   📋 [Skill Name] - Task Chain
-   ================================
-   Task 0: [task 0 name]
-   Task 1: [task 1 name]
-   ...
-   ================================
-   ```
 
    ## Task Chain Definition
 

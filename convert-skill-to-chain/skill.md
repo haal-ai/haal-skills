@@ -177,7 +177,7 @@ For each task in task_chain:
 1. Display the decision message from Task 5
 2. Show final summary:
    ```
-   ✅ Analysis Complete - No Conversion Needed
+  Analysis Complete - No Conversion Needed
    ============================================
    Skill: {{skill_name}}
    Complexity: {{complexity_score}}/10

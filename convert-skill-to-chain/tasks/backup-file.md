@@ -44,7 +44,7 @@ conditions: []
 
 5. **Display Confirmation**:
    ```
-   ✅ Backup created: [backup-path]
+   Backup created: [backup-path]
    Original file preserved.
    ```
 

@@ -91,7 +91,7 @@ Show clear decision to user:
 
 **If conversion_necessary = FALSE**:
 ```
-⚠️  CONVERSION NOT NECESSARY
+CONVERSION NOT NECESSARY
 ================================
 Skill: {{skill_name}}
 Complexity Score: {{complexity_score}}/10

@@ -28,7 +28,7 @@ conditions: []
 ```markdown
 # Skill Conversion Summary
 
-## ✅ Conversion Complete
+## Conversion Complete
 
 **Skill**: [skill_name]
 **Date**: [current date]
@@ -36,7 +36,7 @@ conditions: []
 
 ---
 
-## 📊 Conversion Statistics
+## Conversion Statistics
 
 - **Total Tasks**: [task_count]
 - **Common Tasks Reused**: [reuse_count]
@@ -45,7 +45,7 @@ conditions: []
 
 ---
 
-## 📁 Files Created
+## Files Created
 
 ### Master Coordinator
 - `[master_file]`
@@ -56,7 +56,7 @@ conditions: []
 
 ---
 
-## 🔄 Task Chain Overview
+## Task Chain Overview
 
 ```yaml
 [display task chain from task_boundaries]
@@ -64,7 +64,7 @@ conditions: []
 
 ---
 
-## 🎯 Reusable Common Tasks
+## Reusable Common Tasks
 
 [for each common task reused:]
 - ✓ **[task_id]**: [task_name]
@@ -73,7 +73,7 @@ conditions: []
 
 ---
 
-## 📝 Registry Updates
+## Registry Updates
 
 - **Tasks Added**: [tasks_registered]
 - **Common Task Usages Updated**: [common_tasks_usage_updated]
@@ -81,7 +81,7 @@ conditions: []
 
 ---
 
-## ✨ Next Steps
+## Next Steps
 
 1. **Test the converted skill**:
    ```
@@ -104,9 +104,8 @@ conditions: []
 
 ---
 
-## 🔍 Quality Checklist
+## Quality Checklist
 
-- [ ] Master coordinator displays task list at startup
 - [ ] Tasks have clear input/output definitions
 - [ ] No forward references between tasks
 - [ ] Common tasks properly referenced
