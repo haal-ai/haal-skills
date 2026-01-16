@@ -291,7 +291,7 @@ Common topics and their skill patterns:
 - "create/generate/new skill" → create-skill (Propose-Confirm-Act)
 - "review/analyze code" → review-code (Act)
 - "test/augment tests" → augment-code-unit-test (Propose-Act)
-- "workflow/automate" → generate-workflow (Act)
+- "workflow/automate" → generate-orchestrator (Act)
 - "collection/select" → select-competency-collection (Act)
 - "help/guidance/what can" → help-me (Act) ← YOU ARE HERE
 
