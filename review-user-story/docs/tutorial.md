@@ -1,145 +1,163 @@
-# Step-by-Step Tutorial
+# Tutorial: review-user-story
 
-## Review User Story: Step-by-Step Tutorial
+## Introduction
 
-**How to Execute the "Review User Story" Workflow**
-
-This tutorial shows exactly how to review user stories against standard templates to ensure quality, clarity, and completeness using the OLAF business-analyst competency.
+This tutorial guides you through using the `review-user-story` skill to evaluate user stories against quality standards. By the end, you'll know how to get comprehensive feedback on your user stories and improve them before development begins.
 
 ## Prerequisites
 
-- OLAF framework properly installed and configured
-- A user story document or content to review
-- Understanding of user story structure and acceptance criteria
-- Access to the business-analyst competency pack
+Before starting, ensure you have:
+
+- [ ] A user story to review (with title, description, and ideally acceptance criteria)
+- [ ] Access to the review template (usually included with the skill)
+- [ ] Write access to the staging directory for saving reports
 
 ## Step-by-Step Instructions
 
-### Step 1: Prepare the User Story Content
+### Step 1: Prepare Your User Story
 
-[Ensure you have the user story ready for review]
+Gather the user story you want to review. A complete user story typically includes:
 
-**User Action:**
+- **Title**: Brief identifier for the story
+- **Description**: "As a [role], I want [feature], so that [benefit]"
+- **Acceptance Criteria**: Testable conditions for completion
 
-1. Locate or prepare the user story text to be reviewed
-2. Ensure the story content is accessible (either as text or file)
-3. Note any specific template requirements or review depth needed
-4. Prepare to provide the user story content to OLAF
+Example:
+```
+Title: Password Reset Feature
 
-**System Response:**
-User story content should be readable and contain story elements for analysis.
+As a registered user, I want to reset my password via email 
+so that I can regain access to my account if I forget my credentials.
 
-### Step 2: Invoke the Review Command
-
-**User Action:** Execute the OLAF command to start user story review
-
-```bash
-olaf review user story
+Acceptance Criteria:
+- User can request password reset from login page
+- System sends reset link to registered email within 2 minutes
+- Reset link expires after 24 hours
+- User must create password meeting security requirements
 ```
 
-**Provide Parameters:**
+### Step 2: Invoke the Skill
 
-- **user_story_content**: [Your user story text] - The complete user story text to be reviewed
-- **template_reference**: [specific template name] - Optional template to use for evaluation
-- **review_depth**: [basic/thorough/comprehensive] - Depth level for the review (optional)
+Request a review of your user story:
 
-### Step 3: User Story Loading and Parsing
+```
+Review this user story:
+[paste your user story content here]
+```
 
-**What OLAF Does:**
+Or with specific options:
 
-- Receives and processes the user story content provided
-- Parses and structures the story components for systematic analysis
-- Identifies existing story elements (title, description, acceptance criteria, etc.)
-- Prepares the content for template-based evaluation
+```
+Review this user story with comprehensive depth:
+[user story content]
+```
 
-**You Should See:** Confirmation that the user story has been loaded and parsed successfully
+### Step 3: Wait for Validation
 
-### Step 4: Template-Based Analysis Process
+The skill will verify:
+- User story content is provided and not empty
+- Template file is accessible
+- Story has basic structure (not just a title)
 
-**What OLAF Does:**
+If validation fails, provide the requested information.
 
-- Loads the user story review template for evaluation criteria
-- Evaluates the story against each template requirement systematically
-- Checks for clarity, understandability, and completeness
-- Assesses testability of acceptance criteria and verification methods
-- Identifies missing or unclear information that needs clarification
+### Step 4: Review the Analysis
 
-**You Should See:** Progress through different evaluation criteria with staging noted
+The skill evaluates your story against multiple criteria:
 
-### Step 5: Structured Review Generation
+**Clarity & Conciseness**:
+- Is the title clear and descriptive?
+- Is the description easy to understand?
 
-**What OLAF Does:**
+**Format**:
+- Does it follow "As a...I want...So that..." structure?
+- Are all three parts present and meaningful?
 
-- Creates comprehensive markdown-formatted review based on analysis
-- Structures review with standardized sections including:
-  - Overall assessment summary and quality rating
-  - Identified strengths and positive elements
-  - Areas requiring improvement with specific recommendations
-  - Clarifying questions to help improve the story
-- Frames all feedback constructively and collaboratively
+**Acceptance Criteria**:
+- Are criteria testable?
+- Are they complete and unambiguous?
 
-**You Should See:** Detailed review structured according to the standard template format
+**INVEST Principles**:
+| Principle | Question |
+|-----------|----------|
+| Independent | Can this story be developed without dependencies? |
+| Negotiable | Is there room for discussion on implementation? |
+| Valuable | Does it deliver clear value to users? |
+| Estimable | Can the team estimate the effort? |
+| Small | Can it be completed in one sprint? |
+| Testable | Can completion be objectively verified? |
 
-### Step 6: Review Report Saving and Output
+### Step 5: Interpret the Results
 
-**What OLAF Does:**
+The generated report includes:
 
-- Saves the review to `work/staging/user-story-reviews/` directory
-- Generates filename in format: `user-story-review-YYYYMMDD-NNN.md`
-- Provides summary statistics of the review results
-- Displays the complete review with actionable recommendations
+1. **Checklist Table**: Each item marked Pass/Fail/NA with comments
+2. **Review Summary**: Overall quality assessment
+3. **Strengths**: What's working well in your story
+4. **Areas for Improvement**: Specific suggestions for enhancement
+5. **Clarifying Questions**: Questions to help refine the story
 
-**You Should See:**
+### Step 6: Act on Feedback
 
-- Complete structured review of the user story
-- File save confirmation with location
-- Summary of strengths, improvement areas, and questions generated
-- Overall quality assessment and rating
+Review the improvement suggestions and clarifying questions:
+
+1. Address any "Fail" items in the checklist
+2. Answer the clarifying questions to add detail
+3. Incorporate suggested improvements
+4. Consider re-running the review after changes
+
+### Step 7: Access Your Report
+
+The review is saved to:
+```
+.olaf/work/staging/user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md
+```
+
+Share this report with your team for discussion.
 
 ## Verification Checklist
 
-✅ **User story successfully loaded and parsed for analysis**
-✅ **Story evaluated against standard template requirements**
-✅ **Clarity, testability, and completeness assessed systematically**
-✅ **Review structured with standardized sections (summary, strengths, improvements, questions)**
-✅ **Review saved to work/staging/user-story-reviews/ with proper naming**
-✅ **Feedback framed constructively and collaboratively**
+After completing the review, verify:
+
+- [ ] Review report was generated successfully
+- [ ] All checklist items have status and comments
+- [ ] Strengths are identified with specific examples
+- [ ] Improvement areas have actionable suggestions
+- [ ] Clarifying questions are relevant and helpful
+- [ ] Report is saved to the staging directory
 
 ## Troubleshooting
 
-**If user story content cannot be parsed:**
+### "No user story provided"
 
-- Ensure the story text is complete and properly formatted
-- Check that the content contains recognizable story elements
-- Verify there are no encoding or format issues with the text
+**Cause**: The skill was invoked without story content.
 
-**If template evaluation seems incomplete:**
+**Solution**: Include the full user story text in your request.
 
-- Specify a particular template_reference if available
-- Use "comprehensive" review_depth for more thorough analysis
-- Ensure the user story has sufficient content for meaningful evaluation
+### "Invalid content structure"
 
-**If clarifying questions are too general:**
+**Cause**: The provided text doesn't appear to be a user story.
 
-- Provide more detailed user story content for specific analysis
-- Consider using "thorough" or "comprehensive" review depth
-- Review the generated questions to ensure they address specific story elements
+**Solution**: Ensure your story includes at minimum a description in user story format.
 
-## Key Learning Points
+### "Template not found"
 
-1. **Template-Based Quality Assurance:** The workflow uses standardized templates to ensure consistent and comprehensive user story evaluation
-2. **Constructive Feedback Approach:** Reviews are structured to be helpful and collaborative rather than critical
-3. **Actionable Recommendations:** Generates specific clarifying questions and improvement suggestions for story refinement
+**Cause**: The evaluation template file is missing or inaccessible.
 
-## Next Steps to Try
+**Solution**: The skill will use a fallback checklist. Contact support if this persists.
 
-- Address the identified improvement areas in the user story
-- Use the clarifying questions to gather additional story details
-- Apply the review feedback to enhance story clarity and testability
-- Repeat the review process after making improvements to verify enhancements
+### "Cannot save report"
 
-## Expected Timeline
+**Cause**: Write permission issues with the staging directory.
 
-- **Total review time:** 2-5 minutes depending on story complexity and review depth
-- **User input required:** Providing user story content and configuration parameters
-- **OLAF execution time:** Automated parsing, template-based analysis, and structured review generation
+**Solution**: Check directory permissions or specify an alternative output location.
+
+## Next Steps
+
+After reviewing your user story:
+
+1. **Refine the Story**: Address identified issues and answer clarifying questions
+2. **Re-Review if Needed**: Run another review after significant changes
+3. **Share with Team**: Discuss the review findings with stakeholders
+4. **Document Decisions**: Record any negotiated changes to the story
+5. **Proceed to Development**: Once the story passes review, it's ready for sprint planning

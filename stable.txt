@@ -2,14 +2,19 @@
 # Example:
 # create-skill
 
+analyze-contributor-risk
 analyze-function-complexity
 carry-on-session
 carry-over-session
 challenge-me
 create-changelog-entry
 create-prompt
+generate-orchestrator
 research-and-report
 review-code
 review-diff
+review-user-story
+scaffold-quarkus-microservice
 search-and-learn
+should-i-use-ai
 tell-me

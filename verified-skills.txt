@@ -1,8 +1,3 @@
-analyze-contributor-risk
-review-user-story
-should-i-use-ai
-scaffold-quarkus-microservice
-generate-orchestrator
 store-conversation-record
 create-skill
 evaluate-prompt-for-adoption

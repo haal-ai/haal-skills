@@ -1,106 +1,154 @@
-# Should I Use AI?: Step-by-Step Tutorial
+# Tutorial: should-i-use-ai
 
-**How to Execute the "Should I Use AI?" Workflow**
+## Introduction
 
-This tutorial shows how to evaluate whether AI is appropriate for your task or problem.
+This tutorial guides you through using the `should-i-use-ai` skill to determine the best approach for your development tasks. By the end, you'll know how to quickly decide between AI assistance and traditional IDE tools for maximum efficiency.
 
 ## Prerequisites
 
-- Clear description of the task or problem
-- Understanding of current approach (if applicable)
-- Basic context about constraints and requirements
+Before starting, ensure you have:
+
+- [ ] A clear understanding of the task you want to accomplish
+- [ ] Access to both AI/LLM tools and your IDE
+- [ ] Familiarity with basic IDE features
 
 ## Step-by-Step Instructions
 
-### Step 1: Invoke the Competency
-Start the AI appropriateness evaluation
+### Step 1: Formulate Your Task
 
-**User Action:**
-1. Type the command: `should i use ai`
-2. Describe the task you're considering AI for
+Describe your task in a single, clear sentence. Be specific about what you want to accomplish.
 
-**OLAF Response:**
-OLAF will begin the appropriateness analysis
+Good examples:
+- "Refactor this function to use async/await"
+- "Generate unit tests for my authentication module"
+- "Rename all occurrences of 'userId' to 'customerId'"
 
-### Step 2: Provide Task Details
-**User Action:** Describe your task or problem
+Avoid vague descriptions:
+- "Help me with my code" (too broad)
+- "Make it better" (unclear goal)
+
+### Step 2: Invoke the Skill
+
+Present your task to the skill:
+
 ```
-I want to use AI to automatically generate code documentation from source code comments
+Should I use AI for: [your task description]
 ```
 
-**Provide Context:**
-- **Current Approach**: Manual documentation writing
-- **Data Available**: Large codebase with comments
-- **Goal**: Save developer time on documentation
+Or simply:
 
-### Step 3: Problem Analysis
-**What OLAF Does:**
-- Analyzes task characteristics
-- Evaluates if AI is suitable
-- Considers data requirements
-- Identifies potential approaches
-- Assesses complexity vs benefit
+```
+[your task description]
+```
 
-**You Should See:** Analysis of problem characteristics
+### Step 3: Review the Recommendation
 
-### Step 4: Appropriateness Assessment
-**What OLAF Provides:**
-- Clear recommendation (yes/no/maybe)
-- Reasoning for the recommendation
-- Alternative approaches to consider
-- Risks and limitations
-- Implementation considerations
+The skill will provide one of two recommendations:
 
-**You Should See:** Structured assessment with recommendation
+**🔧 IDE Tools Recommendation**:
+```
+Recommendation: Use IDE Tools
 
-### Step 5: Review and Decide
-**User Action:** Use the assessment
-- Review the reasoning
-- Consider alternatives mentioned
-- Evaluate risks and benefits
-- Ask follow-up questions if needed
-- Make informed decision
+Task Category: [Category]
+Specific Actions:
+- IDE Feature: [Feature name]
+- Keyboard Shortcut: [Shortcut]
+- CLI Alternative: [Command]
+
+Why IDE: [Explanation]
+```
+
+**🧠 AI/LLM Recommendation**:
+```
+Recommendation: Use AI/LLM
+
+Task Category: [Category]
+Suggested Prompt: [Generated prompt]
+
+Why AI: [Explanation]
+```
+
+### Step 4: Follow the Guidance
+
+**If IDE Tools are recommended:**
+
+1. Open your IDE
+2. Navigate to the suggested feature
+3. Use the keyboard shortcut if provided
+4. Apply the operation to your code
+
+**If AI/LLM is recommended:**
+
+1. Check for existing prompts in your competency index
+2. Use the suggested prompt or customize it
+3. Review and apply the AI-generated solution
+
+### Step 5: Evaluate the Result
+
+After completing the task:
+
+1. Verify the outcome meets your expectations
+2. Note whether the recommendation was appropriate
+3. Consider the time saved by using the right tool
 
 ## Verification Checklist
 
-✅ **Clear recommendation provided (yes/no/maybe)**
-✅ **Reasoning is specific to your task**
-✅ **Alternatives are considered**
-✅ **Risks and limitations are identified**
-✅ **You understand the recommendation**
+After using the skill, verify:
+
+- [ ] Recommendation was clear and actionable
+- [ ] Specific tools or prompts were provided
+- [ ] Reasoning made sense for your task
+- [ ] You were able to complete the task efficiently
+
+## Understanding the Categories
+
+### Tasks Best for IDE Tools
+
+| Category | Examples |
+|----------|----------|
+| Basic Code Manipulation | Rename, extract method, inline variable |
+| File Operations | Create, move, delete files |
+| Navigation | Go to definition, find usages |
+| Template Generation | Getters/setters, constructors |
+| Formatting | Auto-format, organize imports |
+| Version Control | Commit, diff, merge |
+
+### Tasks Best for AI/LLM
+
+| Category | Examples |
+|----------|----------|
+| Logic & Reasoning | Debug complex issues, optimize algorithms |
+| Context-Aware Generation | Write tests based on implementation |
+| Intelligent Refactoring | Redesign architecture, apply patterns |
+| Migration | Update API versions, change frameworks |
+| Analysis | Security review, code quality assessment |
 
 ## Troubleshooting
 
-**If recommendation is unclear:**
-- Provide more context about your specific situation
-- Ask for clarification: "why is AI appropriate/inappropriate here?"
-- Request comparison: "how does this compare to rule-based approach?"
+### "Recommendation doesn't seem right"
 
-**If you disagree with assessment:**
-- Share your reasoning and ask for reconsideration
-- Provide additional context that might change the analysis
-- Ask about specific concerns: "what if we have more data?"
+**Cause**: Task description may be ambiguous or span multiple categories.
 
-**If you need deeper analysis:**
-- Use `assess genai initiative` for comprehensive evaluation
-- Ask for specific aspects: "what about the data requirements?"
+**Solution**: Provide more specific details about what you're trying to accomplish.
 
-## Key Learning Points
+### "I don't have the suggested IDE feature"
 
-1. **Structured Evaluation**: Systematic approach to AI appropriateness
-2. **Alternatives Considered**: Not every problem needs AI
-3. **Risk-Aware**: Highlights potential issues early
-4. **Actionable**: Provides clear recommendation with reasoning
+**Cause**: IDE features vary between editors.
 
-## Next Steps to Try
+**Solution**: Search for equivalent functionality in your IDE or use the CLI alternative if provided.
 
-- If yes: Use `assess genai initiative` for detailed planning
-- If no: Explore suggested alternatives
-- If maybe: Gather more information or run pilot
-- Find experts: Use `find expert contact` for AI expertise
+### "The suggested prompt doesn't work well"
 
-## Expected Timeline
+**Cause**: AI prompts may need customization for your specific context.
 
-- **Total evaluation time:** 2-3 minutes
-- **User input required:** Task description (1 minute)
-- **OLAF execution time:** Analysis and recommendation (1-2 minutes)
+**Solution**: Modify the prompt to include more context about your codebase or requirements.
+
+## Next Steps
+
+After mastering this skill:
+
+1. **Build Intuition**: Over time, you'll naturally know which tool to use
+2. **Learn IDE Shortcuts**: Invest time in learning your IDE's capabilities
+3. **Refine AI Prompts**: Develop a library of effective prompts for common tasks
+4. **Share Knowledge**: Help teammates understand when to use each approach
+5. **Track Efficiency**: Note which recommendations save you the most time
