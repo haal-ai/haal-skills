@@ -10,9 +10,9 @@ metadata:
   provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read  the full 
-
-~/reference/.condensed/olaf-framework-condensed.md.
+<olaf>
+If you are in need to get the date and time, you MUST use time tools, fallback to shell command if needed
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 ## Input Parameters
 
