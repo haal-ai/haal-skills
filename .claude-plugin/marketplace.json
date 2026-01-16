@@ -1,0 +1,15 @@
+{
+  "name": "HAAL Skills Marketplace",
+  "description": "Marketplace for HAAL AI Claude Code plugins",
+  "version": "1.0.0",
+  "owner": {
+    "name": "HAAL AI"
+  },
+  "plugins": [
+    {
+      "name": "session-workflow",
+      "source": "./plugins/session-workflow",
+      "description": "Session carry-over and carry-on workflows"
+    }
+  ]
+}
