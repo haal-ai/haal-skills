@@ -10,10 +10,12 @@ metadata:
   provider: Haal AI
 ---
 
-CRITICAL: Ensure the OLAF condensed framework is loaded and applied: <olaf-work-instructions>, <olaf-framework-validation>. If not loaded, read the full reference/.condensed/olaf-framework-condensed.md.
+<olaf>
 
-## Time Retrieval
-Get current timestamp using time tools, fallback to shell command if needed
+If you are in need to get the date and time, you MUST use time tools, fallback to shell command if needed
+
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
+
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
@@ -80,8 +82,8 @@ You MUST confirm what the user wants BEFORE proposing any implementation.
 
 **If reference is provided:**
 - If it is a Jira key, you MAY retrieve ticket content using the Jira MCP server tools.
-- If it is a Bitbucket PR, you MAY retrieve PR details/diff using the Bitbucket MCP server tools.
-- If it is a GitHub issue URL, you MUST ask the user to paste the relevant content (no GitHub MCP available).
+- If it is a GitHub issue/PR URL, you MAY retrieve details/diff using the GitHub MCP server tools.
+- If it is a Bitbucket PR, you MUST ask the user to paste the relevant content (no Bitbucket MCP available).
 
 **If reference is not provided:**
 - You MUST require a clear definition of what the user wants (scope, acceptance criteria, non-goals).
