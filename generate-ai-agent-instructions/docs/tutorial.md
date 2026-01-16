@@ -310,4 +310,3 @@ Bad ❌:
 - **`onboard-me`** - Generate human-focused repository guide
 - **`evaluate-prompt-for-adoption`** - Assess external prompts for quality
 - **`convert-prompt`** - Modernize prompts to OLAF standards
-- **`import-prompt-unchanged`** - Import prompts as-is

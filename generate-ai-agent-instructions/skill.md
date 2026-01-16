@@ -57,12 +57,26 @@ platforms:
 
 ## Process
 
+## Search Budget (Avoid Search Loops)
+
+To avoid getting stuck in repetitive/expanding searches (especially in large repos), you MUST follow these limits:
+
+- You MUST NOT run the same broad workspace search more than once.
+- You MUST cap discovery to **two passes**:
+  1) AI-instructions discovery (platform files only)
+  2) Build/stack discovery (package/build files only)
+- If discovery output is too large or truncated, you MUST NOT re-run the same search; instead you MUST narrow scope (e.g., only root + top-level folders) or ask the user which subfolder to focus on.
+- If the repo appears to be a “collection repo” (many independent subprojects), you MUST ask the user which subproject path to target.
+
 ### 1. Platform Discovery Phase
 You WILL detect existing AI instruction files:
 
 **Search Pattern (single glob)**:
+
+IMPORTANT: Do NOT include `README.md` in this discovery search (it can match hundreds/thousands of files and cause looping/truncation).
+
 ```
-**/{.github/copilot-instructions.md,.github/instructions.md,AGENTS.md,AGENT.md,AI-INSTRUCTIONS.md,CLAUDE.md,.cursorrules,.windsurfrules,.clinerules,.cursor/rules/*,.windsurf/rules/*,.cline/rules/*,.kiro/steering/*,README.md}
+**/{.github/copilot-instructions.md,.github/instructions.md,AGENTS.md,AGENT.md,AI-INSTRUCTIONS.md,CLAUDE.md,.cursorrules,.windsurfrules,.clinerules,.cursor/rules/*,.windsurf/rules/*,.cline/rules/*,.kiro/steering/*}
 ```
 
 **Analyze Findings**:
@@ -92,7 +106,9 @@ if target_platform == "auto":
 You WILL systematically examine the workspace:
 
 **CRITICAL**: Exclude these directories from analysis:
-- `.git`, `.github`, `.olaf/core`, `.olaf/data`
+- `.git`, `.github`
+- `.olaf/**` (EXCEPT you may read `.olaf/team-delegation.md` when required)
+- `node_modules`, `.venv`, `venv`, `dist`, `build`, `out`, `target`, `.next`, `.cache`, `coverage`, `.idea`, `.vscode`
 
 **Architecture & Organization**:
 - Project type (monolith, microservices, library, framework)
