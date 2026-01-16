@@ -1,0 +1,14 @@
+{
+  "name": "session-workflow",
+  "description": "Session carry-over and carry-on workflows",
+  "version": "1.0.0",
+  "author": {
+    "name": "HAAL AI"
+  },
+  "license": "Apache-2.0",
+  "commands": [
+    "./commands/carry-over-session.md",
+    "./commands/carry-on-session.md"
+  ],
+  "skills": "./skills/"
+}
