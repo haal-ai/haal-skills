@@ -10,7 +10,11 @@ metadata:
   provider: Haal AI
 ---
 
-<olaf> 
+<olaf>
+
+If you are in need to get the date and time, you MUST use time tools, fallback to shell command if needed
+
+**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 ## Input Parameters
 
@@ -18,9 +22,6 @@ You MUST request these parameters if not provided by the user:
 - **assessment_scope**: string - Specific GenAI use case or problem domain (REQUIRED)
 - **stakeholder_context**: string - Primary users and organizational context (OPTIONAL)
 - **timeline_constraints**: string - Expected implementation timeline (OPTIONAL)
-
-Framework-provided parameters (available from OLAF condensed framework):
-- **staging_dir**: string - Directory for output files and reports (from framework)
 
 ## User Interaction Protocol
 
