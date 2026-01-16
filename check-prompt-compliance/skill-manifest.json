@@ -5,7 +5,9 @@
   "pack": "haal-prompt-engineer",
   "protocol": "Propose-Act",
   "dependencies": {
-    "templates": [],
+    "templates": [
+      "templates/prompting-principles.md"
+    ],
     "tools": [],
     "external": []
   },
@@ -36,6 +38,12 @@
       {
         "name": "check-prompt-compliance",
         "path": "/skill.md"
+      }
+    ],
+    "templates": [
+      {
+        "name": "prompting-principles",
+        "path": "/templates/prompting-principles.md"
       }
     ]
   }
