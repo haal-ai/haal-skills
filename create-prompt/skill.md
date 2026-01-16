@@ -34,7 +34,7 @@ You MUST follow the established interaction protocol strictly:
 ### 1. Validation Phase
 You WILL validate:
 - The user goal is clear enough to write a prompt
-- The output folder exists (create if missing): `.olaf/staging/generated-prompts/`
+- The output folder exists (create if missing): `.olaf/work/staging/generated-prompts/`
 - The output file name is safe (kebab-case slug, no path separators)
 
 ### 2. Drafting Phase
@@ -58,7 +58,7 @@ You MUST fill these placeholders:
 ### 4. Proposal Phase
 You WILL show the full generated prompt file content and propose:
 - Output folder: `.olaf/staging/generated-prompts/`
-- Output filename: `{timestamp}-{prompt_name}.md` where `timestamp` is `YYYYMMDD-HHmmss`
+- Output filename: `{prompt_name}.md` 
 
 Ask: "Ready to write this file? (yes/no/edit)"
 
