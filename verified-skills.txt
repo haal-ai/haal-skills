@@ -32,10 +32,11 @@ code-in-rust
 augment-unittest
 run-redocumentation
 generat-commits-fron-changelog
-esdi ( explore, specify, design , implement) (need challenge-me, transform-raw-spec, generate-design, generate-implementation-plan)
-run-implementation-plan
+esdi-chain (explore, specify, design , implement)  - needs  challenge-me, transform-raw-spec, generate-design, generate-implementation-plan)
+transform-raw-spec
+generate-design
+generate-implementation-plan
+un-implementation-plan
 onboard-me
-
-
 get-bms-expertise (amadeus specific)
 create-otf-varibale (amadeus specific)

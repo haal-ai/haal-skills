@@ -1,47 +1,82 @@
-# Carry-On Session - Description
+# Carry On Session
 
 ## Overview
-Carry-On loads the latest carry-over note file and proposes resuming work from where you left off.
+The `carry-on-session` skill resumes work by loading the most recent carry-over note and proposing the immediate next action. It always waits for user approval before doing anything.
 
-## What It Does
-- Finds the most recent carry-over file in `.olaf/carry-over/`
-- Parses the file sections (NEXT PROMPT, FILES NEEDED, OPTIONAL context)
-- Proposes the plan from the carry-over note
-- Waits for user approval before taking action
-- Opens/reads required files upon approval
+## Purpose
+Use this skill to continue a prior session safely and quickly by:
+- locating the latest carry-over file
+- extracting the intended “NEXT PROMPT”
+- showing which files should be opened
+- asking you to confirm before any work begins
 
-## How It Works
-1. **User requests carry-on** with command like "carry on"
-2. **Copilot searches** for latest `carry-over-YYYYMMDD-HHmm.txt` file by timestamp
-3. **Parses carry-over file**:
-   - Extracts NEXT PROMPT section
-   - Extracts FILES NEEDED (absolute paths)
-   - Extracts OPTIONAL context if present
-4. **Proposes plan** to user showing:
-   - Carry-over file name and date
-   - Proposed plan (from NEXT PROMPT)
-   - Files to open (from FILES NEEDED)
-5. **Waits for approval** - Does NOT auto-execute
-6. **On approval**, proceeds with proposed plan
+## Key Features
+- **Safe by design**: never modifies files until you approve
+- **Automatic carry-over selection**: picks the most recent `carry-over-YYYYMMDD-HHmm.txt`
+- **Structured parsing**: reads `NEXT PROMPT`, optional `FILES NEEDED`, optional context
+- **Clear proposal**: outputs a consistent “Resuming from Carry-Over” block you can accept or adjust
 
-## Key Files
-- **Carry-Over Directory**: `.olaf/carry-over/`
-- **File Pattern**: `carry-over-YYYYMMDD-HHmm.txt` (finds most recent)
-- **Skill Prompt**: `skills/carry-on-session/prompts/carry-on-session.md`
-- **Companion Skill**: `carry-over-session.md` (creates the note)
+## Usage
 
-## Commands
-- `carry on` - Load and resume from latest carry-over
-- `resume work` - Same as above
-- `continue work` - Same as above
+### Invocation
+Invoke the skill by asking for `carry-on-session` in your chat/assistant environment.
 
-## When to Use
-- Starting a new session and want to resume previous work
-- Need to load context from where you left off
-- Have a carry-over note from previous session
+### Expected Input
+You typically provide no parameters. The skill finds the latest carry-over note automatically.
 
-## Companion Feature
-Use `carry over` to create the carry-over note that this skill loads.
+## Parameters
 
-## Protocol
-**Act** - Loads carry-over and proposes plan, but waits for approval before executing.
+### Required Parameters
+None.
+
+### Optional Parameters
+None.
+
+## Process Flow
+
+1. **Read required team protocol**: reads `.olaf/team-delegation.md`.
+2. **Locate latest carry-over note**: searches `.olaf/work/carry-over/` for `carry-over-YYYYMMDD-HHmm.txt` and selects the newest by timestamp.
+3. **Parse the note**:
+   - `## NEXT PROMPT` (required)
+   - `## FILES NEEDED` (optional)
+   - `## OPTIONAL - Brief Context` (optional)
+4. **Propose next action**: prints the proposal and asks for confirmation.
+5. **Wait**: takes no action unless you approve.
+
+## Output
+The skill responds with a proposal that follows this structure:
+
+```text
+## Resuming from Carry-Over
+- Carry-Over File: [filename]
+- Session Date: [YYYY-MM-DD HH:mm]
+
+### Proposed Plan (from NEXT PROMPT)
+[Paste NEXT PROMPT verbatim]
+
+### Files To Open
+[List each absolute path from FILES NEEDED]
+
+Confirm: Proceed with the proposed plan? (Yes/No)
+If No, please specify adjustments.
+```
+
+## Examples
+
+### Example: Resume the latest work
+1. Ask the assistant to run `carry-on-session`.
+2. Review the proposed plan and file list.
+3. Reply **Yes** to proceed or reply **No** with adjustments.
+
+## Error Handling
+
+### No carry-over found
+- **Cause**: `.olaf/work/carry-over/` has no matching files.
+- **Fix**: run `carry-over-session` (or otherwise create a carry-over note) and try again.
+
+### Missing `NEXT PROMPT`
+- **Cause**: the carry-over note is missing the required section.
+- **Fix**: add a `## NEXT PROMPT` section and re-run.
+
+## Related Skills
+- **carry-over-session**: creates carry-over notes that this skill can resume

@@ -1,144 +1,97 @@
-# Carry-On Session: Step-by-Step Tutorial
+# Carry On Session: Step-by-Step Tutorial
 
-**How to Execute the "Carry-On Session" Workflow**
+**How to Execute the "Carry On Session"**
 
-This tutorial shows exactly how to resume work from a carry-over note.
+This tutorial shows exactly how to resume work using the most recent carry-over note.
 
 ## Prerequisites
 
-- OLAF framework installed and active
-- At least one carry-over file in `.olaf/carry-over/`
-- Previous session where you created a carry-over note
-- Access to GitHub Copilot Chat or compatible IDE
+- A carry-over note exists in `.olaf/work/carry-over/`
+- The carry-over note follows the expected format and contains `## NEXT PROMPT`
 
 ## Step-by-Step Instructions
 
-### Step 1: Start New Session and Request Carry-On
-Brief: Load the latest carry-over note
+### Step 1: Run the carry-on skill
+This step triggers the assistant to locate and parse the latest carry-over note.
 
 **User Action:**
-1. Open GitHub Copilot Chat (new session)
-2. Type: `carry on`
-3. Press Enter
+1. Open your assistant/chat.
+2. Ask to run: `carry-on-session`
 
-**Alternative commands:**
-```
-resume work
-continue work
-```
+**Assistant Response:**
+The assistant starts searching for the latest carry-over file in `.olaf/work/carry-over/`.
 
-### Step 2: Copilot Finds Latest Carry-Over
-**What Copilot Does:**
-- Scans `.olaf/carry-over/` directory
-- Finds most recent file matching pattern `carry-over-YYYYMMDD-HHmm.txt`
-- Reads and parses the file
+### Step 2: The assistant selects the latest carry-over note
 
-**You Should See:** Copilot processing the carry-over file
+**What the assistant does:**
+- Finds files matching `carry-over-YYYYMMDD-HHmm.txt`
+- Selects the newest one based on its timestamp
 
-### Step 3: Carry-Over File Parsed
-**What Copilot Does:**
-- Extracts **NEXT PROMPT** section (the exact prompt to continue)
-- Extracts **FILES NEEDED** section (absolute file paths)
-- Extracts **OPTIONAL context** if present
+**You should see:**
+The assistant referencing the selected carry-over filename.
 
-### Step 4: Proposal Presented
-**Copilot Response:**
-```
+### Step 3: The assistant parses the carry-over note
+
+**What the assistant does:**
+- Extracts `## NEXT PROMPT` (required)
+- Extracts `## FILES NEEDED` (optional)
+- Extracts `## OPTIONAL - Brief Context` (optional)
+
+**You should see:**
+A proposed plan and (optionally) a list of files to open.
+
+### Step 4: Review the proposal and confirm
+
+**Assistant Response:**
+```text
 ## Resuming from Carry-Over
-- Carry-Over File: carry-over-20251114-1430.txt
-- Session Date: 2025-11-14 14:30
+- Carry-Over File: carry-over-20260116-1045.txt
+- Session Date: 2026-01-16 10:45
 
 ### Proposed Plan (from NEXT PROMPT)
-Add JWT validation to AuthService, update login to return token, and add middleware to protect routes.
+[Paste NEXT PROMPT verbatim]
 
 ### Files To Open
-c:\users\<user-name>\coderepos\project\src\services\AuthService.ts
-c:\users\<user-name>\coderepos\project\src\middleware\auth.ts
-c:\users\<user-name>\coderepos\project\src\routes\api.ts
-c:\users\<user-name>\coderepos\project\config\jwt.config.ts
-c:\users\<user-name>\coderepos\project\tests\auth.test.ts
+[List each absolute path from FILES NEEDED]
 
 Confirm: Proceed with the proposed plan? (Yes/No)
 If No, please specify adjustments.
 ```
 
-**User Action:** Review the proposed plan
-
-### Step 5: User Approves or Adjusts
 **User Action:**
-Type your response:
-```
-Yes
-```
-or
-```
-No, let's focus only on AuthService first
-```
-
-**Provide Confirmation:**
-- `Yes` - Proceed as proposed
-- `No` - Specify adjustments needed
-
-### Step 6: Copilot Proceeds (if approved)
-**What Copilot Does:**
-- Opens/reads the specified files
-- Executes the NEXT PROMPT as the working instruction
-- Continues with the work described in the carry-over
-
-**You Should See:** Work resuming from where previous session ended
+Reply with one of:
+- `Yes`
+- `No, please do X instead`
 
 ## Verification Checklist
 
-✅ **Latest carry-over loaded** - Correct file by timestamp
-✅ **Plan presented** - NEXT PROMPT shown clearly
-✅ **Files listed** - All absolute paths displayed
-✅ **Approval requested** - Copilot waits before acting
-✅ **Work resumed** - Continues from previous session context
+✅ Latest carry-over file selected from `.olaf/work/carry-over/`
+✅ `NEXT PROMPT` is shown verbatim
+✅ Confirmation requested before any action
 
 ## Troubleshooting
 
-**If no carry-over found:**
-```
-Error: No carry-over files found in .olaf/carry-over/
-Create a carry-over note first using "carry over"
-```
+**If no carry-over files are found:**
+- Create one first (for example using `carry-over-session`), then rerun `carry-on-session`.
 
-**If carry-over file corrupted:**
-- Check file exists in `.olaf/carry-over/`
-- Verify file format matches template
-- Ensure NEXT PROMPT section exists
+**If `NEXT PROMPT` is missing:**
+- Edit the carry-over note to include a `## NEXT PROMPT` section.
 
-**If wrong carry-over loaded:**
-- Carry-on loads MOST RECENT by timestamp
-- Check file timestamps in `.olaf/carry-over/`
-- Rename or delete unwanted carry-over files
-
-**If files not found:**
-- Verify absolute paths in carry-over file are correct
-- Update paths if workspace location changed
-- Edit carry-over file manually if needed
+**If file paths in `FILES NEEDED` are invalid:**
+- Update the paths in the carry-over note to match the current workspace layout.
 
 ## Key Learning Points
 
-1. **Proposal first, action second:** Carry-on always proposes the plan and waits for approval. It never auto-executes.
-
-2. **Most recent by timestamp:** The file with the latest YYYYMMDD-HHmm timestamp is selected automatically.
-
-3. **NEXT PROMPT becomes instruction:** The exact prompt from the carry-over becomes the working instruction once approved.
-
-4. **Session continuity:** Carry-over + carry-on workflow enables seamless work across sessions without losing context.
-
-5. **User control:** You can adjust the plan before proceeding - it's not all-or-nothing.
+1. **Safety first:** this skill always asks before doing anything.
+2. **Most recent wins:** the newest timestamped carry-over file is selected.
+3. **Carry-over notes drive execution:** `NEXT PROMPT` becomes the next working instruction after you approve.
 
 ## Next Steps to Try
 
-- Create a carry-over with `carry over`, then resume it with `carry on`
-- Try adjusting the proposed plan instead of accepting it as-is
-- Create multiple carry-overs and see which one loads (most recent)
-- Edit a carry-over file manually before using `carry on`
+- Create a new carry-over note, then run `carry-on-session` to resume it.
+- Test the “No” flow by requesting a smaller first step before proceeding.
 
 ## Expected Timeline
 
-- **Total carry-on execution time:** 10-30 seconds
-- **User input required:** Approval/adjustment of proposed plan
-- **Copilot execution time:** Instant for loading, variable for work execution
+- **Total time:** typically under a minute (depends on the carry-over contents)
+- **User input required:** confirmation (Yes/No) before any action
