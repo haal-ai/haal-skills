@@ -1,4 +1,4 @@
----
+ ---
 name: run-implementation-plan
 description: Execute an IMPLEMENTATION-TASK-PLAN.md sequentially with progress tracking and optional resume
 license: Apache-2.0
