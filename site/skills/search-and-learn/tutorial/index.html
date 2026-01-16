@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Lean and Search Skill: Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/search-and-learn/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lean-and-search-skill-step-by-step-tutorial" class="nav-link">Lean and Search Skill: Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#when-to-use-this-skill" class="nav-link">When to Use This Skill</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-process" class="nav-link">Step-by-Step Process</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-pitfalls" class="nav-link">Common Pitfalls</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example-session" class="nav-link">Example Session</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#integration-with-other-skills" class="nav-link">Integration with Other Skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#advanced-usage" class="nav-link">Advanced Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lean-and-search-skill-step-by-step-tutorial">Lean and Search Skill: Step-by-Step Tutorial<a class="headerlink" href="#lean-and-search-skill-step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The lean-and-search skill helps you systematically discover information and acquire knowledge through structured research workflows. This tutorial guides you through using this skill effectively for focused learning objectives.</p>
+<h2 id="when-to-use-this-skill">When to Use This Skill<a class="headerlink" href="#when-to-use-this-skill" title="Permanent link">&para;</a></h2>
+<ul>
+<li>You need to quickly learn something new for a specific purpose</li>
+<li>You want to research a topic with structured documentation</li>
+<li>You need credible sources with proper citations</li>
+<li>You want to validate learning through practical application</li>
+<li>You need to identify knowledge gaps for future learning</li>
+</ul>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Basic familiarity with research concepts</li>
+<li>Access to web search capabilities</li>
+<li>Ability to evaluate source credibility</li>
+</ul>
+<h2 id="step-by-step-process">Step-by-Step Process<a class="headerlink" href="#step-by-step-process" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-prepare-your-learning-parameters">Step 1: Prepare Your Learning Parameters<a class="headerlink" href="#step-1-prepare-your-learning-parameters" title="Permanent link">&para;</a></h3>
+<p>Before invoking the skill, prepare three key inputs:</p>
+<ol>
+<li><strong>Learning Objective</strong>: Be specific about what you want to learn</li>
+<li>❌ "Learn about AI"</li>
+<li>
+<p>✅ "Understand how to implement basic neural networks in Python for image classification"</p>
+</li>
+<li>
+<p><strong>Current Knowledge</strong>: Assess your starting point honestly</p>
+</li>
+<li>
+<p>Example: "I know Python basics and some machine learning concepts, but never implemented neural networks"</p>
+</li>
+<li>
+<p><strong>Context</strong>: Define the practical application and constraints</p>
+</li>
+<li>Example: "Need to build a prototype for work presentation next week, using TensorFlow or PyTorch"</li>
+</ol>
+<h3 id="step-2-invoke-the-skill">Step 2: Invoke the Skill<a class="headerlink" href="#step-2-invoke-the-skill" title="Permanent link">&para;</a></h3>
+<p>Use the lean-and-search skill with your prepared parameters:</p>
+<pre><code>olaf lean-and-search
+</code></pre>
+<p>The system will prompt you for the three parameters if not provided.</p>
+<h3 id="step-3-review-the-learning-process">Step 3: Review the Learning Process<a class="headerlink" href="#step-3-review-the-learning-process" title="Permanent link">&para;</a></h3>
+<p>The skill will guide you through:</p>
+<ol>
+<li><strong>Goal Definition</strong>: Clarifying specific objectives</li>
+<li><strong>Search Strategy</strong>: Planning information sources</li>
+<li><strong>Systematic Search</strong>: Finding and documenting sources</li>
+<li><strong>Information Synthesis</strong>: Evaluating and connecting findings</li>
+<li><strong>Practical Application</strong>: Testing understanding</li>
+<li><strong>Report Generation</strong>: Creating structured documentation</li>
+</ol>
+<h3 id="step-4-validate-outputs">Step 4: Validate Outputs<a class="headerlink" href="#step-4-validate-outputs" title="Permanent link">&para;</a></h3>
+<p>Ensure your learning report includes:</p>
+<ul>
+<li>[ ] Clear learning summary with key concepts</li>
+<li>[ ] Credible sources with full URLs</li>
+<li>[ ] Practical examples you can implement</li>
+<li>[ ] Identified knowledge gaps</li>
+<li>[ ] Actionable next steps</li>
+<li>[ ] Learning validation exercises</li>
+</ul>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="effective-learning-objectives">Effective Learning Objectives<a class="headerlink" href="#effective-learning-objectives" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Be specific and measurable</li>
+<li>Include practical application context</li>
+<li>Set realistic scope boundaries</li>
+<li>Consider time constraints</li>
+</ul>
+<h3 id="source-quality-guidelines">Source Quality Guidelines<a class="headerlink" href="#source-quality-guidelines" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prioritize official documentation</li>
+<li>Cross-reference multiple sources</li>
+<li>Note publication dates and relevance</li>
+<li>Verify URLs are accessible</li>
+<li>Document author credentials when relevant</li>
+</ul>
+<h3 id="application-focus">Application Focus<a class="headerlink" href="#application-focus" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Always seek practical examples</li>
+<li>Test understanding through exercises</li>
+<li>Connect new knowledge to existing skills</li>
+<li>Identify real-world use cases</li>
+</ul>
+<h2 id="common-pitfalls">Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Vague Objectives</strong>: Starting without clear learning goals</li>
+<li><strong>Poor Sources</strong>: Accepting information without URL verification</li>
+<li><strong>No Validation</strong>: Skipping practical application tests</li>
+<li><strong>Isolated Learning</strong>: Not connecting to existing knowledge</li>
+<li><strong>Incomplete Documentation</strong>: Missing key sections in reports</li>
+</ol>
+<h2 id="example-session">Example Session<a class="headerlink" href="#example-session" title="Permanent link">&para;</a></h2>
+<h3 id="input-parameters">Input Parameters<a class="headerlink" href="#input-parameters" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Learning Objective</strong>: "Learn how to optimize PostgreSQL query performance for large datasets"</li>
+<li><strong>Current Knowledge</strong>: "I know basic SQL queries and database concepts, but new to performance optimization"</li>
+<li><strong>Context</strong>: "Working on e-commerce application with slow product search queries, need solution within 2 weeks"</li>
+</ul>
+<h3 id="expected-output-structure">Expected Output Structure<a class="headerlink" href="#expected-output-structure" title="Permanent link">&para;</a></h3>
+<pre><code># Lean and Search Report: PostgreSQL Query Optimization
+
+**Generated**: 20251119-1445 UTC
+**Learning Objective**: Learn how to optimize PostgreSQL query performance for large datasets
+**Current Knowledge Level**: Basic SQL and database concepts
+**Context**: E-commerce application performance improvement
+
+## Learning Summary
+### Key Concepts Discovered
+1. **Index Strategy**: Different index types and selection criteria
+2. **Query Analysis**: Using EXPLAIN ANALYZE for performance insights
+3. **Configuration Tuning**: Key PostgreSQL settings for performance
+
+### Main Insights
+- Index selection affects query performance more than configuration tuning
+- EXPLAIN ANALYZE reveals actual bottlenecks vs assumptions
+- Connection pooling essential for high-concurrency applications
+
+## Source Documentation
+[Detailed sources with URLs and quality ratings]
+
+## Application Examples
+[Practical query optimization examples with code]
+
+## Knowledge Gaps
+[Areas requiring deeper research]
+
+## Next Steps
+[Immediate actions and learning plan]
+</code></pre>
+<h2 id="integration-with-other-skills">Integration with Other Skills<a class="headerlink" href="#integration-with-other-skills" title="Permanent link">&para;</a></h2>
+<h3 id="complementary-skills">Complementary Skills<a class="headerlink" href="#complementary-skills" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>review-code</strong>: Validate implementation of learned concepts</li>
+<li><strong>generate-tech-spec</strong>: Document technical solutions from research</li>
+<li><strong>create-prompt</strong>: Share research methodology as reusable prompts</li>
+</ul>
+<h3 id="workflow-combinations">Workflow Combinations<a class="headerlink" href="#workflow-combinations" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Research → Implement → Review</strong></li>
+<li>Use lean-and-search for research</li>
+<li>Implement learning in code</li>
+<li>
+<p>Use review skills for validation</p>
+</li>
+<li>
+<p><strong>Learn → Document → Share</strong></p>
+</li>
+<li>Research with lean-and-search</li>
+<li>Create documentation with generate-tech-spec</li>
+<li>Share knowledge with create-prompt</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="issue-no-sources-found">Issue: "No sources found"<a class="headerlink" href="#issue-no-sources-found" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cause</strong>: Overly specific or poorly formatted search terms</li>
+<li><strong>Solution</strong>: Broaden search scope, use alternative terminology</li>
+</ul>
+<h3 id="issue-conflicting-information">Issue: "Conflicting information"<a class="headerlink" href="#issue-conflicting-information" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cause</strong>: Different source perspectives or outdated information</li>
+<li><strong>Solution</strong>: Document conflicts, prioritize authoritative sources, note date relevance</li>
+</ul>
+<h3 id="issue-cant-validate-learning">Issue: "Can't validate learning"<a class="headerlink" href="#issue-cant-validate-learning" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cause</strong>: Lack of practical application opportunities</li>
+<li><strong>Solution</strong>: Create simplified test scenarios, use online sandboxes</li>
+</ul>
+<h3 id="issue-report-too-longcomplex">Issue: "Report too long/complex"<a class="headerlink" href="#issue-report-too-longcomplex" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cause</strong>: Scope creep during research</li>
+<li><strong>Solution</strong>: Return to original learning objective, split into multiple sessions</li>
+</ul>
+<h2 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
+<h3 id="research-iterations">Research Iterations<a class="headerlink" href="#research-iterations" title="Permanent link">&para;</a></h3>
+<p>For complex topics, use iterative approach:
+1. Initial broad research with lean-and-search
+2. Identify specific gaps or areas of interest
+3. Focused follow-up sessions on specific subtopics</p>
+<h3 id="source-management">Source Management<a class="headerlink" href="#source-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Maintain bibliography of high-quality sources</li>
+<li>Create rating system for source credibility</li>
+<li>Track source updates and revisit periodically</li>
+</ul>
+<h3 id="knowledge-building">Knowledge Building<a class="headerlink" href="#knowledge-building" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Link reports to build knowledge network</li>
+<li>Create glossaries for technical terms</li>
+<li>Develop personal learning templates</li>
+</ul>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>The lean-and-search skill provides structured methodology for efficient learning and knowledge acquisition. Focus on specific objectives, validate understanding through application, and maintain high-quality documentation for future reference.</p>
+<p>For additional help, use the <code>help-me-olaf</code> skill with questions about lean-and-search usage.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

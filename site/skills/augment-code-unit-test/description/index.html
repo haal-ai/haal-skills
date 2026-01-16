@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Create Unit Tests - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/augment-code-unit-test/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#create-unit-tests" class="nav-link">Create Unit Tests</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-competencies" class="nav-link">Related Competencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="create-unit-tests">Create Unit Tests<a class="headerlink" href="#create-unit-tests" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This competency generates comprehensive unit tests for code modules by analyzing existing test patterns, identifying coverage gaps, and creating meaningful tests that validate core functionality while avoiding trivial test anti-patterns.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>Adequate unit test coverage is essential for maintaining code quality, enabling safe refactoring, and catching bugs early. This competency systematically improves test coverage by analyzing code complexity, identifying untested paths, and generating tests that focus on meaningful validation rather than trivial assertions like getter/setter tests.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><strong>Command</strong>: <code>create unit tests</code> (or aliases: <code>augment tests</code>, <code>augment unit test</code>, <code>improve test coverage</code>, <code>unit test augmentation</code>)</p>
+<p><strong>Protocol</strong>: Propose-Act</p>
+<p><strong>When to Use</strong>: Use when you need to improve test coverage for complex modules, establish testing patterns for new code, validate critical business logic, or prepare code for refactoring by ensuring adequate test protection.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-inputs">Required Inputs<a class="headerlink" href="#required-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>code_path</strong>: Directory path containing the codebase to test</li>
+<li><strong>target_coverage</strong>: Desired test coverage percentage (default: 55%)</li>
+</ul>
+<h3 id="optional-inputs">Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>file_filter</strong>: Specific file types or patterns to focus on</li>
+<li><strong>batch_size</strong>: Number of files to process per iteration (default: 10)</li>
+<li><strong>max_iterations</strong>: Maximum number of improvement cycles (default: 10)</li>
+</ul>
+<h3 id="context-requirements">Context Requirements<a class="headerlink" href="#context-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Existing codebase with some test infrastructure</li>
+<li>Testing framework installed and configured</li>
+<li>Write access to test directories</li>
+<li>Understanding of existing test patterns helps maintain consistency</li>
+</ul>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p>Generates unit tests and produces comprehensive coverage reports.</p>
+<p><strong>Deliverables</strong>:
+- New unit test files following existing patterns
+- Updated test coverage metrics
+- Iteration results documenting progress
+- Final report with coverage statistics
+- Recommendations for future testing improvements</p>
+<p><strong>Format</strong>: Test files in appropriate testing framework format, JSON reports for metrics tracking</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-improving-coverage-for-complex-business-logic">Example 1: Improving Coverage for Complex Business Logic<a class="headerlink" href="#example-1-improving-coverage-for-complex-business-logic" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Core business logic has only 30% test coverage</p>
+<p><strong>Command</strong>:</p>
+<pre><code>create unit tests
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>code_path: src/business-logic
+target_coverage: 55%
+</code></pre>
+<p><strong>Result</strong>: Generated 34 new unit tests across 7 modules, increased coverage from 30% to 58%, focused on complex validation and calculation functions, avoided trivial getter/setter tests.</p>
+<h3 id="example-2-preparing-for-refactoring">Example 2: Preparing for Refactoring<a class="headerlink" href="#example-2-preparing-for-refactoring" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Need test protection before refactoring a legacy module</p>
+<p><strong>Command</strong>:</p>
+<pre><code>augment unit test
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>code_path: src/legacy/payment-processor
+target_coverage: 70%
+max_iterations: 5
+</code></pre>
+<p><strong>Result</strong>: Created comprehensive test suite with 45 tests covering edge cases, error handling, and business rules, enabling safe refactoring with confidence.</p>
+<h2 id="related-competencies">Related Competencies<a class="headerlink" href="#related-competencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>analyze-function-complexity</strong>: Identify complex functions that need thorough testing</li>
+<li><strong>review-code</strong>: Includes test coverage assessment as part of code review</li>
+<li><strong>evolve-code-iteratively</strong>: Iterative improvement that includes test enhancement</li>
+<li><strong>fix-code-smells</strong>: Often requires adding tests to enable safe refactoring</li>
+</ul>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Start with the most complex modules first for maximum impact</li>
+<li>Focus on meaningful tests that validate business logic, not trivial assertions</li>
+<li>Follow existing test patterns and naming conventions in the codebase</li>
+<li>Run tests after each iteration to ensure they pass</li>
+<li>Aim for 55-80% coverage as a practical target (100% is often impractical)</li>
+<li>Test edge cases, error conditions, and boundary values</li>
+<li>Avoid testing framework code or simple getters/setters</li>
+<li>Use the iterative approach to manage large codebases effectively</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Cannot generate tests for code that requires complex external dependencies without mocking</li>
+<li>Test quality depends on understanding of business requirements</li>
+<li>May require manual adjustment for framework-specific testing patterns</li>
+<li>Cannot validate that tests actually test the right behavior</li>
+<li>Limited to unit tests - does not create integration or end-to-end tests</li>
+<li>Requires existing test infrastructure and framework</li>
+<li>May hit session limits on very large codebases (use batch processing)</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

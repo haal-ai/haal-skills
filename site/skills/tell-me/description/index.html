@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Tell Me - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/tell-me/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#tell-me" class="nav-link">Tell Me</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#search-locations-priority-order" class="nav-link">Search Locations (Priority Order)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-skills" class="nav-link">Related Skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dependencies" class="nav-link">Dependencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#how-it-works" class="nav-link">How It Works</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="tell-me">Tell Me<a class="headerlink" href="#tell-me" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Lightweight knowledge retrieval skill that searches existing documentation artifacts before suggesting analysis. Returns fast, accurate answers from YOUR repository's documentation with source citations.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>Provides instant access to project knowledge by searching local artifacts first, eliminating unnecessary analysis and providing immediate answers to common project questions.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><strong>Command</strong>: <code>tell me</code> | <code>ask about</code> | <code>info about</code></p>
+<p><strong>Protocol</strong>: Act</p>
+<p><strong>When to Use</strong>: When you need quick answers about your project from existing documentation.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-inputs">Required Inputs<a class="headerlink" href="#required-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Question or Topic</strong>: What you want to know about the project</li>
+</ul>
+<h3 id="optional-inputs">Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Context</strong>: Specific area or scope to search (e.g., "build process", "coding standards")</li>
+<li><strong>Detail Level</strong>: Brief summary or comprehensive explanation</li>
+</ul>
+<h3 id="context-requirements">Context Requirements<a class="headerlink" href="#context-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>.olaf/data/product/{repo}/</code> folder with documentation (generated by <code>onboard-me</code>)</li>
+<li>OR <code>.olaf/data/practices/</code> folder with team practices</li>
+</ul>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p><strong>Deliverables</strong>:
+- Synthesized answer from existing artifacts
+- Source citations with file paths and line numbers
+- OR suggestion to run appropriate analysis skill if no documentation exists</p>
+<p><strong>Format</strong>: Markdown with sources</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-build-instructions">Example 1: Build Instructions<a class="headerlink" href="#example-1-build-instructions" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Developer needs to know how to build the project</p>
+<p><strong>Command</strong>:</p>
+<pre><code>olaf tell me how to build this project
+</code></pre>
+<p><strong>Result</strong>: </p>
+<pre><code class="language-markdown"># How to Build This Project
+
+Prerequisites: Node.js 18+, npm 9+
+
+Build Steps:
+1. npm install
+2. npm run build
+
+---
+📚 Source: .olaf/data/product/my-repo/repo-guide.md (lines 45-62)
+</code></pre>
+<h3 id="example-2-coding-standards">Example 2: Coding Standards<a class="headerlink" href="#example-2-coding-standards" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Developer needs coding standards for the project</p>
+<p><strong>Command</strong>:</p>
+<pre><code>olaf tell me about coding standards
+</code></pre>
+<p><strong>Result</strong>: Returns content from <code>.olaf/data/practices/coding-standards.md</code> with sources</p>
+<h3 id="example-3-missing-documentation">Example 3: Missing Documentation<a class="headerlink" href="#example-3-missing-documentation" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: User asks about contributor risk but no docs exist</p>
+<p><strong>Command</strong>:</p>
+<pre><code>olaf tell me about contributor risk
+</code></pre>
+<p><strong>Result</strong>: </p>
+<pre><code class="language-markdown">❌ No existing documentation found for: &quot;contributor risk&quot;
+
+💡 Suggested Action:
+Run `olaf analyze-contributor-risk` to generate this information.
+</code></pre>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Search-First Approach</strong> - Checks local artifacts before suggesting analysis<br />
+✅ <strong>Fast Answers</strong> - Returns results from existing docs instantly<br />
+✅ <strong>Smart Fallback</strong> - Suggests which skill to run if no docs found<br />
+✅ <strong>Source Citations</strong> - Always cites file paths and line numbers<br />
+❌ <strong>No Generic Knowledge</strong> - Only answers from YOUR repository's artifacts  </p>
+<h2 id="search-locations-priority-order">Search Locations (Priority Order)<a class="headerlink" href="#search-locations-priority-order" title="Permanent link">&para;</a></h2>
+<ol>
+<li><code>.olaf/data/product/{repo-name}/</code> - Project-specific documentation</li>
+<li><code>.olaf/data/practices/</code> - Team practices and standards</li>
+<li><code>README.md</code>, <code>CONTRIBUTING.md</code> - Root documentation</li>
+<li><code>.olaf/data/kb/</code> - Knowledge base entries</li>
+</ol>
+<h2 id="related-skills">Related Skills<a class="headerlink" href="#related-skills" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>onboard-me</strong>: Generates project documentation that tell-me searches</li>
+<li><strong>analyze-contributor-risk</strong>: Generates contributor analysis</li>
+<li><strong>measure-ai-impact</strong>: Generates AI impact reports</li>
+</ul>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Run <code>olaf onboard-me</code> first to generate comprehensive documentation</li>
+<li>Ask specific questions for better matches</li>
+<li>Use natural language - no need for exact keywords</li>
+<li>Check suggested skills if documentation doesn't exist</li>
+<li>Browse available documentation with <code>olaf tell me</code> (no question)</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Only searches existing artifacts, doesn't generate new analysis</li>
+<li>Requires <code>onboard-me</code> to have run first for best results</li>
+<li>Quality depends on available documentation</li>
+<li>Cannot answer questions beyond repository scope</li>
+<li>No access to external/generic knowledge bases</li>
+</ul>
+<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>onboard-me skill</strong>: For generating initial documentation artifacts</li>
+<li><strong>Local documentation</strong>: Requires <code>.olaf/data/product/</code> or <code>.olaf/data/practices/</code> folders</li>
+</ul>
+<h2 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Parse Question</strong>: Extracts keywords and intent from user's question</li>
+<li><strong>Search Artifacts</strong>: Searches documentation files in priority order</li>
+<li><strong>Rank Results</strong>: Scores relevance of found content</li>
+<li><strong>Synthesize Answer</strong>: Combines relevant sections from top matches</li>
+<li><strong>Cite Sources</strong>: Provides file paths and line numbers for all sources</li>
+<li><strong>Fallback</strong>: Suggests appropriate analysis skill if no documentation exists</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

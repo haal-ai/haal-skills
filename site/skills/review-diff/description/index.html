@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Review-Diff Skill Description - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/review-diff/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#review-diff-skill-description" class="nav-link">Review-Diff Skill Description</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#integration" class="nav-link">Integration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#use-cases" class="nav-link">Use Cases</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#input-parameters" class="nav-link">Input Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#workflow-integration" class="nav-link">Workflow Integration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="review-diff-skill-description">Review-Diff Skill Description<a class="headerlink" href="#review-diff-skill-description" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The <strong>review-diff</strong> skill provides comprehensive code review capabilities for git diffs using language-specific review standards and practices. It automatically detects programming languages, applies appropriate review criteria, and generates structured severity-based feedback reports.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>This skill automates the code review process by:
+- Analyzing git diff output for changed files
+- Detecting programming languages from file extensions
+- Applying language-specific review standards from the knowledge base
+- Generating structured review reports with actionable feedback
+- Providing file and line number references for all findings</p>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<h3 id="language-detection">Language Detection<a class="headerlink" href="#language-detection" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Automatically identifies programming languages (.py, .cpp, .h, .java, .go, .js, etc.)</li>
+<li>Routes each file to appropriate review standards</li>
+<li>Supports Python, C++, Java, and Go specific review criteria</li>
+<li>Fallback to general review principles for other languages</li>
+</ul>
+<h3 id="severity-classification">Severity Classification<a class="headerlink" href="#severity-classification" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>HIGH</strong>: Security vulnerabilities, memory safety, runtime errors</li>
+<li><strong>MEDIUM</strong>: Code quality, best practices, testing gaps</li>
+<li><strong>LOW</strong>: Minor style issues, optimization opportunities</li>
+</ul>
+<h3 id="actionable-commands">Actionable Commands<a class="headerlink" href="#actionable-commands" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Generates specific fix commands for each finding</li>
+<li>Provides verification commands to confirm fixes</li>
+<li>Categorizes actions by immediate vs manual fixes</li>
+<li>Language-specific tooling recommendations</li>
+</ul>
+<h3 id="report-persistence">Report Persistence<a class="headerlink" href="#report-persistence" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Optional saving to <code>[staging_dir]/diff-reviews/</code></li>
+<li>Timestamped report files for tracking over time</li>
+<li>Separate actionable commands file for easy execution</li>
+<li>Organized directory structure for review history</li>
+</ul>
+<h3 id="comprehensive-coverage">Comprehensive Coverage<a class="headerlink" href="#comprehensive-coverage" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Security vulnerability scanning (hardcoded secrets, credentials)</li>
+<li>Code quality assessment (duplication, complexity, organization)</li>
+<li>Best practices validation (type hints, documentation, testing)</li>
+<li>Formatting and style compliance checking</li>
+<li>Naming convention consistency verification</li>
+</ul>
+<h3 id="structured-output">Structured Output<a class="headerlink" href="#structured-output" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Mandatory file and line number references for every finding</li>
+<li>Markdown-formatted reports with clickable file links</li>
+<li>Organized by severity levels for prioritized action</li>
+<li>Summary statistics and next steps guidance</li>
+</ul>
+<h2 id="integration">Integration<a class="headerlink" href="#integration" title="Permanent link">&para;</a></h2>
+<p>This skill integrates with:
+- <strong>Git</strong>: Requires git repository in workspace
+- <strong>OLAF Framework</strong>: Follows established protocols and templates
+- <strong>Shared Practices</strong>: References central language-specific review standards in <code>data/practices/code-reviews/</code>
+- <strong>Templates</strong>: Uses structured report formats
+- <strong>Language Router</strong>: Uses <code>helpers/review-diff-router.md</code> for language detection and routing
+- <strong>Other Review Skills</strong>: Shares review standards with <code>review-github-pr</code>, <code>review-commit</code>, and other review tools</p>
+<h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Pre-commit Review</strong>: Review changes before committing to repository</li>
+<li><strong>Pull Request Preparation</strong>: Generate comprehensive feedback for PR descriptions  </li>
+<li><strong>External Integration</strong>: Accept diff from other tools (GitHub PRs, external systems)</li>
+<li><strong>Code Quality Assurance</strong>: Systematic evaluation of code changes</li>
+<li><strong>Team Standards Enforcement</strong>: Consistent application of coding standards</li>
+<li><strong>Security Scanning</strong>: Identification of potential security vulnerabilities</li>
+</ol>
+<h2 id="input-parameters">Input Parameters<a class="headerlink" href="#input-parameters" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>diff_content</strong>: Pre-collected diff content for external integrations (OPTIONAL)</li>
+<li><strong>review_scope</strong>: Scope of review - workspace, folder, or file (default: workspace)</li>
+<li><strong>target_path</strong>: Specific folder or file path when scope is targeted</li>
+<li><strong>save_report</strong>: Save report to staging directory (default: false)  </li>
+<li><strong>include_actions</strong>: Include actionable fix commands (default: true)</li>
+</ul>
+<h2 id="workflow-integration">Workflow Integration<a class="headerlink" href="#workflow-integration" title="Permanent link">&para;</a></h2>
+<p>The skill follows the OLAF <strong>Act</strong> protocol for standard reviews:
+1. Validates git repository availability
+2. Discovers and verifies target paths
+3. Executes appropriate git diff commands
+4. Applies language-specific review standards
+5. Generates structured severity-based reports
+6. Provides actionable recommendations and next steps</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

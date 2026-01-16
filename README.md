@@ -38,6 +38,21 @@ ls examples/
 haal skill install examples/basic-skill
 ```
 
+## 📚 Documentation (GitHub Pages)
+
+This repo publishes skill documentation (descriptions + tutorials) as a GitHub Pages site.
+
+- Each skill keeps its docs in `/<skill-id>/docs/description.md` and `/<skill-id>/docs/tutorial.md`.
+- The site is generated during the Pages build by copying those files into a single `docs/skills/<skill-id>/...` structure.
+
+### Local preview
+
+```bash
+python tools/build_docs_site.py
+pip install mkdocs
+mkdocs serve
+```
+
 ## 📄 License
 
 Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.

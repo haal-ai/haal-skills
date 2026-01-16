@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Create OTF Variable - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/create-otf-variable/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#create-otf-variable" class="nav-link">Create OTF Variable</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#what-is-otf" class="nav-link">What is OTF?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#what-this-skill-does" class="nav-link">What This Skill Does</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#use-cases" class="nav-link">Use Cases</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#what-youll-need" class="nav-link">What You'll Need</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#benefits" class="nav-link">Benefits</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-skills" class="nav-link">Related Skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#knowledge-base" class="nav-link">Knowledge Base</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#who-should-use-this" class="nav-link">Who Should Use This</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example-output" class="nav-link">Example Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="create-otf-variable">Create OTF Variable<a class="headerlink" href="#create-otf-variable" title="Permanent link">&para;</a></h1>
+<p><strong>Skill ID</strong>: <code>create-otf-variable</code><br />
+<strong>Version</strong>: 1.0.0<br />
+<strong>Status</strong>: Experimental</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The <code>create-otf-variable</code> skill guides developers through adding OTF (Open Transaction Framework) variables to Amadeus C++ applications, ensuring proper XML configuration, environment-specific settings, and C++ accessor code following best practices.</p>
+<h2 id="what-is-otf">What is OTF?<a class="headerlink" href="#what-is-otf" title="Permanent link">&para;</a></h2>
+<p><strong>OTF (Open Transaction Framework)</strong> is a C++ application server framework used at Amadeus that acts as a service broker, enabling runtime configuration of application behavior without requiring recompilation.</p>
+<h2 id="what-this-skill-does">What This Skill Does<a class="headerlink" href="#what-this-skill-does" title="Permanent link">&para;</a></h2>
+<p>This skill provides interactive guidance for:</p>
+<ol>
+<li><strong>Gathering Requirements</strong></li>
+<li>Variable naming (with convention suggestions)</li>
+<li>Purpose and valid values</li>
+<li>
+<p>Default values and environment overrides</p>
+</li>
+<li>
+<p><strong>XML Configuration</strong></p>
+</li>
+<li>Locating component XML files</li>
+<li>Adding variables to <code>&lt;common&gt;</code> section</li>
+<li>
+<p>Setting environment-specific overrides in <code>&lt;phase&gt;</code> sections</p>
+</li>
+<li>
+<p><strong>C++ Implementation</strong></p>
+</li>
+<li>Generating PropertiesManager accessor code</li>
+<li>Creating reusable accessor methods</li>
+<li>
+<p>Following naming conventions</p>
+</li>
+<li>
+<p><strong>Testing &amp; Deployment</strong></p>
+</li>
+<li>Unit testing strategies</li>
+<li>Gradual rollout recommendations</li>
+<li>Environment-specific validation</li>
+</ol>
+<h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="feature-flags">Feature Flags<a class="headerlink" href="#feature-flags" title="Permanent link">&para;</a></h3>
+<p>Create runtime toggles for new features:</p>
+<pre><code class="language-xml">&lt;variable name=&quot;ENABLE_NEW_API&quot; value=&quot;false&quot; control=&quot;off&quot; description=&quot;Enable new API implementation&quot;/&gt;
+</code></pre>
+<h3 id="migration-toggles">Migration Toggles<a class="headerlink" href="#migration-toggles" title="Permanent link">&para;</a></h3>
+<p>Gradual rollout of migration features:</p>
+<pre><code class="language-xml">&lt;variable name=&quot;MIG_ENABLE_LAYOVER&quot; value=&quot;N&quot; control=&quot;off&quot; description=&quot;Enable layover feature for migration&quot;/&gt;
+</code></pre>
+<h3 id="environment-specific-configuration">Environment-Specific Configuration<a class="headerlink" href="#environment-specific-configuration" title="Permanent link">&para;</a></h3>
+<p>Different behavior per environment:</p>
+<pre><code class="language-xml">&lt;common&gt;
+    &lt;variable name=&quot;MAX_RETRY_COUNT&quot; value=&quot;3&quot; control=&quot;off&quot; description=&quot;Maximum retry attempts&quot;/&gt;
+&lt;/common&gt;
+&lt;phase name=&quot;PRD&quot;&gt;
+    &lt;variable name=&quot;MAX_RETRY_COUNT&quot; value=&quot;5&quot; control=&quot;off&quot; description=&quot;Maximum retry attempts&quot;/&gt;
+&lt;/phase&gt;
+</code></pre>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Interactive workflow</strong> - Step-by-step guidance with prompts for required information<br />
+✅ <strong>Pattern detection</strong> - Analyzes existing variables to match project conventions<br />
+✅ <strong>Best practices</strong> - Enforces naming conventions and safe defaults<br />
+✅ <strong>Code generation</strong> - Provides ready-to-use C++ accessor code<br />
+✅ <strong>Testing guidance</strong> - Unit test examples and deployment strategies<br />
+✅ <strong>Environment management</strong> - Proper phase-specific overrides  </p>
+<h2 id="what-youll-need">What You'll Need<a class="headerlink" href="#what-youll-need" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Component XML file path (or component name to search)</li>
+<li>Variable purpose and expected values</li>
+<li>Target environments for the feature</li>
+<li>Understanding of the feature being controlled</li>
+</ul>
+<h2 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Reduces errors</strong> in XML configuration</li>
+<li><strong>Standardizes</strong> feature flag implementation across teams</li>
+<li><strong>Accelerates development</strong> with ready-to-use code patterns</li>
+<li><strong>Ensures best practices</strong> for gradual rollout and testing</li>
+<li><strong>Maintains consistency</strong> with existing project patterns</li>
+</ul>
+<h2 id="related-skills">Related Skills<a class="headerlink" href="#related-skills" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>get-bms-expertise</code> - BMS build system expertise for component management</li>
+<li>General C++ development and XML editing skills</li>
+</ul>
+<h2 id="knowledge-base">Knowledge Base<a class="headerlink" href="#knowledge-base" title="Permanent link">&para;</a></h2>
+<p>This skill references:
+- <strong>OTF Configuration Guide</strong> - Comprehensive overview of OTF variables
+- <strong>OTF Workflow</strong> - Step-by-step implementation guide</p>
+<h2 id="who-should-use-this">Who Should Use This<a class="headerlink" href="#who-should-use-this" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Amadeus C++ developers working with OTF applications</li>
+<li>Teams implementing feature flags and runtime configuration</li>
+<li>Developers performing gradual feature migrations</li>
+<li>Anyone needing environment-specific application behavior</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Specific to Amadeus OTF framework and C++ applications</li>
+<li>Requires access to component XML files</li>
+<li>Assumes familiarity with C++ and basic XML structure</li>
+<li>Does not handle complex multi-component dependencies</li>
+</ul>
+<h2 id="example-output">Example Output<a class="headerlink" href="#example-output" title="Permanent link">&para;</a></h2>
+<p>The skill will help you create:</p>
+<p><strong>XML Configuration</strong>:</p>
+<pre><code class="language-xml">&lt;common&gt;
+    &lt;variable name=&quot;MIG_ENABLE_LAYOVER&quot; value=&quot;N&quot; control=&quot;off&quot; description=&quot;Enable layover feature&quot;/&gt;
+&lt;/common&gt;
+&lt;phase name=&quot;LOCAL&quot;&gt;
+    &lt;variable name=&quot;MIG_ENABLE_LAYOVER&quot; value=&quot;Y&quot; control=&quot;off&quot; description=&quot;Enable layover feature&quot;/&gt;
+&lt;/phase&gt;
+</code></pre>
+<p><strong>C++ Accessor</strong>:</p>
+<pre><code class="language-cpp">bool ConfigManager::isLayoverEnabled() {
+    return toolbox::PropertiesManager::GetInstance().isDefined(&quot;MIG_ENABLE_LAYOVER&quot;) &amp;&amp;
+           toolbox::PropertiesManager::GetInstance().getValue(&quot;MIG_ENABLE_LAYOVER&quot;) == &quot;Y&quot;;
+}
+</code></pre>
+<p><strong>Usage</strong>:</p>
+<pre><code class="language-cpp">if (ConfigManager::isLayoverEnabled()) {
+    // New implementation
+} else {
+    // Legacy implementation
+}
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

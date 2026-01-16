@@ -1,0 +1,16 @@
+site_name: HAAL Skills
+site_description: Documentation for HAAL skills (descriptions and tutorials)
+repo_url: https://github.com/haal-ai/haal-skills
+repo_name: haal-ai/haal-skills
+
+nav:
+  - Home: index.md
+  - Skills: skills/index.md
+
+docs_dir: docs
+site_dir: site
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true

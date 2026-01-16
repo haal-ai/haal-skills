@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Carry-On Session: Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/carry-on-session/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#carry-on-session-step-by-step-tutorial" class="nav-link">Carry-On Session: Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="carry-on-session-step-by-step-tutorial">Carry-On Session: Step-by-Step Tutorial<a class="headerlink" href="#carry-on-session-step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<p><strong>How to Execute the "Carry-On Session" Workflow</strong></p>
+<p>This tutorial shows exactly how to resume work from a carry-over note.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework installed and active</li>
+<li>At least one carry-over file in <code>.olaf/carry-over/</code></li>
+<li>Previous session where you created a carry-over note</li>
+<li>Access to GitHub Copilot Chat or compatible IDE</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-start-new-session-and-request-carry-on">Step 1: Start New Session and Request Carry-On<a class="headerlink" href="#step-1-start-new-session-and-request-carry-on" title="Permanent link">&para;</a></h3>
+<p>Brief: Load the latest carry-over note</p>
+<p><strong>User Action:</strong>
+1. Open GitHub Copilot Chat (new session)
+2. Type: <code>carry on</code>
+3. Press Enter</p>
+<p><strong>Alternative commands:</strong></p>
+<pre><code>resume work
+continue work
+</code></pre>
+<h3 id="step-2-copilot-finds-latest-carry-over">Step 2: Copilot Finds Latest Carry-Over<a class="headerlink" href="#step-2-copilot-finds-latest-carry-over" title="Permanent link">&para;</a></h3>
+<p><strong>What Copilot Does:</strong>
+- Scans <code>.olaf/carry-over/</code> directory
+- Finds most recent file matching pattern <code>carry-over-YYYYMMDD-HHmm.txt</code>
+- Reads and parses the file</p>
+<p><strong>You Should See:</strong> Copilot processing the carry-over file</p>
+<h3 id="step-3-carry-over-file-parsed">Step 3: Carry-Over File Parsed<a class="headerlink" href="#step-3-carry-over-file-parsed" title="Permanent link">&para;</a></h3>
+<p><strong>What Copilot Does:</strong>
+- Extracts <strong>NEXT PROMPT</strong> section (the exact prompt to continue)
+- Extracts <strong>FILES NEEDED</strong> section (absolute file paths)
+- Extracts <strong>OPTIONAL context</strong> if present</p>
+<h3 id="step-4-proposal-presented">Step 4: Proposal Presented<a class="headerlink" href="#step-4-proposal-presented" title="Permanent link">&para;</a></h3>
+<p><strong>Copilot Response:</strong></p>
+<pre><code>## Resuming from Carry-Over
+- Carry-Over File: carry-over-20251114-1430.txt
+- Session Date: 2025-11-14 14:30
+
+### Proposed Plan (from NEXT PROMPT)
+Add JWT validation to AuthService, update login to return token, and add middleware to protect routes.
+
+### Files To Open
+c:\users\&lt;user-name&gt;\coderepos\project\src\services\AuthService.ts
+c:\users\&lt;user-name&gt;\coderepos\project\src\middleware\auth.ts
+c:\users\&lt;user-name&gt;\coderepos\project\src\routes\api.ts
+c:\users\&lt;user-name&gt;\coderepos\project\config\jwt.config.ts
+c:\users\&lt;user-name&gt;\coderepos\project\tests\auth.test.ts
+
+Confirm: Proceed with the proposed plan? (Yes/No)
+If No, please specify adjustments.
+</code></pre>
+<p><strong>User Action:</strong> Review the proposed plan</p>
+<h3 id="step-5-user-approves-or-adjusts">Step 5: User Approves or Adjusts<a class="headerlink" href="#step-5-user-approves-or-adjusts" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong>
+Type your response:</p>
+<pre><code>Yes
+</code></pre>
+<p>or</p>
+<pre><code>No, let's focus only on AuthService first
+</code></pre>
+<p><strong>Provide Confirmation:</strong>
+- <code>Yes</code> - Proceed as proposed
+- <code>No</code> - Specify adjustments needed</p>
+<h3 id="step-6-copilot-proceeds-if-approved">Step 6: Copilot Proceeds (if approved)<a class="headerlink" href="#step-6-copilot-proceeds-if-approved" title="Permanent link">&para;</a></h3>
+<p><strong>What Copilot Does:</strong>
+- Opens/reads the specified files
+- Executes the NEXT PROMPT as the working instruction
+- Continues with the work described in the carry-over</p>
+<p><strong>You Should See:</strong> Work resuming from where previous session ended</p>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Latest carry-over loaded</strong> - Correct file by timestamp
+✅ <strong>Plan presented</strong> - NEXT PROMPT shown clearly
+✅ <strong>Files listed</strong> - All absolute paths displayed
+✅ <strong>Approval requested</strong> - Copilot waits before acting
+✅ <strong>Work resumed</strong> - Continues from previous session context</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If no carry-over found:</strong></p>
+<pre><code>Error: No carry-over files found in .olaf/carry-over/
+Create a carry-over note first using &quot;carry over&quot;
+</code></pre>
+<p><strong>If carry-over file corrupted:</strong>
+- Check file exists in <code>.olaf/carry-over/</code>
+- Verify file format matches template
+- Ensure NEXT PROMPT section exists</p>
+<p><strong>If wrong carry-over loaded:</strong>
+- Carry-on loads MOST RECENT by timestamp
+- Check file timestamps in <code>.olaf/carry-over/</code>
+- Rename or delete unwanted carry-over files</p>
+<p><strong>If files not found:</strong>
+- Verify absolute paths in carry-over file are correct
+- Update paths if workspace location changed
+- Edit carry-over file manually if needed</p>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Proposal first, action second:</strong> Carry-on always proposes the plan and waits for approval. It never auto-executes.</p>
+</li>
+<li>
+<p><strong>Most recent by timestamp:</strong> The file with the latest YYYYMMDD-HHmm timestamp is selected automatically.</p>
+</li>
+<li>
+<p><strong>NEXT PROMPT becomes instruction:</strong> The exact prompt from the carry-over becomes the working instruction once approved.</p>
+</li>
+<li>
+<p><strong>Session continuity:</strong> Carry-over + carry-on workflow enables seamless work across sessions without losing context.</p>
+</li>
+<li>
+<p><strong>User control:</strong> You can adjust the plan before proceeding - it's not all-or-nothing.</p>
+</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Create a carry-over with <code>carry over</code>, then resume it with <code>carry on</code></li>
+<li>Try adjusting the proposed plan instead of accepting it as-is</li>
+<li>Create multiple carry-overs and see which one loads (most recent)</li>
+<li>Edit a carry-over file manually before using <code>carry on</code></li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total carry-on execution time:</strong> 10-30 seconds</li>
+<li><strong>User input required:</strong> Approval/adjustment of proposed plan</li>
+<li><strong>Copilot execution time:</strong> Instant for loading, variable for work execution</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Generate AI Agent Instructions - Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/generate-ai-agent-instructions/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#generate-ai-agent-instructions-tutorial" class="nav-link">Generate AI Agent Instructions - Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#basic-usage" class="nav-link">Basic Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#advanced-usage" class="nav-link">Advanced Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#understanding-the-output" class="nav-link">Understanding the Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#comparison-with-onboard-me" class="nav-link">Comparison with onboard-me</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-skills" class="nav-link">Related Skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="generate-ai-agent-instructions-tutorial">Generate AI Agent Instructions - Tutorial<a class="headerlink" href="#generate-ai-agent-instructions-tutorial" title="Permanent link">&para;</a></h1>
+<p>Learn how to create comprehensive instruction files for AI coding assistants across different platforms.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework installed</li>
+<li>Access to <code>generate-ai-agent-instructions</code> skill</li>
+<li>A codebase to analyze</li>
+</ul>
+<h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
+<h3 id="scenario-1-auto-detect-platform">Scenario 1: Auto-Detect Platform<a class="headerlink" href="#scenario-1-auto-detect-platform" title="Permanent link">&para;</a></h3>
+<p><strong>Your Situation</strong>: You have a project and want AI instructions generated automatically.</p>
+<pre><code class="language-bash">olaf generate ai agent instructions
+</code></pre>
+<p><strong>What Happens</strong>:
+1. Skill scans for existing AI instruction files (<code>.cursorrules</code>, <code>.github/copilot-instructions.md</code>, etc.)
+2. Auto-detects which platform(s) you use
+3. Analyzes your codebase structure
+4. Proposes output location and content
+5. Generates appropriate instruction file</p>
+<p><strong>Example Output</strong>:</p>
+<pre><code>Platform: Cursor (detected .cursorrules)
+File: .cursorrules
+Lines: 187
+Sections: 7
+
+Key Coverage:
+✓ Architecture: NestJS microservice with PostgreSQL
+✓ Workflows: npm run build, npm test, docker-compose up
+✓ Patterns: 12 project-specific patterns documented
+✓ Integration Points: 3 external APIs, Redis cache
+</code></pre>
+<hr />
+<h3 id="scenario-2-specify-target-platform">Scenario 2: Specify Target Platform<a class="headerlink" href="#scenario-2-specify-target-platform" title="Permanent link">&para;</a></h3>
+<p><strong>Your Situation</strong>: You want to create instructions for a specific platform.</p>
+<pre><code class="language-bash">olaf generate ai agent instructions
+</code></pre>
+<p><strong>When prompted</strong>: Select platform or provide <code>--platform cursor</code></p>
+<p><strong>Supported Platforms</strong>:
+- <code>copilot</code> - GitHub Copilot (<code>.github/copilot-instructions.md</code>)
+- <code>cursor</code> - Cursor (<code>.cursorrules</code>)
+- <code>windsurf</code> - Windsurf (<code>.windsurfrules</code>)
+- <code>cline</code> - Cline (<code>.clinerules</code>)
+- <code>kiro</code> - Kiro (<code>.kiro/steering/</code>)
+- <code>generic</code> - Platform-agnostic (<code>AGENTS.md</code>)</p>
+<hr />
+<h3 id="scenario-3-merge-existing-instructions">Scenario 3: Merge Existing Instructions<a class="headerlink" href="#scenario-3-merge-existing-instructions" title="Permanent link">&para;</a></h3>
+<p><strong>Your Situation</strong>: You have existing <code>.github/copilot-instructions.md</code> and want to consolidate to <code>AGENTS.md</code>.</p>
+<pre><code class="language-bash">olaf generate ai agent instructions
+</code></pre>
+<p><strong>Prompt Response</strong>:</p>
+<pre><code>I found existing AI instructions in .github/copilot-instructions.md. 
+Would you like me to:
+1. Merge content into AGENTS.md (recommended)
+2. Update .github/copilot-instructions.md in place
+3. Create new file without merging
+4. Create both with synced content
+</code></pre>
+<p>Choose <strong>1</strong> to merge valuable guidance into platform-agnostic format.</p>
+<p><strong>Result</strong>:
+- Preserves project-specific patterns from existing file
+- Updates outdated sections with current codebase analysis
+- Creates <code>AGENTS.md</code> with consolidated guidance</p>
+<hr />
+<h2 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
+<h3 id="scenario-4-multi-platform-projects">Scenario 4: Multi-Platform Projects<a class="headerlink" href="#scenario-4-multi-platform-projects" title="Permanent link">&para;</a></h3>
+<p><strong>Your Situation</strong>: Team uses multiple AI tools (Copilot + Cursor).</p>
+<p><strong>Approach</strong>:
+1. Generate generic <code>AGENTS.md</code> first:
+   <code>bash
+   olaf generate ai agent instructions --platform generic</code></p>
+<ol>
+<li>Create platform-specific symlinks or copies:
+   ```bash
+   # Cursor
+   cp AGENTS.md .cursorrules</li>
+</ol>
+<p># Copilot
+   cp AGENTS.md .github/copilot-instructions.md
+   ```</p>
+<ol>
+<li>Maintain single source of truth (<code>AGENTS.md</code>)</li>
+</ol>
+<hr />
+<h3 id="scenario-5-existing-project-onboarding">Scenario 5: Existing Project Onboarding<a class="headerlink" href="#scenario-5-existing-project-onboarding" title="Permanent link">&para;</a></h3>
+<p><strong>Your Situation</strong>: Large legacy codebase with complex patterns.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p><strong>Run the skill</strong>:
+   <code>bash
+   olaf generate ai agent instructions</code></p>
+</li>
+<li>
+<p><strong>Review analysis proposal</strong>:
+   ```
+   Analysis Summary:</p>
+</li>
+<li>Detected Platform: None (will use generic)</li>
+<li>Primary Language: Java</li>
+<li>Frameworks: Spring Boot 3.2, Hibernate</li>
+<li>Build Tool: Maven</li>
+</ol>
+<p>Proposed Output:
+   - Create: AGENTS.md
+   - Estimated size: 220 lines</p>
+<p>Sections to Include:
+   1. Critical Rules (security, data handling)
+   2. Repository Overview (microservices architecture)
+   3. Architecture &amp; Key Concepts (DDD patterns)
+   4. File Structure (module organization)
+   5. Development Workflows (Maven, Docker)
+   6. Common Scenarios (adding endpoints, DB migrations)
+   7. AI Guidelines (topic-specific guidance)
+   ```</p>
+<ol>
+<li>
+<p><strong>Confirm or adjust</strong></p>
+</li>
+<li>
+<p><strong>Review generated file</strong> and provide feedback:
+   ```
+   Please review:</p>
+</li>
+<li>Clarity: Are all sections clear?</li>
+<li>Completeness: Missing workflows?</li>
+<li>Accuracy: Commands correct?</li>
+<li>
+<p>Specificity: Enough project-specific examples?
+   ```</p>
+</li>
+<li>
+<p><strong>Iterate if needed</strong></p>
+</li>
+</ol>
+<hr />
+<h2 id="understanding-the-output">Understanding the Output<a class="headerlink" href="#understanding-the-output" title="Permanent link">&para;</a></h2>
+<h3 id="whats-included">What's Included<a class="headerlink" href="#whats-included" title="Permanent link">&para;</a></h3>
+<p><strong>Critical Rules</strong> - Project-specific do's and don'ts:</p>
+<pre><code class="language-markdown">## 🚨 CRITICAL RULES FOR AI BEHAVIOR
+- Never modify database migration files directly
+- All API changes require OpenAPI spec updates
+- Authentication uses OAuth2 - don't suggest Basic Auth
+</code></pre>
+<p><strong>Architecture Explanation</strong> - The "why" behind decisions:</p>
+<pre><code class="language-markdown">## Understanding the Architecture
+Microservices architecture with event-driven communication.
+Each service owns its database (no shared DB).
+WHY: Enables independent scaling and deployment.
+</code></pre>
+<p><strong>File Structure</strong> - Where things go and why:</p>
+<pre><code class="language-markdown">### `/services/`
+Purpose: Individual microservice implementations
+Conventions: Each service in own directory with Dockerfile
+Key Files:
+- `auth-service/` - JWT token management
+- `user-service/` - User CRUD operations
+</code></pre>
+<p><strong>Development Workflows</strong> - Actual commands:</p>
+<pre><code class="language-markdown">### Building the Project
+```bash
+mvn clean install -DskipTests
+docker-compose build
+</code></pre>
+<pre><code>
+**Common Scenarios** - Step-by-step with file references:
+```markdown
+### Adding New REST Endpoint
+1. Create controller in `src/main/java/controllers/`
+2. Add service method in `src/main/java/services/`
+3. Update OpenAPI spec in `api/openapi.yml`
+4. Write integration test in `src/test/java/integration/`
+</code></pre>
+<p><strong>AI Guidelines</strong> - Topic-specific guidance:</p>
+<pre><code class="language-markdown">### When Users Ask About:
+**Database**: PostgreSQL with Flyway migrations in `db/migrations/`. 
+Never modify existing migrations - create new ones.
+</code></pre>
+<hr />
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="1-keep-it-current">1. Keep It Current<a class="headerlink" href="#1-keep-it-current" title="Permanent link">&para;</a></h3>
+<p>Re-run when major changes occur:
+- New framework or library adoption
+- Architecture refactoring
+- New deployment process
+- Changed conventions</p>
+<h3 id="2-be-specific">2. Be Specific<a class="headerlink" href="#2-be-specific" title="Permanent link">&para;</a></h3>
+<p>Good ✅:</p>
+<pre><code class="language-markdown">**Error Handling**: Custom exceptions in `src/errors/`, 
+centralized handler in `middleware/error.handler.ts`
+</code></pre>
+<p>Bad ❌:</p>
+<pre><code class="language-markdown">**Error Handling**: Use try-catch blocks and handle errors properly
+</code></pre>
+<h3 id="3-reference-real-files">3. Reference Real Files<a class="headerlink" href="#3-reference-real-files" title="Permanent link">&para;</a></h3>
+<p>Good ✅:</p>
+<pre><code class="language-markdown">**Logging**: Winston logger configured in `src/utils/logger.ts`
+</code></pre>
+<p>Bad ❌:</p>
+<pre><code class="language-markdown">**Logging**: Use a logging library for better debugging
+</code></pre>
+<h3 id="4-explain-why">4. Explain Why<a class="headerlink" href="#4-explain-why" title="Permanent link">&para;</a></h3>
+<p>Good ✅:</p>
+<pre><code class="language-markdown">**Monorepo Structure**: Uses Nx for build optimization and dependency graph.
+WHY: Enables shared libraries and atomic commits across services.
+</code></pre>
+<p>Bad ❌:</p>
+<pre><code class="language-markdown">**Monorepo Structure**: Code organized in monorepo
+</code></pre>
+<hr />
+<h2 id="comparison-with-onboard-me">Comparison with <code>onboard-me</code><a class="headerlink" href="#comparison-with-onboard-me" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th><code>generate-ai-agent-instructions</code></th>
+<th><code>onboard-me</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Audience</strong></td>
+<td>AI coding assistants</td>
+<td>Human developers</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td><code>AGENTS.md</code> (150-250 lines)</td>
+<td><code>repo-guide.md</code> (300-1500 lines)</td>
+</tr>
+<tr>
+<td><strong>Focus</strong></td>
+<td>Patterns, conventions, "why"</td>
+<td>Setup, build, test commands</td>
+</tr>
+<tr>
+<td><strong>Depth</strong></td>
+<td>Single comprehensive pass</td>
+<td>Progressive (quick/standard/deep)</td>
+</tr>
+<tr>
+<td><strong>Content</strong></td>
+<td>AI-optimized guidance</td>
+<td>Human-readable documentation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Use Both</strong>: Generate <code>repo-guide.md</code> for humans, <code>AGENTS.md</code> for AI agents.</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="issue-generic-output">Issue: Generic Output<a class="headerlink" href="#issue-generic-output" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom</strong>: Instructions contain generic advice, not project-specific guidance.</p>
+<p><strong>Solution</strong>: 
+- Ensure codebase has clear patterns (not just getting started)
+- Provide feedback requesting more specific examples
+- Reference specific files you want documented</p>
+<h3 id="issue-wrong-platform-detected">Issue: Wrong Platform Detected<a class="headerlink" href="#issue-wrong-platform-detected" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom</strong>: Skill chooses wrong platform.</p>
+<p><strong>Solution</strong>:
+- Use <code>--platform</code> parameter to specify explicitly
+- Remove old platform files if migrating</p>
+<h3 id="issue-missing-critical-info">Issue: Missing Critical Info<a class="headerlink" href="#issue-missing-critical-info" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom</strong>: Important workflows or patterns not documented.</p>
+<p><strong>Solution</strong>:
+- Provide feedback listing missing items
+- Skill will iterate and add sections
+- Consider if pattern is discoverable in code</p>
+<hr />
+<h2 id="related-skills">Related Skills<a class="headerlink" href="#related-skills" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>onboard-me</code></strong> - Generate human-focused repository guide</li>
+<li><strong><code>evaluate-prompt-for-adoption</code></strong> - Assess external prompts for quality</li>
+<li><strong><code>convert-prompt</code></strong> - Modernize prompts to OLAF standards</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

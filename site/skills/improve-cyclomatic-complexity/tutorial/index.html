@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/improve-cyclomatic-complexity/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#step-by-step-tutorial" class="nav-link">Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="step-by-step-tutorial">Step-by-Step Tutorial<a class="headerlink" href="#step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<p><strong>Improve Cyclomatic Complexity: Step-by-Step Tutorial</strong></p>
+<p><strong>How to Execute the "Systematic Cyclomatic Complexity Reduction" Workflow</strong></p>
+<p>This tutorial shows exactly how to systematically reduce cyclomatic complexity of code sections while preserving functionality and improving maintainability using the OLAF developer competency's improve-cyclomatic-complexity functionality.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework properly installed and configured</li>
+<li>Code with high cyclomatic complexity to refactor</li>
+<li>Existing test suite for the complex code (recommended)</li>
+<li>Basic understanding of refactoring principles and complexity metrics</li>
+<li>Access to project files and testing capabilities</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-initiate-complexity-improvement-analysis">Step 1: Initiate Complexity Improvement Analysis<a class="headerlink" href="#step-1-initiate-complexity-improvement-analysis" title="Permanent link">&para;</a></h3>
+<p>[Brief description: Start the complexity reduction process by invoking the OLAF improve-cyclomatic-complexity competency]</p>
+<p><strong>User Action:</strong></p>
+<ol>
+<li>Open your terminal or OLAF interface</li>
+<li>Navigate to your project directory containing the complex code</li>
+<li>Execute the OLAF improve-cyclomatic-complexity competency using one of these methods:</li>
+<li>Direct invocation: <code>olaf improve-cyclomatic-complexity</code></li>
+<li>Via aliases: <code>olaf improve complexity</code>, <code>olaf reduce complexity</code>, <code>olaf cyclomatic</code></li>
+</ol>
+<p><strong>OLAF Response:</strong>
+The system will prompt you to provide the required parameters for complexity analysis and reduction.</p>
+<h3 id="step-2-provide-target-code-and-requirements">Step 2: Provide Target Code and Requirements<a class="headerlink" href="#step-2-provide-target-code-and-requirements" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Specify the complex code and constraints for refactoring</p>
+<pre><code class="language-text">Required Parameters:
+- target_code: The method/function with high cyclomatic complexity (include location)
+- programming_language: The programming language of the code
+- test_information: Available test information and coverage details
+- interface_restrictions: Restrictions on changing interfaces/signatures (optional)
+- performance_requirements: Performance constraints to consider (optional)
+- compatibility_needs: Backward compatibility requirements (optional)
+- target_complexity: Target cyclomatic complexity score (default: &lt;10)
+</code></pre>
+<p><strong>Provide Requirements/Parameters:</strong></p>
+<ul>
+<li><strong>target_code</strong>: [Example - we used "OrderProcessingService.calculateTotalCost() in src/services/OrderService.java"]</li>
+<li><strong>programming_language</strong>: [Example - we used "Java"]</li>
+<li><strong>test_information</strong>: [Example - we used "Unit tests exist with 85% coverage, missing edge cases"]</li>
+<li><strong>interface_restrictions</strong>: [Example - we used "Cannot change public method signature"]</li>
+<li><strong>performance_requirements</strong>: [Example - we used "Must maintain sub-100ms execution time"]</li>
+<li><strong>target_complexity</strong>: [Example - we used "8"] (optional)</li>
+</ul>
+<h3 id="step-3-current-complexity-assessment">Step 3: Current Complexity Assessment<a class="headerlink" href="#step-3-current-complexity-assessment" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Estimates current cyclomatic complexity score</li>
+<li>Identifies all decision points (conditionals, loops, switch statements)</li>
+<li>Creates visual representation of control flow</li>
+<li>Pinpoints the most complex code sections</li>
+<li>Gets current timestamp for analysis reports</li>
+</ul>
+<p><strong>You Should See:</strong> Detailed complexity breakdown with decision point analysis and control flow visualization</p>
+<h3 id="step-4-test-coverage-evaluation-and-root-cause-analysis">Step 4: Test Coverage Evaluation and Root Cause Analysis<a class="headerlink" href="#step-4-test-coverage-evaluation-and-root-cause-analysis" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li><strong>Analyzes existing unit tests</strong> for the complex code</li>
+<li><strong>Identifies untested paths</strong> and edge cases</li>
+<li><strong>Documents baseline behavior</strong> for validation</li>
+<li><strong>Analyzes root causes</strong> of complexity:</li>
+<li>Mixed levels of abstraction</li>
+<li>Multiple responsibilities in single method</li>
+<li>Deep nesting structures</li>
+<li>Complex boolean logic</li>
+<li>State-based complexity</li>
+<li>Error handling mixed with business logic</li>
+</ul>
+<p><strong>You Should See:</strong> Test coverage report and detailed root cause analysis of complexity patterns</p>
+<h3 id="step-5-refactoring-strategy-design-and-implementation">Step 5: Refactoring Strategy Design and Implementation<a class="headerlink" href="#step-5-refactoring-strategy-design-and-implementation" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Review and approve the proposed refactoring strategy</p>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li><strong>Develops phased approach</strong> to reduce complexity</li>
+<li><strong>Prioritizes changes</strong> for maximum impact</li>
+<li><strong>Selects appropriate refactoring techniques:</strong></li>
+<li>Extract Methods/Functions</li>
+<li>Replace conditionals with polymorphism</li>
+<li>Introduce design patterns (Strategy, State, Command)</li>
+<li>Simplify boolean expressions</li>
+<li>Extract specialized classes/objects</li>
+<li><strong>Implements refactoring</strong> in small, incremental steps</li>
+<li><strong>Preserves existing behavior</strong> exactly</li>
+</ul>
+<p><strong>You Should See:</strong> Detailed refactoring plan and step-by-step implementation with preserved functionality</p>
+<h3 id="step-6-verification-and-measurement">Step 6: Verification and Measurement<a class="headerlink" href="#step-6-verification-and-measurement" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Confirms all tests pass after refactoring</li>
+<li>Measures new complexity metrics</li>
+<li>Validates behavior preservation</li>
+<li>Assesses readability and testability improvements</li>
+<li>Generates comprehensive complexity-reduction report</li>
+<li>Saves all reports to <code>work/staging/code-evolution/</code></li>
+</ul>
+<p><strong>You Should See:</strong> Before/after comparison with improved complexity metrics and verification results</p>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Current complexity assessed with decision point breakdown</strong>
+✅ <strong>Test coverage evaluated and gaps identified</strong>
+✅ <strong>Root causes of complexity analyzed and documented</strong>
+✅ <strong>Phased refactoring strategy developed and approved</strong>
+✅ <strong>Refactoring implemented with behavior preservation</strong>
+✅ <strong>All existing tests pass after refactoring</strong>
+✅ <strong>New complexity metrics measured and improved</strong></p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If tests fail after refactoring:</strong></p>
+<pre><code class="language-bash"># Run specific test suite
+mvn test -Dtest=OrderServiceTest
+npm test -- OrderService.test.js
+pytest tests/test_order_service.py
+</code></pre>
+<p><strong>If complexity doesn't improve as expected:</strong></p>
+<ul>
+<li>Review if all decision points were addressed</li>
+<li>Check for hidden complexity in extracted methods</li>
+<li>Verify that design patterns were applied correctly</li>
+<li>Consider additional refactoring techniques</li>
+</ul>
+<p><strong>If refactoring breaks external interfaces:</strong></p>
+<ul>
+<li>Revert changes and review interface restrictions</li>
+<li>Apply adapter pattern to maintain compatibility</li>
+<li>Consider internal refactoring only without interface changes</li>
+</ul>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Incremental Approach:</strong> Complexity reduction works best with small, testable changes rather than large refactoring efforts</li>
+<li><strong>Behavior Preservation:</strong> All existing functionality must be preserved exactly; refactoring changes structure, not behavior</li>
+<li><strong>Test-Driven Safety:</strong> Comprehensive test coverage is essential before attempting complexity reduction</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Apply the refactoring strategy in phases as recommended</li>
+<li>Add additional test cases for uncovered paths identified during analysis</li>
+<li>Monitor complexity metrics in future development to prevent regression</li>
+<li>Use extracted methods and patterns as templates for similar complexity issues</li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total complexity improvement time:</strong> 30-90 minutes (depending on complexity and code size)</li>
+<li><strong>User input required:</strong> Code identification and constraints specification (5-10 minutes)</li>
+<li><strong>OLAF analysis time:</strong> Complexity assessment, root cause analysis, and strategy design (15-30 minutes)</li>
+<li><strong>Implementation verification:</strong> Refactoring execution and testing validation (10-50 minutes)</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

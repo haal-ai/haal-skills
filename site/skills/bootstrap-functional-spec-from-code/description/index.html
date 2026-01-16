@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Bootstrap Functional Spec from Code - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/bootstrap-functional-spec-from-code/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#bootstrap-functional-spec-from-code" class="nav-link">Bootstrap Functional Spec from Code</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-competencies" class="nav-link">Related Competencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="bootstrap-functional-spec-from-code">Bootstrap Functional Spec from Code<a class="headerlink" href="#bootstrap-functional-spec-from-code" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This competency analyzes existing source code to extract and document its functionalities from a business and user perspective, creating a draft functional specification. It reverse-engineers the implementation to produce business-focused documentation that explains what the system does and why, without requiring deep technical knowledge.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>Many software projects lack up-to-date functional specifications, especially legacy systems or rapidly developed applications. When documentation is missing or outdated, this competency solves the problem by analyzing the actual implementation to generate a business-readable specification. This is invaluable for modernization projects, knowledge transfer, or creating documentation for undocumented systems.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><strong>Command</strong>: <code>bootstrap functional spec from code</code></p>
+<p><strong>Protocol</strong>: Act</p>
+<p><strong>When to Use</strong>: Use this competency when you have working code but missing or outdated functional specifications, when preparing for application modernization or migration, when onboarding new team members to legacy systems, or when stakeholders need business-level documentation of technical implementations.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-inputs">Required Inputs<a class="headerlink" href="#required-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>source_path</strong>: Path to the application's source code or codebase directory to analyze</li>
+</ul>
+<h3 id="optional-inputs">Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>output_format</strong>: Output format for the specification (markdown, html, or pdf; default: markdown)</li>
+<li><strong>detail_level</strong>: Level of detail to include (overview, standard, or detailed; default: standard)</li>
+</ul>
+<h3 id="context-requirements">Context Requirements<a class="headerlink" href="#context-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Source code must be accessible in the workspace or specified directory</li>
+<li>Functional specification template is automatically loaded from competency templates</li>
+<li>Code should be reasonably structured for effective analysis</li>
+</ul>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p>This competency produces a business-focused functional specification document extracted from code analysis.</p>
+<p><strong>Deliverables</strong>:
+- Functional specification document saved to <code>data/specs/FunctionalSpec-YYYYMMDD-NNN.md</code>
+- Executive summary of identified components and business processes
+- User stories derived from code functionality
+- Data models and integration points documentation</p>
+<p><strong>Format</strong>: Structured markdown document following the functional-specification-template, written in business-focused language with technical details relegated to appendices. Includes visual diagrams where helpful.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-legacy-system-documentation">Example 1: Legacy System Documentation<a class="headerlink" href="#example-1-legacy-system-documentation" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: A 5-year-old customer management system lacks documentation, and the team needs a functional spec before planning a modernization effort.</p>
+<p><strong>Command</strong>:</p>
+<pre><code>olaf bootstrap functional spec from code
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>source_path: ./legacy-crm/src
+detail_level: detailed
+</code></pre>
+<p><strong>Result</strong>: Generated comprehensive functional specification documenting customer lifecycle management, reporting capabilities, integration with payment systems, and data models. Identified 12 core business processes and 8 external integrations.</p>
+<h3 id="example-2-quick-system-overview">Example 2: Quick System Overview<a class="headerlink" href="#example-2-quick-system-overview" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: New product manager needs to understand what an existing microservice does from a business perspective.</p>
+<p><strong>Command</strong>:</p>
+<pre><code>olaf bootstrap functional spec from code
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>source_path: ./services/notification-service
+detail_level: overview
+</code></pre>
+<p><strong>Result</strong>: High-level functional specification describing notification delivery capabilities, supported channels (email, SMS, push), and business rules for notification routing.</p>
+<h2 id="related-competencies">Related Competencies<a class="headerlink" href="#related-competencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>extend-specification</strong>: Use after bootstrapping to add missing UI/UX details and frontend requirements</li>
+<li><strong>improve-spec</strong>: Enhance the bootstrapped specification with visual diagrams and detailed data definitions</li>
+<li><strong>analyze-business-requirements</strong>: Validate the extracted requirements against business needs</li>
+<li><strong>generate-technical-specification</strong> (architect): Create technical architecture documentation to complement the functional spec</li>
+</ul>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Start with overview detail level for initial assessment, then run detailed analysis for specific components</li>
+<li>Review the generated specification with original developers if available to validate accuracy</li>
+<li>Use this as a starting point—expect to refine and enhance the specification with stakeholder input</li>
+<li>Combine with code comments and commit history analysis for better context</li>
+<li>Focus on well-structured code first; refactor unclear code before bootstrapping if possible</li>
+<li>Maintain traceability between specification sections and source code locations</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Cannot infer business intent or rationale—only documents what the code does, not why</li>
+<li>Quality depends on code structure and clarity—poorly organized code yields less useful specifications</li>
+<li>May miss implicit business rules or undocumented assumptions in the implementation</li>
+<li>Cannot validate if the implementation matches original business requirements</li>
+<li>Does not modify or analyze code quality—purely extracts functional behavior</li>
+<li>Requires human review to ensure business accuracy and completeness</li>
+</ul>
+<hr />
+<p><strong>Source</strong>: <code>core/competencies/business-analyst/prompts/bootstrap-functional-spec-from-code.md</code></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

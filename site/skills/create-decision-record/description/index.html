@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Create Decision Record - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/create-decision-record/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#create-decision-record" class="nav-link">Create Decision Record</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-competencies" class="nav-link">Related Competencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="create-decision-record">Create Decision Record<a class="headerlink" href="#create-decision-record" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Creates structured decision records following a standardized template to document important project, architectural, business, and technical decisions with full traceability and stakeholder tracking.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>Project teams need to maintain a clear record of why decisions were made, what alternatives were considered, and who was involved. This competency solves the problem of lost institutional knowledge by creating formal decision records that capture context, rationale, and outcomes in a consistent format that can be referenced throughout the project lifecycle.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><strong>Command</strong>: <code>create decision record</code></p>
+<p><strong>Protocol</strong>: Propose-Confirm-Act</p>
+<p><strong>When to Use</strong>: Use this competency whenever a significant decision needs to be documented, including architectural choices, project direction changes, business strategy decisions, technical implementations, security policies, or any decision that will impact the project's future direction or stakeholders.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-inputs">Required Inputs<a class="headerlink" href="#required-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>title</strong>: Concise description of the decision being made</li>
+<li><strong>type</strong>: Category of decision (Architecture, Project, Business, Functional, People, Technical, Security, or Other)</li>
+<li><strong>context</strong>: Background information and problem statement that led to this decision</li>
+<li><strong>drivers</strong>: Key factors, constraints, or requirements influencing the decision</li>
+<li><strong>options</strong>: Alternative options that were considered, including pros and cons for each</li>
+<li><strong>decision_makers</strong>: Individuals responsible for making the final decision</li>
+<li><strong>stakeholders</strong>: Parties affected by or interested in this decision</li>
+</ul>
+<h3 id="optional-inputs">Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>status</strong>: Current status of the decision (Proposed, Accepted, Replaced, Superseded) - defaults to "Proposed"</li>
+<li><strong>decision</strong>: The selected option if already determined (can be left blank for proposed decisions)</li>
+</ul>
+<h3 id="context-requirements">Context Requirements<a class="headerlink" href="#context-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Access to decision records directory (<code>.olaf/data/product/decision-records/</code>)</li>
+<li>Access to decision records register (<code>.olaf/data/product/decision-records/decision-records-register.md</code>)</li>
+<li>Access to changelog register for tracking the creation</li>
+<li>Decision record template available at competency templates folder</li>
+</ul>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p><strong>Deliverables</strong>:
+- New decision record file with unique ID (DR-YYYYMMDD-NN format)
+- Updated decision records register with new entry
+- Changelog entry documenting the record creation</p>
+<p><strong>Format</strong>: Markdown file following the standard decision record template structure with metadata, context, options analysis, decision rationale, and consequences sections.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-architecture-decision">Example 1: Architecture Decision<a class="headerlink" href="#example-1-architecture-decision" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Team needs to decide between microservices and monolithic architecture for a new application</p>
+<p><strong>Command</strong>:</p>
+<pre><code>create decision record
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>Title: Application Architecture Pattern Selection
+Type: Architecture
+Context: Building new customer portal with expected growth to 100K users
+Drivers: Scalability requirements, team expertise, deployment complexity, maintenance costs
+Options: 
+  1. Microservices - Better scalability but higher complexity
+  2. Monolithic - Simpler to start but harder to scale
+  3. Modular monolith - Middle ground approach
+Decision Makers: CTO, Lead Architect, Engineering Manager
+Stakeholders: Development team, DevOps team, Product team
+</code></pre>
+<p><strong>Result</strong>: Created <code>DR-20251027-01.md</code> with full decision documentation, updated register, and changelog entry</p>
+<h3 id="example-2-project-decision">Example 2: Project Decision<a class="headerlink" href="#example-2-project-decision" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Deciding whether to postpone a feature to meet release deadline</p>
+<p><strong>Command</strong>:</p>
+<pre><code>create decision record
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>Title: Q4 Feature Scope Reduction
+Type: Project
+Status: Proposed
+Context: Current sprint velocity indicates we'll miss Q4 release date with all planned features
+Drivers: Release deadline commitment, customer expectations, technical debt concerns
+Options:
+  1. Postpone advanced reporting feature to Q1
+  2. Extend deadline by 2 weeks
+  3. Add resources to complete on time
+Decision Makers: Product Owner, Project Manager
+Stakeholders: Sales team, Customer Success, Development team
+</code></pre>
+<p><strong>Result</strong>: Created decision record for team review and approval before finalizing</p>
+<h2 id="related-competencies">Related Competencies<a class="headerlink" href="#related-competencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>create-changelog-entry</strong>: Use after creating a decision record to log the activity in the project changelog</li>
+<li><strong>review-progress</strong>: Decision records are reviewed during progress assessments to track decision outcomes</li>
+<li><strong>create-job</strong>: Decisions often lead to new work items that need to be tracked as jobs</li>
+<li><strong>store-conversation-record</strong>: Related decision discussions can be stored for additional context</li>
+</ul>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Document decisions as close to the decision-making moment as possible while context is fresh</li>
+<li>Include all seriously considered alternatives, not just the winner - this prevents revisiting rejected options</li>
+<li>Be specific about drivers and constraints - vague rationale leads to confusion later</li>
+<li>Update decision status when circumstances change (e.g., from Proposed to Accepted, or Accepted to Superseded)</li>
+<li>Link related decisions together to show decision evolution over time</li>
+<li>Keep decision records concise but complete - aim for clarity over comprehensiveness</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Requires manual input of decision details - does not automatically extract from meeting notes or conversations</li>
+<li>Does not automatically notify stakeholders - notification must be handled separately</li>
+<li>Cannot retroactively create decision records with past dates - uses current timestamp</li>
+<li>Does not validate that all stakeholders have been consulted before recording the decision</li>
+</ul>
+<p><strong>Source</strong>: <code>core/competencies/project-manager/prompts/create-decision-record.md</code></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Evaluate Prompt for Adoption - Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/evaluate-prompt-for-adoption/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#evaluate-prompt-for-adoption-tutorial" class="nav-link">Evaluate Prompt for Adoption - Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tutorial-scenarios" class="nav-link">Tutorial Scenarios</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#understanding-the-value-score" class="nav-link">Understanding the Value Score</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#decision-matrix" class="nav-link">Decision Matrix</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-evaluation-patterns" class="nav-link">Common Evaluation Patterns</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-for-effective-evaluation" class="nav-link">Tips for Effective Evaluation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-skills" class="nav-link">Related Skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="evaluate-prompt-for-adoption-tutorial">Evaluate Prompt for Adoption - Tutorial<a class="headerlink" href="#evaluate-prompt-for-adoption-tutorial" title="Permanent link">&para;</a></h1>
+<p>This tutorial demonstrates how to evaluate external prompts for potential adoption into your OLAF framework.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework installed</li>
+<li>Internet connection (for fetching from URLs)</li>
+<li>Access to evaluate-prompt-for-adoption skill</li>
+</ul>
+<h2 id="tutorial-scenarios">Tutorial Scenarios<a class="headerlink" href="#tutorial-scenarios" title="Permanent link">&para;</a></h2>
+<h3 id="scenario-1-evaluate-from-github-url">Scenario 1: Evaluate from GitHub URL<a class="headerlink" href="#scenario-1-evaluate-from-github-url" title="Permanent link">&para;</a></h3>
+<p><strong>Situation</strong>: You found an interesting prompt in an awesome-chatgpt-prompts repository.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p><strong>Invoke the skill with URL</strong>:
+   <code>olaf evaluate prompt from https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts/linux-terminal.txt</code></p>
+</li>
+<li>
+<p><strong>Skill fetches and analyzes</strong>:
+   ```
+   Fetching prompt from URL...
+   ✓ Retrieved 245 characters
+   ✓ Detected prompt type: Interactive simulation</p>
+</li>
+</ol>
+<p>Checking similarity to existing OLAF skills...
+   ✓ Searched 96 skills
+   ✓ Found 0 similar skills (0% overlap)</p>
+<p>Evaluating quality...
+   ```</p>
+<ol>
+<li><strong>Review the evaluation report</strong>:
+   ```
+   ## Evaluation Report</li>
+</ol>
+<p>### Source Information
+   - URL: https://raw.githubusercontent.com/.../linux-terminal.txt
+   - Description: Act as a Linux Terminal
+   - Author: Community contribution</p>
+<p>### Similarity Analysis
+   - Similar OLAF Skills: None (0% overlap)
+   - Unique Features: Terminal simulation, command execution
+   - Similarity Verdict: LOW - New capability ✅</p>
+<p>### Quality Assessment
+   | Dimension | Rating | Notes |
+   |-----------|--------|-------|
+   | Clarity | Clear | Well-defined behavior |
+   | Genericity | Domain-Specific | Linux-specific |
+   | Parameterizability | Moderate | Could add shell types |
+   | LLM Independence | Agnostic | Works anywhere |
+   | Structure | Acceptable | Could add error handling |</p>
+<p>### Persona &amp; Use Cases
+   - Target Personas: Developers, sysadmins, DevOps
+   - Primary Use Case: Safe Linux command practice
+   - Frequency: Weekly</p>
+<p>### Value-Add Analysis
+   - Frequency × Specificity: MEDIUM VALUE ⭐⭐
+   - AI Necessity: Required (needs command understanding)
+   - Value Score: 32/50 - GOOD</p>
+<p>### Final Recommendation</p>
+<p>🎯 RECOMMENDATION: ADOPT WITH MODIFICATIONS</p>
+<p>Rationale: Unique capability not in OLAF. Good quality but needs
+   parameterization and error handling. Value score indicates strong candidate.</p>
+<p>Modifications needed:
+   1. Add shell_type parameter (bash/zsh/fish)
+   2. Add error handling section
+   3. Structure as proper OLAF skill</p>
+<p>Estimated effort: Medium (2-3 hours)
+   ```</p>
+<ol>
+<li><strong>Skill asks for next step</strong>:
+   ```
+   Would you like me to proceed with ADOPT WITH MODIFICATIONS?</li>
+</ol>
+<p>I can:
+   a) Create OLAF-native version with create-skill
+   b) Import as-is then improve with convert-prompt
+   c) Skip for now
+   ```</p>
+<ol>
+<li>
+<p><strong>You decide</strong>:
+   <code>Option a - create OLAF-native version</code></p>
+</li>
+<li>
+<p><strong>Result</strong>: Skill creates improved version</p>
+</li>
+</ol>
+<h3 id="scenario-2-evaluate-from-direct-paste">Scenario 2: Evaluate from Direct Paste<a class="headerlink" href="#scenario-2-evaluate-from-direct-paste" title="Permanent link">&para;</a></h3>
+<p><strong>Situation</strong>: Your colleague shared a prompt via Slack that they found useful.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p><strong>Copy the prompt text</strong></p>
+</li>
+<li>
+<p><strong>Invoke with pasted content</strong>:
+   ```
+   olaf evaluate this prompt:</p>
+</li>
+</ol>
+<p>[paste content]
+   You are an expert code reviewer. Review the provided code for:
+   1. Security vulnerabilities
+   2. Performance issues
+   3. Code style violations
+   4. Best practice adherence
+   Provide specific, actionable feedback.
+   ```</p>
+<ol>
+<li><strong>Skill analyzes without fetching</strong>:
+   ```
+   Analyzing provided prompt text...
+   ✓ Extracted 87 characters
+   ✓ Detected type: Code review assistant</li>
+</ol>
+<p>Checking similarity to existing OLAF skills...
+   ✓ Found 2 similar skills:
+     - review-code (75% overlap)
+     - review-diff (45% overlap)</p>
+<p>Evaluating quality and unique features...
+   ```</p>
+<ol>
+<li><strong>Review report focusing on similarity</strong>:
+   ```
+   ### Similarity Analysis</li>
+<li>
+<p>Similar OLAF Skills:
+     • review-code (75% overlap) - Already has security, performance checks
+     • review-diff (45% overlap) - Focuses on git diffs</p>
+</li>
+<li>
+<p>Unique Features in External Prompt:
+     • "Best practice adherence" explicitly mentioned
+     • Numbered checklist approach</p>
+</li>
+<li>
+<p>Similarity Verdict: HIGH (75%) - Mostly duplicate ⚠️</p>
+</li>
+</ol>
+<p>### Final Recommendation</p>
+<p>🎯 RECOMMENDATION: EXTRACT PARTS</p>
+<p>Rationale: High overlap with existing review-code skill. However,
+   the explicit "best practice adherence" callout and numbered
+   checklist format could enhance our existing skill.</p>
+<p>Parts worth extracting:
+   1. Best practice adherence check (add to review-code)
+   2. Numbered checklist format (improve output structure)</p>
+<p>Integration approach: Enhance review-code skill with these elements
+   ```</p>
+<ol>
+<li><strong>Next steps provided</strong>:
+   ```
+   Recommended action:</li>
+<li>Open skills/review-code/prompts/review-code.md</li>
+<li>Add "Best practice adherence" to objectives</li>
+<li>Update output format to use numbered checklist</li>
+</ol>
+<p>Would you like me to make these enhancements now?
+   ```</p>
+<h3 id="scenario-3-low-value-prompt-rejection">Scenario 3: Low-Value Prompt Rejection<a class="headerlink" href="#scenario-3-low-value-prompt-rejection" title="Permanent link">&para;</a></h3>
+<p><strong>Situation</strong>: You see a very specific prompt that seems narrow.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p><strong>Invoke evaluation</strong>:
+   <code>olaf evaluate prompt: https://example.com/my-very-specific-prompt</code></p>
+</li>
+<li>
+<p><strong>Skill fetches and evaluates</strong>:
+   ```
+   Fetching prompt...
+   ✓ Retrieved content</p>
+</li>
+</ol>
+<p>Prompt description: "Generate TypeScript interfaces for AWS Lambda
+   handlers that process S3 events triggered by CloudWatch using CDK"</p>
+<p>Analyzing...
+   ```</p>
+<ol>
+<li><strong>Report shows low scores</strong>:
+   ```
+   ### Quality Assessment
+   | Dimension | Rating | Notes |
+   |-----------|--------|-------|
+   | Clarity | Clear | Well-defined but narrow |
+   | Genericity | Too Narrow | ❌ Very specific stack |
+   | Parameterizability | Hardcoded | Locked to AWS/TypeScript |
+   | LLM Independence | Agnostic | Works across LLMs |
+   | Structure | Acceptable | Basic structure |</li>
+</ol>
+<p>### Persona &amp; Use Cases
+   - Target Personas: AWS developers using TypeScript + CDK
+   - Primary Use Case: Specific S3→Lambda→CloudWatch setup
+   - Frequency: Rare (only when setting up this exact pattern)</p>
+<p>### Value-Add Analysis
+   - Frequency × Specificity: LOW VALUE ⭐ (very narrow + rare)
+   - AI Necessity: Optional (code generator could handle)
+   - Value Score: 14/50 - LOW</p>
+<p>### Final Recommendation</p>
+<p>🎯 RECOMMENDATION: SKIP</p>
+<p>Rationale: Too specific to one tech stack combination. Rare use case.
+   Could be replaced with code generator or CDK construct. Low reuse
+   potential across team. Not generic enough for OLAF library.</p>
+<p>Alternative: Use general create-typescript-interfaces skill and
+   adapt output for specific AWS needs.
+   ```</p>
+<ol>
+<li><strong>Clear guidance</strong>:
+   ```
+   This prompt is not recommended for adoption.</li>
+</ol>
+<p>If you frequently need AWS/TypeScript/CDK work, consider instead:
+   1. Creating a generic "generate-aws-cdk-constructs" skill
+   2. Parameterizing for different AWS services
+   3. Making it reusable beyond S3→Lambda pattern
+   ```</p>
+<h3 id="scenario-4-excellent-high-value-find">Scenario 4: Excellent High-Value Find<a class="headerlink" href="#scenario-4-excellent-high-value-find" title="Permanent link">&para;</a></h3>
+<p><strong>Situation</strong>: You discover a prompt that looks perfect.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p><strong>Evaluate</strong>:
+   <code>olaf evaluate https://github.com/awesome/prompts/api-design-reviewer.md</code></p>
+</li>
+<li>
+<p><strong>Report shows high scores</strong>:
+   ```
+   ### Quality Assessment
+   | Dimension | Rating | Notes |
+   |-----------|--------|-------|
+   | Clarity | Clear | ✅ Excellent structure |
+   | Genericity | Generic | ✅ Works for any API |
+   | Parameterizability | High | ✅ REST/GraphQL/gRPC support |
+   | LLM Independence | Agnostic | ✅ Standard patterns |
+   | Structure | Well-Structured | ✅ Comprehensive flow |</p>
+</li>
+</ol>
+<p>### Value-Add Analysis
+   - Frequency × Specificity: HIGH VALUE ⭐⭐⭐ (generic + frequent)
+   - AI Necessity: Required (needs design judgment)
+   - Value Score: 45/50 - EXCELLENT</p>
+<p>### Final Recommendation</p>
+<p>🎯 RECOMMENDATION: ADOPT</p>
+<p>Rationale: Exceptional quality across all dimensions. Fills gap in
+   OLAF (no API design review skill currently). High reuse potential.
+   Frequent use case. Well-structured and parameterized. No modifications
+   needed.</p>
+<p>Suggested skill name: review-api-design
+   Suggested competency: code-quality or api-development
+   Priority: HIGH
+   ```</p>
+<ol>
+<li><strong>Immediate adoption</strong>:
+   ```
+   Would you like me to import this excellent prompt now?</li>
+</ol>
+<p>I recommend: convert-prompt-to-skill (wrap it into OLAF)
+   ```</p>
+<ol>
+<li>
+<p><strong>You confirm</strong>:
+   <code>Yes, import it</code></p>
+</li>
+<li>
+<p><strong>Skill proceeds</strong>:
+   ```
+   ✓ Packaging via convert-prompt-to-skill...
+   ✓ Created skill: review-api-design
+   ✓ Added to api-development competency
+   ✓ Ready to use!</p>
+</li>
+</ol>
+<p>Try it: olaf review-api-design
+   ```</p>
+<h2 id="understanding-the-value-score">Understanding the Value Score<a class="headerlink" href="#understanding-the-value-score" title="Permanent link">&para;</a></h2>
+<p>The value score formula combines multiple factors:</p>
+<pre><code>Value Score = (Frequency × 3) + (Genericity × 2) + (AI_Necessity × 3) + (Quality × 2)
+</code></pre>
+<p><strong>Example calculation</strong>:</p>
+<p>For "Linux Terminal" prompt:
+- Frequency: 3/5 (weekly) → 3 × 3 = 9 points
+- Genericity: 3/5 (domain-specific) → 3 × 2 = 6 points
+- AI_Necessity: 5/5 (requires understanding) → 5 × 3 = 15 points
+- Quality: 4/5 (acceptable) → 4 × 2 = 8 points</p>
+<p><strong>Total</strong>: 9 + 6 + 15 + 8 = <strong>38/50 (GOOD)</strong></p>
+<h2 id="decision-matrix">Decision Matrix<a class="headerlink" href="#decision-matrix" title="Permanent link">&para;</a></h2>
+<p>Use this to quickly interpret recommendations:</p>
+<table>
+<thead>
+<tr>
+<th>Recommendation</th>
+<th>Similarity</th>
+<th>Value Score</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADOPT</td>
+<td>&lt;40%</td>
+<td>40-50</td>
+<td>Import as-is or with minor tweaks</td>
+</tr>
+<tr>
+<td>ADOPT WITH MODIFICATIONS</td>
+<td>&lt;60%</td>
+<td>30-39</td>
+<td>Improve then import</td>
+</tr>
+<tr>
+<td>EXTRACT PARTS</td>
+<td>40-80%</td>
+<td>20-29</td>
+<td>Merge into existing skill</td>
+</tr>
+<tr>
+<td>SKIP</td>
+<td>&gt;80% or &lt;20%</td>
+<td>&lt;20</td>
+<td>Don't import</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-evaluation-patterns">Common Evaluation Patterns<a class="headerlink" href="#common-evaluation-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="pattern-1-the-duplicate">Pattern 1: The Duplicate<a class="headerlink" href="#pattern-1-the-duplicate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>High similarity (&gt;80%)</li>
+<li>No unique features</li>
+<li><strong>Action</strong>: SKIP, use existing</li>
+</ul>
+<h3 id="pattern-2-the-enhancement">Pattern 2: The Enhancement<a class="headerlink" href="#pattern-2-the-enhancement" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Medium similarity (40-70%)</li>
+<li>Some unique features</li>
+<li><strong>Action</strong>: EXTRACT PARTS, merge</li>
+</ul>
+<h3 id="pattern-3-the-hidden-gem">Pattern 3: The Hidden Gem<a class="headerlink" href="#pattern-3-the-hidden-gem" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Low similarity (&lt;40%)</li>
+<li>High value score (&gt;35)</li>
+<li>Good quality across dimensions</li>
+<li><strong>Action</strong>: ADOPT</li>
+</ul>
+<h3 id="pattern-4-the-niche-special">Pattern 4: The Niche Special<a class="headerlink" href="#pattern-4-the-niche-special" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Very specific use case</li>
+<li>High quality but rare use</li>
+<li><strong>Action</strong>: ADOPT WITH MODIFICATIONS (make more generic)</li>
+</ul>
+<h3 id="pattern-5-the-almost-there">Pattern 5: The Almost-There<a class="headerlink" href="#pattern-5-the-almost-there" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Good concept, poor execution</li>
+<li>Low quality scores</li>
+<li><strong>Action</strong>: ADOPT WITH MODIFICATIONS or rebuild with create-skill</li>
+</ul>
+<h2 id="tips-for-effective-evaluation">Tips for Effective Evaluation<a class="headerlink" href="#tips-for-effective-evaluation" title="Permanent link">&para;</a></h2>
+<h3 id="before-evaluation">Before Evaluation<a class="headerlink" href="#before-evaluation" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Quick scan</strong>: Read the prompt briefly first</li>
+<li><strong>Check source</strong>: Is it from reputable source?</li>
+<li><strong>Check license</strong>: Can you legally use it?</li>
+</ol>
+<h3 id="during-evaluation">During Evaluation<a class="headerlink" href="#during-evaluation" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Trust the metrics</strong>: Don't override scores without good reason</li>
+<li><strong>Consider context</strong>: Your team's needs may differ from general assessment</li>
+<li><strong>Look for patterns</strong>: Does it teach you something valuable even if you skip it?</li>
+</ol>
+<h3 id="after-evaluation">After Evaluation<a class="headerlink" href="#after-evaluation" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Act on recommendation</strong>: Don't just evaluate, execute</li>
+<li><strong>Track outcomes</strong>: Note which adopted prompts get used</li>
+<li><strong>Iterate</strong>: Re-evaluate periodically</li>
+</ol>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>After completing this tutorial:</p>
+<ol>
+<li><strong>Find prompts</strong>: Browse GitHub awesome lists, blogs, registries</li>
+<li><strong>Evaluate systematically</strong>: Use this skill for all external prompts</li>
+<li><strong>Build curated library</strong>: Only adopt high-value prompts</li>
+<li><strong>Share evaluations</strong>: Help team make informed decisions</li>
+<li><strong>Measure value</strong>: Track which adopted prompts get actual use</li>
+</ol>
+<h2 id="related-skills">Related Skills<a class="headerlink" href="#related-skills" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>convert-prompt-to-skill</code> - Package adopted prompts into a skill</li>
+<li><code>convert-prompt</code> - Modernize adopted prompts to OLAF standards</li>
+<li><code>create-skill</code> - Build OLAF-native version of adopted prompts</li>
+<li><code>validate-prompt-value</code> - Re-evaluate existing OLAF prompts</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

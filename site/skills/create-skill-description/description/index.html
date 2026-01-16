@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Create Skill Description - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/create-skill-description/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#create-skill-description" class="nav-link">Create Skill Description</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#process-flow" class="nav-link">Process Flow</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#error-handling" class="nav-link">Error Handling</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-skills" class="nav-link">Related Skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#notes" class="nav-link">Notes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="create-skill-description">Create Skill Description<a class="headerlink" href="#create-skill-description" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The <code>create-skill-description</code> skill generates comprehensive <code>docs/description.md</code> documentation files for existing skills in the OLAF framework.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>This skill automates the documentation process for skills by analyzing their content and structure, then generating well-formatted description files that explain what the skill does, how to use it, and what parameters it requires. This ensures consistent, high-quality documentation across all skills.</p>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Interactive Skill Selection</strong> - Lists available skills if name not provided</li>
+<li><strong>Automatic Content Analysis</strong> - Reads and extracts key information from skill files</li>
+<li><strong>Structured Documentation</strong> - Generates comprehensive descriptions with standardized sections</li>
+<li><strong>Safe Overwrite Protection</strong> - Warns before overwriting existing documentation</li>
+<li><strong>User Review Process</strong> - Shows generated content before saving (Propose-Confirm-Act protocol)</li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="invocation">Invocation<a class="headerlink" href="#invocation" title="Permanent link">&para;</a></h3>
+<p>You can trigger this skill using any of these commands:
+- <code>olaf create-skill-description</code>
+- <code>olaf document skill</code>
+- <code>olaf generate skill docs</code>
+- <code>olaf add skill description</code>
+- <code>olaf create description file</code></p>
+<h3 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Invoke the skill with one of the commands above</li>
+<li>Provide the skill name when asked (or select from list)</li>
+<li>Review the generated description.md content</li>
+<li>Confirm to save or request edits</li>
+</ol>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-parameters">Required Parameters<a class="headerlink" href="#required-parameters" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>skill_name</strong> (string) - The name/ID of the skill to document</li>
+<li>Must match an existing skill directory in <code>skills/</code></li>
+<li>If not provided, skill will list available skills for selection</li>
+</ul>
+<h3 id="optional-parameters">Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>skill_path</strong> (string) - Absolute path to the skill directory</li>
+<li>Auto-detected if not provided</li>
+<li>Only needed for skills in non-standard locations</li>
+</ul>
+<h2 id="process-flow">Process Flow<a class="headerlink" href="#process-flow" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Validation</strong> - Verify skill exists and locate its files</li>
+<li><strong>Analysis</strong> - Read the skill file to extract metadata, parameters, process, outputs, and rules</li>
+<li><strong>Generation</strong> - Create description.md with comprehensive documentation sections</li>
+<li><strong>Proposal</strong> - Present generated content to user for review</li>
+<li><strong>Confirmation</strong> - Wait for user approval or edit requests</li>
+<li><strong>Save</strong> - Write description.md to the skill's /docs/ folder</li>
+</ol>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p>The skill generates a <code>description.md</code> file saved to:</p>
+<pre><code>skills/[skill-name]/docs/description.md
+</code></pre>
+<h3 id="description-sections">Description Sections<a class="headerlink" href="#description-sections" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Overview - Brief summary of skill functionality</li>
+<li>Purpose - Why the skill exists and when to use it</li>
+<li>Key Features - Main capabilities and highlights</li>
+<li>Usage - Invocation commands and basic workflow</li>
+<li>Parameters - Required and optional parameters with descriptions</li>
+<li>Process Flow - High-level execution steps</li>
+<li>Output - What the skill produces</li>
+<li>Examples - Common use cases</li>
+<li>Error Handling - Common errors and solutions</li>
+<li>Related Skills - Dependencies or complementary skills</li>
+</ol>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-document-a-specific-skill">Example 1: Document a Specific Skill<a class="headerlink" href="#example-1-document-a-specific-skill" title="Permanent link">&para;</a></h3>
+<pre><code>User: olaf create-skill-description
+Assistant: Which skill would you like to document?
+User: review-code-quality
+Assistant: [Analyzes skill and generates description]
+         [Shows generated content]
+         Ready to save this documentation? (yes/no/edit)
+User: yes
+Assistant: ✅ Documentation saved to skills/review-code-quality/docs/description.md
+</code></pre>
+<h3 id="example-2-using-skill-name-parameter">Example 2: Using Skill Name Parameter<a class="headerlink" href="#example-2-using-skill-name-parameter" title="Permanent link">&para;</a></h3>
+<pre><code>User: olaf create-skill-description for generate-test-cases
+Assistant: [Analyzes skill]
+         [Generates and shows description]
+         Ready to save? (yes/no/edit)
+User: edit
+Assistant: What changes would you like?
+User: Add more examples
+Assistant: [Regenerates with additional examples]
+         Ready to save? (yes/no/edit)
+User: yes
+</code></pre>
+<h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
+<h3 id="common-errors">Common Errors<a class="headerlink" href="#common-errors" title="Permanent link">&para;</a></h3>
+<p><strong>Skill Not Found</strong>
+- <strong>Symptom</strong>: Specified skill doesn't exist
+- <strong>Resolution</strong>: Skill lists available skills for selection</p>
+<p><strong>Missing Skill File</strong>
+- <strong>Symptom</strong>: Skill directory exists but main skill file missing
+- <strong>Resolution</strong>: Alert user to incomplete skill structure</p>
+<p><strong>description.md Already Exists</strong>
+- <strong>Symptom</strong>: Target file already exists
+- <strong>Resolution</strong>: Warn user and request confirmation to overwrite</p>
+<p><strong>File Save Failure</strong>
+- <strong>Symptom</strong>: Cannot write to /docs/ folder
+- <strong>Resolution</strong>: Check permissions, suggest alternative locations</p>
+<h2 id="related-skills">Related Skills<a class="headerlink" href="#related-skills" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>create-skill</strong> - Creates new skills (which this skill documents)</li>
+<li><strong>convert-prompt-to-skill</strong> - Converts prompt content into a skill structure</li>
+</ul>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>This skill uses the <strong>Propose-Confirm-Act</strong> protocol for safety</li>
+<li>Documentation is auto-generated but can be edited after saving</li>
+<li>Existing description.md files are preserved unless user confirms overwrite</li>
+<li>The skill analyzes the target skill's <code>skill.md</code> to generate accurate documentation</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

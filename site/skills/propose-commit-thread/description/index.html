@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Propose Commit Thread - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/propose-commit-thread/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#propose-commit-thread" class="nav-link">Propose Commit Thread</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-competencies" class="nav-link">Related Competencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="propose-commit-thread">Propose Commit Thread<a class="headerlink" href="#propose-commit-thread" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Analyzes your git changes, intelligently clusters them into logical commits, and executes a commit thread with interactive modification capabilities and GitHub issue integration. This competency transforms messy working directory changes into a clean, well-organized commit history.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>Developers often accumulate many changes across multiple files before committing, making it difficult to create a clean, logical commit history. This competency solves the problem by:
+- Automatically analyzing and categorizing all changes
+- Clustering related changes into coherent commits
+- Matching commits with relevant GitHub issues
+- Providing interactive modification before execution
+- Maintaining clean git history with detailed commit messages</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><strong>Command</strong>: <code>propose commit thread</code> (or aliases: <code>propose commit</code>, <code>commit thread</code>, <code>smart commit</code>, <code>cluster commits</code>, <code>interactive commit</code>, <code>staged commit</code>, <code>organize commits</code>, <code>commit workflow</code>)</p>
+<p><strong>Protocol</strong>: Propose-Confirm-Act</p>
+<p><strong>When to Use</strong>: Use this when you have multiple uncommitted changes that should be organized into separate logical commits rather than one large commit. Ideal for feature development sessions where you've modified multiple components, or when you want to maintain clean git history with focused commits.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-inputs">Required Inputs<a class="headerlink" href="#required-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>repository_path</strong>: Path to git repository (defaults to current working directory)</li>
+</ul>
+<h3 id="optional-inputs">Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>include_github_issues</strong>: Check for related GitHub issues (default: true)</li>
+<li><strong>commit_strategy</strong>: "granular" or "feature-based" clustering (default: "feature-based")</li>
+<li><strong>auto_execute</strong>: Execute commits automatically after approval (default: false)</li>
+</ul>
+<h3 id="context-requirements">Context Requirements<a class="headerlink" href="#context-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Valid git repository</li>
+<li>Uncommitted changes in working directory</li>
+<li>GitHub CLI installed (optional, for issue integration)</li>
+<li>Clean working directory (no merge conflicts)</li>
+<li>Commit permissions on repository</li>
+</ul>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p><strong>Deliverables</strong>:
+- Structured commit proposal with interactive modification options
+- Executed commit sequence in logical order
+- Updated GitHub issues with commit references (if enabled)
+- Clean working directory after execution
+- Detailed git log with organized commit history</p>
+<p><strong>Format</strong>: 
+- Interactive markdown proposal with user commands
+- Git commits with detailed multi-line messages
+- GitHub issue updates with commit links</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-feature-development-session">Example 1: Feature Development Session<a class="headerlink" href="#example-1-feature-development-session" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: You've spent the day building a new API endpoint, updating tests, and adding documentation. You have 15 modified files and want to organize them into logical commits.</p>
+<p><strong>Command</strong>:</p>
+<pre><code>olaf propose commit thread
+</code></pre>
+<p><strong>Analysis Result</strong>:</p>
+<pre><code>Proposed Commit Thread:
+
+Commit 1: Add user profile API endpoint
+Files: src/api/profile.js, src/routes/profile.js
+Related Issue: #142 - User profile management
+
+Commit 2: Add profile endpoint tests
+Files: tests/api/profile.test.js, tests/fixtures/users.json
+
+Commit 3: Update API documentation
+Files: docs/api-reference.md, README.md
+
+Commit 4: Update configuration for new endpoint
+Files: config/routes.json, config/permissions.json
+</code></pre>
+<p><strong>Interactive Modification</strong>:</p>
+<pre><code>User: merge 1,2
+[Commits 1 and 2 combined into single commit]
+
+User: 3a
+[Commit 3 approved]
+
+User: execute
+[All approved commits executed]
+</code></pre>
+<p><strong>Result</strong>: 
+- 3 well-organized commits created
+- Issue #142 updated with commit references
+- Clean git history ready for push</p>
+<h3 id="example-2-bug-fix-with-multiple-components">Example 2: Bug Fix with Multiple Components<a class="headerlink" href="#example-2-bug-fix-with-multiple-components" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: You fixed a validation bug that required changes to utility functions, middleware, and tests.</p>
+<p><strong>Command</strong>:</p>
+<pre><code>olaf propose commit thread
+</code></pre>
+<p><strong>Result</strong>: 
+- Commit 1: Fix validation logic in utilities
+- Commit 2: Update middleware to use fixed validation
+- Commit 3: Add regression tests for validation bug
+- All commits linked to bug tracking issue</p>
+<h2 id="related-competencies">Related Competencies<a class="headerlink" href="#related-competencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>create-feature-for-pr</strong>: Use this after organizing commits to extract feature for PR</li>
+<li><strong>merge-branch-with-safety</strong>: Use this to safely merge organized commits to target branch</li>
+<li><strong>developer/review-code</strong>: Use this to review changes before committing</li>
+</ul>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Use "feature-based" clustering for most development work (groups related functionality)</li>
+<li>Use "granular" clustering when you need very detailed commit history</li>
+<li>Review the proposed commit sequence carefully before executing</li>
+<li>Modify commit messages to add context that the AI might miss</li>
+<li>Split large commits if they contain multiple logical changes</li>
+<li>Enable GitHub issue integration to maintain traceability</li>
+<li>Commit infrastructure changes separately from business logic</li>
+<li>Use descriptive commit messages following conventional commits format</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Requires clean working directory (no merge conflicts)</li>
+<li>GitHub issue integration requires GitHub CLI installation</li>
+<li>Cannot automatically resolve complex file dependencies</li>
+<li>Commit clustering is based on heuristics and may need manual adjustment</li>
+<li>Does not support interactive rebase of existing commits</li>
+<li>Cannot modify already committed history</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

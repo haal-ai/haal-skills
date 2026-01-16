@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Tutorial: Create OTF Variable - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/create-otf-variable/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#tutorial-create-otf-variable" class="nav-link">Tutorial: Create OTF Variable</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#quick-start" class="nav-link">Quick Start</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example-walkthrough" class="nav-link">Example Walkthrough</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-usage-patterns" class="nav-link">Common Usage Patterns</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-resources" class="nav-link">Related Resources</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#need-help" class="nav-link">Need Help?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="tutorial-create-otf-variable">Tutorial: Create OTF Variable<a class="headerlink" href="#tutorial-create-otf-variable" title="Permanent link">&para;</a></h1>
+<p>Learn how to use the <code>create-otf-variable</code> skill to add runtime configuration to your Amadeus C++ application.</p>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<pre><code>olaf create-otf-variable
+</code></pre>
+<p>The skill will guide you through an interactive workflow to create a new OTF variable.</p>
+<h2 id="example-walkthrough">Example Walkthrough<a class="headerlink" href="#example-walkthrough" title="Permanent link">&para;</a></h2>
+<h3 id="scenario-adding-a-layover-feature-toggle">Scenario: Adding a Layover Feature Toggle<a class="headerlink" href="#scenario-adding-a-layover-feature-toggle" title="Permanent link">&para;</a></h3>
+<p>Let's create an OTF variable to enable a new layover feature in a migration scenario.</p>
+<h4 id="step-1-invoke-the-skill">Step 1: Invoke the Skill<a class="headerlink" href="#step-1-invoke-the-skill" title="Permanent link">&para;</a></h4>
+<pre><code>User: olaf create-otf-variable
+</code></pre>
+<h4 id="step-2-provide-requirements">Step 2: Provide Requirements<a class="headerlink" href="#step-2-provide-requirements" title="Permanent link">&para;</a></h4>
+<p>The skill will prompt you for information:</p>
+<pre><code>Assistant: I'll help you create a new OTF variable. Let me gather the details:
+
+- Variable name (suggestion: ENABLE_*, MIG_*, IS_*):
+- Purpose/Description:
+- Expected values (Y/N, true/false, numeric, etc.):
+- Default value (recommend OFF for safety):
+- Environments to override (LOCAL, UAT, PRD):
+- Component XML file path or name:
+</code></pre>
+<p><strong>Your Response</strong>:</p>
+<pre><code>User: Variable name: MIG_ENABLE_LAYOVER
+Purpose: Enable layover feature for migration
+Values: Y/N
+Default: N
+Enable in LOCAL for development
+Component: booking_component.component.xml
+</code></pre>
+<h4 id="step-3-xml-update">Step 3: XML Update<a class="headerlink" href="#step-3-xml-update" title="Permanent link">&para;</a></h4>
+<p>The skill will:
+1. Locate your component XML file
+2. Check existing variable patterns
+3. Add the variable to the XML:</p>
+<pre><code class="language-xml">&lt;common&gt;
+    &lt;variable name=&quot;MIG_ENABLE_LAYOVER&quot; value=&quot;N&quot; control=&quot;off&quot; description=&quot;Enable layover feature for migration&quot;/&gt;
+&lt;/common&gt;
+
+&lt;phase name=&quot;LOCAL&quot;&gt;
+    &lt;variable name=&quot;MIG_ENABLE_LAYOVER&quot; value=&quot;Y&quot; control=&quot;off&quot; description=&quot;Enable layover feature for migration&quot;/&gt;
+&lt;/phase&gt;
+</code></pre>
+<h4 id="step-4-c-accessor-code">Step 4: C++ Accessor Code<a class="headerlink" href="#step-4-c-accessor-code" title="Permanent link">&para;</a></h4>
+<p>The skill provides ready-to-use accessor code:</p>
+<pre><code class="language-cpp">// Recommended: Create accessor method
+bool ConfigManager::isLayoverEnabled() {
+    return toolbox::PropertiesManager::GetInstance().isDefined(&quot;MIG_ENABLE_LAYOVER&quot;) &amp;&amp;
+           toolbox::PropertiesManager::GetInstance().getValue(&quot;MIG_ENABLE_LAYOVER&quot;) == &quot;Y&quot;;
+}
+
+// Usage in your code
+if (ConfigManager::isLayoverEnabled()) {
+    // New layover implementation
+    processWithLayover(request);
+} else {
+    // Legacy implementation
+    processStandard(request);
+}
+</code></pre>
+<h4 id="step-5-testing-guidance">Step 5: Testing Guidance<a class="headerlink" href="#step-5-testing-guidance" title="Permanent link">&para;</a></h4>
+<p>The skill provides unit test examples:</p>
+<pre><code class="language-cpp">TEST(LayoverTest, WhenDisabled_UsesStandardLogic) {
+    MockPropertiesManager::setValue(&quot;MIG_ENABLE_LAYOVER&quot;, &quot;N&quot;);
+    ASSERT_FALSE(ConfigManager::isLayoverEnabled());
+    // Test standard behavior
+}
+
+TEST(LayoverTest, WhenEnabled_UsesLayoverLogic) {
+    MockPropertiesManager::setValue(&quot;MIG_ENABLE_LAYOVER&quot;, &quot;Y&quot;);
+    ASSERT_TRUE(ConfigManager::isLayoverEnabled());
+    // Test layover behavior
+}
+</code></pre>
+<h4 id="step-6-deployment-strategy">Step 6: Deployment Strategy<a class="headerlink" href="#step-6-deployment-strategy" title="Permanent link">&para;</a></h4>
+<p>The skill recommends a rollout plan:
+1. ✅ Deploy with default OFF (N)
+2. ✅ Test in LOCAL (enabled)
+3. ✅ Validate in UAT
+4. ✅ Monitor metrics
+5. ✅ Enable in PRD gradually
+6. ✅ Full rollout after validation</p>
+<h2 id="common-usage-patterns">Common Usage Patterns<a class="headerlink" href="#common-usage-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="pattern-1-simple-feature-flag">Pattern 1: Simple Feature Flag<a class="headerlink" href="#pattern-1-simple-feature-flag" title="Permanent link">&para;</a></h3>
+<pre><code>User: olaf create-otf-variable
+
+Create a feature flag for the new caching system:
+- Name: ENABLE_CACHE
+- Values: true/false
+- Default: false
+- Enable in LOCAL
+</code></pre>
+<p><strong>Result</strong>:</p>
+<pre><code class="language-xml">&lt;variable name=&quot;ENABLE_CACHE&quot; value=&quot;false&quot; control=&quot;off&quot; description=&quot;Enable response caching&quot;/&gt;
+</code></pre>
+<pre><code class="language-cpp">bool isCacheEnabled = toolbox::PropertiesManager::GetInstance().isDefined(&quot;ENABLE_CACHE&quot;) &amp;&amp;
+                      toolbox::PropertiesManager::GetInstance().getValue(&quot;ENABLE_CACHE&quot;) == &quot;true&quot;;
+</code></pre>
+<h3 id="pattern-2-numeric-configuration">Pattern 2: Numeric Configuration<a class="headerlink" href="#pattern-2-numeric-configuration" title="Permanent link">&para;</a></h3>
+<pre><code>User: olaf create-otf-variable
+
+Add retry count configuration:
+- Name: MAX_RETRY_COUNT
+- Values: numeric string
+- Default: 3
+- Override in PRD: 5
+</code></pre>
+<p><strong>Result</strong>:</p>
+<pre><code class="language-xml">&lt;common&gt;
+    &lt;variable name=&quot;MAX_RETRY_COUNT&quot; value=&quot;3&quot; control=&quot;off&quot; description=&quot;Maximum retry attempts&quot;/&gt;
+&lt;/common&gt;
+&lt;phase name=&quot;PRD&quot;&gt;
+    &lt;variable name=&quot;MAX_RETRY_COUNT&quot; value=&quot;5&quot; control=&quot;off&quot; description=&quot;Maximum retry attempts&quot;/&gt;
+&lt;/phase&gt;
+</code></pre>
+<pre><code class="language-cpp">std::string retryStr = toolbox::PropertiesManager::GetInstance().getValue(&quot;MAX_RETRY_COUNT&quot;);
+int maxRetries = std::stoi(retryStr);
+</code></pre>
+<h3 id="pattern-3-migration-flag">Pattern 3: Migration Flag<a class="headerlink" href="#pattern-3-migration-flag" title="Permanent link">&para;</a></h3>
+<pre><code>User: olaf create-otf-variable
+
+Migration flag for new API:
+- Name: MIG_ENABLE_NEW_API
+- Values: Y/N
+- Default: N
+- Enable in LOCAL and UAT
+</code></pre>
+<p><strong>Result</strong>:</p>
+<pre><code class="language-xml">&lt;common&gt;
+    &lt;variable name=&quot;MIG_ENABLE_NEW_API&quot; value=&quot;N&quot; control=&quot;off&quot; description=&quot;Enable new API implementation&quot;/&gt;
+&lt;/common&gt;
+&lt;phase name=&quot;LOCAL&quot;&gt;
+    &lt;variable name=&quot;MIG_ENABLE_NEW_API&quot; value=&quot;Y&quot; control=&quot;off&quot; description=&quot;Enable new API implementation&quot;/&gt;
+&lt;/phase&gt;
+&lt;phase name=&quot;UAT&quot;&gt;
+    &lt;variable name=&quot;MIG_ENABLE_NEW_API&quot; value=&quot;Y&quot; control=&quot;off&quot; description=&quot;Enable new API implementation&quot;/&gt;
+&lt;/phase&gt;
+</code></pre>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="naming-conventions">Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Good</strong>:
+- <code>ENABLE_CACHE</code> - Clear feature toggle
+- <code>MIG_ENABLE_LAYOVER</code> - Migration prefix
+- <code>IS_PRODUCTION</code> - State flag
+- <code>MAX_RETRY_COUNT</code> - Descriptive configuration</p>
+<p>❌ <strong>Avoid</strong>:
+- <code>ENABLE_IS_FEATURE_ENABLED</code> - Redundant
+- <code>flag1</code> - Not descriptive
+- <code>enableCache</code> - Wrong case convention
+- <code>CACHE</code> - Unclear purpose</p>
+<h3 id="default-values">Default Values<a class="headerlink" href="#default-values" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Safe Defaults</strong>:
+- Feature flags: <code>"N"</code> or <code>"false"</code> (OFF by default)
+- Retry counts: Conservative values (e.g., <code>"3"</code>)
+- Timeouts: Safe/tested values</p>
+<p>❌ <strong>Risky Defaults</strong>:
+- Feature enabled by default without testing
+- Aggressive retry/timeout values
+- Production-only configurations</p>
+<h3 id="environment-strategy">Environment Strategy<a class="headerlink" href="#environment-strategy" title="Permanent link">&para;</a></h3>
+<p><strong>Recommended Rollout</strong>:
+1. LOCAL - Always enable for development
+2. UAT - Enable after initial validation
+3. PRD - Enable gradually with monitoring</p>
+<p><strong>Avoid</strong>:
+- Enabling in PRD before LOCAL/UAT testing
+- Same value across all environments (no override benefit)
+- Too many environment-specific overrides (complexity)</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="variable-not-recognized">Variable Not Recognized<a class="headerlink" href="#variable-not-recognized" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: Runtime error or feature not working</p>
+<p><strong>Solutions</strong>:
+1. Verify XML file is loaded by component
+2. Check variable name spelling (case-sensitive)
+3. Restart application to reload configuration
+4. Check OTF logs for XML parsing errors</p>
+<h3 id="override-not-applied">Override Not Applied<a class="headerlink" href="#override-not-applied" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: Getting common value instead of phase override</p>
+<p><strong>Solutions</strong>:
+1. Verify phase name matches environment exactly
+2. Check XML syntax (properly closed tags)
+3. Ensure phase section comes after common section
+4. Restart application after XML changes</p>
+<h3 id="accessor-always-returns-false">Accessor Always Returns False<a class="headerlink" href="#accessor-always-returns-false" title="Permanent link">&para;</a></h3>
+<p><strong>Problem</strong>: Feature flag always disabled</p>
+<p><strong>Solutions</strong>:
+1. Verify <code>isDefined()</code> check passes
+2. Check exact value comparison (case-sensitive)
+3. Ensure XML has correct value
+4. Debug PropertiesManager call to see actual value</p>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>After creating your OTF variable:</p>
+<ol>
+<li><strong>Review the code</strong> with your team</li>
+<li><strong>Write unit tests</strong> for both enabled/disabled states</li>
+<li><strong>Test in LOCAL</strong> environment first</li>
+<li><strong>Document</strong> the feature flag in your component docs</li>
+<li><strong>Monitor</strong> behavior in each environment</li>
+<li><strong>Plan cleanup</strong> after migration is complete</li>
+</ol>
+<h2 id="related-resources">Related Resources<a class="headerlink" href="#related-resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OTF Configuration Guide - Comprehensive reference</li>
+<li>OTF Workflow - Detailed step-by-step guide</li>
+<li>Component XML documentation - Project-specific structure</li>
+</ul>
+<h2 id="need-help">Need Help?<a class="headerlink" href="#need-help" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Check existing variables in your component XML for patterns</li>
+<li>Review C++ code for existing PropertiesManager usage</li>
+<li>Consult team for project-specific conventions</li>
+<li>Use <code>olaf get-bms-expertise</code> for component-level questions</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
