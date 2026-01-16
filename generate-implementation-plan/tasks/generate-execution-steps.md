@@ -1,11 +1,11 @@
 ---
 name: generate-execution-steps
-description: "Task 3 - Create execution steps for each task"
-task_id: 3
+description: "Task 5 - Create execution steps for each task"
+task_id: 5
 protocol: Propose-Act
 ---
 
-# Task 3: Generate Execution Steps
+# Task 5: Generate Execution Steps
 
 ## Objective
 
@@ -14,9 +14,16 @@ Generate execution information for every task in the breakdown, including task p
 ## Context Variables
 
 **Required**:
-- `task_breakdown`: Output from Task 2
-- `skill_path`: Target skill path
+- `task_breakdown`: Output from Task 3
 - `output_file`: Path to IMPLEMENTATION-TASK-PLAN.md
+
+**Optional**:
+- `deliverable_root`: Root path for deliverables
+- `deliverable_kind`: `tool|skill|library`
+- `execution_mode`: `manual|bootstrap` (default: `manual`)
+- `include_task_context_extraction`: `true|false` (default: `false`)
+- `task_context_extractor_prompt`: Prompt path to the context-extraction tool (required only if `include_task_context_extraction=true`)
+- `skill_path`: Back-compat alias used only for `deliverable_kind=skill`
 
 **Outputs**:
 - `task_execution_info`: Map of task_id → execution details (prompt path, context, dependencies)
@@ -30,11 +37,15 @@ For each task type:
 - Layer tasks: Implementation tasks organized by layer
 - Each task needs: prompt path, context variables, dependencies
 
-### Step 2: Define Phase 0 Task Information
+### Step 2: Define Phase 0 Task Information (Optional)
 
-**Task 0.0** (already defined in task_zero_spec):
-- **Prompt**: `olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md`
-- **Context**: `bootstrap_doc=${output_file},skill_path=${skill_path}`
+Only define Phase 0 task execution details when those tasks exist in `task_breakdown`.
+
+Do NOT assume Task 0.0/0.1/0.2 exist.
+
+**Task 0.0** (only if enabled):
+- **Prompt**: `${task_context_extractor_prompt}`
+- **Context**: `bootstrap_doc=${output_file},skill_path=${skill_path}` (only if generating an OLAF skill)
 - **Dependencies**: None
 
 **Task 0.1**:
@@ -47,18 +58,21 @@ For each task type:
 - **Context**: `skill_name=${skill_name},layers=${layer_count},pattern=sequential,output_base=${output_dir}`
 - **Dependencies**: Task 0.1
 
-### Step 3: Define Layer Task Information
+### Step 3: Define Layer/Phase Task Information
 
 For each layer task (1.1, 1.2, ..., N.M):
 
-- **Prompt**: `${skill_path}/tasks/layer-${layer_num}/${task_slug}.md`
+- If `execution_mode=bootstrap` and you are generating per-task prompts:
+  - **Prompt**: `${skill_path}/tasks/layer-${layer_num}/${task_slug}.md`
+- Otherwise (manual execution):
+  - Omit prompt paths and instead provide a short "How to execute" note for the task.
 - **Context Variables**: 
   - `skill_path`: From context
   - `component`: Component name from task_breakdown
   - `layer_number`: Layer ID from task_breakdown
   - `input_file`: Previous layer output or design artifact
   - `task_id`: Task ID (e.g., "1.2")
-  - `context_file`: `${skill_path}/tasks/contexts/task-${task_id}-context.md`
+  - `context_file`: Only if Task 0.0 condensed contexts are enabled
 - **Dependencies**: Previous tasks in sequence
 
 ### Step 4: Format Task Information
@@ -82,8 +96,8 @@ Present to user:
 Sample Task Information:
 
 📌 Task 0.0 (Extract Contexts):
-- **Prompt**: olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md
-- **Context**: bootstrap_doc=${output_file},skill_path=${skill_path}
+- **Prompt**: ${task_context_extractor_prompt}
+- **Context**: bootstrap_doc=${output_file},deliverable_root=${deliverable_root}
 - **Dependencies**: None
 - **Outputs**: Context files for all tasks
 
@@ -110,7 +124,7 @@ Execution Approach:
   ✅ Each task has clear prompt and context
   ✅ Dependencies explicitly defined
 
-APPROVE to proceed to Task 4 (Bootstrap Integration)
+APPROVE to proceed to Task 6 (Bootstrap Integration) ONLY if `execution_mode=bootstrap`
 ADJUST if task structure needs refinement
 ```
 
@@ -120,7 +134,7 @@ ADJUST if task structure needs refinement
 ✅ Context variables properly defined
 ✅ Dependencies clearly specified
 ✅ Task prompts paths correctly formatted
-✅ Task 0.0 uses existing extract-task-contexts.md
+✅ Task 0.0 uses `task_context_extractor_prompt`
 ✅ Layer tasks reference context files from Task 0.0
 ✅ User approved via Propose-Act gate
 
@@ -153,7 +167,7 @@ Returns to coordinator:
   "status": "success",
   "task_execution_info": {
     "0.0": {
-      "prompt": "olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md",
+      "prompt": "${task_context_extractor_prompt}",
       "context": "bootstrap_doc=...,skill_path=...",
       "dependencies": []
     },
@@ -170,4 +184,4 @@ Returns to coordinator:
 
 ## Next Task
 
-→ Task 4: create-bootstrap-integration.md (uses task_commands)
+→ Task 6: create-bootstrap-integration.md (uses task_execution_info)

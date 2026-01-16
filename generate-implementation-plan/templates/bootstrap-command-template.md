@@ -1,13 +1,15 @@
-# Bootstrap Execution Command Template
+# Plan Runner Execution Template
 
 ## Full Autonomous Execution
 
 ```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" `
-  --context "bootstrap_doc={output_file},checklist_path=.olaf/work/project-tasks/task-checklist.md" `
-  --tool-mode auto `
-  --aws-profile bedrock
+# This is a placeholder template.
+# Replace with whatever runner mechanism you use in your environment.
+
+# Required runner inputs:
+# - plan_file={output_file}
+# - checklist_path={checklist_path}
+# - mode=auto
 ```
 
 **Variables**:
@@ -16,7 +18,6 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 
 **Behavior**:
 - Sequential execution of ALL tasks
-- Multi-agent orchestration (Agent A: generate prompts, Agent B: execute)
 - Autonomous (no human intervention)
 - Error handling (stops on failure)
 - Progress tracking (updates checklist)
@@ -26,11 +27,10 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 ## Resume from Specific Task
 
 ```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" `
-  --context "bootstrap_doc={output_file},checklist_path=.olaf/work/project-tasks/task-checklist.md,start_from_task={task_id}" `
-  --tool-mode auto `
-  --aws-profile bedrock
+# Runner inputs (conceptual):
+# - plan_file={output_file}
+# - checklist_path={checklist_path}
+# - start_from_task={task_id}
 ```
 
 **Additional Variable**:
@@ -49,26 +49,23 @@ cat .olaf/work/project-tasks/task-checklist.md
 
 ### Watch Logs (Real-time)
 ```powershell
-Get-Content .olaf/logs/straf_agent_*.log -Wait
+# Runner-specific logging goes here
 ```
 
 ---
 
 ## Prerequisites
 
-Before executing:
+Before executing (only if your plan requires it):
 
-1. ✅ **Task 0.0 completed manually**
-   - Generates context files in `{skill_path}/tasks/contexts/`
-   - Required for universal prompt generator
+1. ✅ **Any required pre-steps completed** (e.g., Task 0.0 context extraction)
    
 2. ✅ **AWS credentials configured**
    - Profile: bedrock
    - Region: us-east-1 (or your region)
    
-3. ✅ **STRAF agent operational**
-   - Path: `.olaf/core/agentic/straf/olaf_strands_agent.py`
-   - Tested and working
+3. ✅ **Runner available**
+   - Your runner can accept `plan_file`, `checklist_path`, and optional resume markers
 
 ---
 
@@ -91,12 +88,10 @@ Before executing:
 ## Example
 
 ```powershell
-# Full execution for repo-scanner skill
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" `
-  --context "bootstrap_doc=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,checklist_path=.olaf/work/project-tasks/task-checklist.md" `
-  --tool-mode auto `
-  --aws-profile bedrock
+# Example runner configuration
+# plan_file=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md
+# checklist_path=.olaf/work/project-tasks/task-checklist.md
+# mode=auto
 ```
 
-**Result**: Fully implemented repo-scanner skill in `skills/repo-scanner/`
+**Result**: Executes the plan described in `{output_file}`

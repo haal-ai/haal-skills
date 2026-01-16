@@ -2,7 +2,7 @@
 
 ## Overview
 
-Patterns for decomposing layered designs into executable implementation tasks following the OLAF onboarding competency model.
+Patterns for decomposing layered designs into executable implementation tasks.
 
 ---
 
@@ -32,7 +32,7 @@ Layer 5 (User Interaction)    → Phase 5 → Tasks 5.1-5.N (prompts, templates)
 
 **Context**: All implementations need initial setup before layer implementation
 
-**Required Tasks**:
+**Common Tasks** (optional depending on execution mode):
 
 ### Task 0.0: Extract Task Contexts
 **Purpose**: Generate condensed context files for each task to optimize prompt generation
@@ -46,17 +46,15 @@ Layer 5 (User Interaction)    → Phase 5 → Tasks 5.1-5.N (prompts, templates)
 **Objective**: Generate condensed context files for universal prompt generator
 
 **Execution**:
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt "olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md" \
-  --context "bootstrap_doc=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,skill_path=${skill_path}" \
-  --tool-mode standard \
-  --aws-profile bedrock
+- Invoke your context extractor using:
+  - prompt/tool: `${task_context_extractor_prompt}`
+  - inputs: `bootstrap_doc=...` and `deliverable_root=...`
 
 **Outputs**:
-- ${skill_path}/tasks/contexts/task-{N}-context.md (one per task)
+- ${deliverable_root}/tasks/contexts/task-{N}-context.md (one per task)
 - Condensed files: ~500 tokens vs ~50KB original (97% reduction)
 
-**Dependencies**: None (first task)
+**Dependencies**: None (first task when enabled)
 **Duration**: 10-15 minutes
 ```
 
@@ -99,20 +97,18 @@ Task N.4: {Validation & Testing}
 
 ---
 
-## Pattern 4: STRAF Command Template
+## Pattern 4: Runner/Execution Template
 
-**Context**: Each task needs executable STRAF command
+**Context**: Each task needs clear execution instructions (manual or runner-assisted)
 
 **Template**:
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "{task_prompt_path}" `
-  --context "{context_variables}" `
-  --tool-mode {standard|auto|minimal} `
-  --aws-profile bedrock
-```
+Provide an **Execution Notes** section per task with:
+- What to do
+- What to produce (outputs)
+- How to verify (success criteria)
+- Minimal required inputs (paths, component names, etc.)
 
-**Context Variables Pattern**:
+**Minimal Inputs Pattern**:
 ```
 Common variables:
 - skill_path: Path to skill being built
@@ -122,7 +118,7 @@ Common variables:
 
 Task-specific:
 - task_id: Unique task identifier (e.g., "1.1", "2.3")
-- context_file: Path to condensed context (Task 0.0 output)
+- context_file: Path to condensed context (Task 0.0 output, when enabled)
 ```
 
 ---
@@ -170,10 +166,8 @@ Task 0.1 → Task 0.2 → Phase 1+ (structure before implementation)
 ## Output Directory Structure
 
 {skill_path}/
-├── skill-manifest.json       # Task 0.1
-├── README.md                  # Task 0.1
-├── prompts/
-│   └── {skill-name}.md       # Task 0.2 (master coordinator)
+├── README.md                 # Task 0.1
+├── skill.md                  # Task 0.2 (master coordinator)
 ├── tasks/
 │   ├── contexts/             # Task 0.0 outputs
 │   │   ├── task-1.1-context.md
@@ -188,9 +182,9 @@ Task 0.1 → Task 0.2 → Phase 1+ (structure before implementation)
 
 ---
 
-## Pattern 7: Bootstrap Integration
+## Pattern 7: Runner Integration
 
-**Context**: Implementation plan must integrate with bootstrap orchestrator
+**Context**: Implementation plan can optionally integrate with a runner
 
 **Required Sections**:
 
@@ -198,33 +192,19 @@ Task 0.1 → Task 0.2 → Phase 1+ (structure before implementation)
 ```markdown
 ## Execution Strategy
 
-Each task will be submitted to STRAF agent using:
+Each task should include **Execution Notes** describing what to do, what to produce, and how to validate.
 
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "<task-prompt-path>" `
-  --context "<context-variables>" `
-  --tool-mode standard `
-  --aws-profile bedrock
-```
-
-**Task Prompt Generation**: Universal prompt generator with condensed contexts
-**Prerequisites**: Task 0.0 must complete first
+**Optional Optimization**: Condensed contexts (Task 0.0) can reduce per-task context size for large plans.
 ```
 
 ### 2. Bootstrap Command Template
 ```markdown
 ## Bootstrap Execution
 
-Execute all tasks via bootstrap orchestrator:
-
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" \
-  --context "bootstrap_doc=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,checklist_path=.olaf/work/project-tasks/task-checklist.md" \
-  --tool-mode auto \
-  --aws-profile bedrock
-```
+Execute all tasks via your runner (if used) by providing:
+- `plan_file=${output_dir}/IMPLEMENTATION-TASK-PLAN.md`
+- `checklist_path=...`
+- `mode=auto`
 ```
 
 ---
@@ -239,10 +219,10 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
 
 **Artifact**: {Primary output/deliverable}
 **Execution Time**: {Estimated duration}
-**STRAF Command**:
-```powershell
-{STRAF command}
-```
+**Execution Notes**:
+- {What to do}
+- {Required inputs}
+- {What to verify}
 
 **Task Details**:
 - **Input**: {Required inputs}
@@ -271,10 +251,10 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
 
 When generating implementation plans:
 
-1. **Start with Phase 0**: Always include Task 0.0 (context extraction)
+1. **Start with Phase 0**: Include it only when required by the design/spec or execution mode
 2. **Map layers to phases**: Use Pattern 1
 3. **Break down each phase**: Apply Pattern 3
-4. **Generate STRAF commands**: Use Pattern 4
+4. **Write execution notes**: Use Pattern 4
 5. **Document dependencies**: Apply Pattern 5
 6. **Define output structure**: Use Pattern 6
 7. **Add bootstrap integration**: Use Pattern 7

@@ -3,7 +3,7 @@
 **Version**: 1.0  
 **Date**: {YYYY-MM-DD}  
 **Execution**: Sequential task execution  
-**Target**: {skill_path}
+**Target**: {deliverable_root}
 
 ---
 
@@ -11,24 +11,27 @@
 
 {High-level description from design document}
 
-**Final Outcome**: {skill_path} skill with master coordinator and task prompts.
+**Final Outcome**: Deliver the product artifacts described in the design/spec under {deliverable_root}.
 
-**Output Directory Structure**:
+NOTE:
+- This plan may optionally include *execution scaffolding* (bootstrap orchestration, Task 0.0 condensed contexts, per-task prompts).
+- Only include that scaffolding when explicitly requested (e.g., `execution_mode=bootstrap`).
+
+**Deliverable Directory Structure** (MUST match design/spec; do not invent extra scaffolding):
 ```
-{skill_path}/
-├── skill-manifest.json
-├── README.md
-├── prompts/
-│   └── {skill-name}.md (master coordinator)
+{deliverable_root}/
+├── {design-derived files and folders}
+└── ...
+```
+
+**Optional Execution Scaffolding** (ONLY if `execution_mode=bootstrap`):
+```
+{deliverable_root}/
 ├── tasks/
-│   ├── contexts/          # Task 0.0 outputs
-│   ├── setup/             # Phase 0 prompts
-│   ├── layer-1/           # Phase 1 prompts
-│   ├── layer-2/           # Phase 2 prompts
-│   └── layer-N/
-├── tools/                 # Python scripts (if applicable)
-├── kb/                    # Knowledge artifacts
-└── definitions/           # Supporting files
+│   ├── contexts/          # Condensed contexts (optional)
+│   ├── setup/             # Setup prompts (optional)
+│   └── phase-* / layer-*  # Per-task prompts (optional)
+└── skill.md               # Only if the deliverable itself is an OLAF skill
 ```
 
 ---
@@ -38,61 +41,21 @@
 Each task should be executed sequentially following the task order. Tasks can be executed using any appropriate method:
 
 - Direct execution via AI assistant with task prompt
-- Automated execution via agent frameworks  
+- Runner-assisted execution with a separate plan runner (e.g., `skills/run-implementation-plan/skill.md`)
+- Automated execution via agent frameworks
 - Manual execution following task instructions
 
-**Task Prompt Location**: `{skill_path}/tasks/<phase>/<task-name>.md`  
-**Prerequisites**: Task 0.0 must complete first
+If using bootstrap execution:
+- **Task Prompt Location**: `{deliverable_root}/tasks/<phase>/<task-name>.md`
+- **Prerequisites**: Task 0.0 must complete first (ONLY if `include_task_context_extraction=true`)
 
 ---
 
-## PHASE 0: Setup & Structure Creation
+## PHASE 0: Setup (Optional)
 
-### Task 0.0: Extract Task Contexts
+Include Phase 0 ONLY when the design/spec explicitly requires setup scaffolding OR when `execution_mode=bootstrap`.
 
-**CRITICAL**: This task MUST be executed FIRST before any other tasks
-
-**Artifact**: Condensed context files for task execution  
-**Execution Time**: 10-15 min  
-**Task Prompt**: `olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md`  
-**Context**: `bootstrap_doc={output_file},skill_path={skill_path}`
-
-**Task Details**:
-- **Input**: {output_file} (this implementation plan)
-- **Process**:
-  1. Read implementation plan
-  2. Extract task definitions
-  3. Generate condensed context files
-  4. Save to {skill_path}/tasks/contexts/
-
-**Outputs**:
-- {skill_path}/tasks/contexts/task-{N}-context.md (one per task)
-
-**Dependencies**: None (FIRST task)
-
----
-
-### Task 0.1: Create Skill Directory Structure
-
-**Artifact**: Complete skill directory  
-**Execution Time**: 5 min  
-**Task Prompt**: `{skill_path}/tasks/setup/create-skill-structure.md`  
-**Context**: `skill_name={skill_name},target_path={skill_path}`
-
-**Dependencies**: Task 0.0
-
----
-
-### Task 0.2: Create Master Coordinator Prompt
-
-**Artifact**: prompts/{skill-name}.md  
-**Execution Time**: 10 min  
-**Task Prompt**: `{skill_path}/tasks/setup/create-master-coordinator.md`  
-**Context**: `skill_name={skill_name},layers={layer_count},pattern=sequential`
-
-**Dependencies**: Task 0.1
-
----
+If included, define setup tasks that are actually needed for the deliverable (e.g., create folders, add boilerplate, initialize tests). Do not force an OLAF-skill structure unless `deliverable_kind=skill`.
 
 ## PHASE 1: Layer 1 - {Layer Name}
 
@@ -102,8 +65,12 @@ Each task should be executed sequentially following the task order. Tasks can be
 
 **Artifact**: {Primary output}  
 **Execution Time**: {N} min  
-**Task Prompt**: `{skill_path}/tasks/layer-1/{task-slug}.md`  
-**Context**: `skill_path={skill_path},component={ComponentName}`
+If using per-task prompts (bootstrap execution):
+- **Task Prompt**: `{deliverable_root}/tasks/layer-1/{task-slug}.md`
+- **Context**: `deliverable_root={deliverable_root},component={ComponentName}`
+
+If manual execution:
+- Omit task prompt paths and provide direct, human-readable execution steps.
 
 **Task Details**:
 - **Input**: {Inputs}
@@ -128,22 +95,28 @@ Each task should be executed sequentially following the task order. Tasks can be
 
 ---
 
-## Bootstrap Execution
+## Runner Execution (Optional)
+
+Include this section ONLY when `execution_mode=bootstrap`.
 
 ### Full Sequential Execution
 
-Execute ALL tasks sequentially via bootstrap orchestrator:
+Execute ALL tasks sequentially via your runner:
 
-**Task Prompt**: `olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md`  
-**Context**: `bootstrap_doc={output_file},checklist_path=.olaf/work/project-tasks/task-checklist.md`
+Runner inputs (conceptual):
+- `plan_file={output_file}`
+- `checklist_path=.olaf/work/project-tasks/task-checklist.md`
+- `mode=auto`
 
 **Execution Time**: {estimated_total_time} minutes (~{hours} hours)  
 **Mode**: Autonomous execution
 
 ### Resume from Specific Task
 
-**Task Prompt**: `olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md`  
-**Context**: `bootstrap_doc={output_file},checklist_path=.olaf/work/project-tasks/task-checklist.md,start_from_task={task_id}`
+Runner inputs (conceptual):
+- `plan_file={output_file}`
+- `checklist_path=.olaf/work/project-tasks/task-checklist.md`
+- `start_from_task={task_id}`
 
 ---
 
@@ -191,4 +164,4 @@ Upon completion:
 
 Generated by ESDI workflow Phase 4 (Implementation Planning)
 
-**Next Step**: Execute via bootstrap-orchestrator.md
+**Next Step**: Execute via `{bootstrap_orchestrator_prompt}`

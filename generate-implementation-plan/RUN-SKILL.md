@@ -5,76 +5,62 @@
 Run this skill directly on an existing design.md file:
 
 ```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
-  --context "design_file=YOUR_DESIGN_FILE_PATH,output_file=YOUR_OUTPUT_FILE_PATH,skill_path=YOUR_SKILL_PATH" `
-  --tool-mode standard `
-  --aws-profile bedrock
+# Use your environment's prompt runner / IDE agent to execute:
+# - prompt: skills/generate-implementation-plan/skill.md
+# - context: specification_file=...,design_file=...,output_file=...,execution_mode=manual
 ```
 
 ## Example: Generate Plan for ESDI Output
 
 ```powershell
 # Assuming ESDI generated design.md in .olaf/work/staging/esdi/20251122-repo-scanner/
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
-  --context "design_file=.olaf/work/staging/esdi/20251122-repo-scanner/design.md,output_file=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,skill_path=skills/repo-scanner" `
-  --tool-mode standard `
-  --aws-profile bedrock
+# prompt: skills/generate-implementation-plan/skill.md
+# context: specification_file=.olaf/work/staging/esdi/20251122-repo-scanner/specification.md,design_file=.olaf/work/staging/esdi/20251122-repo-scanner/design.md,output_file=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,execution_mode=manual
 ```
 
 ## Context Variables
 
 **Required**:
+- `specification_file`: Path to specification.md from transform-raw-spec skill
 - `design_file`: Path to design.md from generate-design skill
 - `output_file`: Path for IMPLEMENTATION-TASK-PLAN.md output
 
 **Optional**:
-- `skill_path`: Target path for skill (default: `skills/${skill_name}`)
+- `deliverable_kind`: `tool|skill|library` (default: `skill`)
+- `deliverable_root`: Root directory for deliverables
+- `skill_path`: Back-compat alias for deliverable_root when generating an OLAF skill
 - `skill_name`: Override skill name (default: extracted from design)
-- `include_bootstrap`: Include bootstrap command (default: true)
+- `execution_mode`: `manual|bootstrap` (default: `manual`)
+- `include_task_context_extraction`: `true|false` (default: `false`)
+- `include_bootstrap`: `true|false` (default: `false`)
+- `task_context_extractor_prompt`: Required if `include_task_context_extraction=true`
+- `bootstrap_orchestrator_prompt`: Required if `include_bootstrap=true`
 
 ## What Happens
 
-1. **Task 0**: Extracts layers & components from design.md → Propose-Act gate
-2. **Task 1**: Generates Task 0.0 spec (onboarding 0.3 pattern) → Propose-Act gate
-3. **Task 2**: Creates complete task breakdown → Propose-Act gate
-4. **Task 3**: Generates STRAF commands for all tasks → Propose-Act gate
-5. **Task 4**: Creates bootstrap integration command → Propose-Act gate
-6. **Task 5**: Writes final IMPLEMENTATION-TASK-PLAN.md → Act
+1. **Task 1**: Extract requirements + design layers → Propose-Act gate
+2. **Task 2**: Optionally generates Task 0.0 (condensed task context extraction) → Propose-Act gate
+3. **Task 3**: Creates complete task breakdown → Propose-Act gate
+4. **Task 4**: Validates requirement coverage → Propose-Act gate
+5. **Task 5**: Generates runner-agnostic execution notes for tasks → Propose-Act gate
+6. **Task 6**: Optionally creates bootstrap/runner integration info → Propose-Act gate
+7. **Task 7**: Writes final IMPLEMENTATION-TASK-PLAN.md → Act
 
 ## After Generation
 
-### Step 1: Execute Task 0.0 Manually
+If you generated a manual plan (`execution_mode=manual`), execute tasks manually.
 
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md" `
-  --context "bootstrap_doc=YOUR_OUTPUT_FILE_PATH,skill_path=YOUR_SKILL_PATH" `
-  --tool-mode standard `
-  --aws-profile bedrock
-```
-
-### Step 2: Execute Bootstrap (Autonomous)
-
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" `
-  --context "bootstrap_doc=YOUR_OUTPUT_FILE_PATH,checklist_path=.olaf/work/project-tasks/task-checklist.md" `
-  --tool-mode auto `
-  --aws-profile bedrock
-```
+If you generated a bootstrap plan (`execution_mode=bootstrap`), you must provide working paths for:
+- `task_context_extractor_prompt` (if using Task 0.0)
+- `bootstrap_orchestrator_prompt` (if using bootstrap orchestration)
 
 ## Via ESDI Workflow (Recommended)
 
 This skill is automatically invoked in ESDI Phase 4:
 
 ```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "skills/run-esdi/prompts/run-esdi-coordinator.md" `
-  --context "idea=Your idea here,topic=your-topic" `
-  --tool-mode standard `
-  --aws-profile bedrock
+# Use your ESDI entrypoint to run phases 1-4.
+# If you have a prompt runner, point it at the ESDI coordinator prompt and provide idea/topic context.
 ```
 
 ESDI will run all 4 phases:
@@ -104,4 +90,4 @@ ESDI will run all 4 phases:
 **If Task 0.0 fails**:
 - Verify implementation plan is valid markdown
 - Check skill_path directory is writable
-- Ensure STRAF agent has necessary permissions
+- Ensure your runner/agent has necessary permissions

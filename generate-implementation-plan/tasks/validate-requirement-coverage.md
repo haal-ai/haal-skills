@@ -1,11 +1,11 @@
 ---
 name: validate-requirement-coverage
-description: "Task 3 - Validate all EARS requirements are addressed in task breakdown"
-task_id: 3
+description: "Task 4 - Validate all EARS requirements are addressed in task breakdown"
+task_id: 4
 protocol: Propose-Act
 ---
 
-# Task 3: Validate Requirement Coverage
+# Task 4: Validate Requirement Coverage
 
 ## Objective
 
@@ -14,9 +14,9 @@ Verify that all EARS requirements from Phase 2 specification are adequately addr
 ## Context Variables
 
 **Required**:
-- `requirements_map`: Output from Task 0 (EARS requirements)
-- `task_breakdown`: Output from Task 2 (complete task structure)
-- `design_layers`: Output from Task 0 (layer information)
+- `requirements_map`: Output from Task 1 (EARS requirements)
+- `task_breakdown`: Output from Task 3 (complete task structure)
+- `design_layers`: Output from Task 1 (layer information)
 
 **Outputs**:
 - `traceability_matrix`: Mapping of requirements to tasks

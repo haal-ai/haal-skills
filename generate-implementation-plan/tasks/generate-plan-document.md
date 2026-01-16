@@ -1,30 +1,42 @@
 ---
 name: generate-plan-document
-description: "Task 5 - Write final IMPLEMENTATION-TASK-PLAN.md"
-task_id: 5
+description: "Task 7 - Write final IMPLEMENTATION-TASK-PLAN.md"
+task_id: 7
 protocol: Act
 ---
 
-# Task 5: Generate Plan Document
+# Task 7: Generate Plan Document
 
 ## Objective
 
-Assemble all outputs from previous tasks into the final IMPLEMENTATION-TASK-PLAN.md file following the onboarding competency pattern.
+Assemble all outputs from previous tasks into the final IMPLEMENTATION-TASK-PLAN.md file.
+
+IMPORTANT:
+- Treat the design/spec as the source of truth for *product deliverables*.
+- Only include onboarding/bootstrap scaffolding when explicitly requested (e.g., `execution_mode=bootstrap`).
 
 ## Context Variables
 
 **Required**:
-- `requirements_map`: From Task 0
-- `design_layers`: From Task 0
-- `task_zero_spec`: From Task 1
-- `task_breakdown`: From Task 2
-- `traceability_matrix`: From Task 3
-- `coverage_report`: From Task 3
-- `task_commands`: From Task 4
-- `bootstrap_command`: From Task 5
+- `requirements_map`: From Task 1
+- `design_layers`: From Task 1
+- `task_zero_spec`: From Task 2
+- `task_breakdown`: From Task 3
+- `traceability_matrix`: From Task 4
+- `coverage_report`: From Task 4
+- `task_execution_info`: From Task 5
+- `bootstrap_command`: From Task 6 (may be empty when omitted)
 - `output_file`: Path to write IMPLEMENTATION-TASK-PLAN.md
 - `specification_file`: Original Phase 2 specification path
 - `design_file`: Original Phase 3 design path
+
+**Optional**:
+- `deliverable_kind`: `tool|skill|library`
+- `deliverable_root`: Root folder for product deliverables
+- `execution_mode`: `manual|bootstrap`
+- `include_task_context_extraction`: `true|false`
+- `include_bootstrap`: `true|false`
+- `skill_path`: Back-compat alias when `deliverable_kind=skill`
 
 **Outputs**:
 - ${output_file}: Complete implementation plan
@@ -42,8 +54,8 @@ Use template from `templates/implementation-plan-template.md`
 
 **Version**: 1.0  
 **Date**: {current_date}  
-**Execution**: Sequential via STRAF Agents  
-**Target**: {skill_path}
+**Execution**: Sequential via a plan runner (human or agent)  
+**Target**: {deliverable_root}
 
 ---
 ```
@@ -55,27 +67,18 @@ Use template from `templates/implementation-plan-template.md`
 
 {Extract from design.md introduction}
 
-**Final Outcome**: {skill_path} with master coordinator and task prompts executable via STRAF agents.
+**Final Outcome**: Product artifacts described in the design/spec implemented under {deliverable_root}.
 
 **Requirement Coverage**: {coverage_percentage}% ({covered_count}/{total_requirements} requirements addressed)
 
-**Output Directory Structure**:
+**Deliverable Directory Structure** (must match design/spec):
 ```
-{skill_path}/
-├── skill-manifest.json
-├── README.md
-├── prompts/
-│   └── {skill-name}.md (master coordinator)
-├── tasks/
-│   ├── contexts/          # Task 0.0 outputs
-│   ├── setup/             # Phase 0 prompts
-│   ├── layer-1/           # Phase 1 prompts
-│   ├── layer-2/           # Phase 2 prompts
-│   └── layer-N/
-├── tools/                 # Python scripts (if applicable)
-├── kb/                    # Knowledge artifacts
-└── definitions/           # Supporting files
+{deliverable_root}/
+├── {design-derived files and folders}
+└── ...
 ```
+
+If `execution_mode=bootstrap`, add a separate "Optional Execution Scaffolding" subsection and clearly label it as non-product scaffolding.
 
 ---
 ```
@@ -85,19 +88,15 @@ Use template from `templates/implementation-plan-template.md`
 ```markdown
 ## Execution Strategy
 
-Each task will be submitted to STRAF agent using:
+This plan is designed to be executed sequentially, one task at a time.
 
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "<task-prompt-path>" `
-  --context "<context-variables>" `
-  --tool-mode standard `
-  --aws-profile bedrock
-```
+Execution options:
+- **Manual**: a human (or IDE agent) follows each task section and produces the specified outputs.
+- **Runner-assisted**: a separate "plan runner" orchestrates tasks, captures/loads per-task context, and updates a checklist.
 
-**Task Prompt Generation**: Tasks use universal-task-prompt-generator.md with condensed contexts from Task 0.0
+If `execution_mode=bootstrap`, include prompt generation + Task 0.0 prerequisites.
 
-**Prerequisites**: Task 0.0 MUST complete first to generate context files
+If `execution_mode=manual`, omit onboarding/Task 0.0 references and instead describe how a human (or agent) should execute the tasks directly.
 
 ---
 ```
@@ -143,10 +142,7 @@ For each phase in task_breakdown (Phase 1 through N):
   
   **Artifact**: {task_artifact}
   **Execution Time**: {estimated_time}
-  **STRAF Command**:
-  ```powershell
-  {task_commands[task_id]}
-  ```
+  **Execution Notes**: {task_execution_info[task_id]}
   
   **Task Details**:
   {task_details from task_breakdown}
@@ -173,11 +169,11 @@ For each phase in task_breakdown (Phase 1 through N):
 ```markdown
 ## Bootstrap Execution
 
-{Insert bootstrap instructions from Task 4}
+{Insert bootstrap instructions from Task 6}
 
-{Insert bootstrap_command from Task 4}
+{Insert bootstrap_command from Task 6}
 
-{Insert resume command pattern from Task 4}
+{Insert resume command pattern from Task 6}
 
 ---
 ```
@@ -207,14 +203,11 @@ N. Phase {N} ({layer_N_name}) - {layer_N_tasks} tasks
 
 ## Prerequisites
 
-Before executing bootstrap:
+Before starting execution:
 
-1. ✅ **AWS credentials configured**
-   - Profile: bedrock
-   - Region: {aws_region}
-   
-2. ✅ **STRAF agent operational**
-   - Path: .olaf/core/agentic/straf/olaf_strands_agent.py
+1. ✅ **Plan reviewed and approved**
+2. ✅ **Workspace ready** (tooling installed, repo cloned, env configured as required by the design)
+3. ✅ **Progress tracking available** (a checklist file if using a runner)
    - Version: Latest
    
 3. ✅ **Design document available**
@@ -231,14 +224,13 @@ Before executing bootstrap:
 
 Upon completion of ALL tasks:
 
-✅ Skill directory structure created ({skill_path})
-✅ Master coordinator prompt implemented
+✅ Product deliverables implemented under `{deliverable_root}`
+✅ Any required entrypoints implemented (only if design/spec requires)
 ✅ All layer components implemented
 ✅ Integration tests created and passing
 ✅ Knowledge base artifacts generated
 ✅ README and documentation complete
-✅ Skill executable via STRAF agent
-✅ Ready for production use
+✅ Ready for user review and execution
 
 ---
 
@@ -254,6 +246,7 @@ This implementation plan was generated by the ESDI workflow:
 **Coverage**: {coverage_percentage}% of requirements addressed in implementation plan.
 
 **Next Step**: Execute via bootstrap-orchestrator.md to build the complete skill.
+**Next Step**: Execute tasks sequentially (manually or via a runner) and track progress in a checklist.
 
 ---
 ```
@@ -279,13 +272,8 @@ Confirm file created successfully
 
 Ready for Bootstrap Execution:
 
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" `
-  --context "bootstrap_doc=${output_file},checklist_path=.olaf/work/project-tasks/task-checklist.md" `
-  --tool-mode auto `
-  --aws-profile bedrock
-
-⚠️ IMPORTANT: Run Task 0.0 manually FIRST to extract task contexts!
+- If `execution_mode=manual`: start with Phase 1 tasks.
+- If `execution_mode=bootstrap`: ensure any enabled Phase 0 tasks (including optional Task 0.0) are completed as specified, then run your chosen runner with `plan_file=${output_file}` and a `checklist_path`.
 ```
 
 ## Success Criteria
@@ -295,10 +283,10 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 ✅ Requirement traceability matrix included
 ✅ Coverage statistics documented
 ✅ Task 0.0 included with CRITICAL annotation
-✅ STRAF commands formatted correctly
-✅ Bootstrap execution section complete
+✅ Execution strategy is runner-agnostic (no framework-specific commands assumed)
+✅ Optional bootstrap section included only when explicitly enabled
 ✅ File valid markdown syntax
-✅ Ready for bootstrap orchestrator
+✅ Ready for sequential execution
 
 ## Error Handling
 
@@ -351,3 +339,4 @@ Returns to coordinator:
 **Final Task**: Implementation plan complete and ready for execution.
 
 **Next Step**: Execute bootstrap-orchestrator.md to build the skill autonomously.
+**Next Step**: Execute tasks sequentially (manually or via your runner) to implement the deliverable.

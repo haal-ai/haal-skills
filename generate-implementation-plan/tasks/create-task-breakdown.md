@@ -1,21 +1,31 @@
 ---
 name: create-task-breakdown
-description: "Task 2 - Map layers to phases and generate task structure"
-task_id: 2
+description: "Task 3 - Map layers to phases and generate task structure"
+task_id: 3
 protocol: Propose-Act
 ---
 
-# Task 2: Create Task Breakdown
+# Task 3: Create Task Breakdown
 
 ## Objective
 
-Transform design layers into complete task breakdown structure with Phase 0 (setup), layer phases, and proper dependencies.
+Transform design layers into a complete task breakdown structure with phases, tasks, and proper dependencies.
+
+IMPORTANT:
+- Do NOT force an onboarding-style Phase 0 (Task 0.0 / 0.1 / 0.2) unless explicitly requested.
+- Do NOT assume the deliverable is an OLAF skill under `skills/`.
 
 ## Context Variables
 
 **Required**:
-- `design_layers`: Output from Task 0
-- `task_zero_spec`: Output from Task 1
+- `design_layers`: Output from Task 1
+- `task_zero_spec`: Output from Task 2
+
+**Optional**:
+- `deliverable_kind`: `tool|skill|library` (default: `skill`)
+- `deliverable_root`: Root folder for product deliverables
+- `execution_mode`: `manual|bootstrap` (default: `manual`)
+- `include_task_context_extraction`: `true|false` (default: `false`)
 
 **Outputs**:
 - `task_breakdown`: Structured list of all tasks across all phases
@@ -24,50 +34,47 @@ Transform design layers into complete task breakdown structure with Phase 0 (set
 
 ### Step 1: Generate Phase 0 (Setup)
 
-**Fixed tasks** for every implementation:
+Phase 0 is OPTIONAL.
+
+Only include onboarding Task 0.0 (context extraction) when:
+- `execution_mode=bootstrap` AND `include_task_context_extraction=true`
+
+Only include "create skill structure" / "create master coordinator" tasks when:
+- the design/spec explicitly requires creating an OLAF skill, OR `deliverable_kind=skill`.
 
 ```markdown
-## PHASE 0: Setup & Structure Creation
+## PHASE 0: Setup (Optional)
 
-### Task 0.0: Extract Task Contexts
-{task_zero_spec from Task 1}
+### Task 0.0: Extract Task Contexts (Optional)
+{task_zero_spec from Task 2, or omit entirely when not enabled}
 
-### Task 0.1: Create Skill Directory Structure
+### Task 0.1: Create Deliverable Directory Structure (Optional)
 
-**Artifact**: Complete skill directory following chain model
+**Artifact**: Required folders/files to begin implementation (only what design/spec requires)
 **Execution Time**: 5 min
-**STRAF Command**:
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${skill_path}/tasks/setup/create-skill-structure.md" `
-  --context "skill_name=${skill_name},target_path=${skill_path}" `
-  --tool-mode standard --aws-profile bedrock
-```
+**Execution Notes**:
+- Create only the folders/files required by the design/spec under `${deliverable_root}`.
+- If you have a runner, capture this as a simple filesystem task.
 
 **Task Details**:
 - **Input**: Skill name, target path
 - **Process**:
   1. Create directory structure following master-chain pattern
-  2. Generate skill-manifest.json
+  2. Create placeholder skill.md
   3. Create placeholder README.md
 
 **Outputs**:
-- Complete skill directory structure
-- skill-manifest.json with metadata
+- Minimal directory structure required by design/spec
 
-**Dependencies**: Task 0.0 (context extraction)
+**Dependencies**: Task 0.0 only if Task 0.0 is enabled
 
-### Task 0.2: Create Master Coordinator Prompt
+### Task 0.2: Create Coordinator/Entrypoint (Optional)
 
-**Artifact**: prompts/${skill_name}.md (master coordinator)
+**Artifact**: Coordinator/entrypoint ONLY if required by design/spec (e.g., `skill.md` for an OLAF skill)
 **Execution Time**: 10 min
-**STRAF Command**:
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${skill_path}/tasks/setup/create-master-coordinator.md" `
-  --context "skill_name=${skill_name},layers=${layer_count},pattern=sequential" `
-  --tool-mode standard --aws-profile bedrock
-```
+**Execution Notes**:
+- Implement the entrypoint/coordinator only if the product deliverable requires it.
+- For non-skill deliverables, this may be a CLI entrypoint, library API surface, or minimal bootstrap.
 
 **Task Details**:
 - **Input**: Layer count, workflow pattern
@@ -77,9 +84,9 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
   3. Create execution protocol
 
 **Outputs**:
-- prompts/${skill_name}.md with complete task chain
+- Entry/coordinator artifacts if required
 
-**Dependencies**: Task 0.1 (structure created)
+**Dependencies**: Task 0.1 (if included)
 ```
 
 ### Step 2: Generate Layer Phases
@@ -106,13 +113,9 @@ For each component in layer:
 
 **Artifact**: {Component output or deliverable}
 **Execution Time**: {Estimated time}
-**STRAF Command**:
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${skill_path}/tasks/layer-{layer_id}/{task-slug}.md" `
-  --context "skill_path=${skill_path},component={ComponentName},layer_number={layer_id}" `
-  --tool-mode standard --aws-profile bedrock
-```
+**Execution Notes**:
+- Follow the Task Details and produce the Outputs.
+- If using a runner, ensure it passes the minimal required context (component name, layer number, paths) and records artifacts.
 
 **Task Details**:
 - **Input**: {Component inputs from design}
@@ -179,9 +182,9 @@ For each task:
    - All Phase 2 tasks depend on Phase 1 completion
    - Layer N depends on Layer N-1 (per design dependencies)
 
-3. Special dependencies:
-   - ALL tasks depend on Task 0.0 (context extraction)
-   - Task 0.2 depends on Task 0.1 (structure before coordinator)
+3. Special dependencies (ONLY if the related tasks are enabled):
+  - Tasks may depend on Task 0.0 (context extraction)
+  - Coordinator depends on structure creation
 ```
 
 ### Step 5: Calculate Task Counts
@@ -232,14 +235,14 @@ Dependency Graph:
 
 Execution Order: Sequential by phase, parallel within phase where possible
 
-APPROVE to proceed to Task 3 (Generate STRAF Commands)
+APPROVE to proceed to Task 4 (Validate Requirement Coverage)
 ADJUST if task breakdown needs refinement
 ```
 
 ## Success Criteria
 
 ✅ Phase 0 included with Tasks 0.0, 0.1, 0.2
-✅ Task 0.0 uses exact spec from Task 1
+✅ Task 0.0 uses exact spec from Task 2
 ✅ Each layer mapped to a phase
 ✅ Each component mapped to a task
 ✅ Integration and validation tasks added per layer
@@ -301,4 +304,4 @@ Returns to coordinator:
 
 ## Next Task
 
-→ Task 3: generate-straf-commands.md (uses task_breakdown)
+→ Task 4: validate-requirement-coverage.md (uses task_breakdown)

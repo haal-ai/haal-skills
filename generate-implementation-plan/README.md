@@ -2,7 +2,7 @@
 
 ## Overview
 
-Transform layered system design into detailed, executable implementation task plan following the OLAF onboarding competency pattern with Task 0.0 for context extraction and bootstrap orchestrator integration.
+Transform specification + system design into a detailed, executable implementation task plan.
 
 **Part of**: ESDI Workflow (Phase 4 - Implementation Planning with Requirement Traceability)  
 **Protocol**: Propose-Act (master-chain pattern)  
@@ -12,15 +12,16 @@ Transform layered system design into detailed, executable implementation task pl
 
 ## What It Does
 
-This skill takes a **design.md** file (from `generate-design` skill) and produces a complete **IMPLEMENTATION-TASK-PLAN.md** that can be executed autonomously via the bootstrap orchestrator.
+This skill takes a **design.md** file (from `generate-design` skill) and produces a complete **IMPLEMENTATION-TASK-PLAN.md**.
+
+Optional: it can also produce an execution-ready plan (Task 0.0 condensed contexts + bootstrap orchestration) *if you provide working prompt paths* for those tools.
 
 **Key Features**:
 - ✅ Extracts layers and components from design
-- ✅ Generates **Task 0.0** (context extraction) following onboarding 0.3 pattern
+- ✅ Can generate optional **Task 0.0** (condensed context extraction) when enabled
 - ✅ Creates complete task breakdown with dependencies
 - ✅ Generates execution information for every task
-- ✅ Provides bootstrap orchestrator integration
-- ✅ Ready for autonomous execution
+- ✅ Can include optional bootstrap orchestrator integration when enabled
 
 ---
 
@@ -34,10 +35,10 @@ This skill takes a **design.md** file (from `generate-design` skill) and produce
 - `IMPLEMENTATION-TASK-PLAN.md`: Complete implementation plan with:
   - Requirement traceability matrix
   - Coverage analysis
-  - Phase 0: Setup (Task 0.0, 0.1, 0.2)
+  - Optional Phase 0: Setup (only when enabled / required by design)
   - Phase 1-N: Layer implementations
   - Task execution information for all tasks
-  - Bootstrap execution instructions
+  - Optional bootstrap execution instructions
   - Estimated execution time
 
 ---
@@ -60,9 +61,10 @@ ESDI will automatically:
 
 Execute the skill directly on an existing design.md:
 
-**Task Prompt**: `skills/generate-implementation-plan/prompts/generate-implementation-plan.md`
+**Task Prompt**: `skills/generate-implementation-plan/skill.md`
 
 **Context Variables**:
+- `specification_file`: Path to specification.md (required)
 - `design_file`: Path to design.md (required)
 - `output_file`: Where to write IMPLEMENTATION-TASK-PLAN.md (required)
 - `skill_path`: Target path for skill (optional, defaults to `skills/${skill_name}`)
@@ -75,40 +77,40 @@ Execute the skill directly on an existing design.md:
 The skill follows the **master-chain pattern** with 7 sequential tasks:
 
 ```yaml
-Task 0: extract-requirements-and-design
+Task 1: extract-requirements-and-design
   → Parse specification.md for EARS requirements
   → Parse design.md for layers/components
   → Create initial requirement-to-layer mapping
   → Propose-Act gate
 
-Task 1: generate-task-zero
+Task 2: generate-task-zero
   → Generate Task 0.0 specification
   → Follow onboarding 0.3 pattern
   → Propose-Act gate
 
-Task 2: create-task-breakdown
+Task 3: create-task-breakdown
   → Map layers to phases
   → Generate task structure
   → Calculate dependencies
   → Propose-Act gate
 
-Task 3: validate-requirement-coverage
+Task 4: validate-requirement-coverage
   → Map requirements to tasks
   → Generate traceability matrix
   → Identify gaps in coverage
   → Propose-Act gate
 
-Task 4: generate-execution-steps
+Task 5: generate-execution-steps
   → Create execution information for all tasks
   → Define prompts, context, and dependencies
   → Propose-Act gate
 
-Task 5: create-bootstrap-integration
+Task 6: create-bootstrap-integration
   → Generate bootstrap execution instructions
   → Add resume capability
   → Propose-Act gate
 
-Task 6: generate-plan-document
+Task 7: generate-plan-document
   → Assemble final IMPLEMENTATION-TASK-PLAN.md
   → Write to output_file
   → Act (no gate, final assembly)
@@ -158,9 +160,9 @@ Generated IMPLEMENTATION-TASK-PLAN.md contains:
 
 ---
 
-## Task 0.0 Pattern
+## Task 0.0 (Optional)
 
-**CRITICAL**: Task 0.0 follows the **current onboarding Task 0.3 pattern**:
+Task 0.0 is OPTIONAL and only applies when you want bootstrap-style execution with condensed per-task contexts.
 
 ```markdown
 ## Task 0.0: Extract Task Contexts
@@ -170,7 +172,7 @@ Generated IMPLEMENTATION-TASK-PLAN.md contains:
 **Purpose**: Generate condensed context files (~500 tokens) for universal prompt generator
 
 **Task Prompt**:  
-`olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md`
+`{task_context_extractor_prompt}`
 
 **Context**:  
 `bootstrap_doc={plan_path},skill_path={skill_path}`
@@ -185,7 +187,7 @@ Generated IMPLEMENTATION-TASK-PLAN.md contains:
 - Universal prompt generator needs condensed context
 - Avoids token limit issues (50KB → 500 tokens)
 - 3x faster prompt generation (600s vs 1800s)
-- Proven pattern from onboarding competency
+- This is a general condensed-context pattern; the extractor prompt must exist in your environment.
 
 ---
 
@@ -194,10 +196,9 @@ Generated IMPLEMENTATION-TASK-PLAN.md contains:
 **Required Skills**:
 - ✅ `generate-design` (produces design.md input)
 
-**Required Infrastructure**:
-- ✅ Bootstrap orchestrator (`olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md`)
-- ✅ Universal prompt generator (`olaf-core/competencies/onboard/prompts/universal-task-prompt-generator.md`)
-- ✅ Extract task contexts tool (`olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md`)
+**Optional Infrastructure (ONLY if you enable bootstrap execution)**:
+- ✅ Bootstrap orchestrator (`{bootstrap_orchestrator_prompt}`)
+- ✅ Task context extractor (`{task_context_extractor_prompt}`)
 
 ---
 
@@ -211,13 +212,13 @@ Execute the ESDI workflow with your chosen execution method:
 
 ### 2. Execute Task 0.0
 
-**Task Prompt**: `olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md`  
-**Context**: `bootstrap_doc=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,skill_path=skills/repo-scanner`  
+**Task Prompt**: `{task_context_extractor_prompt}`  
+**Context**: `bootstrap_doc=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,deliverable_root=skills/repo-scanner`  
 **Output**: `skills/repo-scanner/tasks/contexts/task-*.md` (47 files)
 
 ### 3. Execute Bootstrap
 
-**Task Prompt**: `olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md`  
+**Task Prompt**: `{bootstrap_orchestrator_prompt}`  
 **Context**: `bootstrap_doc=.olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md,checklist_path=.olaf/work/project-tasks/task-checklist.md`  
 **Result**: Fully implemented `repo-scanner` skill in `skills/repo-scanner/`
 
@@ -232,6 +233,7 @@ Execute the ESDI workflow with your chosen execution method:
 
 1. **Layer-to-Phase Mapping**: Each design layer → implementation phase
 2. **Phase 0 Pattern**: Setup tasks (0.0, 0.1, 0.2) for every plan
+  - Now: Phase 0 is optional and should not be forced unless requested
 3. **Task Breakdown**: Components → tasks with integration/validation
 4. **Dependency Management**: Sequential phases, parallel tasks within phases
 5. **Bootstrap Integration**: Autonomous execution via bootstrap orchestrator
@@ -294,18 +296,16 @@ graph LR
 
 ```
 generate-implementation-plan/
-├── skill-manifest.json
+├── skill.md
 ├── README.md (this file)
-├── prompts/
-│   └── generate-implementation-plan.md (master coordinator)
 ├── tasks/
-│   ├── extract-requirements-and-design.md (Task 0)
-│   ├── generate-task-zero.md (Task 1)
-│   ├── create-task-breakdown.md (Task 2)
-│   ├── validate-requirement-coverage.md (Task 3)
-│   ├── generate-execution-steps.md (Task 4)
-│   ├── create-bootstrap-integration.md (Task 5)
-│   └── generate-plan-document.md (Task 6)
+│   ├── extract-requirements-and-design.md (Task 1)
+│   ├── generate-task-zero.md (Task 2)
+│   ├── create-task-breakdown.md (Task 3)
+│   ├── validate-requirement-coverage.md (Task 4)
+│   ├── generate-execution-steps.md (Task 5)
+│   ├── create-bootstrap-integration.md (Task 6)
+│   └── generate-plan-document.md (Task 7)
 ├── kb/
 │   ├── task-planning-patterns.md
 │   └── straf-command-templates.md
@@ -320,7 +320,7 @@ generate-implementation-plan/
 
 For issues or questions:
 - Review task-planning-patterns.md for common scenarios
-- Check STRAF command templates for command syntax
+- Check runner template guidance for execution patterns
 - Verify design.md follows expected format
 - Ensure Task 0.0 completes before bootstrap
 

@@ -1,81 +1,57 @@
-# STRAF Command Templates
+# Runner Execution Templates (Legacy Filename)
 
 ## Overview
 
-Standard templates for generating STRAF agent commands in implementation plans.
+Standard templates for expressing how tasks should be executed in an implementation plan.
+
+NOTE:
+- This file keeps its historical name for back-compat.
+- The content is runner-agnostic and does not assume any specific execution framework or toolchain.
 
 ---
 
-## Basic Command Structure
+## Basic Execution Notes Structure
 
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "{prompt_path}" `
-  --context "{context_variables}" `
-  --tool-mode {mode} `
-  --aws-profile bedrock
+Use this structure in each task section:
+
+```markdown
+**Execution Notes**:
+- Inputs: {minimal inputs}
+- Steps: {what to do}
+- Outputs: {what files/changes should exist after}
+- Verification: {how to validate success}
 ```
-
-**Parameters**:
-- `prompt`: Path to prompt file (relative or absolute)
-- `context`: Comma-separated key=value pairs
-- `tool-mode`: `standard` | `auto` | `minimal`
-- `aws-profile`: AWS profile name (usually `bedrock`)
 
 ---
 
-## Tool Modes
+## Execution Modes (Conceptual)
 
-### Standard Mode
-**Usage**: Most tasks (default)
-**Behavior**: Propose-Act protocol, requires user approval for tool calls
-```powershell
---tool-mode standard
-```
-
-### Auto Mode
-**Usage**: Bootstrap orchestrator, autonomous agents
-**Behavior**: Auto-approves all tool calls, fully autonomous
-```powershell
---tool-mode auto
-```
-
-### Minimal Mode
-**Usage**: Simple analysis tasks, read-only operations
-**Behavior**: Limited tool access, fast execution
-```powershell
---tool-mode minimal
-```
+- **Manual**: human executes each task and checks off success criteria.
+- **Runner-assisted**: a separate tool/agent runs tasks sequentially and updates a checklist.
+- **Automated**: runner proceeds without extra human intervention; stops on failure.
 
 ---
 
 ## Template 1: Phase 0 Setup Tasks
 
 ### Task 0.0: Extract Task Contexts
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md" `
-  --context "bootstrap_doc=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,skill_path=${skill_path}" `
-  --tool-mode standard `
-  --aws-profile bedrock
+```markdown
+**Execution Notes**:
+- Use `${task_context_extractor_prompt}` (or equivalent) to generate condensed per-task context.
+- Inputs should include `bootstrap_doc=${output_dir}/IMPLEMENTATION-TASK-PLAN.md` and `deliverable_root=${deliverable_root}`.
 ```
 
 ### Task 0.1: Create Skill Structure
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${skill_path}/tasks/setup/create-skill-structure.md" `
-  --context "skill_name=${skill_name},target_path=${skill_path}" `
-  --tool-mode standard `
-  --aws-profile bedrock
+```markdown
+**Execution Notes**:
+- Create the minimal directory/file structure required by the design/spec.
+- For `deliverable_kind=skill`, this may include `skill.md` and a `tasks/` tree.
 ```
 
 ### Task 0.2: Create Master Coordinator
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${skill_path}/tasks/setup/create-master-coordinator.md" `
-  --context "skill_name=${skill_name},layers=${layer_count},pattern=sequential,output_base=${output_dir}" `
-  --tool-mode standard `
-  --aws-profile bedrock
+```markdown
+**Execution Notes**:
+- Create the entrypoint/coordinator only if required by the deliverable.
 ```
 
 ---
@@ -83,58 +59,49 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
 ## Template 2: Layer Implementation Tasks
 
 ### General Layer Task Pattern
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${skill_path}/tasks/layer-${layer_num}/${task_name}.md" `
-  --context "skill_path=${skill_path},layer_number=${layer_num},input_file=${input_artifact}" `
-  --tool-mode standard `
-  --aws-profile bedrock
+```markdown
+**Execution Notes**:
+- Implement the component(s) described in the task.
+- Ensure outputs are produced under the deliverable root.
+- Validate against success criteria.
 ```
 
 ### With Context File (Post Task 0.0)
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${skill_path}/tasks/layer-${layer_num}/${task_name}.md" `
-  --context "task_id=${task_id},context_file=${skill_path}/tasks/contexts/task-${task_id}-context.md,skill_path=${skill_path}" `
-  --tool-mode auto `
-  --aws-profile bedrock
+```markdown
+**Execution Notes**:
+- Load condensed context from `tasks/contexts/task-${task_id}-context.md` (if generated) to avoid re-loading the full plan.
 ```
 
 ---
 
-## Template 3: Bootstrap Orchestrator Execution
+## Template 3: Runner Execution
 
 ### Full Execution
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" `
-  --context "bootstrap_doc=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,checklist_path=.olaf/work/project-tasks/task-checklist.md" `
-  --tool-mode auto `
-  --aws-profile bedrock
+```markdown
+Runner inputs (conceptual):
+- `plan_file=${output_dir}/IMPLEMENTATION-TASK-PLAN.md`
+- `checklist_path=.olaf/work/project-tasks/task-checklist.md`
+- `mode=auto`
 ```
 
 ### Resume from Specific Task
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md" `
-  --context "bootstrap_doc=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,checklist_path=.olaf/work/project-tasks/task-checklist.md,start_from_task=2.1" `
-  --tool-mode auto `
-  --aws-profile bedrock
+```markdown
+Runner inputs (conceptual):
+- `plan_file=${output_dir}/IMPLEMENTATION-TASK-PLAN.md`
+- `checklist_path=.olaf/work/project-tasks/task-checklist.md`
+- `start_from_task=2.1`
 ```
 
 ---
 
-## Template 4: Universal Prompt Generator
+## Template 4: Optional Prompt/Task Generator
 
-**Usage**: Generate task prompts dynamically during bootstrap
+**Usage**: If your execution environment supports it, you can generate per-task prompts/instructions dynamically.
 
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/prompts/universal-task-prompt-generator.md" `
-  --context "task_id=${task_id},context_file=${skill_path}/tasks/contexts/task-${task_id}-context.md,skill_path=${skill_path}" `
-  --tool-mode auto `
-  --aws-profile bedrock
-```
+Runner inputs (conceptual):
+- `task_id=${task_id}`
+- `context_file=${deliverable_root}/tasks/contexts/task-${task_id}-context.md` (if generated)
+- `deliverable_root=${deliverable_root}`
 
 ---
 
@@ -181,107 +148,44 @@ start_from_task=1.1  # Optional
 
 ## Variable Interpolation Rules
 
-### Windows PowerShell
-```powershell
-# Use ${var} syntax
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --context "skill_path=${skill_path},output=${output_dir}/design.md"
-```
+Variable interpolation is runner-specific.
 
-### Unix/Linux Bash
-```bash
-# Use $var or ${var} syntax
-python ./.olaf/core/agentic/straf/olaf_strands_agent.py \
-  --context "skill_path=$skill_path,output=$output_dir/design.md"
-```
-
-### Literal Values (No Interpolation)
-```powershell
-# Use actual values when variables not set
---context "skill_path=competencies/onboard-me,layer_number=1"
-```
+Guideline:
+- Prefer explicit, fully qualified paths in execution notes when possible.
+- When variables are used, define them once (e.g., `deliverable_root`, `plan_file`, `checklist_path`) and reuse consistently.
 
 ---
 
 ## Multi-Line Commands
 
-### PowerShell (Backtick)
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "path/to/prompt.md" `
-  --context "var1=value1,var2=value2,var3=value3" `
-  --tool-mode standard `
-  --aws-profile bedrock
-```
-
-### Bash (Backslash)
-```bash
-python ./.olaf/core/agentic/straf/olaf_strands_agent.py \
-  --prompt "path/to/prompt.md" \
-  --context "var1=value1,var2=value2,var3=value3" \
-  --tool-mode standard \
-  --aws-profile bedrock
-```
+If your runner is a CLI, keep commands readable:
+- Use multi-line formatting supported by your shell (PowerShell backtick, Bash backslash).
+- Keep inputs (`plan_file`, `deliverable_root`) explicit.
 
 ---
 
 ## Timeout Configuration
 
-```powershell
-# Default timeout: 1800 seconds (30 minutes)
-# For Task 0.0 with condensed contexts: 600 seconds (10 minutes)
+Timeouts are runner-specific.
 
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md" `
-  --context "bootstrap_doc=${output_dir}/IMPLEMENTATION-TASK-PLAN.md" `
-  --tool-mode standard `
-  --aws-profile bedrock `
-  --timeout 600  # Optional: Override default
-```
+Guideline:
+- Treat context-extraction (Task 0.0) and test runs as potentially long-running.
+- Use conservative defaults and allow task-level overrides.
 
 ---
 
 ## Error Handling
 
-### Retry Pattern
-```powershell
-# Retry failed task with same command
-# Check logs in: .olaf/logs/straf_agent_*.log
-
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "${failed_task_prompt}" `
-  --context "${failed_task_context}" `
-  --tool-mode standard `
-  --aws-profile bedrock
-```
-
-### Debug Mode
-```powershell
-# Add verbose logging
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "path/to/prompt.md" `
-  --context "debug=true,${other_context}" `
-  --tool-mode standard `
-  --aws-profile bedrock `
-  --verbose  # Optional: Enable verbose output
-```
+Runner guidance:
+- Default behavior: stop on first failure.
+- Record failure details in the checklist/progress file.
+- Provide a resume mechanism via `start_from_task`.
 
 ---
 
 ## Quick Reference
 
-### Minimal Command
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py --prompt "path/to/prompt.md" --context "key=value" --tool-mode standard --aws-profile bedrock
-```
-
-### Full Command with All Options
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "path/to/prompt.md" `
-  --context "var1=value1,var2=value2" `
-  --tool-mode auto `
-  --aws-profile bedrock `
-  --timeout 600 `
-  --verbose
-```
+Use these canonical inputs when describing runner execution:
+- `plan_file`: path to IMPLEMENTATION-TASK-PLAN.md
+- `checklist_path`: where progress is tracked
+- `start_from_task`: optional resume marker

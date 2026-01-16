@@ -1,11 +1,11 @@
 ---
 name: extract-requirements-and-design
-description: "Task 0 - Extract EARS requirements and design layers with traceability mapping"
-task_id: 0
+description: "Task 1 - Extract EARS requirements and design layers with traceability mapping"
+task_id: 1
 protocol: Propose-Act
 ---
 
-# Task 0: Extract Requirements and Design
+# Task 1: Extract Requirements and Design
 
 ## Objective
 

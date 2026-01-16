@@ -14,7 +14,11 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 
 ## Mission
 
-Transform layered system design into detailed, executable implementation plan following the onboarding competency pattern with bootstrap orchestrator integration.
+Transform specification + system design into a detailed, executable implementation plan.
+
+IMPORTANT:
+- Do NOT assume the deliverable is an OLAF skill (with `skill.md` + `tasks/` prompt tree) unless explicitly requested in the inputs.
+- Do NOT inject onboarding Task 0.0 (`extract-task-contexts.md`) or bootstrap-orchestrator execution unless explicitly requested.
 
 ## Context Variables
 
@@ -25,13 +29,19 @@ Transform layered system design into detailed, executable implementation plan fo
 
 **Optional**:
 - `skill_name`: Name for the skill being implemented (default: extracted from design)
-- `skill_path`: Target path for skill (default: `skills/${skill_name}`)
-- `include_bootstrap`: Include bootstrap execution command (default: true)
+- `deliverable_kind`: One of `tool|skill|library` (default: `skill`)
+- `deliverable_root`: Output/root directory for the actual product deliverables (default: derived from design; for `skill`, defaults to `skills/${skill_name}`)
+- `skill_path`: Back-compat alias for `deliverable_root` when `deliverable_kind=skill`
+- `execution_mode`: One of `manual|bootstrap` (default: `manual`)
+- `include_task_context_extraction`: Include onboarding Task 0.0 condensed-context generation (default: `false`; only valid when `execution_mode=bootstrap`)
+- `include_bootstrap`: Include bootstrap orchestrator command (default: `false`; only valid when `execution_mode=bootstrap`)
+- `task_context_extractor_prompt`: Path to a context-extraction prompt (optional; required only if `include_task_context_extraction=true`)
+- `bootstrap_orchestrator_prompt`: Path to a bootstrap/orchestrator prompt (optional; required only if `include_bootstrap=true`)
 - `include_traceability`: Include requirement traceability matrix (default: true)
 
 ## Task Chain
 
-This coordinator executes **6 sequential tasks** using the Propose-Act protocol:
+This coordinator executes **7 sequential tasks** using the Propose-Act protocol:
 
 ```yaml
 workflow:
@@ -137,19 +147,19 @@ Propose-Act Gate:
 
 ### PHASE 2: Generate Task 0.0 (Task 2)
 
-**Objective**: Create Task 0.0 following current onboarding 0.3 pattern
+**Objective**: Optionally create Task 0.0 (condensed context extraction) when bootstrap execution is requested
 
 ```
-INPUT: design_layers, ${skill_path}
+INPUT: design_layers, ${deliverable_root}
 OUTPUT: task_zero_spec
 
 Agent spawns: tasks/generate-task-zero.md
-Context: skill_path=${skill_path},layer_count=${layers.length}
+Context: execution_mode=${execution_mode},include_task_context_extraction=${include_task_context_extraction},task_context_extractor_prompt=${task_context_extractor_prompt},deliverable_root=${deliverable_root}
 
 Propose-Act Gate:
   - Present Task 0.0 specification
   - Show context extraction pattern
-  - Confirm matches onboarding pattern
+  - Confirm it is enabled/desired (or omitted)
   → User approves
 ```
 
@@ -161,11 +171,11 @@ Propose-Act Gate:
 
 **Objective**: Generate condensed context files for task execution
 
-**Task Prompt**: `olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md`  
-**Context**: `bootstrap_doc=${output_file},skill_path=${skill_path}`
+**Task Prompt**: `${task_context_extractor_prompt}`  
+**Context**: `bootstrap_doc=${output_file},deliverable_root=${deliverable_root}`
 
 **Outputs**:
-- ${skill_path}/tasks/contexts/task-{N}-context.md
+- ${deliverable_root}/tasks/contexts/task-{N}-context.md
 - ~97% size reduction vs original plan
 ```
 
@@ -192,10 +202,10 @@ Propose-Act Gate:
 
 **Expected Output**:
 ```
-Phase 0: Setup (3 tasks)
-  - Task 0.0: Extract Task Contexts
-  - Task 0.1: Create Skill Structure
-  - Task 0.2: Create Master Coordinator
+Phase 0: Setup (optional; only if required)
+  - Task 0.0: Extract Task Contexts (optional)
+  - Task 0.1: Create Deliverable Structure (optional)
+  - Task 0.2: Create Coordinator/Entrypoint (optional)
 
 Phase 1: Layer 1 - Data Collection (4 tasks)
   - Task 1.1: Migrate FileScanner
@@ -277,14 +287,14 @@ Propose-Act Gate:
 
 ### PHASE 6: Create Bootstrap Integration (Task 6)
 
-**Objective**: Generate bootstrap orchestrator execution instructions
+**Objective**: Optionally generate bootstrap execution instructions when `execution_mode=bootstrap`
 
 ```
-INPUT: ${output_file}, ${skill_path}
+INPUT: ${output_file}, ${deliverable_root}
 OUTPUT: bootstrap_instructions
 
 Agent spawns: tasks/create-bootstrap-integration.md
-Context: output_file=${output_file},skill_path=${skill_path}
+Context: execution_mode=${execution_mode},include_bootstrap=${include_bootstrap},bootstrap_orchestrator_prompt=${bootstrap_orchestrator_prompt},output_file=${output_file}
 
 Propose-Act Gate:
   - Present bootstrap instructions
@@ -296,7 +306,7 @@ Propose-Act Gate:
 **Expected Output**:
 ```markdown
 # Execute Complete Implementation Plan
-**Task Prompt**: `olaf-core/competencies/onboard/prompts/bootstrap-orchestrator.md`
+**Task Prompt**: `${bootstrap_orchestrator_prompt}`
 **Context**: `bootstrap_doc=${output_file},checklist_path=.olaf/work/project-tasks/task-checklist.md`
 ```
 
@@ -316,7 +326,7 @@ Context: all_task_data=${collected_data},output_file=${output_file}
 NO Propose-Act Gate (final assembly)
 ```
 
-**Expected Output**: Complete IMPLEMENTATION-TASK-PLAN.md following onboarding pattern
+**Expected Output**: Complete IMPLEMENTATION-TASK-PLAN.md
 
 ---
 
@@ -331,7 +341,7 @@ Track progress across tasks:
   "output_file": ".olaf/work/staging/esdi/20251122-repo-scanner/IMPLEMENTATION-TASK-PLAN.md",
   "current_task": 2,
   "tasks": {
-    "extract-design-layers": {
+    "extract-requirements-and-design": {
       "status": "completed",
       "output": {
         "skill_name": "repo-scanner",

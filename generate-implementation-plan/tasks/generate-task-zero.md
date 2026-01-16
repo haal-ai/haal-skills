@@ -1,22 +1,28 @@
 ---
 name: generate-task-zero
-description: "Task 1 - Generate Task 0.0 following onboarding 0.3 pattern"
-task_id: 1
+description: "Task 2 - Optionally generate Task 0.0 (condensed task context extraction)"
+task_id: 2
 protocol: Propose-Act
 ---
 
-# Task 1: Generate Task 0.0 (Context Extraction)
+# Task 2: Generate Task 0.0 (Context Extraction)
 
 ## Objective
 
-Create Task 0.0 specification following the **current onboarding Task 0.3 pattern** for extracting condensed task contexts.
+Create an OPTIONAL Task 0.0 specification for extracting condensed per-task context files.
 
 ## Context Variables
 
 **Required**:
-- `design_layers`: Output from Task 0 (JSON structure)
-- `skill_path`: Target path for skill implementation
+- `design_layers`: Output from Task 1 (JSON structure)
 - `output_file`: Path to IMPLEMENTATION-TASK-PLAN.md
+
+**Optional**:
+- `execution_mode`: `manual|bootstrap` (default: `manual`)
+- `include_task_context_extraction`: `true|false` (default: `false`)
+- `task_context_extractor_prompt`: Prompt path to the context-extraction tool (required only if `include_task_context_extraction=true`)
+- `deliverable_root`: Root path for deliverables
+- `skill_path`: Back-compat alias used only when generating an OLAF-skill plan
 
 **Outputs**:
 - `task_zero_spec`: Complete Task 0.0 specification (markdown)
@@ -38,6 +44,10 @@ Example:
 
 ### Step 2: Generate Task 0.0 Specification
 
+ONLY generate Task 0.0 when `execution_mode=bootstrap` AND `include_task_context_extraction=true`.
+
+If NOT enabled, set `task_zero_spec` to an empty string and explicitly state: "Task 0.0 omitted (manual execution mode)."
+
 **Template** (following onboarding 0.3):
 
 ```markdown
@@ -47,14 +57,9 @@ Example:
 
 **Artifact**: Condensed context files for universal prompt generator  
 **Execution Time**: 10-15 min  
-**STRAF Command**:
-```powershell
-python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md" `
-  --context "bootstrap_doc=${output_file},skill_path=${skill_path}" `
-  --tool-mode standard `
-  --aws-profile bedrock
-```
+**Execution Notes**:
+- Use `${task_context_extractor_prompt}` (or an equivalent mechanism) to generate condensed per-task context files.
+- Inputs should include `bootstrap_doc=${output_file}` and the target root (`deliverable_root` or `skill_path`).
 
 **Task Details**:
 - **Input**: ${output_file} (this implementation plan)
@@ -66,26 +71,26 @@ python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
      - Inputs/outputs
      - Reuse references
      - Success criteria
-  4. Save to ${skill_path}/tasks/contexts/task-{N}-context.md
+  4. Save to ${deliverable_root}/tasks/contexts/task-{N}-context.md (or an equivalent location)
   5. Compress ~50KB → ~500 tokens (97% reduction)
 
 **Reuse**:
-- **Existing tool**: `extract-task-contexts.md` from onboarding competency
-- **Pattern**: Context extraction pattern (proven in onboarding)
+- **Existing tool**: A task-context extraction prompt (provided via `task_context_extractor_prompt`)
+- **Pattern**: Condensed context extraction to keep per-task execution small
 
 **Outputs**:
-- ${skill_path}/tasks/contexts/task-0.1-context.md
-- ${skill_path}/tasks/contexts/task-0.2-context.md
-- ${skill_path}/tasks/contexts/task-1.1-context.md
+- ${deliverable_root}/tasks/contexts/task-0.1-context.md
+- ${deliverable_root}/tasks/contexts/task-0.2-context.md
+- ${deliverable_root}/tasks/contexts/task-1.1-context.md
 - ... (one file per task, {total_tasks} total)
 
 **Dependencies**: None (FIRST task)
 
 **Success Criteria**:
 - ✅ All {total_tasks} context files generated
-- ✅ Each file ~500 tokens (compressed)
-- ✅ contexts/ directory created in ${skill_path}/tasks/
-- ✅ Ready for universal-task-prompt-generator.md
+- ✅ Each file is condensed (target: ~500 tokens)
+- ✅ `contexts/` directory created under the chosen root
+- ✅ Runner/manual execution can load per-task context instead of full plan
 
 **Impact**:
 - 🚀 3x faster prompt generation (600s vs 1800s)
@@ -105,7 +110,7 @@ The universal-task-prompt-generator.md requires condensed context for each task 
 2. Speed up prompt generation (3x faster)
 3. Enable consistent prompt structure across all tasks
 
-This pattern was proven in onboarding competency bootstrap and is now standard for all ESDI-generated implementations.
+This is an optional optimization for large plans.
 
 **Original Pattern**: Each task had full implementation plan embedded (50KB)
 **Current Pattern**: Each task has condensed context file (500 tokens)
@@ -121,9 +126,9 @@ Present to user:
 
 📝 Task 0.0 Specification Generated
 
-Pattern: Onboarding 0.3 (proven context extraction)
+Pattern: condensed per-task context extraction
 Total Tasks: {total_tasks}
-Context Files: {total_tasks} files in ${skill_path}/tasks/contexts/
+Context Files: {total_tasks} files in ${deliverable_root}/tasks/contexts/
 
 Task 0.0 will:
   ✅ Extract {total_tasks} task definitions from implementation plan
@@ -134,12 +139,10 @@ Task 0.0 will:
 Size Reduction: ~50KB → ~500 tokens (97% smaller)
 Time Savings: ~1200 seconds per task (20 minutes)
 
-STRAF Command:
-  python .\.olaf\core\agentic\straf\olaf_strands_agent.py \
-    --prompt "olaf-core/competencies/onboard/tasks/setup/extract-task-contexts.md" \
-    --context "bootstrap_doc=${output_file},skill_path=${skill_path}" \
-    --tool-mode standard \
-    --aws-profile bedrock
+Execution Notes:
+  Use `${task_context_extractor_prompt}` with context like:
+  - `bootstrap_doc=${output_file}`
+  - `deliverable_root=${deliverable_root}` (or `skill_path` if applicable)
 
 APPROVE to include Task 0.0 in implementation plan
 ADJUST if modifications needed
@@ -147,9 +150,9 @@ ADJUST if modifications needed
 
 ## Success Criteria
 
-✅ Task 0.0 specification follows onboarding 0.3 pattern exactly
-✅ STRAF command uses extract-task-contexts.md
-✅ Context variables correctly reference ${output_file} and ${skill_path}
+✅ Task 0.0 specification is optional and clearly scoped
+✅ Execution notes reference `task_context_extractor_prompt`
+✅ Context variables correctly reference ${output_file} and a target root
 ✅ Total task count calculated correctly
 ✅ Explanation of why Task 0.0 exists included
 ✅ User approved via Propose-Act gate
@@ -166,9 +169,10 @@ Provide default: 3 (Phase 0) + 4 per layer
 
 **If skill_path not provided**:
 ```
-Error: skill_path required for Task 0.0
+Error: skill_path/deliverable_root required for Task 0.0
 
-Default to: skills/${skill_name}
+If generating an OLAF skill plan, default to: skills/${skill_name}
+Otherwise, use deliverable_root.
 Confirm with user.
 ```
 
@@ -182,11 +186,11 @@ Returns to coordinator:
   "task_zero_spec": "## Task 0.0: Extract Task Contexts\n\n**CRITICAL**: ...",
   "total_tasks": 47,
   "context_file_count": 47,
-  "straf_command": "python .\\...",
+  "runner_hint": "Invoke your context-extractor with bootstrap_doc + deliverable_root",
   "dependencies": []
 }
 ```
 
 ## Next Task
 
-→ Task 2: create-task-breakdown.md (uses task_zero_spec + design_layers)
+→ Task 3: create-task-breakdown.md (uses task_zero_spec + design_layers)
