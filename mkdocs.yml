@@ -6,6 +6,8 @@ repo_name: haal-ai/haal-skills
 nav:
   - Home: index.md
   - Skills: skills/index.md
+  - Catalog: skills/catalog.md
+  - About: about.md
 
 docs_dir: docs
 site_dir: site

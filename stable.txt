@@ -1,0 +1,4 @@
+# List stable skills (one per line)
+# Example:
+# create-skill
+
