@@ -242,7 +242,7 @@ Save state: design_complete = true
 Run via STRAF agent (command line):
 
 python .\.olaf\core\agentic\straf\olaf_strands_agent.py `
-  --prompt "skills/generate-implementation-plan/prompts/generate-implementation-plan.md" `
+  --prompt "skills/generate-implementation-plan/skill.md" `
   --context "specification_file=${output_dir}/specification.md,design_file=${output_dir}/design.md,output_file=${output_dir}/IMPLEMENTATION-TASK-PLAN.md,skill_path=skills/${topic}" `
   --tool-mode standard `
   --aws-profile bedrock
