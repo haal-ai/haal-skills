@@ -21,6 +21,7 @@ You MUST request these parameters if not provided by the user:
 - **source_url**: string - URL to the prompt (GitHub, gist, registry, webpage) (REQUIRED if source_text not provided)
 - **source_text**: string - Direct paste of prompt content (REQUIRED if source_url not provided)
 - **source_description**: string - Brief description of what the prompt does (OPTIONAL - will analyze if not provided)
+- **available_skills_list**: string - List of skills the user currently has available/installed (OPTIONAL - improves duplicate detection)
 
 ## User Interaction Protocol
 You MUST follow the established interaction protocol strictly:
@@ -60,6 +61,11 @@ You WILL check against existing OLAF skills:
 - Look for similar objectives/use cases
 - Check prompt-engineer competency for overlap
 
+**Optional: Check User-Visible Skills**
+- If **available_skills_list** is provided, compare the external prompt against that list to detect duplicates the user may already have, even if they are not present in the current workspace.
+- If **available_skills_list** is not provided, you SHOULD ask the user to paste the output of "what skills do you have?" (or provide their skills list) before finalizing an ADOPT recommendation.
+- If the user cannot provide it, proceed with a workspace-only similarity check and clearly label the limitation in the report.
+
 **Similarity Assessment:**
 ```
 For each similar skill found:
@@ -67,6 +73,10 @@ For each similar skill found:
 - Identify unique features in external prompt
 - Identify features already in OLAF
 - Determine if external prompt adds value
+
+If available_skills_list is provided:
+- Identify potential duplicates in the user's available skills
+- Estimate overlap qualitatively (HIGH/MEDIUM/LOW)
 ```
 
 **Similarity Verdict:**
@@ -210,7 +220,9 @@ You WILL provide final recommendation:
 - **License**: [if detectable]
 
 ### Similarity Analysis
-- **Similar OLAF Skills**: [list with overlap %]
+- **Similarity Scope Used**: [workspace-only / workspace+available_skills_list]
+- **Similar OLAF Skills (workspace)**: [list with overlap %]
+- **Possible User Skill Duplicates**: [list from available_skills_list, or "Not provided"]
 - **Unique Features**: [what this adds that OLAF doesn't have]
 - **Similarity Verdict**: [HIGH/MEDIUM/LOW - recommendation]
 
@@ -263,9 +275,8 @@ You WILL provide final recommendation:
 
 ### Next Steps
 **If adopting:**
-1. Use `import-prompt-unchanged` to import as-is, OR
-2. Use `convert-prompt` to modernize to OLAF standards, OR
-3. Use `create-skill` to build OLAF-native version
+1. Use `convert-prompt` to modernize to OLAF standards, OR
+2. Use `create-skill` to build OLAF-native version
 
 **If extracting:**
 1. Identify target OLAF skill to enhance
@@ -280,7 +291,8 @@ You WILL generate outputs following this structure:
 **Interactive Follow-up:**
 After presenting report, ask user:
 - "Would you like me to proceed with [RECOMMENDATION]?"
-- If ADOPT: "Should I import it now using import-prompt-unchanged or convert-prompt?"
+- If **available_skills_list** was not provided: "To avoid adopting a duplicate, can you paste your available skills list (answer to 'what skills do you have?')?"
+- If ADOPT: "Should I modernize it now using convert-prompt, or package an OLAF-native version with create-skill?"
 - If EXTRACT: "Which OLAF skill should I enhance with the extracted parts?"
 
 ## Domain-Specific Rules
@@ -295,6 +307,8 @@ You MUST follow these constraints:
 - NEVER recommend adopting near-duplicate (>80% overlap)
 - ALWAYS highlight unique features even in similar prompts
 - CONSIDER merging similar prompts rather than having both
+- If **available_skills_list** is provided, treat near-duplicates from that list as duplicates for adoption decisions.
+- If **available_skills_list** is not provided, explicitly label the similarity check as workspace-only.
 
 **Quality Rules:**
 - BE HONEST about quality issues

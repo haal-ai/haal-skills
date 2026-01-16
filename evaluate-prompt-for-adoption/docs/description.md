@@ -249,7 +249,7 @@ Unique capability not in OLAF. Good quality but could be enhanced with error han
 ```
 1. evaluate-prompt-for-adoption (this skill)
    ↓ [if ADOPT recommendation]
-2. import-prompt-unchanged (as-is import)
+2. convert-prompt-to-skill (package into OLAF skill)
    OR
 3. convert-prompt (modernize to OLAF standards)
    OR

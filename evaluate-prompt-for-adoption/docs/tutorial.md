@@ -282,7 +282,7 @@ This tutorial demonstrates how to evaluate external prompts for potential adopti
    ```
    Would you like me to import this excellent prompt now?
    
-   I recommend: import-prompt-unchanged (it's already perfect)
+   I recommend: convert-prompt-to-skill (wrap it into OLAF)
    ```
 
 4. **You confirm**:
@@ -292,7 +292,7 @@ This tutorial demonstrates how to evaluate external prompts for potential adopti
 
 5. **Skill proceeds**:
    ```
-   ✓ Importing via import-prompt-unchanged...
+   ✓ Packaging via convert-prompt-to-skill...
    ✓ Created skill: review-api-design
    ✓ Added to api-development competency
    ✓ Ready to use!
@@ -386,7 +386,7 @@ After completing this tutorial:
 
 ## Related Skills
 
-- `import-prompt-unchanged` - Import evaluated prompts as-is
+- `convert-prompt-to-skill` - Package adopted prompts into a skill
 - `convert-prompt` - Modernize adopted prompts to OLAF standards
 - `create-skill` - Build OLAF-native version of adopted prompts
 - `validate-prompt-value` - Re-evaluate existing OLAF prompts
