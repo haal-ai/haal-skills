@@ -87,7 +87,6 @@ skills/[skill-name]/
 │   ├── task-1.md                # New task files
 │   ├── task-2.md
 │   └── task-3.md
-└── skill-manifest.json           # Updated
 ```
 
 ### Task Registry Updates

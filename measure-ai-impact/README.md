@@ -30,7 +30,6 @@ Measure the impact of AI-assisted development on code quality and team productiv
 
 - **[Full Description](docs/description.md)** - Complete skill documentation
 - **[Tutorial](docs/tutorial.md)** - Step-by-step examples
-- **[Skill Manifest](skill-manifest.json)** - Technical metadata
 
 ## Output
 

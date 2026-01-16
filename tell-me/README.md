@@ -267,7 +267,6 @@ Try:
 
 ```
 ~/skills/tell-me/
-├── skill-manifest.json          # Skill metadata and task chain definition
 ├── prompts/
 │   └── tell-me.md              # Master coordinator prompt
 ├── tasks/
