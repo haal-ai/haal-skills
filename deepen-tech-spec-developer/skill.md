@@ -59,6 +59,22 @@ You WILL verify all requirements:
 
 ### 2. Execution Phase
 
+## Execution Quality Bar (NON-NEGOTIABLE)
+
+### Thoroughness & Exactitude
+- You MUST prioritize thoroughness and exactitude over brevity.
+- You MUST NOT produce surface-level summaries.
+- Assume the LLM has sufficient context window for deep inspection; expand analysis until it is complete and precise.
+- If something cannot be confirmed from the repo/code/config, you MUST label it explicitly as an assumption and explain what evidence would confirm it.
+
+### Evidence & Source Linking (MANDATORY)
+- For every non-trivial statement (architecture, behavior, quality, risks, patterns, test coverage, coupling, etc.), you MUST provide evidence.
+- Evidence MUST include:
+  - **Source**: the concrete artifact used (code/config/spec/test)
+  - **Location**: a link to the exact file used for the claim (preferably with a line-range when available)
+  - **Snippet/Anchor**: short quoted identifier(s) (class/method/setting name) sufficient to verify quickly
+- If you cannot provide a concrete source link, you MUST NOT state the claim as fact.
+
 **Tech Spec Analysis:**
 
 <!-- <tech_spec_analysis> -->
@@ -248,6 +264,8 @@ You MUST follow these constraints:
 - Rule 4: Ensure each chapter stands alone while maintaining series coherence and cross-references
 - Rule 5: Execute user review checkpoint after each chapter completion without exception
 - Rule 6: Always offer session transition after chapter completion to manage memory and complexity
+- Rule 7: Every meaningful claim MUST include evidence with a source-linked file reference; do not assert without citations
+- Rule 8: Prefer completeness over concision; avoid “high-level only” assessments unless explicitly requested
 
 ## Success Criteria
 
