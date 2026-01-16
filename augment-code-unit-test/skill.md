@@ -33,19 +33,21 @@ Evolution/Refactoring Mode:
 
 ## Time Retrieval\s*Get current timestamp in `YYYYMMDD-HHmm` format
 
+## Time Retrieval
+Get current timestamp in `YYYYMMDD-HHmm` format.
+
 ## Input Parameters
 You MUST request these parameters if not provided by the user:
-- **core_dir**: string  Directory containing the codebase to analyze (**REQUIRED**)
-- **scope_path**: string  File or folder path **relative to `core_dir`** that defines the
-  test-improvement scope (**REQUIRED**). Examples:
+- **core_dir**: string - Directory containing the codebase to analyze (**REQUIRED**)
+- **scope_path**: string  File or folder path **relative to `core_dir`** that defines the test-improvement scope (**REQUIRED**). Examples:
   - `internal/syncer`
   - `internal/syncer/syncer.go`
-- **test_command**: string  Optional explicit test command for the scope. If omitted, you
-  MUST infer a reasonable default based on the language/framework and repository
+- **staging_dir**: string - Directory for persisted augmentation session artifacts (OPTIONAL).
+  - Default: `<repo_root>/.olaf/work/staging` where `<repo_root>` is the git/worktree root that contains `.olaf/`.
+  - Tasklists are stored under: `[staging_dir]/unittest/<scope_path-as-directories>/tasklist.md`.
+- **test_command**: string  Optional explicit test command for the scope. If omitted, you MUST infer a reasonable default based on the language/framework and repository
   conventions (for Go, prefer `go test ./...` or `go test ./<scope-dir>`).
 
-Framework-provided parameters (available from OLAF condensed framework):
-- **staging_dir**: string  Base directory for workflow state and reports.
 
 ## Session Discovery and Selection (User-Friendly UX)
 
@@ -104,6 +106,10 @@ This workflow is **scope-driven** and **tests-pass-first**:
          `tasklist_dir = [staging_dir]/unittest/internal/syncer/`
    - The **tasklist file** is:
      - `tasklist_path = tasklist_dir + "tasklist.md"`
+
+   **When is it created?**
+   - On the first run for a given `scope_path`, during **Tasklist Phase → Load or Create Tasklist**.
+   - If `tasklist_path` already exists, it is loaded and updated (e.g., `Last-run`).
 
 3. **Tasklist Creation vs. Loading**
    - If `tasklist_path` **exists**:
