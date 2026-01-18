@@ -2,7 +2,7 @@
 
 <!-- LOADING_ANNOUNCEMENT_START -->
 🪟 Windows PowerShell context loaded  
-Use `olaf switch context` if this environment doesn't match yours.
+Use `switch context` if this environment doesn't match yours.
 <!-- LOADING_ANNOUNCEMENT_END -->
 
 ## Environment Configuration
@@ -10,6 +10,12 @@ Use `olaf switch context` if this environment doesn't match yours.
 ### Shell & Platform
 - **Shell**: PowerShell 5.1+ (Windows)
 - **Platform**: Windows environment assumed
+
+### Enforcement Rules
+- **Use PowerShell only**: Commands and examples must be valid in Windows PowerShell (not bash/zsh).
+- **No bash utilities**: Do not suggest `grep`, `sed`, `awk`, `ls -la`, `cat`, `find`, pipelines that rely on GNU tools, or `cd` inside commands.
+- **PowerShell equivalents**: Prefer `Get-ChildItem` / `dir`, `Select-String`, `Get-Content`, `Get-Location`, `Resolve-Path`, etc.
+- **If another shell is required**: Ask the user to `switch context` (new context takes effect in a new session) rather than using another shell implicitly.
 
 ### Development Tools
 - **JDK Location**: `$env:USERPROFILE\.olaf\jdk`
