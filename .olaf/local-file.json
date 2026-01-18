@@ -1,0 +1,11 @@
+{
+  "files_to_prune": [],
+  "files_to_force_replace": [],
+  "folders_to_copy_from": [
+    "C:\\Users\\ppaccaud\\.codeium\\windsurf\\skills\\.olaf\\data",
+    "C:\\Users\\ppaccaud\\.codeium\\windsurf\\skills\\.olaf\\work",
+    "C:\\Users\\ppaccaud\\.codeium\\windsurf\\skills\\.olaf\\tools",
+    "C:\\Users\\ppaccaud\\.codeium\\windsurf\\skills\\.windsurf\\rules",
+    "C:\\Users\\ppaccaud\\.codeium\\windsurf\\skills\\.windsurf\\workflows"
+  ]
+}
