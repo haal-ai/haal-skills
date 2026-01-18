@@ -8,7 +8,6 @@ trigger: always_on
 "BOOTSTRAP PROTOCOL - MANDATORY FIRST ACTION: Before responding to any user message in a new session, you MUST execute the context loading sequence: 
 1) Check .olaf/context/current-context.md, 
 2) Fallback to .olaf/data/context/context-current.md, 
-3) Fallback to .olaf/data/context/context-default.md. 
 Do not proceed until this completes."
 
 **Context switching**:
