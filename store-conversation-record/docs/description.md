@@ -2,11 +2,38 @@
 
 ## Overview
 
-Creates comprehensive conversation records that capture complete dialogue, actions taken, files affected, AI models used, and full context to preserve project history and enable future reference.
+Store Conversation Record creates comprehensive conversation records that capture complete dialogue, actions taken, files affected, and AI models used. It preserves project history and enables future reference by documenting the full narrative of important work sessions.
 
 ## Purpose
 
-Important conversations and work sessions contain valuable context, decisions, and rationale that can be lost over time. This competency solves the problem of lost institutional knowledge by creating detailed, structured records of conversations that capture the complete narrative, all actions performed, files modified, and context needed to understand what happened and why.
+Important conversations and work sessions contain valuable context, decisions, and rationale that can be lost over time. This skill solves the problem of lost institutional knowledge by creating detailed, structured records that capture the complete narrative, all actions performed, files modified, and context needed to understand what happened and why.
+
+## Key Features
+
+### 1. Explicit Permission Model
+- Records are NEVER created automatically
+- Requires explicit user request before proceeding
+- Confirms permission and scope before documentation
+
+### 2. AI Model Transparency
+- AI model information MUST be provided by user
+- Never infers or guesses the AI model name
+- Ensures accurate attribution in records
+
+### 3. Complete Narrative Capture
+- Full conversation documented without summarization
+- Each user request and AI response captured
+- All tool calls and operations recorded
+
+### 4. Structured File Operations
+- Files created/modified/deleted listed with relative paths
+- Clean markdown formatting applied
+- User typos corrected for readability
+
+### 5. Unique Timestamped Files
+- Each record gets unique timestamp filename
+- Never appends to existing files
+- Prevents filename conflicts
 
 ## Usage
 
@@ -14,14 +41,14 @@ Important conversations and work sessions contain valuable context, decisions, a
 
 **Protocol**: Act
 
-**When to Use**: Use this competency only when explicitly requested by the user to preserve important conversations, document significant work sessions, capture decision-making processes, or create historical records for future reference, audits, or knowledge transfer.
+**When to Use**: Use this skill only when explicitly requested to preserve important conversations, document significant work sessions, capture decision-making processes, or create historical records for future reference, audits, or knowledge transfer.
 
 ## Parameters
 
 ### Required Inputs
 - **user_request**: Explicit user request for record creation (CRITICAL: never create automatically)
 - **conversation_scope**: Purpose and scope of the record being created
-- **ai_model_used**: Name of the AI model used in the conversation (must be provided by user - never infer)
+- **ai_model_used**: Name of the AI model used in the conversation (must be provided by user)
 
 ### Optional Inputs
 - **record_purpose**: Specific use case or reason for creating this record
@@ -29,7 +56,7 @@ Important conversations and work sessions contain valuable context, decisions, a
 ### Context Requirements
 - Explicit user permission to create the record
 - Access to conversation history and context
-- Access to conversation records directory (`[id:conversation_records_dir]`)
+- Access to conversation records directory
 - Access to conversation record template
 - System time for unique timestamp generation
 
@@ -42,20 +69,16 @@ Important conversations and work sessions contain valuable context, decisions, a
 - All actions documented (tool calls, file operations, searches)
 - File operations listed (created/modified/deleted with relative paths)
 - Clean markdown formatting with corrected user typos
-- Organized by logical topic sections
 
 **Format**: Markdown file following conversation record template with structured sections, clear headings for each topic, and formatted dialogue using **USER said:** / **AI said:** / **AI did:** patterns.
+
+**Location**: `.olaf/work/staging/conversation-records/conversation-record-[timestamp].md`
 
 ## Examples
 
 ### Example 1: Feature Development Session
 
 **Scenario**: User wants to preserve a complex feature implementation conversation
-
-**Command**:
-```
-store conversation record
-```
 
 **Input**:
 ```
@@ -67,14 +90,9 @@ Record Purpose: Document implementation decisions and approach for team referenc
 
 **Result**: Created `conversation-record-20251027-1430.md` with complete dialogue, all code changes, design decisions, and implementation steps documented
 
-### Example 2: Problem-Solving Session
+### Example 2: Debugging Session
 
 **Scenario**: Debugging session that identified root cause of production issue
-
-**Command**:
-```
-store conversation record
-```
 
 **Input**:
 ```
@@ -86,14 +104,9 @@ Record Purpose: Incident documentation and future reference
 
 **Result**: Created record capturing investigation process, profiling results, root cause identification, and fix implementation
 
-### Example 3: Architecture Decision Session
+### Example 3: Architecture Decision
 
 **Scenario**: Important architectural discussion that needs to be preserved
-
-**Command**:
-```
-store conversation record
-```
 
 **Input**:
 ```
@@ -105,25 +118,25 @@ Record Purpose: Preserve decision rationale for future team members
 
 **Result**: Created record with complete discussion, options considered, trade-offs analyzed, and final decision with rationale
 
-## Related Competencies
+## Related Skills
 
-- **prepare-conversation-handover**: Handovers capture next steps, records capture complete history
+- **carry-over-session**: Handovers capture next steps, records capture complete history
 - **create-decision-record**: Formal decisions discussed in conversations can be extracted to decision records
 - **create-changelog-entry**: Significant conversations can be logged in the changelog
 - **review-progress**: Conversation records provide detailed context for progress reviews
 
 ## Tips & Best Practices
 
-- Only create records when explicitly requested - never automatically
-- Always ask user to specify the AI model being used - never infer or guess
-- Create new file for each record with unique timestamp - never append to existing files
-- Capture complete conversation - include full narrative, never summarize content
-- Validate file path resolution via memory-map.md before creating files
-- Organize content by logical topics with clear headings for easy navigation
-- Correct obvious user typos in the record for readability
-- Use relative paths from project root for all file references
-- Include all tool calls and actions performed, not just the results
-- Format dialogue consistently using **USER said:** / **AI said:** / **AI did:** patterns
+1. **Only create when requested**: Never automatically create records
+2. **Always ask for AI model**: Get this information directly from user
+3. **Create new files**: Each record is a separate file with unique timestamp
+4. **Capture completely**: Include full narrative, never summarize
+5. **Validate paths**: Ensure file path resolution before creating files
+6. **Organize by topics**: Use clear headings for easy navigation
+7. **Correct typos**: Fix obvious user typos for readability
+8. **Use relative paths**: Reference files from project root
+9. **Document all actions**: Include tool calls and operations, not just results
+10. **Format consistently**: Use **USER said:** / **AI said:** / **AI did:** patterns
 
 ## Limitations
 
@@ -131,9 +144,8 @@ Record Purpose: Preserve decision rationale for future team members
 - Cannot infer AI model information - must be provided by user
 - Creates new files only - cannot append to or update existing records
 - Does not automatically categorize or tag conversations for searchability
-- File path must be validated via memory-map.md - cannot guess locations
+- File path must be validated - cannot guess locations
 - Does not integrate with external documentation systems
-- Cannot automatically extract decisions or action items - manual extraction needed
+- Cannot automatically extract decisions or action items
 - Record quality depends on conversation clarity and completeness
 
-**Source**: `core/competencies/project-manager/prompts/store-conversation-record.md`

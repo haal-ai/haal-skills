@@ -1,98 +1,224 @@
-# Assess GenAI Initiative: Step-by-Step Tutorial
+# Tutorial: assess-genai-initiative-idea
 
-**How to Execute the "Assess GenAI Initiative Idea" Workflow**
+## Introduction
 
-This tutorial shows how to evaluate a GenAI initiative idea using structured research and analysis.
+This tutorial guides you through using the `assess-genai-initiative-idea` skill to conduct a comprehensive evaluation of a GenAI solution proposal. By the end, you'll have a structured assessment document with research findings and actionable recommendations.
 
 ## Prerequisites
 
-- Clear description of the GenAI initiative you're considering
-- Understanding of your business context and constraints
-- Decision-making authority or input into the initiative
+Before starting, ensure you have:
+
+- [ ] A clear GenAI use case or problem domain to assess
+- [ ] Access to web search capabilities for the research phase
+- [ ] Time to complete the 10-question questionnaire thoughtfully
+- [ ] Stakeholder context information (optional but recommended)
 
 ## Step-by-Step Instructions
 
-### Step 1: Invoke the Competency
-Initiate the assessment process
+### Step 1: Define Your Assessment Scope
 
-**User Action:**
-1. Open a new conversation with OLAF
-2. Type the command: `assess genai initiative`
-3. Provide a brief description of your initiative idea
+Start by clearly articulating the GenAI initiative you want to assess.
 
-**OLAF Response:**
-OLAF will acknowledge the request and begin the research and analysis process
+**Action:** Prepare a concise description of your GenAI use case.
 
-### Step 2: Provide Initiative Details
-**User Action:** Describe your GenAI initiative idea
+**Example:**
 ```
-We want to build an AI-powered code review assistant that automatically 
-checks pull requests for security vulnerabilities and suggests improvements
+assessment_scope: "Automated document summarization for legal contracts"
 ```
 
-**Provide Context:**
-- **Industry**: Software development / SaaS
-- **Team Size**: 50 developers
-- **Current Process**: Manual code reviews taking 2-3 days per PR
-- **Budget**: $50K initial investment
+**Tips:**
+- Be specific about the problem domain
+- Avoid vague descriptions like "use AI to improve things"
+- Include the target application area
 
-### Step 3: Research Phase
-**What OLAF Does:**
-- Researches similar GenAI initiatives and solutions
-- Analyzes market trends and existing tools
-- Identifies technical approaches and frameworks
-- Gathers implementation examples and case studies
+### Step 2: Invoke the Skill
 
-**You Should See:** Research summary with staging about similar initiatives
+Trigger the assessment workflow with your parameters.
 
-### Step 4: Challenge Analysis
-**What OLAF Does:**
-- Generates critical challenge questions
-- Identifies potential risks and obstacles
-- Evaluates technical feasibility
-- Assesses resource requirements
+**Action:** Provide the required parameters to start the assessment.
 
-**You Should See:** List of challenge questions and considerations specific to your initiative
+```
+Skill: assess-genai-initiative-idea
+Parameters:
+  - assessment_scope: "Automated document summarization for legal contracts"
+  - stakeholder_context: "Legal team, 200+ contracts reviewed monthly"
+  - timeline_constraints: "6 months to pilot"
+```
 
-### Step 5: Review Recommendations
-**User Action:** Review the analysis and recommendations
-- Read through research staging
-- Consider challenge questions
-- Evaluate the recommendation (proceed/modify/abandon)
-- Ask follow-up questions if needed
+**Expected Response:** The skill will confirm readiness and begin the questionnaire phase.
+
+### Step 3: Complete the Questionnaire
+
+Answer all 10 structured questions thoroughly.
+
+**Core Problem Analysis (Questions 1-4):**
+
+1. **What is the core problem or opportunity?**
+   - Describe the specific pain point GenAI should address
+   
+2. **Why is solving this important now?**
+   - Explain urgency and impact if not addressed
+   
+3. **Describe your current process**
+   - Detail existing workflow for this need
+   
+4. **Where do you see GenAI providing value?**
+   - Identify specific automation opportunities
+
+**User and Impact Analysis (Questions 5-8):**
+
+5. **Who are the main users?**
+   - Describe daily tasks and pain points
+   
+6. **What outcomes do you expect?**
+   - Define specific improvements
+   
+7. **What solutions have you tried?**
+   - List manual, digital, or AI alternatives
+   
+8. **Why didn't previous solutions work?**
+   - Explain gaps in existing approaches
+
+**Business and Technical Constraints (Questions 9-10):**
+
+9. **What are the expected business benefits?**
+   - Include funding needs and target market
+   
+10. **Are there constraints to consider?**
+    - Data, compliance, or integration requirements
+
+**Tips:**
+- Provide detailed, specific answers
+- Avoid generic responses that could apply to any project
+- Include quantifiable metrics where possible
+
+### Step 4: Review and Sign Off
+
+The skill will analyze your responses and present them for review.
+
+**Action:** Review the generated data file and confirm accuracy.
+
+**What to Check:**
+- All responses captured correctly
+- No critical information missing
+- Initiative name is appropriate (3 words max)
+
+**If Issues Found:**
+- The skill will rate issues as Critical, Important, or Suggestion
+- Address Critical issues before proceeding to research
+- Important issues can be noted for later consideration
+
+### Step 5: Research Phase
+
+The skill conducts web research across multiple platforms.
+
+**Platforms Searched:**
+- GitHub repositories
+- Medium articles
+- Reddit discussions
+- Industry publications
+- Academic papers
+
+**Action:** Wait for research completion (minimum 5 sources).
+
+**Expected Output:**
+- Similar initiatives and implementations
+- Alternative approaches to consider
+- Common challenges and pitfalls
+
+### Step 6: Challenge and Justify
+
+The skill will challenge your proposal with alternatives.
+
+**Action:** Provide justification for rejecting suggested alternatives.
+
+**Example Challenge:**
+```
+Alternative Found: "Pre-built contract analysis API from LegalTech vendor"
+Question: Why not use this existing solution instead of building custom?
+```
+
+**Your Response:**
+```
+Justification: "Existing solutions don't support our specific contract 
+templates and require data to leave our secure environment, which 
+violates compliance requirements."
+```
+
+### Step 7: Review Final Assessment
+
+Receive the comprehensive assessment document.
+
+**Location:** `[staging_dir]/genai-assessments/[initiative_name]-data.md`
+
+**Document Sections:**
+1. Initiative Overview
+2. Questionnaire Responses
+3. Alternatives and Challenges
+4. Implementation Challenges
+5. Conclusion and Recommendations
+
+**Action:** Review recommendations and determine next steps.
 
 ## Verification Checklist
 
-✅ **Research staging cover similar initiatives in your domain**
-✅ **Challenge questions address your specific concerns**
-✅ **Technical feasibility is clearly assessed**
-✅ **Clear recommendation provided with rationale**
+After completing the assessment, verify:
+
+- [ ] All 10 questionnaire questions answered completely
+- [ ] Initiative name generated and data file created
+- [ ] User review and sign-off obtained for responses
+- [ ] Response quality analysis completed with issue ratings
+- [ ] Web research conducted across minimum 5 sources
+- [ ] Alternatives and challenges documented comprehensively
+- [ ] Implementation challenges identified and analyzed
+- [ ] Alternative approaches proposed and user justification obtained
+- [ ] Final recommendations provided with actionable next steps
+- [ ] Complete assessment document delivered with all chapters
 
 ## Troubleshooting
 
-**If research seems too generic:**
-Provide more specific details about your industry, use case, and constraints
+### Issue: Questionnaire Responses Flagged as Generic
 
-**If you need deeper analysis on specific aspects:**
-- Ask follow-up questions about specific concerns
-- Request deeper dive into technical approaches
-- Ask for comparison with specific alternatives
+**Symptom:** Skill requests more specific information repeatedly.
 
-## Key Learning Points
+**Solution:**
+- Add concrete numbers and metrics
+- Include specific examples from your organization
+- Reference actual pain points experienced by users
 
-1. **Research-Driven**: Decisions based on market research and existing solutions
-2. **Challenge-Based**: Critical questions help identify risks early
-3. **Actionable**: Clear recommendations with next steps
-4. **Iterative**: Can refine analysis based on additional information
+### Issue: Web Search Returns Limited Results
 
-## Next Steps to Try
+**Symptom:** Research phase finds fewer than 5 sources.
 
-- If approved: Use `find expert contact` to locate implementation experts
-- If modified: Refine the initiative based on feedback and reassess
-- If uncertain: Use `should i use ai` for simpler appropriateness check
+**Solution:**
+- Broaden search terms
+- Try alternative phrasings of your use case
+- Consider adjacent problem domains
 
-## Expected Timeline
+### Issue: Critical Gaps Identified
 
-- **Total assessment time:** 5-10 minutes
-- **User input required:** Initial description and context (2-3 minutes)
-- **OLAF execution time:** Research and analysis (3-7 minutes)
+**Symptom:** Skill stops and requests clarification.
+
+**Solution:**
+- Address the specific gap identified
+- Consult with stakeholders if needed
+- Provide additional context or constraints
+
+### Issue: Unable to Justify Rejecting Alternatives
+
+**Symptom:** Proposed alternatives seem viable.
+
+**Solution:**
+- Consider if the alternative might actually be better
+- Document specific requirements the alternative doesn't meet
+- Discuss with stakeholders before proceeding
+
+## Next Steps
+
+After completing the assessment:
+
+1. **Share with Stakeholders:** Distribute the assessment document to decision-makers
+2. **Create Decision Record:** Use `create-decision-record` skill to document the final decision
+3. **Plan Implementation:** If proceeding, use findings to inform project planning
+4. **Address Challenges:** Create mitigation plans for identified implementation challenges
+5. **Monitor Alternatives:** Keep track of alternative solutions for future consideration

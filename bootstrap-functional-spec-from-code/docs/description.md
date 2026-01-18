@@ -1,108 +1,162 @@
-# Bootstrap Functional Spec from Code
+# bootstrap-functional-spec-from-code
 
 ## Overview
 
-This competency analyzes existing source code to extract and document its functionalities from a business and user perspective, creating a draft functional specification. It reverse-engineers the implementation to produce business-focused documentation that explains what the system does and why, without requiring deep technical knowledge.
+The `bootstrap-functional-spec-from-code` skill analyzes source code to extract and describe functionalities from a business and user perspective. It creates a draft functional specification document that bridges the gap between technical implementation and business requirements.
 
 ## Purpose
 
-Many software projects lack up-to-date functional specifications, especially legacy systems or rapidly developed applications. When documentation is missing or outdated, this competency solves the problem by analyzing the actual implementation to generate a business-readable specification. This is invaluable for modernization projects, knowledge transfer, or creating documentation for undocumented systems.
+This skill enables teams to generate business-focused documentation from existing codebases. It's particularly useful for legacy systems lacking documentation, onboarding new team members, or creating specifications for stakeholder communication.
+
+## Key Features
+
+- **Code Analysis**: Scans directory structure, identifies entry points, and extracts business logic
+- **Business Logic Extraction**: Identifies core business rules, user flows, and system boundaries
+- **Specification Generation**: Creates structured documentation using business-friendly language
+- **Traceability**: Maintains links between specification and source code
+- **Interactive Refinement**: Supports Q&A for clarification and validation
 
 ## Usage
 
-**Command**: `bootstrap functional spec from code`
+Invoke with source path:
 
-**Protocol**: Act
+```
+@bootstrap-functional-spec-from-code source_path=src/main/java
+```
 
-**When to Use**: Use this competency when you have working code but missing or outdated functional specifications, when preparing for application modernization or migration, when onboarding new team members to legacy systems, or when stakeholders need business-level documentation of technical implementations.
+With optional parameters:
+
+```
+@bootstrap-functional-spec-from-code source_path=src/ output_format=markdown detail_level=detailed
+```
 
 ## Parameters
 
-### Required Inputs
-- **source_path**: Path to the application's source code or codebase directory to analyze
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| source_path | string | Yes | Path to the application's source code directory |
+| output_format | enum | No | Output format: markdown, html, pdf (default: markdown) |
+| detail_level | enum | No | Level of detail: overview, standard, detailed (default: standard) |
 
-### Optional Inputs
-- **output_format**: Output format for the specification (markdown, html, or pdf; default: markdown)
-- **detail_level**: Level of detail to include (overview, standard, or detailed; default: standard)
+## Process Flow
 
-### Context Requirements
-- Source code must be accessible in the workspace or specified directory
-- Functional specification template is automatically loaded from competency templates
-- Code should be reasonably structured for effective analysis
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    SPECIFICATION GENERATION                     │
+├─────────────────────────────────────────────────────────────────┤
+│ 1. Code Analysis                                                │
+│    - Scan directory structure                                   │
+│    - Identify entry points and main components                  │
+│    - Extract business logic and workflows                       │
+│    - Document data models and relationships                     │
+│    ↓                                                            │
+│ 2. Business Logic Extraction                                    │
+│    - Identify core business rules                               │
+│    - Map out user flows                                         │
+│    - Document system boundaries                                 │
+│    - Identify external integrations                             │
+│    ↓                                                            │
+│ 3. Specification Generation                                     │
+│    - Use functional specification template                      │
+│    - Structure content for business audience                    │
+│    - Include relevant code examples                             │
+│    - Add visual diagrams where helpful                          │
+│    ↓                                                            │
+│ 4. Review & Refinement                                          │
+│    - Interactive Q&A for clarification                          │
+│    - Validation against source code                             │
+│    - Version control integration                                │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ## Output
 
-This competency produces a business-focused functional specification document extracted from code analysis.
+The skill generates a functional specification document saved to:
+`.olaf/work/staging/functional-specifications/FunctionalSpec-YYYYMMDD-NNN.md`
 
-**Deliverables**:
-- Functional specification document saved to `data/specs/FunctionalSpec-YYYYMMDD-NNN.md`
-- Executive summary of identified components and business processes
-- User stories derived from code functionality
-- Data models and integration points documentation
+### Document Structure
 
-**Format**: Structured markdown document following the functional-specification-template, written in business-focused language with technical details relegated to appendices. Includes visual diagrams where helpful.
+1. **Executive Summary** - High-level overview for stakeholders
+2. **Functional Requirements** - Detailed feature descriptions
+3. **User Stories** - User-centric requirement descriptions
+4. **Data Models** - Business entity descriptions
+5. **Integration Points** - External system connections
+6. **Business Rules** - Core business logic documentation
+7. **Appendices** - Technical details and assumptions
 
 ## Examples
 
-### Example 1: Legacy System Documentation
+### Example 1: Basic Analysis
 
-**Scenario**: A 5-year-old customer management system lacks documentation, and the team needs a functional spec before planning a modernization effort.
-
-**Command**:
 ```
-olaf bootstrap functional spec from code
-```
+User: @bootstrap-functional-spec-from-code source_path=src/
 
-**Input**:
-```
-source_path: ./legacy-crm/src
-detail_level: detailed
-```
+Agent:
+Codebase Analysis Complete
+==========================
+- 45 source files identified
+- 3 main packages detected
+- 12 entry points found
 
-**Result**: Generated comprehensive functional specification documenting customer lifecycle management, reporting capabilities, integration with payment systems, and data models. Identified 12 core business processes and 8 external integrations.
+Key Components:
+- UserController - User management
+- OrderService - Order processing
+- PaymentGateway - Payment integration
 
-### Example 2: Quick System Overview
+Generating specification...
 
-**Scenario**: New product manager needs to understand what an existing microservice does from a business perspective.
-
-**Command**:
-```
-olaf bootstrap functional spec from code
+File created: .olaf/work/staging/functional-specifications/FunctionalSpec-20240115-001.md
 ```
 
-**Input**:
+### Example 2: Detailed Analysis with Q&A
+
 ```
-source_path: ./services/notification-service
-detail_level: overview
+User: @bootstrap-functional-spec-from-code source_path=src/ detail_level=detailed
+
+Agent:
+[Analysis output...]
+
+Clarification Needed:
+1. The OrderService has approval logic. What triggers approval requirements?
+2. Multiple payment providers found. Which is primary?
+
+User: 
+1. Orders over $1000 need approval
+2. Stripe is primary, PayPal is backup
+
+Agent:
+Thank you. Updating specification with clarifications...
+
+Specification generated with 95% confidence.
 ```
 
-**Result**: High-level functional specification describing notification delivery capabilities, supported channels (email, SMS, push), and business rules for notification routing.
+## Domain-Specific Rules
 
-## Related Competencies
+- **Read-Only**: Never modifies source code
+- **Business Focus**: Uses business-friendly language, avoids technical jargon
+- **Traceability**: Includes references to source code locations
+- **Consistency**: Uses consistent terminology throughout
+- **Maintainability**: Structures for easy updates
 
-- **extend-specification**: Use after bootstrapping to add missing UI/UX details and frontend requirements
-- **improve-spec**: Enhance the bootstrapped specification with visual diagrams and detailed data definitions
-- **analyze-business-requirements**: Validate the extracted requirements against business needs
-- **generate-technical-specification** (architect): Create technical architecture documentation to complement the functional spec
+## Error Handling
 
-## Tips & Best Practices
+| Error Condition | Handling |
+|----------------|----------|
+| Invalid source path | Request correct path from user |
+| Unreadable files | Skip and report, continue analysis |
+| Complex code patterns | Document assumptions, ask for clarification |
+| Missing entry points | Analyze available code, note limitations |
 
-- Start with overview detail level for initial assessment, then run detailed analysis for specific components
-- Review the generated specification with original developers if available to validate accuracy
-- Use this as a starting point—expect to refine and enhance the specification with stakeholder input
-- Combine with code comments and commit history analysis for better context
-- Focus on well-structured code first; refactor unclear code before bootstrapping if possible
-- Maintain traceability between specification sections and source code locations
+## Critical Notes
 
-## Limitations
+- Never modifies source code
+- Maintains clear audit trail of analysis
+- Includes confidence levels for extracted information
+- Documents all assumptions made during analysis
+- Supports incremental updates for evolving codebases
 
-- Cannot infer business intent or rationale—only documents what the code does, not why
-- Quality depends on code structure and clarity—poorly organized code yields less useful specifications
-- May miss implicit business rules or undocumented assumptions in the implementation
-- Cannot validate if the implementation matches original business requirements
-- Does not modify or analyze code quality—purely extracts functional behavior
-- Requires human review to ensure business accuracy and completeness
+## Related Skills
 
----
-
-**Source**: `core/competencies/business-analyst/prompts/bootstrap-functional-spec-from-code.md`
+- `generate-tech-spec-from-code` - Generate technical specifications
+- `deepen-tech-spec-developer` - Deep-dive technical analysis
+- `analyze-spec-vs-code` - Compare specifications against code

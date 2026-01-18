@@ -38,27 +38,27 @@ This implementation plan describes the steps for an AI agent to execute the auto
     - For each skill: validate → generate description → generate tutorial → add to stable.txt → remove from verified-skills.txt
     - _Requirements: 2.1-2.5, 3.1-3.4, 4.1-4.4, 5.1-5.4, 6.1-6.5_
 
-  - [ ] 3.D Batch 4: Skills 16-20
+  - [x] 3.D Batch 4: Skills 16-20
     - Skills: store-conversation-record, create-skill, evaluate-prompt-for-adoption, check-prompt-compliance, convert-prompt-to-skill
     - For each skill: validate → generate description → generate tutorial → add to stable.txt → remove from verified-skills.txt
     - _Requirements: 2.1-2.5, 3.1-3.4, 4.1-4.4, 5.1-5.4, 6.1-6.5_
 
-  - [ ] 3.E Batch 5: Skills 21-25
+  - [x] 3.E Batch 5: Skills 21-25
     - Skills: convert-skill-to-chain, assist-me-as-prompt-engineer, switch-context, bootstrap-functional-spec-from-code, deepen-tech-spec-developer
     - For each skill: validate → generate description → generate tutorial → add to stable.txt → remove from verified-skills.txt
     - _Requirements: 2.1-2.5, 3.1-3.4, 4.1-4.4, 5.1-5.4, 6.1-6.5_
 
-  - [ ] 3.F Batch 6: Skills 26-30
+  - [x] 3.F Batch 6: Skills 26-30
     - Skills: assess-genai-initiative-idea, code-in-go, code-in-rust, augment-code-unit-test, run-redocumentation
     - For each skill: validate → generate description → generate tutorial → add to stable.txt → remove from verified-skills.txt
     - _Requirements: 2.1-2.5, 3.1-3.4, 4.1-4.4, 5.1-5.4, 6.1-6.5_
 
-  - [ ] 3.G Batch 7: Skills 31-35
+  - [x] 3.G Batch 7: Skills 31-35
     - Skills: generate-commits-from-changelog, esdi-chain, transform-raw-spec, generate-design, generate-implementation-plan
     - For each skill: validate → generate description → generate tutorial → add to stable.txt → remove from verified-skills.txt
     - _Requirements: 2.1-2.5, 3.1-3.4, 4.1-4.4, 5.1-5.4, 6.1-6.5_
 
-  - [ ] 3.H Batch 8: Skills 36-40
+  - [x] 3.H Batch 8: Skills 36-40
     - Skills: run-implementation-plan, onboard-me, get-bms-expertise, create-otf-variable
     - For each skill: validate → generate description → generate tutorial → add to stable.txt → remove from verified-skills.txt
     - _Requirements: 2.1-2.5, 3.1-3.4, 4.1-4.4, 5.1-5.4, 6.1-6.5_

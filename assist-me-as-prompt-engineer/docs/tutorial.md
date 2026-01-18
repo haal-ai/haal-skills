@@ -1,298 +1,238 @@
-# Prompt Engineering Assistant - Tutorial
+# Tutorial: assist-me-as-prompt-engineer
 
 ## Introduction
-This tutorial walks you through using the Prompt Engineering Assistant to navigate OLAF's prompt engineering capabilities based on your expertise level.
+
+This tutorial shows you how to use the `assist-me-as-prompt-engineer` skill to get personalized guidance on prompt engineering tasks. The skill assesses your expertise level and recommends the most appropriate skills and workflows for your needs.
 
 ## Prerequisites
-- OLAF framework installed
-- Basic understanding of prompt engineering concepts
-- Access to terminal/command line
 
-## Learning Path
+Before starting, ensure you have:
 
-### Level 1: Beginner Tasks
+- [ ] Access to the OLAF framework
+- [ ] A clear idea of what you want to accomplish
+- [ ] Basic understanding of prompt engineering concepts (helpful but not required)
 
-#### Scenario 1: Creating Your First Prompt
-**Goal**: Create a code review prompt
+## Step-by-Step Instructions
 
-**Step 1**: Ask for assistance
-```bash
-olaf prompt assistant "I need to create a code review prompt"
+### Step 1: Invoke the Skill
+
+Start by invoking the skill with your task:
+
+```
+@assist-me-as-prompt-engineer I want to create a prompt for API documentation
 ```
 
-**Expected Response**:
+Or invoke without a task for interactive guidance:
+
 ```
-Assessment: Beginner level task - first prompt creation
-Recommendation: create-prompt
-
-This skill guides you through creating a structured code review 
-prompt using proven templates.
-
-Usage: use the `create-prompt` skill
-
-Expected Outcome: 
-- Staged prompt file in `.olaf/staging/generated-prompts/`
-- Prompt follows prompt engineering principles
-- Ready-to-use code review capability
-
-Next Step: Tell me what you want the prompt to do and I’ll draft it.
+@assist-me-as-prompt-engineer
 ```
 
-#### Scenario 2: Checking Prompt Compliance
-**Goal**: Validate a prompt before using it
+### Step 2: Provide Task Description (if not already provided)
 
-**Command**:
-```bash
-olaf prompt help "Is this prompt compliant?"
+If you didn't include a task, the skill will ask:
+
+```
+What would you like to accomplish with prompt engineering today?
 ```
 
-**Expected Guidance**:
-- Recommendation: `check-prompt-compliance`
-- What is non-compliant and why
-- Concrete edits to make it compliant
+Describe your goal clearly:
 
-#### Scenario 3: Importing Existing Prompts
-**Goal**: Bring a ChatGPT prompt into OLAF
-
-**Command**:
-```bash
-olaf guide me "I have a prompt from ChatGPT to import"
+```
+I need to create a prompt that helps generate API documentation from code comments.
 ```
 
-**Expected Guidance**:
-- Recommendation: `convert-prompt-to-skill`
-- Import process steps
-- Where prompt will be stored
+### Step 3: Expertise Level Assessment
 
-### Level 2: Trained Tasks
+The skill assesses your level based on task complexity. You can also specify it:
 
-#### Scenario 4: Building Your First Skill
-**Goal**: Create a skill with multiple prompts
-
-**Step 1**: Request assistance
-```bash
-olaf prompt assistant "I want to create a skill with multiple prompts"
+```
+@assist-me-as-prompt-engineer expertise_level=trained I want to build a skill
 ```
 
-**Expected Response**:
+**Expertise Levels:**
+- **Beginner**: Creating first prompts, learning basics
+- **Trained**: Creating skills, converting prompts, evaluating quality
+- **Advanced**: Building orchestrators, chains, validating effectiveness
+
+### Step 4: Review the Recommendation
+
+The skill provides a structured recommendation:
+
 ```
 Assessment: Trained level task - skill development
-Recommendation: create-skill
 
-Ready to build complete capabilities? This skill helps you create
-a full skill package with prompts, docs, and workflows.
+Primary Skill: `create-skill`
+- Purpose: Build a complete skill with prompts and workflows
+- Usage: @create-skill
+- Expected Outcome: Full skill package with documentation
 
-Usage: olaf create skill
+Supporting Skills:
+- `check-prompt-compliance`: Validate your prompts
+- `create-skill-description`: Generate documentation
 
-Expected Outcome:
-- Complete skill structure
-- Multiple prompts organized
-- Documentation generated
-
-Next Step: Run `olaf create skill` to begin.
+Next Step: Would you like me to start the skill creation process?
 ```
 
-**Step 2**: Execute the skill creation
+### Step 5: Follow the Guidance
 
-#### Scenario 5: Modernizing Legacy Prompts
-**Goal**: Update old prompts to OLAF standards
+Based on the recommendation, take action:
 
-**Command**:
-```bash
-olaf prompt help "I have old prompts that need updating"
+**Option A: Execute the recommended skill**
+```
+Yes, let's start creating the skill
 ```
 
-**Expected Guidance**:
-- Recommendation: `convert-prompt-to-skill`
-- Conversion/packaging steps explained
-- Validation steps included
-
-#### Scenario 6: Creating Prompt Documentation
-**Goal**: Generate documentation for a prompt/skill
-
-**Command**:
-```bash
-olaf guide me "Generate docs for this prompt"
+**Option B: Ask for more details**
+```
+Can you explain what create-skill will produce?
 ```
 
-**Expected Guidance**:
-- Recommendation: `create-skill-description`
-- What it will extract and how it structures the docs
-
-### Level 3: Advanced Tasks
-
-#### Scenario 7: Creating a Workflow
-**Goal**: Build workflow that validates then deploys prompts
-
-**Step 1**: Request workflow guidance
-```bash
-olaf prompt assistant "I need a workflow that validates then deploys prompts"
+**Option C: Request alternatives**
+```
+What other options do I have?
 ```
 
-**Expected Response**:
+### Step 6: Multi-Step Workflow (for complex tasks)
+
+For complex tasks, you'll receive a workflow proposal:
+
 ```
-Assessment: Advanced level task - workflow orchestration
-Recommendation: Multi-step workflow
+Multi-Step Workflow for: Validate and deploy prompts
 
-Workflow:
-1. evaluate-prompt-for-adoption - Assess prompt quality
-2. check-prompt-compliance - Ensure directive quality and compliance
-3. convert-prompt-to-skill - Package prompt content into a skill structure
-4. validate-prompt-value - Verify effectiveness
-5. validate-olaf-artifacts - Validate local artifacts holistically (optional)
+Step 1: `evaluate-prompt-for-adoption`
+   Purpose: Assess prompt quality and fit
+   Output: Evaluation report
 
-Alternative: Use generate-orchestrator to create an orchestrator.
+Step 2: `check-prompt-compliance`
+   Purpose: Validate directive quality
+   Output: Compliance status
 
-Next Step: Would you like me to execute this workflow, or create 
-a permanent workflow chain? (workflow/chain)
-```
+Step 3: `convert-prompt-to-skill`
+   Purpose: Package into skill structure
+   Output: Complete skill package
 
-**Step 2**: Choose execution or chain creation
-```bash
-# For one-time execution
-> workflow
-
-# For reusable chain
-> chain
+Would you like me to execute this workflow for you? (yes/no)
 ```
 
-#### Scenario 8: Skill Chain Creation
-**Goal**: Convert skill to executable chain
+### Step 7: Learning Path Suggestions
 
-**Command**:
-```bash
-olaf prompt help "How do I chain multiple skills together?"
+The skill may suggest advancement opportunities:
+
+```
+Learning Path Suggestion:
+Once comfortable with `create-prompt`, try `create-skill` to build 
+complete capabilities with multiple prompts and workflows.
 ```
 
-**Expected Guidance**:
-- Recommendation: `convert-skill-to-chain`
-- Chain architecture explained
-- Execution model described
+## Verification Checklist
 
-## Common Patterns
+After receiving guidance, verify:
 
-### Pattern 1: "I Don't Know What Skill to Use"
-**Solution**: Describe your goal, let the assistant recommend
-
-```bash
-olaf prompt assistant "I want to [your goal]"
-```
-
-### Pattern 2: "I'm Not Sure About My Level"
-**Solution**: The assistant auto-assesses based on your task
-
-No need to specify level - it's determined automatically
-
-### Pattern 3: "I Need Multiple Skills"
-**Solution**: Request workflow orchestration
-
-```bash
-olaf prompt help "I need to [complex multi-step goal]"
-```
-
-The assistant will propose a complete workflow
-
-### Pattern 4: "I Want to Learn More"
-**Solution**: Ask about advancement
-
-```bash
-olaf guide me "What should I learn next?"
-```
-
-## Progression Path
-
-### Beginner to Trained
-**When Ready**:
-- Comfortable with `create-prompt`
-- Created several prompts successfully
-- Understand prompt structure
-
-**Next Steps**:
-- Try `create-skill`
-- Explore `convert-prompt-to-skill`
-- Try `create-skill-description`
-
-### Trained to Advanced
-**When Ready**:
-- Built multiple skills
-- Managed prompt collections
-- Understand skill architecture
-
-**Next Steps**:
-- Try `generate-orchestrator`
-- Explore `convert-skill-to-chain`
-- Try `validate-olaf-artifacts`
-
-## Tips and Best Practices
-
-### Tip 1: Be Specific About Your Goal
-**Less Effective**: "Help with prompts"
-**More Effective**: "I need to create a prompt that reviews Python code for security issues"
-
-### Tip 2: Don't Worry About Your Level
-The assistant automatically assesses and recommends appropriately
-
-### Tip 3: Ask for Workflows
-For multi-step tasks, explicitly mention "workflow" to get orchestration guidance
-
-### Tip 4: Use Aliases
-Multiple ways to invoke:
-- `olaf prompt assistant`
-- `olaf prompt help`
-- `olaf guide me`
-- `olaf pe assistant`
-
-### Tip 5: Follow Learning Paths
-Progress naturally through levels - the assistant will suggest when you're ready for more
+- [ ] You understand the recommended skill's purpose
+- [ ] You know how to invoke the recommended skill
+- [ ] You understand what output to expect
+- [ ] You have a clear next action to take
+- [ ] You understand any prerequisites needed
 
 ## Troubleshooting
 
-### Issue: "I Got a Skill I Don't Understand"
-**Solution**: Ask for tutorial
-```bash
-olaf tell me about [skill-name]
+### Recommendation Doesn't Match My Needs
+
+**Symptom**: The suggested skill doesn't fit your task
+
+**Solution**: Provide more details about your goal:
+```
+Actually, I need something more specific. I want to [detailed description]
 ```
 
-### Issue: "The Recommended Skill Seems Too Advanced"
-**Solution**: Ask for prerequisites
-```bash
-olaf prompt help "What do I need to learn before [skill-name]?"
+### Skill Level Seems Wrong
+
+**Symptom**: Recommendations are too basic or too advanced
+
+**Solution**: Explicitly set your expertise level:
+```
+@assist-me-as-prompt-engineer expertise_level=advanced [your task]
 ```
 
-### Issue: "I Need Multiple Skills But Don't Know the Order"
-**Solution**: Request workflow
-```bash
-olaf prompt assistant "workflow for [your complex goal]"
+### Unknown Task Error
+
+**Symptom**: Skill can't map your request to any capability
+
+**Solution**: The skill will offer alternatives:
+```
+I'm not sure which skill fits this task. Let me ask some clarifying questions...
+
+Alternatively, try:
+- `help-me-olaf` for general assistance
+- `tell-me` for information and explanations
 ```
 
-### Issue: "I'm Not Finding the Right Skill"
-**Solution**: Browse all skills
-```bash
-olaf list skills
+### Multiple Options Presented
+
+**Symptom**: Several skills could work for your task
+
+**Solution**: Review the trade-offs and choose:
+```
+Options for your task:
+1. `create-skill` - Full skill with workflows (more comprehensive)
+2. `convert-prompt-to-skill` - Quick conversion (faster)
+3. `create-prompt` - Just the prompt (simplest)
+
+Which approach fits your needs?
 ```
 
-Then describe to assistant which one matches your need
+## Example Scenarios
+
+### Scenario 1: First-Time User
+
+```
+User: @assist-me-as-prompt-engineer I'm new and want to create my first prompt
+
+Agent: 
+Assessment: Beginner level - first prompt creation
+
+Primary Skill: `create-prompt`
+This skill guides you through creating a structured prompt using 
+proven templates. Perfect for getting started.
+
+Usage: @create-prompt
+
+Expected Outcome:
+- Staged prompt in `.olaf/staging/generated-prompts/`
+- Follows prompt engineering best practices
+
+Next Step: What type of prompt do you want to create? 
+(code review, documentation, analysis, etc.)
+```
+
+### Scenario 2: Experienced User with Complex Task
+
+```
+User: @assist-me-as-prompt-engineer expertise_level=advanced 
+      I need to create a workflow that validates, tests, and deploys prompts
+
+Agent:
+Assessment: Advanced level - workflow orchestration
+
+Recommendation: Use `generate-orchestrator` to create a permanent 
+automated workflow.
+
+Workflow Components:
+1. `evaluate-prompt-for-adoption` → Quality gate
+2. `check-prompt-compliance` → Compliance validation
+3. `validate-prompt-value` → Effectiveness metrics
+4. `convert-prompt-to-skill` → Packaging
+
+Next Step: Should I help you create this orchestrator, or execute 
+the workflow manually first to test it?
+```
 
 ## Next Steps
 
-1. **Start Simple**: Begin with beginner skills
-2. **Practice Regularly**: Create prompts frequently
-3. **Progress Gradually**: Move to next level when comfortable
-4. **Ask Questions**: Use the assistant whenever unsure
-5. **Contribute Back**: Share your prompts with the community
+After receiving guidance:
 
-## Related Skills
-
-- `help-me-olaf` - General OLAF assistance
-- `tell-me` - Learn about OLAF features
-
-## Summary
-
-The Prompt Engineering Assistant is your guide through OLAF's capabilities:
-- Assesses your expertise automatically
-- Recommends appropriate skills
-- Guides complex workflows
-- Suggests learning paths
-- Adapts to your growth
-
-Start with simple tasks, progress naturally, and let the assistant guide your journey from beginner to advanced prompt engineer.
+1. **Execute the recommended skill** - Follow the provided usage instructions
+2. **Explore supporting skills** - Try related skills for comprehensive results
+3. **Follow the learning path** - Build expertise progressively
+4. **Return for more guidance** - Use this skill whenever you need direction

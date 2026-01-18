@@ -1,221 +1,209 @@
-# Onboard Me - Tutorial
+# Tutorial: onboard-me
 
-## Quick Start
+## Introduction
 
-### Basic Usage
+This tutorial guides you through using the `onboard-me` skill to generate persona-focused onboarding documentation for any repository. You'll learn how to analyze a codebase and create tailored quickstart guides that help developers become productive in 30 minutes.
 
-```
-olaf onboard me
-```
+## Prerequisites
 
-This will:
-1. Analyze the current repository
-2. Detect relevant developer personas
-3. Generate persona-focused quick start guides
-4. Create an overview index file
+Before starting, ensure you have:
+- Python installed (for the repository analyzer tool)
+- Access to the target repository
+- Write permissions to create output files
 
-### Example Session
+## Step-by-Step Instructions
 
-```
-You: olaf onboard me
+### Step 1: Identify the Target Repository
 
-Copilot:
-[*] Analyzing repository...
-[*] Detected: TypeScript/React frontend + Python/FastAPI backend
-[*] Identified personas: Frontend Developer, Backend Developer, QA Engineer, Architect
-[*] Generating guides...
-
-✓ Created: .olaf/data/product/context/my-app/QUICKSTART-FRONTEND-DEVELOPER.md
-✓ Created: .olaf/data/product/context/my-app/QUICKSTART-BACKEND-DEVELOPER.md
-✓ Created: .olaf/data/product/context/my-app/QUICKSTART-QA-ENGINEER.md
-✓ Created: .olaf/data/product/context/my-app/QUICKSTART-ARCHITECT.md
-✓ Created: .olaf/data/product/context/my-app/QUICKSTART-OVERVIEW.md
-
-Onboarding guides ready! Share QUICKSTART-OVERVIEW.md with new team members.
-```
-
-## Step-by-Step Guide
-
-### Step 1: Run Analysis
-
-The skill automatically runs the repository analyzer:
+Determine the repository you want to generate onboarding guides for:
 
 ```bash
-# From anywhere (recommended): run the analyzer from where the skill is installed,
-# and write output into the target repo.
-python <path-to-onboard-me>/tools/analyze-repository.py <repo-path> --output <repo-path>/.olaf/work/onboard-me
+# Example: Your project directory
+/path/to/my-project
 
-# If you are running from the haal-skills repo root, <path-to-onboard-me> is `onboard-me`:
-python onboard-me/tools/analyze-repository.py <repo-path> --output <repo-path>/.olaf/work/onboard-me
+# Or the current workspace
+./
 ```
 
-This extracts:
-- Languages and frameworks
-- Build tools and commands
+### Step 2: Run the Skill
+
+Invoke the onboard-me skill:
+
+```
+Execute onboard-me for repository: /path/to/my-project
+```
+
+The skill will automatically:
+1. Run the repository analyzer
+2. Detect applicable personas
+3. Generate all quickstart guides
+
+### Step 3: Repository Analysis
+
+The skill runs the analyzer tool:
+
+```bash
+python ./onboard-me/tools/analyze-repository.py /path/to/my-project --output /path/to/my-project/.olaf/work/onboard-me
+```
+
+This generates `repository-analysis.json` containing:
+- Detected languages and frameworks
+- Available commands (install, build, run, test)
 - Entry points and key files
-- Project structure
-- Testing setup
+- Architecture information
 
-### Step 2: Persona Detection
+### Step 4: Review Detected Personas
 
-Based on the analysis, the skill detects relevant personas:
+Based on the analysis, the skill detects relevant personas. For example, a TypeScript React project might detect:
 
-**Always Included:**
-- Architect (overview & patterns)
-- Business Analyst (features & workflows)
-- QA Engineer (if tests exist)
-- Docs Contributor
+- Frontend Developer (TypeScript + React)
+- QA Engineer (has tests)
+- Architect (always included)
+- Business Analyst (always included)
+- Docs Contributor (always included)
 
-**Technology-Specific:**
-- Frontend Developer (React/Vue/Angular/Next.js)
-- Backend Developer (FastAPI/Django/Flask/Go APIs)
-- Mobile Developer (Kotlin/Swift/React Native)
-- CLI Tool Developer (CLI frameworks)
-- DevOps Engineer (Docker/K8s/Terraform)
-- Data Engineer (pandas/Spark/ML frameworks)
-- VS Code Extension Developer
+### Step 5: Guide Generation
 
-### Step 3: Guide Generation
+The skill generates a quickstart guide for each persona. Each guide follows this structure:
 
-For each persona, generates a structured guide:
+```markdown
+# my-project - Frontend Developer Quick Start
 
-**1. What You'll Build** (Goal)
-- Concrete, achievable task relevant to persona
+[(Back to Overview)](./QUICKSTART-OVERVIEW.md)
 
-**2. Setup (5 min)**
-- Clone, install dependencies
-- Environment setup
+**Get productive in 30 minutes**
 
-**3. Build & Run (5 min)**
-- Build commands
-- Run/start commands
-- Verification steps
+## What You'll Build
+[Concrete task matching the persona]
 
-**4. Understand the Code (10 min)**
-- Key files for this persona
-- Relevant directories
-- Architecture diagrams (when needed)
+## Your First 30 Minutes
 
-**5. Make Your First Change (10 min)**
-- Specific file to modify
-- Exact changes to make
-- Test commands to verify
+### 1. Setup (5 min)
+[Install commands]
 
-**6. Common Tasks**
-- Frequently needed commands
-- Development workflows
-- Troubleshooting tips
+### 2. Build & Run (5 min)
+[Build and run commands with verification]
 
-### Step 4: Output
+### 3. Understand the Code (10 min)
+[Key files and architecture diagram]
 
-Guides are saved to:
+### 4. Make Your First Change (10 min)
+[Specific, testable modification task]
+
+## Common Tasks
+[Frequently needed commands]
+
+## Development Workflow
+[Git workflow and testing]
+
+## Debugging
+[Debug approaches and common issues]
+
+## Resources
+[Links to documentation]
 ```
-.olaf/data/product/context/<repo-name>/
+
+### Step 6: Review Generated Files
+
+Check the output directory:
+
+```
+.olaf/data/product/context/my-project/
 ├── QUICKSTART-OVERVIEW.md
 ├── QUICKSTART-FRONTEND-DEVELOPER.md
-├── QUICKSTART-BACKEND-DEVELOPER.md
+├── QUICKSTART-ARCHITECT.md
+├── QUICKSTART-BUSINESS-ANALYST.md
 ├── QUICKSTART-QA-ENGINEER.md
-└── ...
+└── QUICKSTART-DOCS-CONTRIBUTOR.md
 ```
 
-## Advanced Usage
+### Step 7: Verify the Overview
 
-### Analyze Specific Repository
+Open `QUICKSTART-OVERVIEW.md` to see:
+- Links to all generated guides
+- Repository snapshot (languages, frameworks)
+- General setup commands
+- Decision tree for choosing a guide
 
-```
-olaf onboard me /path/to/other/repo
-```
+### Step 8: Customize if Needed
 
-### Customize Output Location
+The generated guides use real data from your repository. You may want to:
+- Add project-specific context
+- Update commands if they differ from detected ones
+- Add team-specific workflows
 
-Edit the prompt or analyzer script to change output directory (default: `.olaf/data/product/context/<repo-name>/`)
+## Verification Checklist
 
-### Re-run Analysis
+After running the skill, verify:
 
-Simply run `olaf onboard me` again - it will regenerate all guides with updated information (overwriting existing `QUICKSTART-*.md` files in place).
-
-## Understanding the Output
-
-### QUICKSTART-OVERVIEW.md
-
-Index file listing all generated guides with:
-- Quick links to each persona guide (Markdown links)
-- Repository overview
-- General setup instructions
-
-Each persona guide also includes a "Back to Overview" link at the top for easy navigation.
-
-### Persona Guides
-
-Each `QUICKSTART-<PERSONA>.md` contains:
-- **30-minute structure**: Designed for immediate productivity
-- **Concrete examples**: Actual file paths and commands from your repo
-- **First task**: Safe, testable modification to build confidence
-- **Common tasks**: Copy-paste ready commands for daily work
-
-## Tips & Best Practices
-
-### For Repository Owners
-
-1. **Keep setup simple**: Ensure install/build commands work on fresh clone
-2. **Document entry points**: Clear main files help the analyzer
-3. **Include tests**: Enables QA Engineer persona generation
-4. **Use standard tools**: Standard package managers detected automatically
-
-### For New Team Members
-
-1. **Start with OVERVIEW**: Get the big picture first
-2. **Pick your persona**: Use the guide matching your role
-3. **Follow the 30-min plan**: Complete sections in order
-4. **Do the first task**: Builds confidence with a quick win
-5. **Bookmark common tasks**: Reference section saves time daily
-
-### For Maintainers
-
-- **Regenerate periodically**: Run when build process changes
-- **Validate guides**: Test with actual new team members
-- **Customize if needed**: Guides are markdown, easy to edit
-- **Share OVERVIEW link**: Perfect for README or onboarding docs
-
-## Common Scenarios
-
-### Scenario 1: Monorepo
-
-The analyzer detects multiple modules and generates personas for each tech stack found.
-
-### Scenario 2: Legacy Codebase
-
-Even without modern build tools, the skill extracts structure and creates guides based on detected patterns.
-
-### Scenario 3: Multiple Languages
-
-Generates personas for each language ecosystem (e.g., Frontend + Backend + Data Pipeline).
-
-### Scenario 4: Microservices
-
-Run on each service repository or on parent repo - adapts to structure.
+- [ ] `repository-analysis.json` was created in `.olaf/work/onboard-me/`
+- [ ] `QUICKSTART-OVERVIEW.md` exists and links to all guides
+- [ ] Each persona guide has the "Back to Overview" link
+- [ ] Commands in guides are accurate and copy-pasteable
+- [ ] Mermaid diagrams render correctly (for Architect/Business Analyst guides)
+- [ ] Key files referenced in guides actually exist
 
 ## Troubleshooting
 
-**No personas detected?**
-- Ensure repository has source code files (not just config)
-- Check that `.git` directory exists (for analysis)
+### Analyzer Tool Fails
 
-**Missing commands in guides?**
-- Verify `package.json`, `requirements.txt`, `go.mod`, etc. exist
-- Standard build files help the analyzer find commands
+**Symptom**: Error running analyze-repository.py
 
-**Guides too generic?**
-- More structured code = better analysis
-- Clear entry points improve quality
-- Standard project layout helps detection
+**Solution**:
+1. Verify Python is installed: `python --version`
+2. Check the repository path exists
+3. Ensure write permissions for output directory
+4. Review error message for specific issues
+
+### Missing Personas
+
+**Symptom**: Expected persona not detected
+
+**Solution**:
+1. Check `repository-analysis.json` for detected technologies
+2. Verify the detection rules match your stack
+3. The skill always includes Architect, Business Analyst, and Docs Contributor
+
+### Incorrect Commands
+
+**Symptom**: Generated commands don't work
+
+**Solution**:
+1. Review `repository-analysis.json` commands section
+2. The analyzer detects commands from package.json, Makefile, etc.
+3. Manually update guides if commands differ
+
+### Guides Not Regenerating
+
+**Symptom**: Old content persists after re-running
+
+**Solution**:
+1. The skill overwrites existing files by design
+2. Check file permissions
+3. Verify you're running against the correct repository
+
+### Diagrams Not Rendering
+
+**Symptom**: Mermaid diagrams show as code blocks
+
+**Solution**:
+1. Ensure your Markdown viewer supports Mermaid
+2. GitHub and VS Code render Mermaid natively
+3. Check diagram syntax for errors
 
 ## Next Steps
 
-After generating guides:
+After generating onboarding guides:
 
-1. **Review**: Check accuracy of detected tech stack
-2. **Test**: Have a new team member try a guide
-3. **Refine**: Edit generated markdown if needed
-4. **Share**: Add link to OVERVIEW in your README
-5. **Maintain**: Regenerate when major changes occur
+- **Share with team**: Distribute guides to new team members
+- **Iterate**: Update guides based on feedback
+- **Automate**: Run periodically to keep guides current
+- **Extend**: Add project-specific sections as needed
+
+## Tips for Success
+
+1. **Run on complete repositories**: The analyzer works best with full codebases
+2. **Check detected commands**: Verify install/build/test commands are accurate
+3. **Review architecture diagrams**: Ensure they reflect actual system design
+4. **Update after major changes**: Regenerate guides when architecture evolves
+5. **Customize for your team**: Add team-specific workflows and conventions

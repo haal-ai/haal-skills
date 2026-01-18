@@ -1,62 +1,140 @@
-# Onboard Me - Skill Description
+# onboard-me
 
 ## Overview
 
-The **onboard-me** skill generates persona-focused quick start guides that help new team members become productive in 30 minutes. It analyzes any repository and creates tailored onboarding documentation for different developer roles (Frontend, Backend, QA, DevOps, etc.).
+The `onboard-me` skill generates persona-focused 30-minute productivity guides from repository analysis. It automatically detects the technology stack, identifies relevant developer personas, and creates tailored quickstart guides for each role.
 
 ## Purpose
 
-New team members often face overwhelming documentation or none at all. This skill:
-- Analyzes repository structure, tech stack, and build systems automatically
-- Detects relevant developer personas based on technologies used
-- Generates focused, actionable quick start guides for each persona
-- Provides concrete "first task" examples to build confidence
+This skill enables teams to:
+- Automatically generate onboarding documentation for any repository
+- Create role-specific guides that get developers productive in 30 minutes
+- Maintain consistent onboarding quality across projects
+- Reduce time spent on manual documentation creation
 
 ## Key Features
 
-- **Automatic Analysis**: Scans repository to extract languages, frameworks, entry points, and commands
+- **Automatic Repository Analysis**: Scans codebase to detect languages, frameworks, and architecture
 - **Persona Detection**: Identifies 3-6 relevant developer roles based on tech stack
-- **30-Minute Guides**: Each guide is structured to get someone productive in half an hour
-- **Practical Focus**: Includes setup, build, key files, and a first coding task
-- **Universal**: Works with any programming language or framework
+- **Tailored Guides**: Generates role-specific quickstart documentation
+- **Mermaid Diagrams**: Includes architecture and workflow visualizations
+- **Actionable Content**: Every command is copy-pasteable, every step is concrete
 
-## When to Use
+## Usage
 
-Use this skill when:
-- Onboarding new team members to a codebase
-- Creating developer documentation for a new repository
-- Migrating teams to a new project
-- Improving existing onboarding materials
-- You need quick start guides for multiple developer personas
+Invoke the skill by pointing it at a repository:
 
-## Typical Output
+```
+Execute onboard-me for repository: /path/to/repo
+```
 
-For a TypeScript/React + Python/FastAPI project, generates:
-- `QUICKSTART-FRONTEND-DEVELOPER.md`
-- `QUICKSTART-BACKEND-DEVELOPER.md`
-- `QUICKSTART-QA-ENGINEER.md`
-- `QUICKSTART-DEVOPS-ENGINEER.md`
-- `QUICKSTART-ARCHITECT.md`
-- `QUICKSTART-OVERVIEW.md` (linked index of all guides)
+The skill will:
+1. Run the repository analyzer tool
+2. Detect applicable personas
+3. Generate quickstart guides for each persona
+4. Create an overview file linking all guides
 
-Each guide contains:
-- What you'll build (concrete goal)
-- 5-min setup instructions
-- 5-min build & run verification
-- 10-min code walkthrough
-- 10-min first change exercise
-- Common tasks reference
+## Parameters
 
-## Benefits
+This skill operates on the target repository path and generates output based on automatic analysis. No additional parameters are required.
 
-- **Reduces onboarding time** from days to hours
-- **Persona-specific** content eliminates irrelevant information
-- **Actionable** tasks build confidence through immediate success
-- **Consistent** format across all repositories
-- **Maintainable** generated from code analysis, stays up-to-date
+## Process Flow
 
-## Skill Type
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   Run Repository Analyzer                    │
+│  • Execute analyze-repository.py on target repo             │
+│  • Generate repository-analysis.json                        │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      Detect Personas                         │
+│  • Analyze languages, frameworks, project type              │
+│  • Apply persona detection rules                            │
+│  • Select 3-6 relevant personas                             │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   Generate Persona Guides                    │
+│  For each detected persona:                                 │
+│  • Create QUICKSTART-<PERSONA>.md                           │
+│  • Include setup, build, code understanding, first change   │
+│  • Add relevant Mermaid diagrams                            │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Create Overview File                      │
+│  • Generate QUICKSTART-OVERVIEW.md                          │
+│  • Link all persona guides                                  │
+│  • Include repo snapshot and general setup                  │
+└─────────────────────────────────────────────────────────────┘
+```
 
-**Protocol**: Act  
-**Exposure**: Export  
-**Status**: Mainstream
+## Output
+
+The skill generates files in `.olaf/data/product/context/<repo-name>/`:
+
+| File | Description |
+|------|-------------|
+| `QUICKSTART-OVERVIEW.md` | Summary with links to all persona guides |
+| `QUICKSTART-FRONTEND-DEVELOPER.md` | Guide for frontend developers |
+| `QUICKSTART-BACKEND-DEVELOPER.md` | Guide for backend developers |
+| `QUICKSTART-ARCHITECT.md` | System overview and architecture guide |
+| `QUICKSTART-QA-ENGINEER.md` | Testing and quality assurance guide |
+| `QUICKSTART-DEVOPS-ENGINEER.md` | Infrastructure and deployment guide |
+| `QUICKSTART-BUSINESS-ANALYST.md` | Non-technical system overview |
+| `QUICKSTART-DOCS-CONTRIBUTOR.md` | Documentation contribution guide |
+
+*Note: Only guides for detected personas are generated.*
+
+## Persona Detection Rules
+
+| Persona | Detection Criteria |
+|---------|-------------------|
+| Frontend Developer | TypeScript/JavaScript + React/Vue/Angular/Next.js |
+| Backend Developer | Python + FastAPI/Django/Flask OR Go with API frameworks |
+| Mobile Developer | Kotlin OR Swift OR react-native |
+| VS Code Extension Developer | VS Code Extension in frameworks |
+| CLI Tool Developer | project_type == cli-tool OR Bubble Tea (TUI) |
+| DevOps Engineer | Docker OR Kubernetes OR Terraform |
+| Data Engineer | Python + pandas/numpy/tensorflow OR Apache Spark |
+| QA Engineer | Always if architecture.has_tests == true |
+| Architect | Always included |
+| Business Analyst | Always included |
+| Docs Contributor | Always included |
+
+## Examples
+
+### Basic Usage
+```
+Execute onboard-me for repository: ./my-project
+```
+
+### Output Structure
+```
+.olaf/data/product/context/my-project/
+├── QUICKSTART-OVERVIEW.md
+├── QUICKSTART-FRONTEND-DEVELOPER.md
+├── QUICKSTART-BACKEND-DEVELOPER.md
+├── QUICKSTART-ARCHITECT.md
+├── QUICKSTART-QA-ENGINEER.md
+└── QUICKSTART-DOCS-CONTRIBUTOR.md
+```
+
+## Error Handling
+
+| Scenario | Behavior |
+|----------|----------|
+| Repository path not found | Reports error with path |
+| Analysis tool fails | Reports specific error from analyzer |
+| No personas detected | Falls back to Architect, Business Analyst, Docs Contributor |
+| Existing guides found | Regenerates in-place (overwrites) |
+
+## Related Skills
+
+- `generate-step-by-step-tutorial` - Creates detailed tutorials for specific workflows
+- `create-skill-description` - Generates skill documentation
+- `tell-me` - Searches knowledge base for specific topics
