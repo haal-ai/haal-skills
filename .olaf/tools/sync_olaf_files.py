@@ -48,14 +48,14 @@ def initialize_config(config_path: Path, source_base: Path) -> None:
     with open(config_path, 'w') as f:
         json.dump(config, f, indent=2)
     
-    print(f"✅ Initialized config at {config_path}")
-    print(f"📁 Source base: {source_base}")
+    print(f"Initialized config at {config_path}")
+    print(f"Source base: {source_base}")
 
 
 def load_config(config_path: Path) -> Dict:
     """Load configuration from JSON file."""
     if not config_path.exists():
-        print(f"❌ Config file not found: {config_path}")
+        print(f"Config file not found: {config_path}")
         print("Initializing new config...")
         source_base = get_source_base()
         initialize_config(config_path, source_base)
@@ -94,6 +94,16 @@ def collect_files_to_copy(source_folders: List[str], prune_files: List[str],
                     continue
                 
                 files_to_copy.add((file_path, rel_path, rel_path in force_replace_set))
+
+    # Ensure explicitly force-replaced files are copied even if they are not
+    # under any of the configured source folders.
+    for rel_path in force_replace_set:
+        if rel_path in prune_set:
+            continue
+        source_file = source_base / rel_path
+        if not source_file.exists() or not source_file.is_file():
+            continue
+        files_to_copy.add((source_file, rel_path, True))
     
     return files_to_copy
 
@@ -105,12 +115,12 @@ def prune_files_at_destination(prune_files: List[str], dest_base: Path) -> None:
         if file_path.exists():
             if file_path.is_file():
                 file_path.unlink()
-                print(f"🗑️  Deleted file: {file_path}")
+                print(f"Deleted file: {file_path}")
             elif file_path.is_dir():
                 shutil.rmtree(file_path)
-                print(f"🗑️  Deleted directory: {file_path}")
+                print(f"Deleted directory: {file_path}")
         else:
-            print(f"ℹ️  File not found for pruning: {file_path}")
+            print(f"File not found for pruning: {file_path}")
 
 
 def copy_files_to_destination(files_to_copy: Set[tuple], dest_base: Path) -> None:
@@ -121,9 +131,9 @@ def copy_files_to_destination(files_to_copy: Set[tuple], dest_base: Path) -> Non
         # Check if file already exists
         if dest_file.exists():
             if force_replace:
-                print(f"🔄 Force replacing: {rel_path}")
+                print(f"Force replacing: {rel_path}")
             else:
-                print(f"⏭️  Skipping (exists): {rel_path}")
+                print(f"Skipping (exists): {rel_path}")
                 continue
         
         # Create parent directories if needed
@@ -131,7 +141,7 @@ def copy_files_to_destination(files_to_copy: Set[tuple], dest_base: Path) -> Non
         
         # Copy the file
         shutil.copy2(source_file, dest_file)
-        print(f"📁 Copied: {rel_path}")
+        print(f"Copied: {rel_path}")
 
 
 def update_git_exclude(dest_base: Path) -> None:
@@ -164,14 +174,14 @@ def update_git_exclude(dest_base: Path) -> None:
             f.write("\n# OLAF sync exclusions\n")
             for exclusion in new_exclusions:
                 f.write(f"{exclusion}\n")
-        print(f"📝 Added {len(new_exclusions)} exclusions to .git/info/exclude")
+        print(f"Added {len(new_exclusions)} exclusions to .git/info/exclude")
     else:
-        print("ℹ️  No new exclusions needed for .git/info/exclude")
+        print("No new exclusions needed for .git/info/exclude")
 
 
 def main():
     """Main execution function."""
-    print("🚀 OLAF File Synchronization Script")
+    print("OLAF File Synchronization Script")
     print("=" * 50)
     
     # Get paths
@@ -179,16 +189,16 @@ def main():
     source_base = get_source_base()
     dest_base = get_destination_base()
     
-    print(f"📂 Config: {config_path}")
-    print(f"📂 Source: {source_base}")
-    print(f"📂 Destination: {dest_base}")
+    print(f"Config: {config_path}")
+    print(f"Source: {source_base}")
+    print(f"Destination: {dest_base}")
     print()
     
     # Load configuration
     try:
         config = load_config(config_path)
     except Exception as e:
-        print(f"❌ Error loading config: {e}")
+        print(f"Error loading config: {e}")
         sys.exit(1)
     
     # Extract configuration
@@ -199,34 +209,34 @@ def main():
     )
     source_folders = config.get("folders_to_copy_from", [])
     
-    print(f"📋 Configuration loaded:")
+    print("Configuration loaded:")
     print(f"   - Files to prune: {len(prune_files)}")
     print(f"   - Files to force replace: {len(force_replace_files)}")
     print(f"   - Source folders: {len(source_folders)}")
     print()
     
     # Step 1: Prune files at destination
-    print("🗑️  Step 1: Pruning files...")
+    print("Step 1: Pruning files...")
     prune_files_at_destination(prune_files, dest_base)
     print()
     
     # Step 2: Collect files to copy
-    print("📦 Step 2: Collecting files to copy...")
+    print("Step 2: Collecting files to copy...")
     files_to_copy = collect_files_to_copy(source_folders, prune_files, force_replace_files, source_base)
     print(f"   Found {len(files_to_copy)} files to copy")
     print()
     
     # Step 3: Copy files to destination
-    print("📁 Step 3: Copying files...")
+    print("Step 3: Copying files...")
     copy_files_to_destination(files_to_copy, dest_base)
     print()
     
     # Step 4: Update .git/info/exclude
-    print("📝 Step 4: Updating .git/info/exclude...")
+    print("Step 4: Updating .git/info/exclude...")
     update_git_exclude(dest_base)
     print()
     
-    print("✅ Synchronization completed successfully!")
+    print("Synchronization completed successfully!")
 
 
 if __name__ == "__main__":
