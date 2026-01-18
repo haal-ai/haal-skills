@@ -1,139 +1,275 @@
-# Step-by-Step Tutorial
+# Tutorial: bootstrap-functional-spec-from-code
 
-## Bootstrap Functional Spec from Code: Step-by-Step Tutorial
+## Introduction
 
-**How to Execute the "Bootstrap Functional Spec from Code" Workflow**
-
-This tutorial shows exactly how to analyze source code and extract functionalities to create a draft functional specification using the OLAF business-analyst competency.
+This tutorial guides you through using the `bootstrap-functional-spec-from-code` skill to analyze source code and generate a functional specification document. The skill extracts business logic and user-facing functionality from code to create documentation suitable for business stakeholders.
 
 ## Prerequisites
 
-- OLAF framework properly installed and configured
-- Access to a source code directory or codebase to analyze
-- Understanding of functional specification structure
-- Access to the business-analyst competency pack
+Before starting, ensure you have:
+
+- [ ] Access to the source code you want to analyze
+- [ ] The codebase is accessible from your workspace
+- [ ] Understanding of the application's general purpose
+- [ ] Write access to `.olaf/work/staging/functional-specifications/`
 
 ## Step-by-Step Instructions
 
-### Step 1: Prepare the Source Code
+### Step 1: Invoke the Skill
 
-[Ensure you have the codebase ready for analysis]
+Start by invoking the skill with the source path:
 
-**User Action:**
-
-1. Locate the application's source code or codebase directory
-2. Ensure the directory is accessible and contains the main application code
-3. Note the full path to the source code directory
-
-**System Response:**
-Directory should be readable and contain analyzable source code files.
-
-### Step 2: Invoke the Bootstrap Command
-
-**User Action:** Execute the OLAF command to start functional spec generation
-
-```bash
-olaf bootstrap functional spec from code
+```
+@bootstrap-functional-spec-from-code source_path=src/
 ```
 
-**Provide Parameters:**
+Or invoke without parameters for interactive mode:
 
-- **source_path**: [path/to/your/source-code] - Full path to the codebase directory
-- **output_format**: [markdown/html/pdf] - Output format (default: markdown)
-- **detail_level**: [overview/standard/detailed] - Level of detail (default: standard)
+```
+@bootstrap-functional-spec-from-code
+```
 
-### Step 3: Code Analysis Process
+### Step 2: Provide Source Path
 
-**What OLAF Does:**
+If not provided, the skill will ask:
 
-- Scans the directory structure and identifies entry points
-- Analyzes main components and their relationships
-- Extracts business logic and workflows from the source code
-- Documents data models and system relationships
+```
+Please provide the path to the application's source code:
+```
 
-**You Should See:** Progress messages indicating directory scanning and code analysis phases
+Enter the path to your codebase:
 
-### Step 4: Business Logic Extraction
+```
+src/main/java/com/example/myapp
+```
 
-**What OLAF Does:**
+### Step 3: Select Detail Level (Optional)
 
-- Identifies core business rules embedded in the code
-- Maps out user flows and system interactions
-- Documents system boundaries and external dependencies
-- Identifies integration points and external services
+Choose the level of detail for the specification:
 
-**You Should See:** Summary of identified business processes and system components
+```
+Select detail level:
+1. overview - High-level summary only
+2. standard - Balanced detail (default)
+3. detailed - Comprehensive documentation
+```
 
-### Step 5: Specification Generation
+### Step 4: Review Initial Analysis
 
-**What OLAF Does:**
+The skill analyzes your codebase and presents findings:
 
-- Loads the functional specification template
-- Structures extracted content for business audience
-- Translates technical code into business-focused language
-- Includes relevant code examples and visual diagrams where helpful
+```
+Codebase Analysis Complete
+==========================
 
-**You Should See:** Formatted functional specification following the standard template structure
+Directory Structure:
+- 45 source files identified
+- 3 main packages detected
+- 12 entry points found
 
-### Step 6: Output Generation and Saving
+Key Components:
+- UserController - User management endpoints
+- OrderService - Order processing logic
+- PaymentGateway - Payment integration
 
-**What OLAF Does:**
+Business Processes:
+- User registration and authentication
+- Order creation and management
+- Payment processing workflow
+```
 
-- Generates filename in format: `FunctionalSpec-YYYYMMDD-NNN.md`
-- Saves the specification to `data/specs/` directory
-- Creates business-focused documentation without technical jargon
-- Includes technical details in appendices for reference
+### Step 5: Review Identified Business Logic
 
-**You Should See:**
+The skill extracts business rules:
 
-- Complete functional specification in chosen format
-- File save confirmation with location
-- Executive summary of identified functionalities
-- Clear separation between business and technical views
+```
+Business Logic Extracted
+========================
+
+Core Business Rules:
+1. Users must verify email before placing orders
+2. Orders over $1000 require manager approval
+3. Payments are processed through Stripe integration
+4. Refunds allowed within 30 days of purchase
+
+User Flows:
+1. Registration → Email Verification → Login
+2. Browse Products → Add to Cart → Checkout → Payment
+3. View Orders → Request Refund → Approval → Processing
+```
+
+### Step 6: Review Draft Specification
+
+The skill generates the specification document:
+
+```
+Draft Specification Generated
+=============================
+
+File: .olaf/work/staging/functional-specifications/FunctionalSpec-20240115-001.md
+
+Sections Created:
+✓ Executive Summary
+✓ Functional Requirements
+✓ User Stories
+✓ Data Models
+✓ Integration Points
+✓ Business Rules
+✓ Appendices
+```
+
+### Step 7: Interactive Q&A
+
+The skill may ask clarifying questions:
+
+```
+Clarification Needed:
+1. The PaymentGateway references both Stripe and PayPal. 
+   Which is the primary payment processor?
+
+2. The OrderService has a "priority" field. What determines 
+   order priority?
+```
+
+Provide answers to improve specification accuracy:
+
+```
+1. Stripe is primary, PayPal is fallback
+2. Priority is based on customer tier: Gold > Silver > Bronze
+```
+
+### Step 8: Validate Against Source
+
+The skill validates the specification:
+
+```
+Validation Results
+==================
+✓ All identified components documented
+✓ Business rules traced to source code
+✓ User flows match code paths
+⚠ 2 assumptions made (see Appendix A)
+
+Confidence Level: High (92%)
+```
+
+### Step 9: Review Final Output
+
+Open and review the generated specification:
+
+```
+.olaf/work/staging/functional-specifications/FunctionalSpec-20240115-001.md
+```
+
+The document includes:
+- Executive summary for stakeholders
+- Detailed functional requirements
+- User stories with acceptance criteria
+- Data model documentation
+- Integration point descriptions
+- Traceability to source code
 
 ## Verification Checklist
 
-✅ **Source code successfully analyzed and components identified**
-✅ **Business logic extracted and documented in business terms**
-✅ **Functional specification generated following template structure**
-✅ **Specification saved to data/specs/ with proper naming convention**
-✅ **Business-focused language used (no technical jargon in main sections)**
-✅ **Traceability to source code maintained for validation**
+After generation, verify:
+
+- [ ] Specification file created in staging directory
+- [ ] Executive summary accurately describes the application
+- [ ] All major features are documented
+- [ ] Business rules are correctly captured
+- [ ] User flows match actual application behavior
+- [ ] Data models reflect code structure
+- [ ] Assumptions are clearly documented
 
 ## Troubleshooting
 
-**If source code cannot be analyzed:**
+### Source Path Not Found
 
-- Verify the source path is correct and accessible
-- Ensure the directory contains recognizable source code files
-- Check if the codebase uses supported programming languages
+**Symptom**: Error "Cannot access source path"
 
-**If business logic extraction is incomplete:**
+**Cause**: Invalid or inaccessible path
 
-- Try using 'detailed' level for more comprehensive analysis
-- Ensure the source code contains meaningful business logic
-- Check if code comments and documentation help with context
+**Solution**:
+1. Verify the path exists
+2. Use relative path from workspace root
+3. Check file permissions
 
-**If specification template errors occur:**
+### Incomplete Analysis
 
-- Verify the functional specification template exists in the competency pack
-- Check if the template is properly formatted and accessible
+**Symptom**: Missing components in analysis
 
-## Key Learning Points
+**Cause**: Complex or non-standard code structure
 
-1. **Code-to-Business Translation:** The workflow translates technical implementation into business-understandable functional requirements
-2. **Template-Driven Consistency:** Uses standardized templates to ensure consistent specification structure
-3. **Traceability Maintenance:** Maintains clear links between generated specification and source code for validation
+**Solution**:
+1. Provide more specific source path
+2. Use `detail_level=detailed` for deeper analysis
+3. Answer clarifying questions thoroughly
 
-## Next Steps to Try
+### Low Confidence Score
 
-- Review the generated functional specification with business stakeholders
-- Validate the extracted functionalities against actual system behavior
-- Use the specification as a starting point for requirements refinement
-- Update and maintain the specification as the codebase evolves
+**Symptom**: Confidence level below 70%
 
-## Expected Timeline
+**Cause**: Ambiguous code or missing documentation
 
-- **Total analysis time:** 5-15 minutes depending on codebase size
-- **User input required:** Providing source path and configuration parameters
-- **OLAF execution time:** Automated code analysis, business logic extraction, and specification generation
+**Solution**:
+1. Review the assumptions section
+2. Provide clarifications for uncertain areas
+3. Consider adding code comments and re-running
+
+### Business Logic Misinterpretation
+
+**Symptom**: Incorrect business rules in specification
+
+**Cause**: Code doesn't clearly express business intent
+
+**Solution**:
+1. Use the interactive Q&A to correct misunderstandings
+2. Provide additional context about business rules
+3. Review and manually edit the specification
+
+### Large Codebase Timeout
+
+**Symptom**: Analysis takes too long or times out
+
+**Cause**: Very large codebase
+
+**Solution**:
+1. Analyze specific modules separately
+2. Use `detail_level=overview` first
+3. Focus on specific packages: `source_path=src/main/java/com/example/core`
+
+## Output Format Options
+
+### Markdown (Default)
+
+```
+@bootstrap-functional-spec-from-code source_path=src/ output_format=markdown
+```
+
+Standard markdown format, best for version control and editing.
+
+### HTML
+
+```
+@bootstrap-functional-spec-from-code source_path=src/ output_format=html
+```
+
+Formatted HTML for web viewing and sharing.
+
+### PDF
+
+```
+@bootstrap-functional-spec-from-code source_path=src/ output_format=pdf
+```
+
+PDF format for formal documentation and distribution.
+
+## Next Steps
+
+After generating the specification:
+
+1. **Review with stakeholders** - Share the specification for feedback
+2. **Iterate and refine** - Update based on feedback
+3. **Maintain traceability** - Keep specification updated as code changes
+4. **Use for planning** - Reference for feature planning and estimation
+5. **Generate technical spec** - Use `generate-tech-spec-from-code` for developer documentation

@@ -1,97 +1,48 @@
-# Carry On Session: Step-by-Step Tutorial
+# Tutorial: carry-on-session
 
-**How to Execute the "Carry On Session"**
-
-This tutorial shows exactly how to resume work using the most recent carry-over note.
+## Introduction
+Resume your previous work session by loading a carry-over note and reviewing the proposed next steps.
 
 ## Prerequisites
-
-- A carry-over note exists in `.olaf/work/carry-over/`
-- The carry-over note follows the expected format and contains `## NEXT PROMPT`
+- Existing carry-over note in `.olaf/work/carry-over/`
+- Created using `carry-over-session` skill
 
 ## Step-by-Step Instructions
 
-### Step 1: Run the carry-on skill
-This step triggers the assistant to locate and parse the latest carry-over note.
-
-**User Action:**
-1. Open your assistant/chat.
-2. Ask to run: `carry-on-session`
-
-**Assistant Response:**
-The assistant starts searching for the latest carry-over file in `.olaf/work/carry-over/`.
-
-### Step 2: The assistant selects the latest carry-over note
-
-**What the assistant does:**
-- Finds files matching `carry-over-YYYYMMDD-HHmm.txt`
-- Selects the newest one based on its timestamp
-
-**You should see:**
-The assistant referencing the selected carry-over filename.
-
-### Step 3: The assistant parses the carry-over note
-
-**What the assistant does:**
-- Extracts `## NEXT PROMPT` (required)
-- Extracts `## FILES NEEDED` (optional)
-- Extracts `## OPTIONAL - Brief Context` (optional)
-
-**You should see:**
-A proposed plan and (optionally) a list of files to open.
-
-### Step 4: Review the proposal and confirm
-
-**Assistant Response:**
-```text
-## Resuming from Carry-Over
-- Carry-Over File: carry-over-20260116-1045.txt
-- Session Date: 2026-01-16 10:45
-
-### Proposed Plan (from NEXT PROMPT)
-[Paste NEXT PROMPT verbatim]
-
-### Files To Open
-[List each absolute path from FILES NEEDED]
-
-Confirm: Proceed with the proposed plan? (Yes/No)
-If No, please specify adjustments.
+### Step 1: Invoke the Skill
+```
+@carry-on-session
 ```
 
-**User Action:**
-Reply with one of:
-- `Yes`
-- `No, please do X instead`
+### Step 2: Review the Proposal
+The skill displays:
+- Session date from the carry-over file
+- The exact next prompt to execute
+- Files that need to be opened
+
+### Step 3: Confirm or Adjust
+- Type **Yes** to proceed with the proposed plan
+- Type **No** and specify adjustments if needed
+
+### Step 4: Execute the Plan
+Once confirmed, the assistant will:
+- Open the listed files
+- Execute the proposed prompt
 
 ## Verification Checklist
-
-✅ Latest carry-over file selected from `.olaf/work/carry-over/`
-✅ `NEXT PROMPT` is shown verbatim
-✅ Confirmation requested before any action
+- [ ] Latest carry-over file was found
+- [ ] Proposal displays correct session date
+- [ ] Next prompt matches your expectations
+- [ ] File paths are valid
 
 ## Troubleshooting
 
-**If no carry-over files are found:**
-- Create one first (for example using `carry-over-session`), then rerun `carry-on-session`.
+### No carry-over files found
+Run `@carry-over-session` first to create a carry-over note.
 
-**If `NEXT PROMPT` is missing:**
-- Edit the carry-over note to include a `## NEXT PROMPT` section.
+### Wrong carry-over loaded
+Check `.olaf/work/carry-over/` for multiple files and manually specify which one to use.
 
-**If file paths in `FILES NEEDED` are invalid:**
-- Update the paths in the carry-over note to match the current workspace layout.
-
-## Key Learning Points
-
-1. **Safety first:** this skill always asks before doing anything.
-2. **Most recent wins:** the newest timestamped carry-over file is selected.
-3. **Carry-over notes drive execution:** `NEXT PROMPT` becomes the next working instruction after you approve.
-
-## Next Steps to Try
-
-- Create a new carry-over note, then run `carry-on-session` to resume it.
-- Test the “No” flow by requesting a smaller first step before proceeding.
-
-## Expected Timeline
-
-- **Total time:** typically under a minute (depends on the carry-over contents)
-- **User input required:** confirmation (Yes/No) before any action
+## Next Steps
+- Use `carry-over-session` at the end of each work session
+- Review and clean up old carry-over files periodically

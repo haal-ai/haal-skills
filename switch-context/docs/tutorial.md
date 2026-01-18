@@ -1,112 +1,266 @@
-# Context Switch: Step-by-Step Tutorial
+# Tutorial: switch-context
 
-**How to Execute the "Context Switch" Workflow**
+## Introduction
 
-This tutorial shows exactly how to switch between different project contexts in OLAF.
+This tutorial guides you through using the `switch-context` skill to manage and switch between different operational contexts. Contexts customize AI agent behavior for specific projects, frameworks, or workflows.
 
 ## Prerequisites
 
-- OLAF framework installed and active
-- At least one context template file in `.olaf/data/context/`
-- Access to GitHub Copilot Chat or compatible IDE
+Before starting, ensure you have:
+
+- [ ] Access to the OLAF framework
+- [ ] The `.olaf/data/context/` directory exists
+- [ ] At least one context template file (context-*.md)
 
 ## Step-by-Step Instructions
 
-### Step 1: List Available Contexts
-Brief: Check what contexts are available to switch to
+### Step 1: View Available Contexts
 
-**User Action:**
-1. Open GitHub Copilot Chat
-2. Type: `context switch`
-3. Press Enter
+Start by listing available contexts:
 
-**Copilot Response:**
+```
+@switch-context
+```
+
+Or use the explicit command:
+
+```
+context list
+```
+
+You'll see a numbered list:
+
 ```
 Available contexts:
-1. default
-2. springboot-hexagonal
+1. default - General purpose development context
+2. springboot-hexagonal - Spring Boot with hexagonal architecture
+3. python-fastapi - Python FastAPI backend development
+4. react-typescript - React with TypeScript frontend
 
-Select context by number:
+Current active: default
+
+Select a context by number or name:
 ```
 
-### Step 2: Select Context by Number
-**User Action:** Type the number of the context you want
+### Step 2: Check Current Context Status
+
+To see only the current status:
+
+```
+context status
+```
+
+Output:
+
+```
+Current Context: default
+Available Contexts: 4
+Location: .olaf/data/context/context-current.md
+```
+
+### Step 3: Switch to a Different Context
+
+Select a context by number:
 
 ```
 2
 ```
 
-**Provide Selection:**
-- Enter the number corresponding to your desired context
-- Example: We selected "2" for springboot-hexagonal
+Or by name:
 
-### Step 3: Context Switch Execution
-**What Copilot Does:**
-- Validates the selected context file exists
-- Copies `.olaf/data/context/context-springboot-hexagonal.md` to `.olaf/data/context/context-current.md`
-- Confirms the switch
-
-**You Should See:** 
 ```
-✓ Switched to context: springboot-hexagonal
-⚠️ Start new conversation for context to activate
+@switch-context context_name=springboot-hexagonal
 ```
 
-### Step 4: Start New Session
-**User Action:**
-1. Close the current Copilot Chat conversation
-2. Open a new Copilot Chat conversation
-3. The new context is now automatically loaded via bootstrap
+The skill confirms the switch:
 
-**What Happens:**
-- OLAF bootstrap loads the active context file
-- Project-specific context is applied to the session
-- You're now working with the new context active
+```
+✓ Context switched to: springboot-hexagonal
+
+⚠️ IMPORTANT: Please start a new conversation for the 
+'springboot-hexagonal' context to be active. The context 
+change will only take effect in a fresh session.
+```
+
+### Step 4: Start a New Session
+
+**Critical Step**: The context change only takes effect in a new session.
+
+1. End your current conversation
+2. Start a new conversation
+3. The new context is now active
+
+### Step 5: Verify Context is Active
+
+In your new session, the AI agent will follow the context instructions. You can verify by asking:
+
+```
+What context are you operating in?
+```
+
+Or check the status:
+
+```
+context status
+```
+
+### Step 6: Clear Context (Optional)
+
+To remove the active context and return to default behavior:
+
+```
+context clear
+```
+
+Output:
+
+```
+✓ Context cleared successfully
+
+⚠️ IMPORTANT: Please start a new conversation for the 
+context clearing to be active.
+```
+
+## Creating Custom Contexts
+
+### Step 1: Create a Context File
+
+Create a new file in `.olaf/data/context/`:
+
+```
+.olaf/data/context/context-myproject.md
+```
+
+### Step 2: Add Context Content
+
+Structure your context file:
+
+```markdown
+# MyProject Context
+
+## Project Overview
+This is a Node.js microservices project using Express and MongoDB.
+
+## Coding Standards
+- Use TypeScript for all new code
+- Follow ESLint configuration
+- Write unit tests for all functions
+
+## Architecture
+- Microservices pattern
+- Event-driven communication
+- MongoDB for persistence
+
+## Conventions
+- Use kebab-case for file names
+- Use camelCase for variables
+- Use PascalCase for classes
+```
+
+### Step 3: Switch to Your Context
+
+```
+@switch-context context_name=myproject
+```
 
 ## Verification Checklist
 
-✅ **Context file copied** - Check `.olaf/data/context/context-current.md` exists
-✅ **New session started** - Opened fresh Copilot conversation
-✅ **Context loaded** - Bootstrap loaded the new context automatically
-✅ **Ready to work** - Can now work with project-specific context
+After switching contexts, verify:
+
+- [ ] Context switch confirmation received
+- [ ] New session started
+- [ ] AI agent follows context instructions
+- [ ] Context status shows correct active context
 
 ## Troubleshooting
 
-**If context doesn't seem active:**
+### Context Not Found
+
+**Symptom**: Error message "Context 'xyz' not found"
+
+**Cause**: The context file doesn't exist
+
+**Solution**: 
+1. Check available contexts with `context list`
+2. Verify file exists: `.olaf/data/context/context-xyz.md`
+3. Create the context file if needed
+
+### Context Not Taking Effect
+
+**Symptom**: AI agent doesn't follow context instructions
+
+**Cause**: Session not restarted after switch
+
+**Solution**:
+1. Confirm you received the switch confirmation
+2. Close current conversation completely
+3. Start a fresh new conversation
+4. Verify with `context status`
+
+### Invalid Selection
+
+**Symptom**: Error when selecting by number
+
+**Cause**: Number out of range
+
+**Solution**: Use a number from the displayed list, or use the context name directly
+
+### No Contexts Available
+
+**Symptom**: Empty context list
+
+**Cause**: No context-*.md files in the context directory
+
+**Solution**:
+1. Navigate to `.olaf/data/context/`
+2. Create at least one context file: `context-default.md`
+3. Add context content
+4. Run `context list` again
+
+### File Permission Error
+
+**Symptom**: Cannot switch or clear context
+
+**Cause**: File system permission issue
+
+**Solution**:
+1. Check write permissions on `.olaf/data/context/`
+2. Ensure `context-current.md` is not locked
+3. Try clearing and re-switching
+
+## Example Scenarios
+
+### Scenario 1: Project-Based Context Switching
+
 ```
-Make sure you started a NEW conversation. 
-Context changes only take effect in fresh sessions.
+# Morning: Working on backend
+@switch-context context_name=springboot-backend
+[Start new session]
+[Work on Spring Boot code with backend-specific guidance]
+
+# Afternoon: Switch to frontend
+@switch-context context_name=react-frontend
+[Start new session]
+[Work on React code with frontend-specific guidance]
 ```
 
-**If no contexts are listed:**
-- Check `.olaf/data/context/` directory exists
-- Ensure you have at least one `context-*.md` file
-- File naming must follow pattern: `context-{name}.md`
+### Scenario 2: Environment-Based Contexts
 
-**If "context not found" error:**
-- Verify the context file exists in `.olaf/data/context/`
-- Check file name matches pattern exactly
+```
+# Development work
+@switch-context context_name=dev-environment
+[Relaxed validation, verbose logging guidance]
 
-## Key Learning Points
+# Production deployment
+@switch-context context_name=prod-environment
+[Strict validation, security-focused guidance]
+```
 
-1. **Context switch requires new session:** Changes only take effect when you start a fresh conversation because the bootstrap process runs at session start.
+## Next Steps
 
-2. **context-current.md is the active file:** This file gets overwritten each time you switch. The template files (context-*.md) remain unchanged.
+After mastering context switching:
 
-3. **Bootstrap automatic loading:** You don't need to manually load the context. In this repo, bootstrap behavior is defined in `.windsurf/rules/olaf-bootstrap-skills.md` and loads (in order):
-	- `.olaf/context/current-context.md` (preferred)
-	- `.olaf/data/context/context-current.md` (legacy)
-	- `.olaf/data/context/context-default.md` (fallback)
-
-## Next Steps to Try
-
-- Create your own custom context template in `.olaf/data/context/context-myproject.md`
-- Use `context status` to check which context is currently active
-- Use `context clear` to remove the active context and return to default OLAF framework
-- Switch between multiple project contexts as you work on different codebases
-
-## Expected Timeline
-
-- **Total context switch time:** 10-30 seconds
-- **User input required:** Select context number, start new session
-- **Copilot execution time:** Instant (file copy operation)
+1. **Create project-specific contexts** - Customize for each project
+2. **Share contexts with team** - Standardize team workflows
+3. **Combine with carry-over** - Use `carry-over-session` to preserve work across context switches
+4. **Document your contexts** - Keep context files well-documented for team use

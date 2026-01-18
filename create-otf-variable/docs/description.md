@@ -1,142 +1,186 @@
-# Create OTF Variable
-
-**Skill ID**: `create-otf-variable`  
-**Version**: 1.0.0  
-**Status**: Experimental
+# create-otf-variable
 
 ## Overview
 
-The `create-otf-variable` skill guides developers through adding OTF (Open Transaction Framework) variables to Amadeus C++ applications, ensuring proper XML configuration, environment-specific settings, and C++ accessor code following best practices.
+The `create-otf-variable` skill guides developers through creating OTF (Open Transaction Framework) variables with proper XML configuration and C++ accessor code. It provides an interactive workflow for adding feature flags and configuration parameters to Amadeus OTF applications.
 
-## What is OTF?
+## Purpose
 
-**OTF (Open Transaction Framework)** is a C++ application server framework used at Amadeus that acts as a service broker, enabling runtime configuration of application behavior without requiring recompilation.
-
-## What This Skill Does
-
-This skill provides interactive guidance for:
-
-1. **Gathering Requirements**
-   - Variable naming (with convention suggestions)
-   - Purpose and valid values
-   - Default values and environment overrides
-
-2. **XML Configuration**
-   - Locating component XML files
-   - Adding variables to `<common>` section
-   - Setting environment-specific overrides in `<phase>` sections
-
-3. **C++ Implementation**
-   - Generating PropertiesManager accessor code
-   - Creating reusable accessor methods
-   - Following naming conventions
-
-4. **Testing & Deployment**
-   - Unit testing strategies
-   - Gradual rollout recommendations
-   - Environment-specific validation
-
-## Use Cases
-
-### Feature Flags
-Create runtime toggles for new features:
-```xml
-<variable name="ENABLE_NEW_API" value="false" control="off" description="Enable new API implementation"/>
-```
-
-### Migration Toggles
-Gradual rollout of migration features:
-```xml
-<variable name="MIG_ENABLE_LAYOVER" value="N" control="off" description="Enable layover feature for migration"/>
-```
-
-### Environment-Specific Configuration
-Different behavior per environment:
-```xml
-<common>
-    <variable name="MAX_RETRY_COUNT" value="3" control="off" description="Maximum retry attempts"/>
-</common>
-<phase name="PRD">
-    <variable name="MAX_RETRY_COUNT" value="5" control="off" description="Maximum retry attempts"/>
-</phase>
-```
+This skill enables developers to:
+- Create new OTF configuration variables with proper structure
+- Generate C++ accessor code following best practices
+- Configure environment-specific overrides (LOCAL, UAT, PRD)
+- Implement safe feature flag rollout strategies
+- Follow consistent naming conventions and patterns
 
 ## Key Features
 
-✅ **Interactive workflow** - Step-by-step guidance with prompts for required information  
-✅ **Pattern detection** - Analyzes existing variables to match project conventions  
-✅ **Best practices** - Enforces naming conventions and safe defaults  
-✅ **Code generation** - Provides ready-to-use C++ accessor code  
-✅ **Testing guidance** - Unit test examples and deployment strategies  
-✅ **Environment management** - Proper phase-specific overrides  
+- **Interactive Workflow**: Gathers requirements through guided questions
+- **XML Configuration**: Generates proper component XML structure
+- **C++ Code Generation**: Provides PropertiesManager accessor patterns
+- **Environment Management**: Configures common and phase-specific values
+- **Testing Guidance**: Includes unit test examples and deployment strategies
+- **Best Practices**: Enforces naming conventions and safe defaults
 
-## What You'll Need
+## Usage
 
-- Component XML file path (or component name to search)
-- Variable purpose and expected values
-- Target environments for the feature
-- Understanding of the feature being controlled
+Invoke the skill to start the interactive workflow:
 
-## Benefits
-
-- **Reduces errors** in XML configuration
-- **Standardizes** feature flag implementation across teams
-- **Accelerates development** with ready-to-use code patterns
-- **Ensures best practices** for gradual rollout and testing
-- **Maintains consistency** with existing project patterns
-
-## Related Skills
-
-- `get-bms-expertise` - BMS build system expertise for component management
-- General C++ development and XML editing skills
-
-## Knowledge Base
-
-This skill references:
-- **OTF Configuration Guide** - Comprehensive overview of OTF variables
-- **OTF Workflow** - Step-by-step implementation guide
-
-## Who Should Use This
-
-- Amadeus C++ developers working with OTF applications
-- Teams implementing feature flags and runtime configuration
-- Developers performing gradual feature migrations
-- Anyone needing environment-specific application behavior
-
-## Limitations
-
-- Specific to Amadeus OTF framework and C++ applications
-- Requires access to component XML files
-- Assumes familiarity with C++ and basic XML structure
-- Does not handle complex multi-component dependencies
-
-## Example Output
-
-The skill will help you create:
-
-**XML Configuration**:
-```xml
-<common>
-    <variable name="MIG_ENABLE_LAYOVER" value="N" control="off" description="Enable layover feature"/>
-</common>
-<phase name="LOCAL">
-    <variable name="MIG_ENABLE_LAYOVER" value="Y" control="off" description="Enable layover feature"/>
-</phase>
+```
+Execute create-otf-variable
 ```
 
-**C++ Accessor**:
+Or provide initial context:
+
+```
+Execute create-otf-variable for: enable layover feature
+```
+
+## Parameters
+
+The skill gathers parameters interactively:
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| Variable Name | Yes | Identifier (e.g., `ENABLE_*`, `MIG_*`, `IS_*`) |
+| Purpose | Yes | What the variable controls |
+| Valid Values | Yes | e.g., `Y/N`, `true/false`, numeric |
+| Default Value | Yes | Recommended: OFF (`N` or `false`) for safety |
+| Environments | Yes | Which need overrides (LOCAL, UAT, PRD) |
+| Component XML File | Yes | Path to the configuration file |
+
+## Process Flow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Gather Requirements                       │
+│  • Variable name and purpose                                │
+│  • Valid values and default                                 │
+│  • Environment overrides needed                             │
+│  • Component XML file location                              │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   Locate Component XML                       │
+│  • Search for *.component.xml files                         │
+│  • Verify file structure                                    │
+│  • Present options if multiple found                        │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  Check Existing Patterns                     │
+│  • Find existing variables in XML                           │
+│  • Identify accessor patterns in C++ code                   │
+│  • Match project conventions                                │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   Add Variable to XML                        │
+│  • Add to <common> section with default                     │
+│  • Add to <phase> sections for overrides                    │
+│  • Maintain alphabetical order if applicable                │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 Generate C++ Accessor Code                   │
+│  • PropertiesManager patterns                               │
+│  • Recommended accessor method                              │
+│  • Usage examples                                           │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  Provide Testing Guidance                    │
+│  • Unit test examples                                       │
+│  • Environment testing strategy                             │
+│  • Gradual rollout recommendations                          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Output
+
+The skill produces:
+
+### XML Configuration
+```xml
+<!-- In <common> section -->
+<variable name="MIG_ENABLE_LAYOVER" value="N" control="off" description="Enable layover feature for migration"/>
+
+<!-- In <phase name="LOCAL"> section -->
+<variable name="MIG_ENABLE_LAYOVER" value="Y" control="off" description="Enable layover feature for migration"/>
+```
+
+### C++ Accessor Code
 ```cpp
+// Basic pattern
+bool isLayoverEnabled = toolbox::PropertiesManager::GetInstance().isDefined("MIG_ENABLE_LAYOVER") &&
+                        toolbox::PropertiesManager::GetInstance().getValue("MIG_ENABLE_LAYOVER") == "Y";
+
+// Recommended accessor method
 bool ConfigManager::isLayoverEnabled() {
     return toolbox::PropertiesManager::GetInstance().isDefined("MIG_ENABLE_LAYOVER") &&
            toolbox::PropertiesManager::GetInstance().getValue("MIG_ENABLE_LAYOVER") == "Y";
 }
 ```
 
-**Usage**:
+### Unit Test Examples
 ```cpp
-if (ConfigManager::isLayoverEnabled()) {
-    // New implementation
-} else {
-    // Legacy implementation
+TEST(FeatureTest, WhenDisabled_UsesStandardLogic) {
+    MockPropertiesManager::setValue("MIG_ENABLE_LAYOVER", "N");
+    ASSERT_FALSE(ConfigManager::isLayoverEnabled());
 }
 ```
+
+## Examples
+
+### Feature Flag for Migration
+```
+User: "Add an OTF variable to enable layover feature"
+
+Skill Response:
+1. Suggests name: MIG_ENABLE_LAYOVER
+2. Recommends values: Y/N
+3. Sets default: N (safe)
+4. Enables in LOCAL for development
+5. Provides accessor code and tests
+```
+
+### Configuration Parameter
+```
+User: "Create a variable for max retry count"
+
+Skill Response:
+1. Suggests name: MAX_RETRY_COUNT
+2. Recommends values: numeric (1-10)
+3. Sets default: 3
+4. Provides numeric accessor pattern
+```
+
+## Naming Conventions
+
+| Prefix | Use Case |
+|--------|----------|
+| `ENABLE_*` | Feature flags |
+| `MIG_*` | Migration-related features |
+| `IS_*` | Boolean state indicators |
+| `MAX_*` | Numeric limits |
+| `DEFAULT_*` | Default values |
+
+## Error Handling
+
+| Scenario | Behavior |
+|----------|----------|
+| XML file not found | Helps locate correct component file |
+| Syntax errors | Ensures proper XML structure |
+| Naming conflicts | Searches for existing variables, suggests alternatives |
+| Missing sections | Guides user to add required sections |
+
+## Related Skills
+
+- `get-bms-expertise` - BMS build system expertise
+- `code-in-rust` - Alternative language patterns
+- `tell-me` - Search OTF knowledge base

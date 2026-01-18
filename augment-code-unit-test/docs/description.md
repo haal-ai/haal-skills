@@ -1,112 +1,197 @@
-# Create Unit Tests
+# augment-code-unit-test
 
 ## Overview
 
-This competency generates comprehensive unit tests for code modules by analyzing existing test patterns, identifying coverage gaps, and creating meaningful tests that validate core functionality while avoiding trivial test anti-patterns.
+The `augment-code-unit-test` skill iteratively improves unit test coverage by analyzing code complexity and enhancing tests for the most complex modules. It uses a scope-driven, tests-pass-first methodology to systematically identify and fill testing gaps.
 
 ## Purpose
 
-Adequate unit test coverage is essential for maintaining code quality, enabling safe refactoring, and catching bugs early. This competency systematically improves test coverage by analyzing code complexity, identifying untested paths, and generating tests that focus on meaningful validation rather than trivial assertions like getter/setter tests.
+This skill enables developers to:
+- Systematically improve test coverage for specific code scopes
+- Identify missing or weak tests through code analysis
+- Add meaningful tests that cover error paths and edge cases
+- Track progress across multiple sessions with persistent tasklists
+
+## Key Features
+
+- **Scope-Driven Analysis**: Focus on specific files or directories
+- **Tests-Pass-First**: Ensures existing tests pass before adding new ones
+- **Session Management**: Resume, restart, or start new augmentation sessions
+- **Persistent Tasklists**: Track progress in Markdown checklists
+- **Propose-Confirm-Act**: User approval required for all test changes
+- **Universal Standards**: Applies coding standards in Evolution/Refactoring Mode
 
 ## Usage
 
-**Command**: `create unit tests` (or aliases: `augment tests`, `augment unit test`, `improve test coverage`, `unit test augmentation`)
+Invoke this skill when you need to improve test coverage for a codebase.
 
-**Protocol**: Propose-Act
+### Parameters
 
-**When to Use**: Use when you need to improve test coverage for complex modules, establish testing patterns for new code, validate critical business logic, or prepare code for refactoring by ensuring adequate test protection.
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `core_dir` | string | Yes | Directory containing the codebase to analyze |
+| `scope_path` | string | Yes | File or folder path relative to `core_dir` |
+| `staging_dir` | string | No | Directory for session artifacts (default: `<repo_root>/.olaf/work/staging`) |
+| `test_command` | string | No | Explicit test command (auto-detected if omitted) |
 
-## Parameters
+### Example Invocation
 
-### Required Inputs
-- **code_path**: Directory path containing the codebase to test
-- **target_coverage**: Desired test coverage percentage (default: 55%)
+```
+Skill: augment-code-unit-test
+Parameters:
+  - core_dir: "./my-project"
+  - scope_path: "internal/syncer"
+  - test_command: "go test ./internal/syncer/..."
+```
 
-### Optional Inputs
-- **file_filter**: Specific file types or patterns to focus on
-- **batch_size**: Number of files to process per iteration (default: 10)
-- **max_iterations**: Maximum number of improvement cycles (default: 10)
+## Process Flow
 
-### Context Requirements
-- Existing codebase with some test infrastructure
-- Testing framework installed and configured
-- Write access to test directories
-- Understanding of existing test patterns helps maintain consistency
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   SESSION DISCOVERY                              │
+│  • Scan for existing sessions in staging_dir                     │
+│  • Present in-progress and completed sessions                    │
+│  • Allow resume, restart, or new session                         │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   VALIDATION PHASE                               │
+│  • Verify core_dir and scope_path exist                          │
+│  • Resolve tasklist path                                         │
+│  • Load or create tasklist                                       │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   TASKLIST PHASE                                 │
+│  • Load existing tasklist or create new one                      │
+│  • Determine next unchecked task                                 │
+│  • Update Last-run timestamp                                     │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              ENSURE TESTS PASS (First Priority)                  │
+│  • Run test command for scope                                    │
+│  • Fix failing tests if any                                      │
+│  • Mark task complete when green                                 │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              IDENTIFY MISSING/WEAK TESTS                         │
+│  • Analyze code in scope                                         │
+│  • Detect uncovered error paths                                  │
+│  • Find complex branches without tests                           │
+│  • Update tasklist with findings                                 │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   ADD MISSING TESTS                              │
+│  • Propose concrete test cases                                   │
+│  • Get user approval (Propose-Confirm-Act)                       │
+│  • Implement approved tests                                      │
+│  • Re-run tests and verify                                       │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   ITERATION AUTHORIZATION                        │
+│  • Present results                                               │
+│  • Recommend next action                                         │
+│  • Request authorization to continue                             │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ## Output
 
-Generates unit tests and produces comprehensive coverage reports.
+### Tasklist File
 
-**Deliverables**:
-- New unit test files following existing patterns
-- Updated test coverage metrics
-- Iteration results documenting progress
-- Final report with coverage statistics
-- Recommendations for future testing improvements
+Located at `[staging_dir]/unittest/<scope_path>/tasklist.md`:
 
-**Format**: Test files in appropriate testing framework format, JSON reports for metrics tracking
+```markdown
+# Unit test improvement – internal/syncer
+
+Session:
+- Status: in-progress
+- Scope: internal/syncer
+- Last-run: 20260115-1430
+
+- [x] Ensure tests pass for scope `internal/syncer`
+  - [x] Run tests for the scope
+  - [x] Fix failing tests (if any)
+- [ ] Identify missing or weak tests in `internal/syncer`
+  - [ ] Analyze branches and error paths
+  - [ ] Analyze edge cases and boundary conditions
+- [ ] Add missing tests for `internal/syncer`
+  - [ ] Implement agreed new tests
+  - [ ] Re-run tests for safety
+```
+
+### Progress Updates
+
+- Current scope and active task
+- Test pass/fail status
+- Summary of tests added or fixed
+- Coverage snapshot when available
+- Path to tasklist file
 
 ## Examples
 
-### Example 1: Improving Coverage for Complex Business Logic
+### Example 1: Starting New Session
 
-**Scenario**: Core business logic has only 30% test coverage
-
-**Command**:
+**Input:**
 ```
-create unit tests
-```
-
-**Input**:
-```
-code_path: src/business-logic
-target_coverage: 55%
+core_dir: "./backend"
+scope_path: "pkg/auth"
 ```
 
-**Result**: Generated 34 new unit tests across 7 modules, increased coverage from 30% to 58%, focused on complex validation and calculation functions, avoided trivial getter/setter tests.
+**Output:** New tasklist created, tests run for scope, gaps identified, and test proposals presented for approval.
 
-### Example 2: Preparing for Refactoring
+### Example 2: Resuming Existing Session
 
-**Scenario**: Need test protection before refactoring a legacy module
-
-**Command**:
+**Input:**
 ```
-augment unit test
-```
-
-**Input**:
-```
-code_path: src/legacy/payment-processor
-target_coverage: 70%
-max_iterations: 5
+core_dir: "./backend"
+scope_path: "pkg/auth"
 ```
 
-**Result**: Created comprehensive test suite with 45 tests covering edge cases, error handling, and business rules, enabling safe refactoring with confidence.
+**Output:** Existing session detected, user prompted to resume or restart, continues from last unchecked task.
 
-## Related Competencies
+### Example 3: Directory Scope Analysis
 
-- **analyze-function-complexity**: Identify complex functions that need thorough testing
-- **review-code**: Includes test coverage assessment as part of code review
-- **evolve-code-iteratively**: Iterative improvement that includes test enhancement
-- **fix-code-smells**: Often requires adding tests to enable safe refactoring
+**Input:**
+```
+core_dir: "./services"
+scope_path: "internal"
+```
 
-## Tips & Best Practices
+**Output:** All modules under `internal/` enumerated, test file presence detected per module, comprehensive tasklist generated.
 
-- Start with the most complex modules first for maximum impact
-- Focus on meaningful tests that validate business logic, not trivial assertions
-- Follow existing test patterns and naming conventions in the codebase
-- Run tests after each iteration to ensure they pass
-- Aim for 55-80% coverage as a practical target (100% is often impractical)
-- Test edge cases, error conditions, and boundary values
-- Avoid testing framework code or simple getters/setters
-- Use the iterative approach to manage large codebases effectively
+## Domain-Specific Rules
 
-## Limitations
+| Rule | Description |
+|------|-------------|
+| Scope-First | All actions constrained to user-provided scope |
+| Tests-Pass-First | Never add new tests until existing tests pass |
+| Tasklist as Truth | Markdown tasklist is single source of workflow progress |
+| Test Quality | Focus on meaningful tests, not trivial ones |
+| Minimal Changes | Prefer small, incremental changes with tests passing between steps |
+| Worktree Required | Must run in dedicated Git worktree for the scope |
 
-- Cannot generate tests for code that requires complex external dependencies without mocking
-- Test quality depends on understanding of business requirements
-- May require manual adjustment for framework-specific testing patterns
-- Cannot validate that tests actually test the right behavior
-- Limited to unit tests - does not create integration or end-to-end tests
-- Requires existing test infrastructure and framework
-- May hit session limits on very large codebases (use batch processing)
+## Error Handling
+
+| Scenario | Handling |
+|----------|----------|
+| Tasklist corruption | Back up and recreate minimal valid checklist |
+| Test execution failure | Capture output, propose minimal fixes |
+| Permission errors | Report exact path and required permissions |
+| Scope resolution errors | Stop and ask user to correct path |
+
+## Related Skills
+
+- `code-in-go` - For Go coding assistance with test generation
+- `code-in-rust` - For Rust coding assistance with test generation
+- `review-code` - For code review tasks

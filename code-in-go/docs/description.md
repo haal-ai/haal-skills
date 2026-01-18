@@ -1,49 +1,180 @@
-# Code in Go
+# code-in-go
 
 ## Overview
 
-The **Code in Go** skill provides Go development assistance while strictly enforcing team practices. It loads coding standards, Go-specific guidance, and Git workflow practices from the local `.olaf/data/practices/` folder and ensures all code assistance adheres to these standards.
+The `code-in-go` skill assists developers coding in Go by enforcing team practices, SOLID principles, and Git workflow standards. It provides structured coding assistance while ensuring all generated code follows established guidelines and best practices.
+
+## Purpose
+
+This skill enables developers to receive Go coding assistance that:
+- Enforces universal coding standards (SOLID, DI, complexity limits)
+- Follows Go-specific idioms and conventions
+- Maintains proper Git workflow with worktrees and small commits
+- Generates or updates unit tests for every code change
 
 ## Key Features
 
-- **Practice Enforcement**: Automatically loads and enforces all relevant practices
-- **SOLID Principles**: Ensures code follows SRP, Dependency Injection, and other SOLID principles
-- **Go Idioms**: Applies Go-specific best practices for error handling, naming, and structure
-- **Git Workflow**: Verifies worktree usage, requires a new branch before coding, and guides toward small, frequent commits
-- **Violation Alerts**: Warns when requested code would violate loaded practices
-- **Phased Delivery**: Collects requirements, performs impact analysis, proposes a solution, and asks for explicit approval before generating code
+- **Practice Enforcement**: Loads and applies team coding standards before any assistance
+- **Worktree Verification**: Ensures isolated development environment before code changes
+- **Branch Protection**: Prevents direct commits to main/master/develop branches
+- **Impact Analysis**: Analyzes changes before implementation
+- **Test Generation**: Creates table-driven tests for all code changes
+- **Commit Guidance**: Suggests appropriate commit messages and timing
 
-## Practices Loaded
+## Usage
 
-1. **Universal Coding Standards** (`standards/universal-coding-standards.md`)
-   - Single Responsibility Principle
-   - Dependency Injection
-   - Function size and complexity limits
-   - Naming and readability
+Invoke this skill when you need assistance with Go development tasks.
 
-2. **Go Coding Guidance** (`guidances/coding/go-coding-guidance.md`)
-   - Go idioms and conventions
-   - Error handling patterns
-   - Project structure
-   - Testing practices
+### Parameters
 
-3. **Git Workflow Guidance** (`guidances/git/git-workflow-guidance.md`)
-   - Worktree setup before coding
-   - Small, focused commits
-   - Commit message format
-   - Branch strategy
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `reference` | string | No | Work item reference (Jira ticket, GitHub issue, PR URL) |
+| `task_description` | string | Conditional | What to implement or fix (required if no reference) |
+| `working_directory` | string | No | Path to Go project (defaults to current workspace) |
 
-## When to Use
+### Example Invocation
 
-Use this skill when:
-- Starting a Go coding session
-- Implementing new Go features
-- Refactoring existing Go code
-- You want strict enforcement of team practices
+```
+Skill: code-in-go
+Parameters:
+  - reference: "PROJ-123"
+  - task_description: "Add retry logic to HTTP client"
+  - working_directory: "./services/api"
+```
 
-## Trigger Phrases
+## Process Flow
 
-- "olaf code in go"
-- "olaf go coding"
-- "olaf golang assistance"
-- "olaf go development"
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                  PRACTICES LOADING PHASE                         │
+│  • Load universal-coding-standards.md                            │
+│  • Load go-coding-guidance.md                                    │
+│  • Load git-workflow-guidance.md                                 │
+│  • Confirm practices loaded                                      │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              WORKTREE + BRANCH VERIFICATION                      │
+│  • Check git worktree status                                     │
+│  • Guide worktree creation if needed                             │
+│  • Verify not on protected branch                                │
+│  • Guide branch creation if needed                               │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                 REQUIREMENTS INTAKE PHASE                        │
+│  • Retrieve ticket/issue content if reference provided           │
+│  • Confirm scope and acceptance criteria                         │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│            IMPACT ANALYSIS + SOLUTION PROPOSAL                   │
+│  • Analyze files/modules impacted                                │
+│  • Propose step-by-step solution using SRP and DI                │
+│  • Create test plan                                              │
+│  • Request explicit agreement                                    │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                  IMPLEMENTATION PHASE                            │
+│  • Generate code following all practices                         │
+│  • Apply SOLID principles                                        │
+│  • Keep functions under 30 lines                                 │
+│  • Generate/update unit tests                                    │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                  COMMIT GUIDANCE PHASE                           │
+│  • Remind about commit timing                                    │
+│  • Suggest commit message                                        │
+│  • Provide commit checklist                                      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## Output
+
+The skill provides structured assistance in this format:
+
+```markdown
+## Practices Applied
+[List of enforced practices]
+
+## Requirements
+[Reference/ticket summary or user requirements]
+
+## Impact Analysis
+[What will change and where]
+
+## Proposed Solution
+[Overview + implementation steps]
+
+## Confirmation
+[Explicit proceed question]
+
+## Implementation
+[Code following all practices]
+
+## Commit Suggestion
+[Suggested commit message]
+
+## Next Steps
+[What to do next]
+```
+
+## Examples
+
+### Example 1: Adding Error Handling
+
+**Input:**
+```
+task_description: "Add proper error handling to database connection"
+```
+
+**Output:** Implementation with error wrapping, context propagation, and corresponding unit tests using table-driven approach.
+
+### Example 2: Implementing New Feature
+
+**Input:**
+```
+reference: "PROJ-456"
+task_description: "Implement user authentication middleware"
+```
+
+**Output:** Impact analysis, middleware implementation with dependency injection, comprehensive tests, and commit guidance.
+
+## Domain-Specific Rules
+
+| Rule | Description |
+|------|-------------|
+| Error Handling | Never generate code that ignores errors |
+| Error Wrapping | Always use error wrapping with context |
+| Dependency Injection | Always apply DI for external dependencies |
+| Table-Driven Tests | Always suggest table-driven tests |
+| Test Coverage | Always generate/update unit tests for changes |
+| Commit Frequency | Remind about commits after significant changes |
+| Worktree Verification | Verify worktree setup before modifications |
+| Branch Verification | Verify new branch before modifications |
+| Function Size | Keep functions under 30 lines |
+| Complexity | Keep cyclomatic complexity under 10 |
+| Naming | Follow Go naming conventions strictly |
+
+## Error Handling
+
+| Scenario | Handling |
+|----------|----------|
+| Practice file not found | Notify user and list missing files; offer to create them |
+| Git not available | Warn that Git workflow guidance cannot be enforced |
+| User rejects practice | Document deviation, explain risks, proceed if user insists |
+| Complex requirement | Break down into smaller, practice-compliant increments |
+
+## Related Skills
+
+- `code-in-rust` - Similar assistance for Rust development
+- `review-code` - For code review tasks
+- `augment-code-unit-test` - For improving test coverage

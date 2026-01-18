@@ -1,75 +1,139 @@
-# Tutorial: Create OTF Variable
+# Tutorial: create-otf-variable
 
-Learn how to use the `create-otf-variable` skill to add runtime configuration to your Amadeus C++ application.
+## Introduction
 
-## Quick Start
+This tutorial guides you through using the `create-otf-variable` skill to add configuration variables to Amadeus OTF applications. You'll learn how to create feature flags with proper XML configuration and C++ accessor code.
 
-```
-olaf create-otf-variable
-```
+## Prerequisites
 
-The skill will guide you through an interactive workflow to create a new OTF variable.
+Before starting, ensure you have:
+- Access to an OTF application codebase
+- Knowledge of which component XML file to modify
+- Understanding of the feature you want to control
+- Familiarity with C++ and XML basics
 
-## Example Walkthrough
+## Step-by-Step Instructions
 
-### Scenario: Adding a Layover Feature Toggle
+### Step 1: Start the Skill
 
-Let's create an OTF variable to enable a new layover feature in a migration scenario.
-
-#### Step 1: Invoke the Skill
-
-```
-User: olaf create-otf-variable
-```
-
-#### Step 2: Provide Requirements
-
-The skill will prompt you for information:
+Invoke the skill to begin the interactive workflow:
 
 ```
-Assistant: I'll help you create a new OTF variable. Let me gather the details:
-
-- Variable name (suggestion: ENABLE_*, MIG_*, IS_*):
-- Purpose/Description:
-- Expected values (Y/N, true/false, numeric, etc.):
-- Default value (recommend OFF for safety):
-- Environments to override (LOCAL, UAT, PRD):
-- Component XML file path or name:
+Execute create-otf-variable
 ```
 
-**Your Response**:
+Or provide initial context:
+
 ```
-User: Variable name: MIG_ENABLE_LAYOVER
-Purpose: Enable layover feature for migration
-Values: Y/N
-Default: N
-Enable in LOCAL for development
-Component: booking_component.component.xml
+Execute create-otf-variable for: enable new pricing algorithm
 ```
 
-#### Step 3: XML Update
+### Step 2: Provide Variable Requirements
 
-The skill will:
-1. Locate your component XML file
-2. Check existing variable patterns
-3. Add the variable to the XML:
+The skill will ask for details. Provide:
 
+**Variable Name**:
+- Use descriptive names with proper prefixes
+- Examples: `MIG_ENABLE_LAYOVER`, `ENABLE_NEW_PRICING`, `IS_DEBUG_MODE`
+
+**Purpose**:
+- Clearly describe what the variable controls
+- Example: "Enable the new layover calculation feature for migration"
+
+**Valid Values**:
+- Boolean: `Y/N` or `true/false`
+- Numeric: specific range like `1-10`
+- String: enumerated values
+
+**Default Value**:
+- Recommend OFF (`N` or `false`) for safety
+- New features should be disabled by default
+
+**Environments**:
+- LOCAL: Development environment
+- UAT: User acceptance testing
+- PRD: Production
+
+### Step 3: Locate the Component XML File
+
+The skill will help find your configuration file:
+
+```
+Searching for *.component.xml files...
+
+Found:
+1. src/pricing/pricing.component.xml
+2. src/booking/booking.component.xml
+
+Which file should I update?
+```
+
+Select the appropriate file for your feature.
+
+### Step 4: Review Existing Patterns
+
+The skill checks your codebase for:
+- Existing variable naming conventions
+- Current accessor patterns in C++ code
+- XML structure and formatting style
+
+This ensures consistency with your project.
+
+### Step 5: Add XML Configuration
+
+The skill adds the variable to your XML file:
+
+**In the `<common>` section** (default for all environments):
 ```xml
 <common>
+    <!-- Existing variables... -->
     <variable name="MIG_ENABLE_LAYOVER" value="N" control="off" description="Enable layover feature for migration"/>
 </common>
+```
 
+**In environment-specific `<phase>` sections**:
+```xml
 <phase name="LOCAL">
+    <!-- Enable for development -->
     <variable name="MIG_ENABLE_LAYOVER" value="Y" control="off" description="Enable layover feature for migration"/>
+</phase>
+
+<phase name="UAT">
+    <!-- Keep disabled until ready for testing -->
+    <variable name="MIG_ENABLE_LAYOVER" value="N" control="off" description="Enable layover feature for migration"/>
+</phase>
+
+<phase name="PRD">
+    <!-- Keep disabled until rollout -->
+    <variable name="MIG_ENABLE_LAYOVER" value="N" control="off" description="Enable layover feature for migration"/>
 </phase>
 ```
 
-#### Step 4: C++ Accessor Code
+### Step 6: Implement C++ Accessor Code
 
-The skill provides ready-to-use accessor code:
+The skill provides accessor code patterns:
 
+**Basic inline check**:
 ```cpp
-// Recommended: Create accessor method
+bool isLayoverEnabled = toolbox::PropertiesManager::GetInstance().isDefined("MIG_ENABLE_LAYOVER") &&
+                        toolbox::PropertiesManager::GetInstance().getValue("MIG_ENABLE_LAYOVER") == "Y";
+
+if (isLayoverEnabled) {
+    // New implementation
+} else {
+    // Legacy implementation
+}
+```
+
+**Recommended: Dedicated accessor method**:
+```cpp
+// In ConfigManager.h
+class ConfigManager {
+public:
+    static bool isLayoverEnabled();
+};
+
+// In ConfigManager.cpp
 bool ConfigManager::isLayoverEnabled() {
     return toolbox::PropertiesManager::GetInstance().isDefined("MIG_ENABLE_LAYOVER") &&
            toolbox::PropertiesManager::GetInstance().getValue("MIG_ENABLE_LAYOVER") == "Y";
@@ -77,210 +141,122 @@ bool ConfigManager::isLayoverEnabled() {
 
 // Usage in your code
 if (ConfigManager::isLayoverEnabled()) {
-    // New layover implementation
-    processWithLayover(request);
+    // New layover calculation
+    calculateLayoverNew();
 } else {
-    // Legacy implementation
-    processStandard(request);
+    // Legacy calculation
+    calculateLayoverLegacy();
 }
 ```
 
-#### Step 5: Testing Guidance
+### Step 7: Add Unit Tests
 
-The skill provides unit test examples:
+Implement tests for both states:
 
 ```cpp
-TEST(LayoverTest, WhenDisabled_UsesStandardLogic) {
+#include <gtest/gtest.h>
+#include "ConfigManager.h"
+#include "MockPropertiesManager.h"
+
+TEST(LayoverFeatureTest, WhenDisabled_UsesLegacyLogic) {
     MockPropertiesManager::setValue("MIG_ENABLE_LAYOVER", "N");
+    
     ASSERT_FALSE(ConfigManager::isLayoverEnabled());
-    // Test standard behavior
+    // Verify legacy behavior
 }
 
-TEST(LayoverTest, WhenEnabled_UsesLayoverLogic) {
+TEST(LayoverFeatureTest, WhenEnabled_UsesNewLogic) {
     MockPropertiesManager::setValue("MIG_ENABLE_LAYOVER", "Y");
+    
     ASSERT_TRUE(ConfigManager::isLayoverEnabled());
-    // Test layover behavior
+    // Verify new behavior
+}
+
+TEST(LayoverFeatureTest, WhenUndefined_DefaultsToDisabled) {
+    MockPropertiesManager::clearValue("MIG_ENABLE_LAYOVER");
+    
+    ASSERT_FALSE(ConfigManager::isLayoverEnabled());
 }
 ```
 
-#### Step 6: Deployment Strategy
+### Step 8: Plan Deployment Strategy
 
-The skill recommends a rollout plan:
-1. ✅ Deploy with default OFF (N)
-2. ✅ Test in LOCAL (enabled)
-3. ✅ Validate in UAT
-4. ✅ Monitor metrics
-5. ✅ Enable in PRD gradually
-6. ✅ Full rollout after validation
+Follow the gradual rollout approach:
 
-## Common Usage Patterns
+1. **Deploy with default OFF**: Ship code with feature disabled
+2. **Enable in LOCAL**: Verify feature works in development
+3. **Enable in UAT**: Test with production-like data
+4. **Monitor metrics**: Watch for issues
+5. **Enable in PRD**: Gradual rollout (canary/percentage)
+6. **Full rollout**: After validation
+7. **Remove flag**: Clean up after migration complete
 
-### Pattern 1: Simple Feature Flag
+## Verification Checklist
 
-```
-User: olaf create-otf-variable
+After creating the variable, verify:
 
-Create a feature flag for the new caching system:
-- Name: ENABLE_CACHE
-- Values: true/false
-- Default: false
-- Enable in LOCAL
-```
-
-**Result**:
-```xml
-<variable name="ENABLE_CACHE" value="false" control="off" description="Enable response caching"/>
-```
-
-```cpp
-bool isCacheEnabled = toolbox::PropertiesManager::GetInstance().isDefined("ENABLE_CACHE") &&
-                      toolbox::PropertiesManager::GetInstance().getValue("ENABLE_CACHE") == "true";
-```
-
-### Pattern 2: Numeric Configuration
-
-```
-User: olaf create-otf-variable
-
-Add retry count configuration:
-- Name: MAX_RETRY_COUNT
-- Values: numeric string
-- Default: 3
-- Override in PRD: 5
-```
-
-**Result**:
-```xml
-<common>
-    <variable name="MAX_RETRY_COUNT" value="3" control="off" description="Maximum retry attempts"/>
-</common>
-<phase name="PRD">
-    <variable name="MAX_RETRY_COUNT" value="5" control="off" description="Maximum retry attempts"/>
-</phase>
-```
-
-```cpp
-std::string retryStr = toolbox::PropertiesManager::GetInstance().getValue("MAX_RETRY_COUNT");
-int maxRetries = std::stoi(retryStr);
-```
-
-### Pattern 3: Migration Flag
-
-```
-User: olaf create-otf-variable
-
-Migration flag for new API:
-- Name: MIG_ENABLE_NEW_API
-- Values: Y/N
-- Default: N
-- Enable in LOCAL and UAT
-```
-
-**Result**:
-```xml
-<common>
-    <variable name="MIG_ENABLE_NEW_API" value="N" control="off" description="Enable new API implementation"/>
-</common>
-<phase name="LOCAL">
-    <variable name="MIG_ENABLE_NEW_API" value="Y" control="off" description="Enable new API implementation"/>
-</phase>
-<phase name="UAT">
-    <variable name="MIG_ENABLE_NEW_API" value="Y" control="off" description="Enable new API implementation"/>
-</phase>
-```
-
-## Tips & Best Practices
-
-### Naming Conventions
-
-✅ **Good**:
-- `ENABLE_CACHE` - Clear feature toggle
-- `MIG_ENABLE_LAYOVER` - Migration prefix
-- `IS_PRODUCTION` - State flag
-- `MAX_RETRY_COUNT` - Descriptive configuration
-
-❌ **Avoid**:
-- `ENABLE_IS_FEATURE_ENABLED` - Redundant
-- `flag1` - Not descriptive
-- `enableCache` - Wrong case convention
-- `CACHE` - Unclear purpose
-
-### Default Values
-
-✅ **Safe Defaults**:
-- Feature flags: `"N"` or `"false"` (OFF by default)
-- Retry counts: Conservative values (e.g., `"3"`)
-- Timeouts: Safe/tested values
-
-❌ **Risky Defaults**:
-- Feature enabled by default without testing
-- Aggressive retry/timeout values
-- Production-only configurations
-
-### Environment Strategy
-
-**Recommended Rollout**:
-1. LOCAL - Always enable for development
-2. UAT - Enable after initial validation
-3. PRD - Enable gradually with monitoring
-
-**Avoid**:
-- Enabling in PRD before LOCAL/UAT testing
-- Same value across all environments (no override benefit)
-- Too many environment-specific overrides (complexity)
+- [ ] Variable added to `<common>` section with safe default
+- [ ] Environment overrides configured correctly
+- [ ] Description is clear and accurate
+- [ ] C++ accessor code compiles without errors
+- [ ] Unit tests pass for both enabled and disabled states
+- [ ] XML formatting matches project style
+- [ ] Variable name follows project conventions
 
 ## Troubleshooting
 
-### Variable Not Recognized
+### XML File Not Found
 
-**Problem**: Runtime error or feature not working
+**Symptom**: Skill can't locate component XML
 
-**Solutions**:
-1. Verify XML file is loaded by component
-2. Check variable name spelling (case-sensitive)
-3. Restart application to reload configuration
-4. Check OTF logs for XML parsing errors
+**Solution**:
+1. Search workspace for `*.component.xml`
+2. Check if file is in a different location
+3. Verify file naming convention
 
-### Override Not Applied
+### Accessor Code Doesn't Compile
 
-**Problem**: Getting common value instead of phase override
+**Symptom**: C++ errors when using PropertiesManager
 
-**Solutions**:
-1. Verify phase name matches environment exactly
-2. Check XML syntax (properly closed tags)
-3. Ensure phase section comes after common section
-4. Restart application after XML changes
+**Solution**:
+1. Verify include paths for toolbox headers
+2. Check PropertiesManager namespace
+3. Review existing accessor patterns in codebase
 
-### Accessor Always Returns False
+### Variable Not Taking Effect
 
-**Problem**: Feature flag always disabled
+**Symptom**: Feature doesn't respond to variable changes
 
-**Solutions**:
-1. Verify `isDefined()` check passes
-2. Check exact value comparison (case-sensitive)
-3. Ensure XML has correct value
-4. Debug PropertiesManager call to see actual value
+**Solution**:
+1. Verify variable name matches exactly (case-sensitive)
+2. Check `isDefined()` call is present
+3. Confirm correct phase is being used
+4. Restart application to reload configuration
+
+### Tests Fail Intermittently
+
+**Symptom**: Unit tests pass sometimes, fail others
+
+**Solution**:
+1. Ensure mock is properly reset between tests
+2. Check for static state issues
+3. Verify test isolation
 
 ## Next Steps
 
 After creating your OTF variable:
 
-1. **Review the code** with your team
-2. **Write unit tests** for both enabled/disabled states
-3. **Test in LOCAL** environment first
-4. **Document** the feature flag in your component docs
-5. **Monitor** behavior in each environment
-6. **Plan cleanup** after migration is complete
+- **Test locally**: Verify feature works with variable enabled
+- **Code review**: Have team review XML and accessor code
+- **Document**: Add variable to feature documentation
+- **Monitor**: Set up metrics for feature usage
+- **Plan cleanup**: Schedule flag removal after migration
 
-## Related Resources
+## Tips for Success
 
-- OTF Configuration Guide - Comprehensive reference
-- OTF Workflow - Detailed step-by-step guide
-- Component XML documentation - Project-specific structure
-
-## Need Help?
-
-- Check existing variables in your component XML for patterns
-- Review C++ code for existing PropertiesManager usage
-- Consult team for project-specific conventions
-- Use `olaf get-bms-expertise` for component-level questions
+1. **Use safe defaults**: Always default to OFF for new features
+2. **Be descriptive**: Clear variable names and descriptions
+3. **Test both paths**: Verify behavior when enabled AND disabled
+4. **Plan for removal**: Feature flags are temporary
+5. **Monitor rollout**: Watch metrics during gradual enablement
+6. **Keep it simple**: One variable per feature when possible

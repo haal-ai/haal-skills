@@ -12,7 +12,7 @@ The Research and Report skill provides structured research capabilities with com
 
 ## When to Use This Skill
 
-Use `research-andreport` when you need:
+Use `research-and-report` when you need:
 - Comprehensive research on any topic with current information
 - Systematic investigation with professional documentation
 - Web-validated findings to supplement training data
@@ -22,7 +22,7 @@ Use `research-andreport` when you need:
 
 ### Step 1: Invoke the Skill
 ```
-olaf research-andreport
+Use the research-and-report skill
 ```
 
 ### Step 2: Provide Research Parameters

@@ -1,104 +1,98 @@
-# Should I Use AI?
+# should-i-use-ai
 
 ## Overview
 
-Evaluates whether AI is appropriate for a given task or problem through structured analysis.
+The `should-i-use-ai` skill analyzes user tasks and recommends whether to use AI/LLM capabilities or traditional IDE tools. It provides specific guidance based on a task categorization framework to help developers choose the most efficient approach.
 
 ## Purpose
 
-Helps decision-makers determine if AI is the right solution by analyzing the problem characteristics, data requirements, alternatives, and potential risks.
+This skill helps developers make informed decisions about when to leverage AI assistance versus when traditional IDE tools are more appropriate. By categorizing tasks and providing specific recommendations, it optimizes workflow efficiency and ensures the right tool is used for each job.
+
+## Key Features
+
+- **Task Analysis**: Evaluates task descriptions against a categorization guide
+- **Clear Recommendations**: Provides definitive AI or IDE tool guidance
+- **Specific Actions**: Includes IDE features, keyboard shortcuts, and CLI alternatives
+- **Prompt Suggestions**: Generates AI prompts when LLM is recommended
+- **Reasoning Explanations**: Explains why each recommendation is made
 
 ## Usage
 
-**Command**: `should i use ai`
+Invoke the skill with a task description:
 
-**Protocol**: Act
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| Task description | string | Yes | Single sentence describing what you want to accomplish |
 
-**When to Use**: When considering AI for a task and need objective evaluation of appropriateness.
+## Decision Framework
 
-## Parameters
+**Use AI/LLM for tasks requiring:**
+- Logic and reasoning
+- Context-aware code generation
+- Intelligent refactoring and architecture
+- API and framework migration
+- Domain-specific understanding
+- Quality and security analysis
 
-### Required Inputs
-- **Task/Problem Description**: What you're considering using AI for
+**Use IDE Tools for tasks involving:**
+- Basic code manipulation
+- File and project operations
+- Navigation and search
+- Template-based code generation
+- Formatting and style
+- Debugging and analysis tools
+- Version control integration
+- Build and deployment
 
-### Optional Inputs
-- **Constraints**: Budget, timeline, data availability
-- **Current Approach**: How the task is currently handled
-- **Success Criteria**: What defines success
+## Process Flow
 
-### Context Requirements
-- Clear understanding of the task or problem
-- Basic understanding of current process (if applicable)
+1. **Analyze Task**: Evaluate the task against the LLM vs IDE categorization guide
+2. **Categorize**: Determine if task requires reasoning/context or is mechanical/pattern-based
+3. **Generate Recommendation**: Provide specific guidance based on categorization
+4. **Explain Reasoning**: Include brief explanation of why the recommendation was made
 
 ## Output
 
-**Deliverables**:
-- Appropriateness assessment (yes/no/maybe)
-- Reasoning and analysis
-- Alternative approaches to consider
-- Risks and considerations
-- Recommendations
+### For IDE Tool Recommendations:
+- Task category from the guide
+- Specific IDE features and functionality
+- Keyboard shortcuts (if applicable)
+- CLI alternatives (if applicable)
+- Explanation of why IDE tools are appropriate
 
-**Format**: Structured analysis with clear recommendation
+### For AI/LLM Recommendations:
+- Task category from the guide
+- Search suggestions for existing prompts
+- Generated prompt specific to the task
+- Pattern phrases for competency index
+- Explanation of why AI is appropriate
 
 ## Examples
 
-### Example 1: Simple Classification Task
+**Task**: "Generate getter methods for my class"
 
-**Scenario**: Considering AI for email categorization
+**Recommendation**: Use IDE Tools
+- Category: Basic Code Manipulation
+- Action: Right-click → Generate → Getter/Setter
+- Why: Template-based, mechanical operation
 
-**Command**:
-```
-should i use ai
-```
+---
 
-**Input**: "Should I use AI to categorize customer support emails?"
+**Task**: "Fix memory leak in my application"
 
-**Result**: Analysis showing AI is appropriate, with recommendations for approach and considerations
+**Recommendation**: Use AI/LLM
+- Category: Logic & Reasoning Tasks
+- Why: Requires code behavior analysis and reasoning about memory patterns
 
-### Example 2: Complex Decision Task
+## Error Handling
 
-**Scenario**: Considering AI for medical diagnosis
+| Scenario | Behavior |
+|----------|----------|
+| Ambiguous task description | Asks for clarification on the specific task |
+| Task spans both categories | Provides guidance for both approaches |
+| Unknown task type | Defaults to AI recommendation with explanation |
 
-**Command**:
-```
-should i use ai
-```
+## Related Skills
 
-**Input**: "Should I use AI to diagnose patient conditions?"
-
-**Result**: Analysis highlighting risks, regulatory requirements, and need for human oversight
-
-### Example 3: Simple Rule-Based Task
-
-**Scenario**: Considering AI for data validation
-
-**Command**:
-```
-should i use ai
-```
-
-**Input**: "Should I use AI to validate form inputs?"
-
-**Result**: Analysis suggesting simpler rule-based validation is more appropriate
-
-## Related Competencies
-
-- **assess-genai-initiative**: Use this for deeper analysis of GenAI initiatives
-- **find-expert-contact**: Find AI experts if proceeding with AI solution
-- **use-skill**: Route to appropriate skill based on decision
-
-## Tips & Best Practices
-
-- Be specific about the task and context
-- Mention data availability and quality
-- Consider simpler alternatives first
-- Think about maintenance and explainability needs
-- Use for quick appropriateness checks
-
-## Limitations
-
-- Provides guidance, not guarantees
-- Cannot assess proprietary or highly specialized domains without context
-- Recommendations are general - may need expert consultation
-- Cannot evaluate specific AI models or vendors
+- `assist-me-as-prompt-engineer` - For crafting effective AI prompts
+- `assess-genai-initiative-idea` - For evaluating AI project ideas

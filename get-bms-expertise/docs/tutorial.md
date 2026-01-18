@@ -1,153 +1,217 @@
-# Get BMS Expertise - Tutorial
+# Tutorial: get-bms-expertise
 
-Learn how to use the BMS expert persona to solve build system problems.
+## Introduction
 
-## Step 1: Activate BMS Expertise
+This tutorial guides you through using the `get-bms-expertise` skill to access expert-level guidance on Amadeus BMS (Build Management System). You'll learn how to activate the expert persona and get help with common BMS challenges.
 
-```bash
-olaf get-bms-expertise
+## Prerequisites
+
+Before starting, you should have:
+- Basic familiarity with C/C++ build systems
+- Access to a BMS-managed codebase (optional, for hands-on practice)
+- Understanding of component-based architecture concepts
+
+## Step-by-Step Instructions
+
+### Step 1: Activate BMS Expert Mode
+
+Invoke the skill to activate the expert persona:
+
+```
+Execute get-bms-expertise
 ```
 
-You'll see confirmation:
+You'll receive confirmation:
+
 ```
 ✅ BMS Expert Mode Activated
 
-I'm now operating as a Senior BMS Specialist...
+I'm now operating as a Senior BMS Specialist with expertise in:
+- Component-based C/C++ architecture
+- Binary compatibility management  
+- Build/test/delivery workflows
+- Dependency resolution and Forest workspaces
+
+I'm ready to help with BMS questions, troubleshooting, and best practices.
+
+How can I assist you with BMS today?
 ```
 
-## Step 2: Ask BMS Questions
+### Step 2: Ask Your BMS Question
 
-The AI now thinks like a BMS expert. Ask questions naturally:
+Once activated, ask any BMS-related question. The expert will provide detailed, actionable guidance.
 
-### Example 1: Build Issues
+**Example questions:**
+- "How do I add an external dependency to my component?"
+- "Why am I getting binary incompatibility errors?"
+- "How do I set up a forest workspace?"
+- "What's the best way to optimize my build times?"
 
-```
-User: My component won't compile, I'm getting link errors
+### Step 3: Follow the Diagnostic Process
 
-AI: Let me help diagnose this link error using the BMS problem-solving approach.
+For troubleshooting questions, the expert follows a systematic methodology:
 
-1. Context First: What type of component are you building (library/binary)?
-2. Check Description.xml: Are all .cpp files listed in <sources>?
-3. Verify dependencies: Run `bms deps` to check your dependency graph
+1. **Context First**: Understanding your component type and structure
+2. **Version Awareness**: Checking BMS version and channel
+3. **Configuration Analysis**: Reviewing bmsrc cascade
+4. **Error Diagnosis**: Examining error messages and logs
+5. **Incremental Solutions**: Starting simple, escalating as needed
 
-[Provides structured troubleshooting steps...]
-```
+### Step 4: Apply Recommendations
 
-### Example 2: Dependency Management
+The expert provides:
+- Specific Description.xml snippets
+- Exact bmsrc configurations
+- Validation commands to verify changes
+- Warnings about compatibility risks
 
-```
-User: Should I use external or internal dependency for this library?
+### Step 5: Validate Changes
 
-AI: This depends on whether the library is part of your component's public API.
+After applying recommendations, use validation commands:
 
-External dependencies:
-- Transitively visible to components that depend on you
-- Use when: Library types appear in your public headers
-- Example: <dependency type="external" name="mdw::Toolbox"/>
+```bash
+# Check configuration
+bms -s
 
-Internal dependencies:
-- Hidden from clients
-- Use when: Library only used in .cpp files
-- Example: <dependency type="internal" name="mdw::Boost"/>
+# View dependency graph
+bms deps
 
-[Provides XML examples and best practices...]
-```
-
-### Example 3: Performance Optimization
-
-```
-User: My forest builds are slow, how can I optimize?
-
-AI: Let's optimize your forest build performance:
-
-1. Check current parallelism: `bms -s | grep parallel`
-2. Balance forest.parallel vs build.parallel
-3. Consider memory constraints
-
-[Provides specific tuning recommendations...]
-```
-
-## Step 3: Deep Dive with Knowledge Base
-
-For detailed documentation:
-
-```
-User: I need the complete list of test plugins and their options
-
-AI: For comprehensive plugin documentation, use:
-
-`olaf tell me about BMS plugins`
-
-This will retrieve the complete plugin reference from the knowledge base,
-covering all 27+ plugins with configuration options.
-
-Or I can provide a quick overview of the main plugins:
-- build: Compilation with profiles
-- test: Orchestrates unittest, valgrind, callgrind, cppcheck
-- deliver: Full delivery pipeline
-[...]
-```
-
-## Step 4: Get Configuration Examples
-
-Ask for specific configurations:
-
-```
-User: Show me how to configure a development profile with ccache
-
-AI: Here's a bmsrc configuration for a dev profile with ccache:
-
-```bmsrc
-[default]
-profile = dev
-
-[dev]
-build.ccache = true
-build.parallel = 8
-test.plugins = unittest,valgrind
-
-[repositories]
-[0] = ar://bms-release-public
-```
-
-[Explains each setting...]
+# Build and test
+bms build
+bms test
 ```
 
 ## Common Use Cases
 
-### 1. Troubleshooting Build Failures
-- Link errors → Check sources in Description.xml
-- Compilation errors → Analyze cppFlags, cxxFlags
-- Generator failures → Examine bms.log
+### Adding Dependencies
 
-### 2. Managing Dependencies
-- Binary incompatibility → Manual version specification
-- Missing dependencies → Check repositories config
-- Circular dependencies → Architectural refactoring
+**Question**: "How do I add an external dependency?"
 
-### 3. Delivery Issues
-- Version conflicts → Version bump strategy
-- Test failures → Review test/logs/
-- SCM tagging → Verify uncommitted changes
+**Expert Response**:
+```xml
+<!-- External dependency (transitively visible) -->
+<dependency type="external" name="mdw::Toolbox" version="11-0-0-5"/>
 
-### 4. Forest Workspace
-- Setup multi-component workspace
-- Resolve constraint conflicts
-- Execute forest-level operations
+<!-- Internal dependency (hidden from clients) -->
+<dependency type="internal" name="mdw::Boost"/>
+```
 
-## Tips
+### Resolving Version Conflicts
 
-✅ **Be specific**: "My unittest plugin fails" vs "Tests don't work"  
-✅ **Provide context**: Component type, BMS version, error messages  
-✅ **Ask for examples**: "Show me an example Description.xml for..."  
-✅ **Request validation**: "How do I verify this configuration?"  
+**Question**: "I'm getting version conflicts in my dependencies"
 
-## Exit Expertise Mode
+**Expert Response**:
+1. Run `bms deps` to visualize the dependency graph
+2. Identify conflicting versions
+3. Use versioner or explicit version specification
+4. Validate with `bms deps --unpack`
 
-Simply start a new conversation or use another skill. The persona is session-specific.
+### Optimizing Build Performance
 
-## Need More Help?
+**Question**: "My builds are taking too long"
 
-- Detailed docs: `olaf tell me about BMS <topic>`
-- Full documentation: `.olaf/data/kb/bms/`
-- Escalate to BMS team: NCE-BMS-Admin@amadeus.com
+**Expert Response**:
+1. Check parallel build settings: `build.parallel`
+2. Review dependency graph for unnecessary dependencies
+3. Consider local replication: `bms replicate`
+4. Tune based on available memory
+
+### Setting Up Forest Workspaces
+
+**Question**: "How do I work with multiple components?"
+
+**Expert Response**:
+1. Create Forest.xml with component constraints
+2. Use `bms --use-forest build` for forest mode
+3. Manage local dependencies with `version="local"`
+
+## Verification Checklist
+
+After getting expert guidance, verify:
+
+- [ ] Recommendations are specific to your BMS version
+- [ ] Description.xml changes follow proper syntax
+- [ ] Validation commands confirm expected behavior
+- [ ] Binary compatibility rules are respected
+- [ ] Changes work across required environments
+
+## Troubleshooting
+
+### Expert Doesn't Understand Context
+
+**Symptom**: Responses seem generic or off-target
+
+**Solution**:
+1. Provide more context about your component
+2. Share relevant Description.xml snippets
+3. Include error messages verbatim
+4. Specify your BMS version
+
+### Recommendations Don't Work
+
+**Symptom**: Applied changes cause new errors
+
+**Solution**:
+1. Verify BMS version compatibility
+2. Check for typos in configuration
+3. Review the complete error message
+4. Ask for alternative approaches
+
+### Need More Detailed Information
+
+**Symptom**: Need deeper technical details
+
+**Solution**:
+1. Ask the expert to reference the knowledge base
+2. Use `tell-me` skill for specific BMS topics
+3. Request links to BMS documentation sections
+
+### Complex Architectural Questions
+
+**Symptom**: Question requires BMS admin input
+
+**Solution**:
+The expert will recommend escalation to:
+1. R&D Request Portal (topic: BMS)
+2. BMS admin mailing list
+3. Current BMS support "sheriff"
+
+## Next Steps
+
+After using the BMS expert:
+
+- **Apply recommendations**: Implement suggested changes
+- **Validate thoroughly**: Test in all required environments
+- **Document decisions**: Record architectural choices
+- **Share knowledge**: Help team members with similar issues
+
+## Tips for Success
+
+1. **Be specific**: Include component names, versions, and error messages
+2. **Share context**: Describe your forest structure and dependencies
+3. **Ask follow-ups**: Clarify any unclear recommendations
+4. **Validate incrementally**: Test changes step by step
+5. **Note version-specific behavior**: BMS behavior varies by version
+
+## Essential Commands Reference
+
+```bash
+# Core workflow
+bms build              # Compile componentPack
+bms build -t           # Build unitTestPack
+bms test               # Run unit tests
+bms deliver            # Full delivery pipeline
+
+# Dependency management
+bms deps               # View dependency graph
+bms deps --unpack      # Show aggregated dependencies
+bms replicate          # Cache dependencies locally
+
+# Configuration
+bms -s                 # Show configuration
+bms -p <profile>       # Use specific profile
+
+# Forest operations
+bms --use-forest build # Force forest mode
+bms --no-forest build  # Disable forest mode
+```

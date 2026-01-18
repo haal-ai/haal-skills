@@ -1,189 +1,125 @@
-# Lean and Search Skill: Step-by-Step Tutorial
+# Search and Learn: Step-by-Step Tutorial
 
-## Overview
-The lean-and-search skill helps you systematically discover information and acquire knowledge through structured research workflows. This tutorial guides you through using this skill effectively for focused learning objectives.
+## Introduction
 
-## When to Use This Skill
-- You need to quickly learn something new for a specific purpose
-- You want to research a topic with structured documentation
-- You need credible sources with proper citations
-- You want to validate learning through practical application
-- You need to identify knowledge gaps for future learning
+This tutorial guides you through using the Search and Learn skill to systematically research topics, acquire knowledge, and apply your learning in practical contexts. By following this structured approach, you'll efficiently gather information, synthesize insights, and create actionable outcomes.
 
 ## Prerequisites
-- Basic familiarity with research concepts
-- Access to web search capabilities
-- Ability to evaluate source credibility
 
-## Step-by-Step Process
+Before starting, ensure you have:
+
+- [ ] Clear idea of what you want to learn
+- [ ] Understanding of your current knowledge level
+- [ ] Defined context for how you'll apply the learning
+- [ ] Access to web search capabilities
+- [ ] Time allocated for the complete 8-task workflow
+
+## Step-by-Step Instructions
 
 ### Step 1: Prepare Your Learning Parameters
-Before invoking the skill, prepare three key inputs:
 
-1. **Learning Objective**: Be specific about what you want to learn
-   - ❌ "Learn about AI"
-   - ✅ "Understand how to implement basic neural networks in Python for image classification"
+Before invoking the skill, define three key inputs:
 
-2. **Current Knowledge**: Assess your starting point honestly
-   - Example: "I know Python basics and some machine learning concepts, but never implemented neural networks"
+**Learning Objective** - Be specific about what you want to learn:
+- ❌ "Learn about AI"
+- ✅ "Understand how to implement basic neural networks in Python for image classification"
 
-3. **Context**: Define the practical application and constraints
-   - Example: "Need to build a prototype for work presentation next week, using TensorFlow or PyTorch"
+**Current Knowledge** - Honestly assess your starting point:
+- Example: "I know Python basics and some machine learning concepts, but never implemented neural networks"
+
+**Application Context** - Define practical constraints:
+- Example: "Need to build a prototype for work presentation next week, using TensorFlow or PyTorch"
 
 ### Step 2: Invoke the Skill
-Use the lean-and-search skill with your prepared parameters:
+
+Start the search-and-learn workflow:
 
 ```
-olaf lean-and-search
+Use the search-and-learn skill
 ```
 
-The system will prompt you for the three parameters if not provided.
+The skill will guide you through collecting your parameters interactively.
 
-### Step 3: Review the Learning Process
-The skill will guide you through:
+### Step 3: Complete the Task Chain
 
-1. **Goal Definition**: Clarifying specific objectives
-2. **Search Strategy**: Planning information sources
-3. **Systematic Search**: Finding and documenting sources
-4. **Information Synthesis**: Evaluating and connecting findings
-5. **Practical Application**: Testing understanding
-6. **Report Generation**: Creating structured documentation
+The skill executes 8 sequential tasks:
 
-### Step 4: Validate Outputs
-Ensure your learning report includes:
+| Task | Purpose | Your Role |
+|------|---------|-----------|
+| 1. Collect Parameters | Gather your learning inputs | Provide clear, specific answers |
+| 2. Validate Prerequisites | Check readiness | Confirm or address gaps |
+| 3. Define Learning Goals | Create measurable objectives | Review and refine goals |
+| 4. Develop Search Strategy | Plan information gathering | Approve search approach |
+| 5. Execute Systematic Search | Find and document sources | Monitor progress |
+| 6. Evaluate and Synthesize | Organize findings | Review synthesized knowledge |
+| 7. Apply and Test Learning | Validate understanding | Engage with exercises |
+| 8. Generate Learning Report | Create final documentation | Review and save report |
+
+### Step 4: Review Your Learning Report
+
+Your final report should include:
 
 - [ ] Clear learning summary with key concepts
 - [ ] Credible sources with full URLs
 - [ ] Practical examples you can implement
 - [ ] Identified knowledge gaps
 - [ ] Actionable next steps
-- [ ] Learning validation exercises
+- [ ] Concept relationship map
 
-## Best Practices
+### Step 5: Apply Your Learning
 
-### Effective Learning Objectives
-- Be specific and measurable
-- Include practical application context
-- Set realistic scope boundaries
-- Consider time constraints
+Take action on the report:
 
-### Source Quality Guidelines
-- Prioritize official documentation
-- Cross-reference multiple sources
-- Note publication dates and relevance
-- Verify URLs are accessible
-- Document author credentials when relevant
+1. Implement the practical applications identified
+2. Address knowledge gaps with follow-up research
+3. Save the report for future reference
+4. Share insights with your team if applicable
 
-### Application Focus
-- Always seek practical examples
-- Test understanding through exercises
-- Connect new knowledge to existing skills
-- Identify real-world use cases
+## Verification Checklist
 
-## Common Pitfalls
+After completing the workflow, verify:
 
-1. **Vague Objectives**: Starting without clear learning goals
-2. **Poor Sources**: Accepting information without URL verification
-3. **No Validation**: Skipping practical application tests
-4. **Isolated Learning**: Not connecting to existing knowledge
-5. **Incomplete Documentation**: Missing key sections in reports
-
-## Example Session
-
-### Input Parameters
-- **Learning Objective**: "Learn how to optimize PostgreSQL query performance for large datasets"
-- **Current Knowledge**: "I know basic SQL queries and database concepts, but new to performance optimization"
-- **Context**: "Working on e-commerce application with slow product search queries, need solution within 2 weeks"
-
-### Expected Output Structure
-```
-# Lean and Search Report: PostgreSQL Query Optimization
-
-**Generated**: 20251119-1445 UTC
-**Learning Objective**: Learn how to optimize PostgreSQL query performance for large datasets
-**Current Knowledge Level**: Basic SQL and database concepts
-**Context**: E-commerce application performance improvement
-
-## Learning Summary
-### Key Concepts Discovered
-1. **Index Strategy**: Different index types and selection criteria
-2. **Query Analysis**: Using EXPLAIN ANALYZE for performance insights
-3. **Configuration Tuning**: Key PostgreSQL settings for performance
-
-### Main Insights
-- Index selection affects query performance more than configuration tuning
-- EXPLAIN ANALYZE reveals actual bottlenecks vs assumptions
-- Connection pooling essential for high-concurrency applications
-
-## Source Documentation
-[Detailed sources with URLs and quality ratings]
-
-## Application Examples
-[Practical query optimization examples with code]
-
-## Knowledge Gaps
-[Areas requiring deeper research]
-
-## Next Steps
-[Immediate actions and learning plan]
-```
-
-## Integration with Other Skills
-
-### Complementary Skills
-- **review-code**: Validate implementation of learned concepts
-- **generate-tech-spec**: Document technical solutions from research
-- **create-prompt**: Share research methodology as reusable prompts
-
-### Workflow Combinations
-1. **Research → Implement → Review**
-   - Use lean-and-search for research
-   - Implement learning in code
-   - Use review skills for validation
-
-2. **Learn → Document → Share**
-   - Research with lean-and-search
-   - Create documentation with generate-tech-spec
-   - Share knowledge with create-prompt
+- [ ] All 8 tasks completed successfully
+- [ ] Learning goals have measurable success criteria
+- [ ] Sources are credible and URLs are valid
+- [ ] Synthesized knowledge is organized by topic
+- [ ] Practical applications are actionable
+- [ ] Knowledge gaps are clearly identified
+- [ ] Report file is saved and accessible
 
 ## Troubleshooting
 
-### Issue: "No sources found"
-- **Cause**: Overly specific or poorly formatted search terms
-- **Solution**: Broaden search scope, use alternative terminology
+### Issue: Task chain stops unexpectedly
+**Cause**: Missing dependency or context variable
+**Solution**: Check the error message for required context, restart from the failed task
 
-### Issue: "Conflicting information"
-- **Cause**: Different source perspectives or outdated information
-- **Solution**: Document conflicts, prioritize authoritative sources, note date relevance
+### Issue: No relevant sources found
+**Cause**: Search queries too specific or poorly formatted
+**Solution**: Broaden search scope, use alternative terminology, adjust search strategy
 
-### Issue: "Can't validate learning"
-- **Cause**: Lack of practical application opportunities
-- **Solution**: Create simplified test scenarios, use online sandboxes
+### Issue: Conflicting information from sources
+**Cause**: Different perspectives or outdated information
+**Solution**: Document conflicts, prioritize authoritative sources, note publication dates
 
-### Issue: "Report too long/complex"
-- **Cause**: Scope creep during research
-- **Solution**: Return to original learning objective, split into multiple sessions
+### Issue: Can't validate learning practically
+**Cause**: Lack of application opportunities
+**Solution**: Create simplified test scenarios, use online sandboxes or simulations
 
-## Advanced Usage
+### Issue: Report is too long or unfocused
+**Cause**: Scope creep during research
+**Solution**: Return to original learning objective, consider splitting into multiple sessions
 
-### Research Iterations
-For complex topics, use iterative approach:
-1. Initial broad research with lean-and-search
-2. Identify specific gaps or areas of interest
-3. Focused follow-up sessions on specific subtopics
+## Next Steps
 
-### Source Management
-- Maintain bibliography of high-quality sources
-- Create rating system for source credibility
-- Track source updates and revisit periodically
+After completing your first search-and-learn session:
 
-### Knowledge Building
-- Link reports to build knowledge network
-- Create glossaries for technical terms
-- Develop personal learning templates
+1. **Iterate on gaps**: Use the identified knowledge gaps for follow-up sessions
+2. **Build knowledge network**: Link related reports together
+3. **Create templates**: Develop personal learning templates for recurring topics
+4. **Share methodology**: Use `create-prompt` to share your research approach
 
-## Conclusion
+## Related Skills
 
-The lean-and-search skill provides structured methodology for efficient learning and knowledge acquisition. Focus on specific objectives, validate understanding through application, and maintain high-quality documentation for future reference.
-
-For additional help, use the `help-me-olaf` skill with questions about lean-and-search usage.
+- `research-and-report` - For formal research documentation
+- `challenge-me` - For testing and validating concepts
+- `tell-me` - For quick information without full workflow

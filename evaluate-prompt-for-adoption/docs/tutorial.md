@@ -1,333 +1,309 @@
-# Evaluate Prompt for Adoption - Tutorial
+# Evaluate Prompt for Adoption: Step-by-Step Tutorial
 
-This tutorial demonstrates how to evaluate external prompts for potential adoption into your OLAF framework.
+**How to Assess External Prompts Before Importing**
+
+This tutorial demonstrates how to evaluate external prompts for potential adoption into your OLAF framework using a structured assessment process.
 
 ## Prerequisites
 
-- OLAF framework installed
+- OLAF framework installed and active
 - Internet connection (for fetching from URLs)
-- Access to evaluate-prompt-for-adoption skill
+- Access to existing OLAF skills for similarity checking
 
-## Tutorial Scenarios
+## Estimated Time
 
-### Scenario 1: Evaluate from GitHub URL
+10-15 minutes per prompt evaluation
 
-**Situation**: You found an interesting prompt in an awesome-chatgpt-prompts repository.
+## Step-by-Step Instructions
 
-**Steps**:
+### Step 1: Invoke the Skill
 
-1. **Invoke the skill with URL**:
-   ```
-   olaf evaluate prompt from https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts/linux-terminal.txt
-   ```
-
-2. **Skill fetches and analyzes**:
-   ```
-   Fetching prompt from URL...
-   ✓ Retrieved 245 characters
-   ✓ Detected prompt type: Interactive simulation
-   
-   Checking similarity to existing OLAF skills...
-   ✓ Searched 96 skills
-   ✓ Found 0 similar skills (0% overlap)
-   
-   Evaluating quality...
-   ```
-
-3. **Review the evaluation report**:
-   ```
-   ## Evaluation Report
-   
-   ### Source Information
-   - URL: https://raw.githubusercontent.com/.../linux-terminal.txt
-   - Description: Act as a Linux Terminal
-   - Author: Community contribution
-   
-   ### Similarity Analysis
-   - Similar OLAF Skills: None (0% overlap)
-   - Unique Features: Terminal simulation, command execution
-   - Similarity Verdict: LOW - New capability ✅
-   
-   ### Quality Assessment
-   | Dimension | Rating | Notes |
-   |-----------|--------|-------|
-   | Clarity | Clear | Well-defined behavior |
-   | Genericity | Domain-Specific | Linux-specific |
-   | Parameterizability | Moderate | Could add shell types |
-   | LLM Independence | Agnostic | Works anywhere |
-   | Structure | Acceptable | Could add error handling |
-   
-   ### Persona & Use Cases
-   - Target Personas: Developers, sysadmins, DevOps
-   - Primary Use Case: Safe Linux command practice
-   - Frequency: Weekly
-   
-   ### Value-Add Analysis
-   - Frequency × Specificity: MEDIUM VALUE ⭐⭐
-   - AI Necessity: Required (needs command understanding)
-   - Value Score: 32/50 - GOOD
-   
-   ### Final Recommendation
-   
-   🎯 RECOMMENDATION: ADOPT WITH MODIFICATIONS
-   
-   Rationale: Unique capability not in OLAF. Good quality but needs
-   parameterization and error handling. Value score indicates strong candidate.
-   
-   Modifications needed:
-   1. Add shell_type parameter (bash/zsh/fish)
-   2. Add error handling section
-   3. Structure as proper OLAF skill
-   
-   Estimated effort: Medium (2-3 hours)
-   ```
-
-4. **Skill asks for next step**:
-   ```
-   Would you like me to proceed with ADOPT WITH MODIFICATIONS?
-   
-   I can:
-   a) Create OLAF-native version with create-skill
-   b) Import as-is then improve with convert-prompt
-   c) Skip for now
-   ```
-
-5. **You decide**:
-   ```
-   Option a - create OLAF-native version
-   ```
-
-6. **Result**: Skill creates improved version
-
-### Scenario 2: Evaluate from Direct Paste
-
-**Situation**: Your colleague shared a prompt via Slack that they found useful.
-
-**Steps**:
-
-1. **Copy the prompt text**
-
-2. **Invoke with pasted content**:
-   ```
-   olaf evaluate this prompt:
-   
-   [paste content]
-   You are an expert code reviewer. Review the provided code for:
-   1. Security vulnerabilities
-   2. Performance issues
-   3. Code style violations
-   4. Best practice adherence
-   Provide specific, actionable feedback.
-   ```
-
-3. **Skill analyzes without fetching**:
-   ```
-   Analyzing provided prompt text...
-   ✓ Extracted 87 characters
-   ✓ Detected type: Code review assistant
-   
-   Checking similarity to existing OLAF skills...
-   ✓ Found 2 similar skills:
-     - review-code (75% overlap)
-     - review-diff (45% overlap)
-   
-   Evaluating quality and unique features...
-   ```
-
-4. **Review report focusing on similarity**:
-   ```
-   ### Similarity Analysis
-   - Similar OLAF Skills:
-     • review-code (75% overlap) - Already has security, performance checks
-     • review-diff (45% overlap) - Focuses on git diffs
-   
-   - Unique Features in External Prompt:
-     • "Best practice adherence" explicitly mentioned
-     • Numbered checklist approach
-   
-   - Similarity Verdict: HIGH (75%) - Mostly duplicate ⚠️
-   
-   ### Final Recommendation
-   
-   🎯 RECOMMENDATION: EXTRACT PARTS
-   
-   Rationale: High overlap with existing review-code skill. However,
-   the explicit "best practice adherence" callout and numbered
-   checklist format could enhance our existing skill.
-   
-   Parts worth extracting:
-   1. Best practice adherence check (add to review-code)
-   2. Numbered checklist format (improve output structure)
-   
-   Integration approach: Enhance review-code skill with these elements
-   ```
-
-5. **Next steps provided**:
-   ```
-   Recommended action:
-   1. Open skills/review-code/prompts/review-code.md
-   2. Add "Best practice adherence" to objectives
-   3. Update output format to use numbered checklist
-   
-   Would you like me to make these enhancements now?
-   ```
-
-### Scenario 3: Low-Value Prompt Rejection
-
-**Situation**: You see a very specific prompt that seems narrow.
-
-**Steps**:
-
-1. **Invoke evaluation**:
-   ```
-   olaf evaluate prompt: https://example.com/my-very-specific-prompt
-   ```
-
-2. **Skill fetches and evaluates**:
-   ```
-   Fetching prompt...
-   ✓ Retrieved content
-   
-   Prompt description: "Generate TypeScript interfaces for AWS Lambda
-   handlers that process S3 events triggered by CloudWatch using CDK"
-   
-   Analyzing...
-   ```
-
-3. **Report shows low scores**:
-   ```
-   ### Quality Assessment
-   | Dimension | Rating | Notes |
-   |-----------|--------|-------|
-   | Clarity | Clear | Well-defined but narrow |
-   | Genericity | Too Narrow | ❌ Very specific stack |
-   | Parameterizability | Hardcoded | Locked to AWS/TypeScript |
-   | LLM Independence | Agnostic | Works across LLMs |
-   | Structure | Acceptable | Basic structure |
-   
-   ### Persona & Use Cases
-   - Target Personas: AWS developers using TypeScript + CDK
-   - Primary Use Case: Specific S3→Lambda→CloudWatch setup
-   - Frequency: Rare (only when setting up this exact pattern)
-   
-   ### Value-Add Analysis
-   - Frequency × Specificity: LOW VALUE ⭐ (very narrow + rare)
-   - AI Necessity: Optional (code generator could handle)
-   - Value Score: 14/50 - LOW
-   
-   ### Final Recommendation
-   
-   🎯 RECOMMENDATION: SKIP
-   
-   Rationale: Too specific to one tech stack combination. Rare use case.
-   Could be replaced with code generator or CDK construct. Low reuse
-   potential across team. Not generic enough for OLAF library.
-   
-   Alternative: Use general create-typescript-interfaces skill and
-   adapt output for specific AWS needs.
-   ```
-
-4. **Clear guidance**:
-   ```
-   This prompt is not recommended for adoption.
-   
-   If you frequently need AWS/TypeScript/CDK work, consider instead:
-   1. Creating a generic "generate-aws-cdk-constructs" skill
-   2. Parameterizing for different AWS services
-   3. Making it reusable beyond S3→Lambda pattern
-   ```
-
-### Scenario 4: Excellent High-Value Find
-
-**Situation**: You discover a prompt that looks perfect.
-
-**Steps**:
-
-1. **Evaluate**:
-   ```
-   olaf evaluate https://github.com/awesome/prompts/api-design-reviewer.md
-   ```
-
-2. **Report shows high scores**:
-   ```
-   ### Quality Assessment
-   | Dimension | Rating | Notes |
-   |-----------|--------|-------|
-   | Clarity | Clear | ✅ Excellent structure |
-   | Genericity | Generic | ✅ Works for any API |
-   | Parameterizability | High | ✅ REST/GraphQL/gRPC support |
-   | LLM Independence | Agnostic | ✅ Standard patterns |
-   | Structure | Well-Structured | ✅ Comprehensive flow |
-   
-   ### Value-Add Analysis
-   - Frequency × Specificity: HIGH VALUE ⭐⭐⭐ (generic + frequent)
-   - AI Necessity: Required (needs design judgment)
-   - Value Score: 45/50 - EXCELLENT
-   
-   ### Final Recommendation
-   
-   🎯 RECOMMENDATION: ADOPT
-   
-   Rationale: Exceptional quality across all dimensions. Fills gap in
-   OLAF (no API design review skill currently). High reuse potential.
-   Frequent use case. Well-structured and parameterized. No modifications
-   needed.
-   
-   Suggested skill name: review-api-design
-   Suggested competency: code-quality or api-development
-   Priority: HIGH
-   ```
-
-3. **Immediate adoption**:
-   ```
-   Would you like me to import this excellent prompt now?
-   
-   I recommend: convert-prompt-to-skill (wrap it into OLAF)
-   ```
-
-4. **You confirm**:
-   ```
-   Yes, import it
-   ```
-
-5. **Skill proceeds**:
-   ```
-   ✓ Packaging via convert-prompt-to-skill...
-   ✓ Created skill: review-api-design
-   ✓ Added to api-development competency
-   ✓ Ready to use!
-   
-   Try it: olaf review-api-design
-   ```
-
-## Understanding the Value Score
-
-The value score formula combines multiple factors:
-
+**User Action:**
 ```
-Value Score = (Frequency × 3) + (Genericity × 2) + (AI_Necessity × 3) + (Quality × 2)
+evaluate prompt for adoption
 ```
 
-**Example calculation**:
+**AI Response:**
+Acknowledges request and asks for the prompt source.
 
-For "Linux Terminal" prompt:
-- Frequency: 3/5 (weekly) → 3 × 3 = 9 points
-- Genericity: 3/5 (domain-specific) → 3 × 2 = 6 points
-- AI_Necessity: 5/5 (requires understanding) → 5 × 3 = 15 points
-- Quality: 4/5 (acceptable) → 4 × 2 = 8 points
+### Step 2: Provide Prompt Source
 
-**Total**: 9 + 6 + 15 + 8 = **38/50 (GOOD)**
+**Option A - URL:**
+```
+source_url: https://github.com/f/awesome-chatgpt-prompts/blob/main/prompts/linux-terminal.txt
+```
 
-## Decision Matrix
+**Option B - Direct Paste:**
+```
+source_text: [paste your prompt content here]
+```
 
-Use this to quickly interpret recommendations:
+**What AI Does:**
+- If URL: Fetches content from the source
+- Extracts prompt content from page (markdown, code block, raw text)
+- Parses prompt structure (frontmatter, description, instructions)
 
-| Recommendation | Similarity | Value Score | Action |
-|----------------|------------|-------------|--------|
-| ADOPT | <40% | 40-50 | Import as-is or with minor tweaks |
-| ADOPT WITH MODIFICATIONS | <60% | 30-39 | Improve then import |
-| EXTRACT PARTS | 40-80% | 20-29 | Merge into existing skill |
-| SKIP | >80% or <20% | <20 | Don't import |
+**You Should See:**
+```
+✓ Fetching prompt from URL...
+✓ Retrieved 245 characters
+✓ Detected prompt type: Interactive simulation
+```
+
+### Step 3: Similarity Check
+
+**What AI Does:**
+1. Searches existing OLAF skills for similar capabilities
+2. Calculates conceptual overlap percentage
+3. Identifies unique features in external prompt
+4. Determines similarity verdict
+
+**You Should See:**
+```
+Checking similarity to existing OLAF skills...
+✓ Searched 96 skills
+✓ Found 0 similar skills (0% overlap)
+✓ Similarity Verdict: LOW - New capability
+```
+
+**If Similar Skills Found:**
+```
+✓ Found 2 similar skills:
+  - review-code (75% overlap)
+  - review-diff (45% overlap)
+✓ Similarity Verdict: HIGH - Mostly duplicate
+```
+
+### Step 4: Optional - Provide Available Skills List
+
+**AI May Ask:**
+"To avoid adopting a duplicate, can you paste your available skills list?"
+
+**User Provides (Optional):**
+```
+available_skills_list: review-code, review-diff, analyze-function-complexity, ...
+```
+
+**Why This Helps:**
+- Detects duplicates you may already have installed
+- Improves accuracy of similarity assessment
+- Prevents importing skills you already own
+
+### Step 5: Quality Evaluation
+
+**What AI Does:**
+Evaluates prompt across 5 dimensions:
+
+**Clarity Assessment:**
+```
+✓ Clear objective stated? YES
+✓ Well-structured sections? YES
+✓ Unambiguous instructions? YES
+✓ Examples provided? NO
+✓ Expected outputs defined? YES
+Rating: Clear
+```
+
+**Genericity Assessment:**
+```
+✓ Applicable to multiple use cases? YES
+✓ Not too narrow/specific? YES
+✓ Reusable across projects? YES
+Rating: Generic
+```
+
+**Parameterizability Assessment:**
+```
+✓ Can be parameterized? MODERATE
+✓ Supports configuration? LIMITED
+✓ Flexible for contexts? YES
+Rating: Moderate
+```
+
+**LLM Independence Assessment:**
+```
+✓ Works across LLMs? YES
+✓ Not platform-locked? YES
+✓ Standard patterns? YES
+Rating: Agnostic
+```
+
+**Structure Quality Assessment:**
+```
+✓ Logical flow? YES
+✓ Proper sections? PARTIAL
+✓ Error handling? NO
+✓ Success criteria? NO
+Rating: Acceptable
+```
+
+### Step 6: Persona & Use Case Analysis
+
+**What AI Determines:**
+```
+### Persona & Use Cases
+- Target Personas: Developers (junior to senior), DevOps engineers
+- Primary Use Case: Learning/practicing Linux commands safely
+- Secondary Use Cases: Testing command sequences, documentation
+- Frequency: Weekly (learning contexts)
+- Context: Solo work, training sessions
+```
+
+### Step 7: Value-Add Calculation
+
+**What AI Calculates:**
+```
+Value Score Calculation:
+- Frequency: 3/5 (weekly) × 3 = 9 points
+- Genericity: 3/5 (domain-specific) × 2 = 6 points
+- AI Necessity: 5/5 (requires understanding) × 3 = 15 points
+- Quality: 4/5 (acceptable) × 2 = 8 points
+
+Total: 38/50 points - GOOD
+```
+
+**Value Tiers:**
+- 40-50: EXCELLENT - Adopt immediately
+- 30-39: GOOD - Strong candidate
+- 20-29: MODERATE - Consider with improvements
+- 10-19: LOW - Skip or extract parts
+- 0-9: POOR - Not worth it
+
+### Step 8: Review Evaluation Report
+
+**AI Provides Complete Report:**
+```markdown
+## Evaluation Report
+
+### Source Information
+- URL: https://github.com/.../linux-terminal.txt
+- Description: Act as a Linux Terminal
+- Author: Community contribution
+- License: CC0-1.0
+
+### Similarity Analysis
+- Similarity Scope: Workspace-only
+- Similar OLAF Skills: None (0% overlap)
+- Unique Features: Terminal simulation, command execution
+- Similarity Verdict: LOW - New capability ✅
+
+### Quality Assessment
+| Dimension | Rating | Notes |
+|-----------|--------|-------|
+| Clarity | Clear | Well-defined behavior |
+| Genericity | Domain-Specific | Linux-specific |
+| Parameterizability | Moderate | Could add shell types |
+| LLM Independence | Agnostic | Works anywhere |
+| Structure | Acceptable | Could add error handling |
+
+### Persona & Use Cases
+- Target Personas: Developers, sysadmins, DevOps
+- Primary Use Case: Safe Linux command practice
+- Frequency: Weekly
+
+### Value-Add Analysis
+- Frequency × Specificity: MEDIUM VALUE ⭐⭐
+- AI Necessity: Required
+- Value Score: 38/50 - GOOD
+
+### Final Recommendation
+
+🎯 RECOMMENDATION: ADOPT WITH MODIFICATIONS
+
+Rationale: Unique capability not in OLAF. Good quality but needs
+parameterization and error handling.
+
+Modifications needed:
+1. Add shell_type parameter (bash/zsh/fish)
+2. Add error handling section
+3. Structure as proper OLAF skill
+
+Estimated effort: Medium (2-3 hours)
+
+### Next Steps
+1. Use create-skill to build OLAF-native version
+2. Add to learning-tools competency
+3. Include parameterization for different shells
+```
+
+### Step 9: Decide on Action
+
+**AI Asks:**
+"Would you like me to proceed with ADOPT WITH MODIFICATIONS?"
+
+**User Options:**
+1. **Yes, create skill**: Proceeds to create-skill or convert-prompt-to-skill
+2. **Extract parts only**: Identifies specific patterns to merge into existing skills
+3. **Skip for now**: Saves evaluation for later reference
+4. **Re-evaluate**: Request different assessment criteria
+
+**Example Response:**
+```
+Yes, create an OLAF-native version using create-skill
+```
+
+### Step 10: Follow-Up Action
+
+**If ADOPT:**
+```
+✓ Proceeding to create-skill...
+✓ Skill name: simulate-linux-terminal
+✓ Target competency: learning-tools
+```
+
+**If EXTRACT PARTS:**
+```
+Parts to extract:
+1. Command simulation pattern → add to existing skill
+2. Interactive feedback format → merge into review-code
+
+Would you like me to enhance the existing skill now?
+```
+
+## Verification Checklist
+
+After evaluation, verify:
+
+✅ **Source fetched correctly** (content retrieved)
+✅ **Similarity check completed** (overlap calculated)
+✅ **Quality assessed** (all 5 dimensions rated)
+✅ **Value score calculated** (0-50 points)
+✅ **Recommendation provided** (ADOPT/SKIP/EXTRACT)
+✅ **Next steps defined** (actionable guidance)
+
+## Understanding Recommendations
+
+| Recommendation | When Used | Action |
+|----------------|-----------|--------|
+| ADOPT | Low similarity, high value | Import as-is or minor tweaks |
+| ADOPT WITH MODIFICATIONS | Good but needs work | Improve then import |
+| EXTRACT PARTS | Medium similarity, some unique value | Merge into existing |
+| SKIP | High similarity or low value | Don't import |
+
+## Troubleshooting
+
+**If URL fetch fails:**
+- Check URL is accessible
+- Try raw file URL for GitHub
+- Paste content directly as source_text
+
+**If similarity seems wrong:**
+- Provide available_skills_list for better detection
+- Check if similar skills exist under different names
+- Request manual similarity override
+
+**If value score seems off:**
+- Consider your team's specific context
+- Adjust for domain-specific needs
+- Request re-evaluation with different criteria
+
+## Best Practices
+
+1. **Evaluate before importing**: Always assess external prompts first
+2. **Check multiple sources**: Compare similar prompts from different sources
+3. **Consider maintenance**: High-quality prompts are easier to maintain
+4. **Track adoptions**: Note which adopted prompts get actual use
+5. **Re-evaluate periodically**: Prompts may become outdated or redundant
 
 ## Common Evaluation Patterns
 
@@ -344,7 +320,6 @@ Use this to quickly interpret recommendations:
 ### Pattern 3: The Hidden Gem
 - Low similarity (<40%)
 - High value score (>35)
-- Good quality across dimensions
 - **Action**: ADOPT
 
 ### Pattern 4: The Niche Special
@@ -352,41 +327,16 @@ Use this to quickly interpret recommendations:
 - High quality but rare use
 - **Action**: ADOPT WITH MODIFICATIONS (make more generic)
 
-### Pattern 5: The Almost-There
-- Good concept, poor execution
-- Low quality scores
-- **Action**: ADOPT WITH MODIFICATIONS or rebuild with create-skill
+## Next Steps After Evaluation
 
-## Tips for Effective Evaluation
+1. **If ADOPT**: Use convert-prompt-to-skill or create-skill
+2. **If EXTRACT**: Identify target skill and merge patterns
+3. **If SKIP**: Document reason for future reference
+4. **Track outcomes**: Monitor which adoptions prove valuable
 
-### Before Evaluation
-1. **Quick scan**: Read the prompt briefly first
-2. **Check source**: Is it from reputable source?
-3. **Check license**: Can you legally use it?
+## Expected Timeline
 
-### During Evaluation
-1. **Trust the metrics**: Don't override scores without good reason
-2. **Consider context**: Your team's needs may differ from general assessment
-3. **Look for patterns**: Does it teach you something valuable even if you skip it?
+- **Simple evaluation**: 5-10 minutes
+- **Complex prompt**: 15-20 minutes
+- **Batch evaluation**: 5-10 minutes per prompt
 
-### After Evaluation
-1. **Act on recommendation**: Don't just evaluate, execute
-2. **Track outcomes**: Note which adopted prompts get used
-3. **Iterate**: Re-evaluate periodically
-
-## Next Steps
-
-After completing this tutorial:
-
-1. **Find prompts**: Browse GitHub awesome lists, blogs, registries
-2. **Evaluate systematically**: Use this skill for all external prompts
-3. **Build curated library**: Only adopt high-value prompts
-4. **Share evaluations**: Help team make informed decisions
-5. **Measure value**: Track which adopted prompts get actual use
-
-## Related Skills
-
-- `convert-prompt-to-skill` - Package adopted prompts into a skill
-- `convert-prompt` - Modernize adopted prompts to OLAF standards
-- `create-skill` - Build OLAF-native version of adopted prompts
-- `validate-prompt-value` - Re-evaluate existing OLAF prompts

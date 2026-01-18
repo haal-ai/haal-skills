@@ -1,163 +1,106 @@
-# Carry-Over Session: Step-by-Step Tutorial
+# Tutorial: carry-over-session
 
-**How to Execute the "Carry-Over Session" Workflow**
+## Introduction
 
-This tutorial shows exactly how to create a carry-over note to resume work in a future session.
+This tutorial guides you through using the `carry-over-session` skill to create carry-over notes that enable seamless session continuation.
 
 ## Prerequisites
 
-- OLAF framework installed and active
-- `.olaf/carry-over/` directory exists (created automatically if needed)
-- Active work session with tasks in progress
-- Access to GitHub Copilot Chat or compatible IDE
+- Active workspace with ongoing work
+- Conversation context with the AI assistant
+- Write access to `.olaf/work/carry-over/` directory
 
 ## Step-by-Step Instructions
 
-### Step 1: Request Carry-Over
-Brief: Signal that you want to create a carry-over note
+### Step 1: Identify the Right Moment
 
-**User Action:**
-1. Open GitHub Copilot Chat
-2. Type: `carry over`
-3. Press Enter
+Before ending your work session, ensure you have:
+- A clear stopping point in your current task
+- Understanding of what needs to happen next
 
-**Alternative commands:**
+**Expected Outcome**: You know the logical next step in your workflow.
+
+### Step 2: Invoke the Skill
+
+Call the carry-over-session skill:
 ```
-create carry over
-carry over note
+@carry-over-session
 ```
 
-### Step 2: Copilot Analyzes Current Session
-**What Copilot Does:**
-- Reviews the current conversation and work context
-- Identifies the logical next action/prompt
-- Determines which files are relevant
-- Extracts absolute file paths
+**Expected Outcome**: The skill begins analyzing your conversation context.
 
-**You Should See:** Copilot processing your request
+### Step 3: Review the Generated Note
 
-### Step 3: Carry-Over File Generation
-**What Copilot Does:**
-- Creates timestamp: `YYYYMMDD-HHmm` format
-- Generates carry-over file content:
-  - Section 1: NEXT PROMPT (exact prompt for next session)
-  - Section 2: FILES NEEDED (absolute paths)
-  - Section 3: OPTIONAL context (brief summary if critical)
-- Saves to `.olaf/carry-over/carry-over-YYYYMMDD-HHmm.txt`
+The skill will produce a carry-over note with:
+- A specific, actionable prompt for your next session
+- List of files with absolute paths
 
-**Example Generated File:**
+**Example Output**:
 ```text
 CARRY-OVER - 2025-11-14 14:30
 ========================
 
 ## NEXT PROMPT
-Add JWT validation to AuthService, update login to return token, and add middleware to protect routes.
+Add JWT validation to AuthService, update login to return token.
 
 ## FILES NEEDED (Absolute Paths)
-c:\users\<user-name>\coderepos\project\src\services\AuthService.ts
-c:\users\<user-name>\coderepos\project\src\middleware\auth.ts
-c:\users\<user-name>\coderepos\project\src\routes\api.ts
-c:\users\<user-name>\coderepos\project\config\jwt.config.ts
-c:\users\<user-name>\coderepos\project\tests\auth.test.ts
-
-## OPTIONAL - Brief Context
-Working on authentication feature. Login endpoint exists but needs JWT implementation.
+c:\Users\user\project\src\services\AuthService.ts
+c:\Users\user\project\src\middleware\auth.ts
 ```
 
-### Step 4: Confirmation
-**Copilot Response:**
+### Step 4: Verify File Location
+
+Confirm the note was saved to:
 ```
-✓ Carry-over note created: .olaf/carry-over/carry-over-20251114-1430.txt
-  Use "carry on" in next session to resume
-```
-
-**User Action:** Note the confirmation, end your session
-
-### Step 5: Resume in Future Session (Using Carry-On)
-**User Action:**
-1. Start new Copilot Chat session
-2. Type: `carry on`
-3. Press Enter
-
-**What Copilot Does:**
-- Finds latest carry-over file
-- Loads NEXT PROMPT and FILES NEEDED
-- Proposes plan and asks for approval
-
-**Copilot Response:**
-```
-## Resuming from Carry-Over
-- Carry-Over File: carry-over-20251114-1430.txt
-- Session Date: 2025-11-14 14:30
-
-### Proposed Plan (from NEXT PROMPT)
-Add JWT validation to AuthService, update login to return token, and add middleware to protect routes.
-
-### Files To Open
-c:\users\<user-name>\coderepos\project\src\services\AuthService.ts
-c:\users\<user-name>\coderepos\project\src\middleware\auth.ts
-c:\users\<user-name>\coderepos\project\src\routes\api.ts
-c:\users\<user-name>\coderepos\project\config\jwt.config.ts
-c:\users\<user-name>\coderepos\project\tests\auth.test.ts
-
-Confirm: Proceed with the proposed plan? (Yes/No)
+.olaf/work/carry-over/carry-over-YYYYMMDD-HHmm.txt
 ```
 
-**User Action:** Respond `Yes` to proceed
+**Expected Outcome**: File exists with current timestamp.
+
+### Step 5: Resume Later with carry-on-session
+
+When starting your next session, use the companion skill:
+```
+@carry-on-session
+```
+
+This will read your carry-over note and restore context.
 
 ## Verification Checklist
 
-✅ **Carry-over file created** - Check `.olaf/carry-over/` directory
-✅ **Timestamp format correct** - File named `carry-over-YYYYMMDD-HHmm.txt`
-✅ **NEXT PROMPT included** - Clear actionable prompt present
-✅ **FILES NEEDED listed** - Absolute paths to relevant files
-✅ **Resumable in next session** - Can use `carry on` to load
+- [ ] Carry-over note created in `.olaf/work/carry-over/`
+- [ ] Next prompt is clear and actionable
+- [ ] All relevant files are listed with absolute paths
+- [ ] Timestamp matches current date/time
 
 ## Troubleshooting
 
-**If carry-over file not created:**
-```
-Check .olaf/carry-over/ directory exists
-Copilot may need write permissions
-```
+### Issue: No clear next prompt generated
 
-**If files have relative paths instead of absolute:**
-- Manually edit the carry-over file
-- Convert to absolute paths using workspace root
-- Format: `c:\Users\<user>\coderepos\<project>\<path>`
+**Cause**: Insufficient context in the conversation.
 
-**If NEXT PROMPT is unclear:**
-- Manually edit the carry-over file
-- Make the prompt more specific and actionable
-- Add any critical context
+**Solution**: Provide more details about your current task and intended next steps before invoking the skill.
 
-**If resuming doesn't work:**
-- Check carry-over file exists and isn't corrupted
-- Verify file follows correct template format
-- Try `carry on` command again
+### Issue: Missing files in the list
 
-## Key Learning Points
+**Cause**: Files weren't explicitly mentioned in the conversation.
 
-1. **Minimal but sufficient:** Carry-over notes are intentionally brief. Include only what's needed to resume work immediately.
+**Solution**: Mention the files you're working with before creating the carry-over note.
 
-2. **Absolute paths critical:** File paths must be absolute (full workspace path) so they work across sessions without ambiguity.
+### Issue: Directory doesn't exist
 
-3. **NEXT PROMPT is key:** This is the exact prompt you or Copilot will use to continue work. Make it clear and actionable.
+**Cause**: First time using carry-over functionality.
 
-4. **Companion workflow:** Carry-over creates the note, `carry on` loads it. They work together as a pair.
+**Solution**: The skill will create the directory automatically. If it fails, manually create `.olaf/work/carry-over/`.
 
-5. **Personal workspace:** `.olaf/` directory is typically in `.gitignore`, keeping carry-over notes private.
+## Tips for Best Results
 
-## Next Steps to Try
+1. **Be explicit** about your current task before invoking
+2. **Mention files** you're actively working with
+3. **State your next goal** clearly in the conversation
+4. **Use regularly** at natural stopping points
 
-- Create a carry-over note and resume it in next session using `carry on`
-- Edit a carry-over file manually to refine the NEXT PROMPT
-- Create multiple carry-over notes for different tasks (use descriptive timestamps)
-- Compare carry-over with stash workflow (stash is for pausing, carry-over is for session continuity)
+## Next Steps
 
-## Expected Timeline
-
-- **Total carry-over creation time:** 10-30 seconds
-- **User input required:** Request carry-over command
-- **Copilot execution time:** Instant (file generation)
-- **Resume time:** 10-20 seconds in next session with `carry on`
+- Learn about `carry-on-session` to resume work
+- Explore `stash-restart-session` for alternative session management

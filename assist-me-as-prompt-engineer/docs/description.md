@@ -1,146 +1,153 @@
-# Prompt Engineering Assistant
+# assist-me-as-prompt-engineer
 
 ## Overview
-The Prompt Engineering Assistant is your intelligent guide through OLAF's comprehensive prompt engineering capabilities. It assesses your expertise level and recommends the right skills, workflows, and learning paths to accomplish your goals.
+
+The `assist-me-as-prompt-engineer` skill serves as an intelligent guide for prompt engineers, providing skill recommendations and workflow guidance based on the user's expertise level and task requirements. It acts as the entry point for all prompt engineering activities within the OLAF framework.
 
 ## Purpose
-- **Smart Skill Discovery**: Automatically recommends appropriate skills based on your task and expertise
-- **Leveled Learning**: Organizes skills by expertise level (beginner -> trained -> advanced)
-- **Workflow Orchestration**: Guides complex multi-skill workflows
-- **Progressive Learning**: Suggests advancement paths as you grow
 
-## Expertise Levels
-
-### Beginner Level
-**Focus**: Creating and sharing basic prompts
-**Available Skills**:
-- `create-prompt` - Draft a prompt and stage it under `.olaf/staging/generated-prompts/`
-- `check-prompt-compliance` - Check prompt compliance and directive quality
-
-**Typical Goals**:
-- Creating first prompts
-- Learning prompt structure
-- Sharing work with team
-
-### Trained Level
-**Focus**: Skill development and prompt management
-**Available Skills**:
-- `create-skill` - Build complete skills with prompts
-- `evaluate-prompt-for-adoption` - Assess external prompts
-- `convert-prompt-to-skill` - Convert prompt content into a skill structure
-- `create-skill-description` - Generate docs for an existing skill
-
-**Typical Goals**:
-- Building reusable skills
-- Converting old prompts
-- Managing prompt collections
-
-### Advanced Level
-**Focus**: Orchestration and validation
-**Available Skills**:
-- `generate-orchestrator` - Create orchestrator skills
-- `convert-skill-to-chain` - Build executable skill chains
-- `validate-prompt-value` - Deep effectiveness analysis
-- `validate-olaf-artifacts` - System-wide validation of local artifacts
-
-**Typical Goals**:
-- Orchestrating multiple skills
-- Creating workflow chains
-- Measuring prompt ROI
-
-## How It Works
-
-### 1. Task Assessment
-Describe what you want to accomplish. The assistant analyzes:
-- Task complexity
-- Required capabilities
-- Your current expertise level
-
-### 2. Skill Recommendation
-Receive tailored recommendations:
-- Primary skill to use
-- Supporting skills if needed
-- Clear usage instructions
-- Expected outcomes
-
-### 3. Workflow Guidance
-For complex tasks:
-- Multi-step workflow proposed
-- Dependencies explained
-- Option to execute automatically
-
-### 4. Learning Paths
-Progressive skill suggestions:
-- Next skills to learn
-- Prerequisite recommendations
-- Advancement opportunities
+This skill bridges the gap between user intent and framework capabilities by assessing expertise levels, mapping tasks to appropriate skills, and providing clear, actionable guidance. It helps users navigate the prompt engineering skill ecosystem efficiently.
 
 ## Key Features
 
-### Intelligent Matching
-- Analyzes task requirements
-- Maps to appropriate skill level
-- Considers user expertise
+- **Expertise Assessment**: Automatically determines user skill level (beginner, trained, advanced)
+- **Skill Mapping**: Matches user tasks to appropriate skills based on expertise and requirements
+- **Workflow Orchestration**: Proposes multi-step workflows for complex tasks
+- **Learning Path Guidance**: Suggests advancement opportunities to build expertise
+- **Interactive Recommendations**: Provides clear next steps and usage instructions
 
-### Clear Guidance
-- Step-by-step instructions
-- Usage examples
-- Expected outcomes
-- Next actions
+## Usage
 
-### Workflow Support
-- Multi-skill orchestration
-- Dependency management
-- Automated execution option
+Invoke the skill with a task description:
 
-### Progressive Learning
-- Skill level advancement
-- Learning path suggestions
-- Prerequisite guidance
+```
+@assist-me-as-prompt-engineer I need to create a prompt for code reviews
+```
 
-## When to Use
+Or invoke without parameters for interactive guidance:
 
-**Perfect For**:
-- "What skill should I use for...?"
-- "How do I accomplish...?"
-- "I'm new to prompt engineering"
-- "What's the best way to...?"
-- "I need help with multiple steps"
+```
+@assist-me-as-prompt-engineer
+```
 
-**Example Scenarios**:
-- Creating your first prompt
-- Converting legacy prompts
-- Building complex workflows
-- Contributing to OLAF framework
-- Learning prompt engineering
+## Parameters
 
-## Integration
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| task_description | string | Yes | What the user wants to accomplish |
+| expertise_level | string | No | User's skill level: beginner/trained/advanced (assessed if not provided) |
 
-**Works With**:
-- All prompt engineering skills
-- Learning and documentation skills
-- Workflow generation capabilities
+## Process Flow
 
-**Complements**:
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    ASSISTANCE WORKFLOW                          │
+├─────────────────────────────────────────────────────────────────┤
+│ 1. Skill Level Assessment                                       │
+│    - Assess from task complexity if not provided                │
+│    - Categorize: beginner / trained / advanced                  │
+│    ↓                                                            │
+│ 2. Skill Mapping                                                │
+│    - Match task to appropriate skills                           │
+│    - Consider expertise level constraints                       │
+│    ↓                                                            │
+│ 3. Recommendation                                               │
+│    - Primary skill with rationale                               │
+│    - Supporting skills if applicable                            │
+│    ↓                                                            │
+│ 4. Workflow Guidance (if complex)                               │
+│    - Multi-step workflow proposal                               │
+│    - Execution offer                                            │
+│    ↓                                                            │
+│ 5. Learning Path (optional)                                     │
+│    - Advancement suggestions                                    │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## Output
+
+The skill provides structured recommendations:
+
+- **Assessment**: Identified expertise level and task understanding
+- **Recommendation**: Primary skill(s) with clear rationale
+- **Guidance**: Step-by-step instructions or workflow
+- **Learning**: Optional advancement suggestions
+- **Next Action**: Clear, specific next step
+
+## Skill Recommendations by Level
+
+### Beginner Level
+| Skill | Purpose |
+|-------|---------|
+| `create-prompt` | Draft prompts and stage them |
+| `check-prompt-compliance` | Verify prompt compliance |
+
+### Trained Level
+| Skill | Purpose |
+|-------|---------|
+| `create-skill` | Build complete skills with workflows |
+| `convert-prompt-to-skill` | Convert prompts to skill structure |
+| `evaluate-prompt-for-adoption` | Assess prompts for integration |
+| `create-skill-description` | Generate skill documentation |
+
+### Advanced Level
+| Skill | Purpose |
+|-------|---------|
+| `generate-orchestrator` | Create orchestrator skills |
+| `convert-skill-to-chain` | Transform skills into chains |
+| `validate-prompt-value` | Deep prompt effectiveness analysis |
+
+## Examples
+
+### Example 1: Beginner Task
+
+```
+User: I need to create a prompt for code review
+
+Assessment: Beginner level task - first prompt creation
+Recommendation: `create-prompt`
+
+This skill will guide you through creating a structured code review 
+prompt using proven templates.
+
+Expected Outcome:
+- Staged prompt file in `.olaf/staging/generated-prompts/`
+- Prompt follows prompt engineering principles
+
+Next Step: What should the prompt review (language, security focus, standards)?
+```
+
+### Example 2: Advanced Multi-Step Task
+
+```
+User: I need to validate prompts then deploy them automatically
+
+Assessment: Advanced level task - workflow orchestration
+Recommendation: Multi-step workflow
+
+Workflow:
+1. `evaluate-prompt-for-adoption` - Assess prompt quality
+2. `check-prompt-compliance` - Validate directive quality
+3. `convert-prompt-to-skill` - Package into skill structure
+4. `validate-prompt-value` - Verify effectiveness
+
+Alternative: Use `generate-orchestrator` to create a permanent workflow.
+
+Next Step: Execute this workflow, or create a permanent chain?
+```
+
+## Error Handling
+
+| Scenario | Handling |
+|----------|----------|
+| Unknown task | Ask clarifying questions, offer `help-me-olaf` or `tell-me` |
+| Skill level mismatch | Acknowledge goal, recommend prerequisites, provide learning path |
+| Multiple skill options | Present top 2-3 options with trade-offs |
+| Deprecated skill | Acknowledge old name, provide replacement, explain changes |
+
+## Related Skills
+
 - `help-me-olaf` - General OLAF assistance
-- `tell-me` - Contextual help and knowledge routing
-
-## Success Criteria
-
-You'll know this skill is effective when:
-- You quickly find the right skill for your task
-- You understand how to use recommended skills
-- You progress through expertise levels smoothly
-- Complex tasks are broken into clear workflows
-- You know exactly what to do next
-
-## Getting Started
-
-Simply describe your goal:
-```
-olaf prompt assistant "I need to create a code review prompt"
-olaf prompt help "Is this prompt compliant?"
-olaf guide me "I want to build a workflow for prompt deployment"
-```
-
-The assistant will assess your need and guide you to the right solution.
+- `tell-me` - Information and explanations
+- `create-skill` - Build new skills
+- `generate-orchestrator` - Create skill orchestrators

@@ -1,117 +1,79 @@
-# Review User Story
+# review-user-story
 
 ## Overview
 
-This competency reviews user stories against standard templates to ensure quality, clarity, and completeness. It systematically evaluates story components including title, description, acceptance criteria, and supporting details, then provides constructive feedback and clarifying questions to improve the story before development begins.
+The `review-user-story` skill reviews user stories against a standard template to ensure quality, clarity, and completeness. It provides systematic evaluation using INVEST principles and generates actionable feedback for improvement.
 
 ## Purpose
 
-User stories often suffer from ambiguity, incomplete acceptance criteria, or untestable requirements that lead to misunderstandings and rework during development. This competency addresses this by applying a structured evaluation framework to assess story quality, identify specific weaknesses, and generate actionable questions that guide story authors toward clearer, more implementable user stories.
+This skill helps product owners, business analysts, and development teams ensure their user stories meet quality standards before development begins. By evaluating stories against established criteria, it identifies gaps, ambiguities, and areas for improvement early in the process.
+
+## Key Features
+
+- **Template-Based Evaluation**: Reviews stories against a comprehensive checklist template
+- **INVEST Principles Assessment**: Evaluates Independent, Negotiable, Valuable, Estimable, Small, and Testable criteria
+- **Acceptance Criteria Validation**: Ensures acceptance criteria are testable and complete
+- **Structured Feedback**: Generates organized reports with strengths, improvements, and clarifying questions
+- **Configurable Depth**: Supports basic, thorough, or comprehensive review levels
 
 ## Usage
 
-**Command**: `review user story`
+Invoke the skill with the following parameters:
 
-**Protocol**: Act
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `user_story_content` | string | Yes | - | The user story text to be reviewed |
+| `template_reference` | string | No | user-story-review-template.md | Specific template for evaluation |
+| `review_depth` | string | No | thorough | Depth level: basic, thorough, or comprehensive |
+| `output_filename` | string | No | auto-generated | Custom filename for the output review |
 
-**When to Use**: Use this competency during backlog refinement sessions, before sprint planning to validate story readiness, when developers report unclear requirements, or as part of a quality gate before stories are approved for development.
+## Process Flow
 
-## Parameters
-
-### Required Inputs
-- **user_story_content**: The user story text to be reviewed (can be provided inline or as file reference)
-
-### Optional Inputs
-- **template_reference**: Specific template to use for evaluation (uses default user story template if not specified)
-- **review_depth**: Depth level for review (basic, thorough, or comprehensive; default: thorough)
-
-### Context Requirements
-- User story should follow standard format (title, description, acceptance criteria)
-- User story review template is automatically loaded from competency templates
-- Best results when story has at least basic structure defined
+1. **Validation Phase**: Confirms user story content is provided and template is accessible
+2. **Load User Story**: Parses and structures story components for analysis
+3. **Load Evaluation Template**: Reads evaluation criteria from template file
+4. **Analyze Against Template**: Evaluates story against each requirement systematically
+5. **Generate Structured Review**: Creates markdown-formatted review with findings
+6. **Output Phase**: Saves review to staging directory with timestamp
 
 ## Output
 
-This competency produces a structured review report with assessment and improvement recommendations.
+The skill generates a comprehensive review report containing:
 
-**Deliverables**:
-- User story review report saved to `work/staging/user-story-reviews/user-story-review-YYYYMMDD-NNN.md`
-- Overall quality assessment and rating
-- Identified strengths and areas requiring improvement
-- Specific clarifying questions for story author
+- **Checklist Table**: Pass/Fail/NA status with detailed comments for each item
+- **Review Summary**: Overall assessment based on checklist results
+- **Strengths**: Specific positive elements identified in the user story
+- **Areas for Improvement**: Concrete suggestions with examples
+- **Clarifying Questions**: Specific questions to help improve the story
 
-**Format**: Markdown document with standardized sections covering overall assessment, component-by-component evaluation, identified issues, and actionable recommendations for improvement.
+Reports are saved to: `.olaf/work/staging/user-story-reviews/user-story-review-[YYYYMMDD-HHmm].md`
 
 ## Examples
 
-### Example 1: Sprint Planning Story Validation
-
-**Scenario**: During sprint planning, the team wants to validate that a user story about password reset functionality is ready for development.
-
-**Command**:
+**Basic review**:
 ```
-olaf review user story
+Review this user story:
+As a customer, I want to reset my password so that I can regain access to my account.
 ```
 
-**Input**:
+**Thorough review with custom output**:
 ```
-user_story_content: |
-  As a user, I want to reset my password so I can access my account if I forget it.
-  
-  Acceptance Criteria:
-  - User can request password reset
-  - User receives email with reset link
-  - User can set new password
+Review this user story with comprehensive depth:
+[user story content]
+Save as: password-reset-story-review.md
 ```
 
-**Result**: Review identified that acceptance criteria lack specificity (no timeout for reset link, no password complexity requirements, no error handling scenarios). Generated 8 clarifying questions about edge cases, security requirements, and user feedback mechanisms. Recommended story not ready for development without enhancements.
+## Error Handling
 
-### Example 2: Backlog Refinement Quality Check
+| Scenario | Behavior |
+|----------|----------|
+| No user story provided | Requests user to provide the story content |
+| Empty/invalid content | Informs user that valid content is required |
+| Template access issues | Provides manual checklist structure as fallback |
+| Unclear story structure | Notes structural issues and asks clarifying questions |
+| Missing story elements | Identifies missing components and suggests additions |
 
-**Scenario**: Product owner has written several user stories for a new feature and wants quality feedback before backlog refinement meeting.
+## Related Skills
 
-**Command**:
-```
-olaf review user story
-```
-
-**Input**:
-```
-user_story_content: [file reference to story document]
-review_depth: comprehensive
-```
-
-**Result**: Comprehensive review highlighting strong business value statement and clear user persona, but identifying missing acceptance criteria for error states, unclear definition of "done", and testability concerns. Provided specific recommendations for improving each section.
-
-## Related Competencies
-
-- **analyze-business-requirements**: Use for reviewing complete requirements documents containing multiple stories
-- **extend-specification**: Enhance specifications that user stories are derived from
-- **generate-questionnaire**: Create questionnaires to gather missing information for incomplete stories
-- **create-unit-tests** (developer): Validate that acceptance criteria are testable by attempting to write tests
-
-## Tips & Best Practices
-
-- Review stories early in the refinement process to allow time for improvements
-- Use review staging as discussion points in refinement sessions, not as criticism
-- Focus on testability—if you can't write a test for it, the criteria needs clarification
-- Ensure acceptance criteria are specific, measurable, and observable
-- Check that the story follows INVEST principles (Independent, Negotiable, Valuable, Estimable, Small, Testable)
-- Validate that the story includes the "who, what, why" (persona, capability, benefit)
-- Look for missing error handling, edge cases, and non-functional requirements
-- Ensure story size is appropriate—large stories may need splitting
-- Review related stories together to identify inconsistencies or gaps
-
-## Limitations
-
-- Cannot validate business value or priority—focuses on story quality and clarity
-- Does not assess technical feasibility or implementation complexity
-- Cannot determine if story is appropriately sized without team context
-- May identify issues that are acceptable trade-offs for the team's context
-- Does not replace collaborative refinement discussions with the team
-- Cannot verify that acceptance criteria match actual business needs without stakeholder input
-- Review quality depends on the completeness of the provided story content
-
----
-
-**Source**: `core/competencies/business-analyst/prompts/review-user-story.md`
+- `analyze-business-requirements` - For broader requirements analysis
+- `review-prd-spec` - For reviewing product requirement documents
