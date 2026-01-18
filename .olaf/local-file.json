@@ -1,6 +1,8 @@
 {
   "files_to_prune": [],
-  "files_to_force_replace": [],
+  "files_to_force_replace": [
+    ".olaf/team-delegation.md"
+  ],
   "folders_to_copy_from": [
     "C:\\Users\\ppaccaud\\.codeium\\windsurf\\skills\\.olaf\\data",
     "C:\\Users\\ppaccaud\\.codeium\\windsurf\\skills\\.olaf\\work",
