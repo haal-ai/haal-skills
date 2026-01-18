@@ -1,5 +1,7 @@
 # Installer
 
+This installer is for **Windsurf** only (tested with **Windsurf 1.13.9**).
+
 ## PowerShell (Windows)
 
 Run this in the destination repository folder (the repo where you want to use HAAL skills):
