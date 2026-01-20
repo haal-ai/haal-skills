@@ -9,7 +9,7 @@
     {
       "name": "session-workflow",
       "source": "./plugins/session-workflow",
-      "description": "Session carry-over and carry-on workflows"
+      "description": "Session carry-over and carry-on and challenge workflows"
     }
   ]
 }
