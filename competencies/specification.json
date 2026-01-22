@@ -1,0 +1,11 @@
+{
+  "name": "specification",
+  "description": "Specification review and transformation skills",
+  "skills": [
+    "review-human-written-spec",
+    "review-prd-spec",
+    "transform-raw-spec",
+    "improve-spec",
+    "extend-specification"
+  ]
+}

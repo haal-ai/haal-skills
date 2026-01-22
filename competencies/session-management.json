@@ -1,0 +1,10 @@
+{
+  "name": "session-management",
+  "description": "Session carry-over and context switching skills",
+  "skills": [
+    "carry-on-session",
+    "carry-over-session",
+    "stash-restart-session",
+    "switch-context"
+  ]
+}

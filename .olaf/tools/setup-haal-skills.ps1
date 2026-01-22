@@ -58,20 +58,20 @@ function Read-JsonFile([string]$Path) {
 }
 
 function Get-SkillsFromCompetencies([string[]]$CompetencyNames, [string]$ClonePath) {
-    $manifestPath = Join-Path $ClonePath "competency-manifest.json"
-    $manifest = Read-JsonFile $manifestPath
-    if ($null -eq $manifest) {
-        Write-Output "Warning: competency-manifest.json not found, skipping competency resolution"
-        return @()
-    }
+    $competenciesPath = Join-Path $ClonePath "competencies"
     
     $skills = @()
     foreach ($comp in $CompetencyNames) {
-        if ($manifest.PSObject.Properties.Name -contains $comp) {
-            $skills += $manifest.$comp
-            Write-Output "Competency '$comp': $($manifest.$comp.Count) skills"
-        } else {
-            Write-Output "Warning: Competency '$comp' not found in manifest"
+        $manifestPath = Join-Path $competenciesPath "$comp.json"
+        $manifest = Read-JsonFile $manifestPath
+        if ($null -eq $manifest) {
+            Write-Output "Warning: Competency '$comp' manifest not found, skipping"
+            continue
+        }
+        
+        if ($manifest.skills) {
+            $skills += $manifest.skills
+            Write-Output "Competency '$comp': $($manifest.skills.Count) skills"
         }
     }
     return $skills | Select-Object -Unique

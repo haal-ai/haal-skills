@@ -1,0 +1,11 @@
+{
+  "name": "prompting",
+  "description": "Prompt and skill creation skills",
+  "skills": [
+    "create-prompt",
+    "create-skill",
+    "convert-prompt-to-skill",
+    "assist-me-as-prompt-engineer",
+    "check-prompt-compliance"
+  ]
+}

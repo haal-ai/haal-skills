@@ -1,0 +1,10 @@
+{
+  "name": "documentation",
+  "description": "Documentation generation skills",
+  "skills": [
+    "generate-jsdoc",
+    "generate-tech-spec-from-code",
+    "generate-code-mapper-docs",
+    "run-redocumentation"
+  ]
+}

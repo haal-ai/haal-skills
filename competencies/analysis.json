@@ -1,0 +1,12 @@
+{
+  "name": "analysis",
+  "description": "Code and API analysis skills",
+  "skills": [
+    "analyze-api-consistency",
+    "analyze-business-requirements",
+    "analyze-changelog-and-report",
+    "analyze-db-api-fit",
+    "analyze-function-complexity",
+    "analyze-spec-vs-code"
+  ]
+}
