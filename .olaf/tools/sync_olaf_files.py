@@ -10,6 +10,7 @@ Configuration is stored in ~/.codeium/windsurf/skills/.olaf/local-file.json
 """
 
 import json
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -24,6 +25,11 @@ def get_config_path() -> Path:
 
 def get_source_base() -> Path:
     """Get the source base directory."""
+    # Check for environment variable override (used by setup script)
+    env_source = os.environ.get("HAAL_SKILLS_SOURCE")
+    if env_source:
+        return Path(env_source)
+    
     home = Path.home()
     return home / ".codeium/windsurf/skills"
 

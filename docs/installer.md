@@ -1,53 +1,105 @@
 # Installer
 
-This installer is for **Windsurf** only (tested with **Windsurf 1.13.9**).
+This installer supports **Windsurf**, **Claude**, **GitHub Copilot**, and **Kiro**.
 
-## PowerShell (Windows)
+## Quick Start
 
-Run this in the destination repository folder (the repo where you want to use HAAL skills):
+### PowerShell (Windows)
+
+Run in your target repository folder:
 
 ```powershell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.ps1" -OutFile "setup-haal-skills.ps1"; .\setup-haal-skills.ps1
 ```
 
-## Bash (macOS / Linux)
-
-Run this in the destination repository folder (the repo where you want to use HAAL skills):
+### Bash (macOS / Linux)
 
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.sh" -o setup-haal-skills.sh \
   && bash setup-haal-skills.sh
 ```
 
-### Bash on Windows (Git Bash)
+## Options
 
-If you see an error like `CRYPT_E_NO_REVOCATION_CHECK`, Git Bash `curl` is failing TLS revocation checks on Windows.
+### Install a Collection
 
-Use Windows `curl.exe` with `--ssl-no-revoke`:
+Collections are predefined sets of competencies:
+
+```powershell
+.\setup-haal-skills.ps1 -Collection "developer"
+```
+
+```bash
+bash setup-haal-skills.sh --collection developer
+```
+
+Available collections:
+- `starter` - Basic skills for getting started
+- `developer` - Full developer toolkit
+- `architect` - Architecture and specification skills
+- `full` - All skills
+
+### Install Specific Competencies
+
+```powershell
+.\setup-haal-skills.ps1 -Competency "code-review","documentation"
+```
+
+```bash
+bash setup-haal-skills.sh --competency code-review,documentation
+```
+
+Available competencies:
+- `code-review` - Code review and diff analysis
+- `documentation` - JSDoc, tech specs, code mapping
+- `git-workflow` - Git commits, merges, PR workflows
+- `specification` - Spec review and transformation
+- `scaffolding` - API and frontend scaffolding
+- `session-management` - Session carry-over and context switching
+- `prompting` - Prompt and skill creation
+- `analysis` - Code and API analysis
+
+### Combine Collection and Competencies
+
+```powershell
+.\setup-haal-skills.ps1 -Collection "starter" -Competency "scaffolding"
+```
+
+```bash
+bash setup-haal-skills.sh --collection starter --competency scaffolding
+```
+
+### Install All Skills (Default)
+
+If no collection or competency is specified, all skills are installed.
+
+## What It Does
+
+1. Clones the `haal-skills` repository to a temp folder
+2. Prunes deprecated skills from all destinations
+3. Resolves skills from collection/competency selection
+4. Copies selected skills to all IDE skill folders:
+   - `~/.codeium/windsurf/skills/`
+   - `~/.claude/skills/`
+   - `~/.github/skills/`
+   - `~/.kiro/skills/`
+5. Syncs `.olaf/` and `.windsurf/` files to your repository
+
+## Troubleshooting
+
+### Git Bash on Windows
+
+If you see `CRYPT_E_NO_REVOCATION_CHECK`, use:
 
 ```bash
 curl.exe -fsSL --ssl-no-revoke "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.sh" -o setup-haal-skills.sh \
   && bash setup-haal-skills.sh
 ```
 
-Or download with PowerShell, then run with Bash:
+### Network Errors
 
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.sh" -OutFile "setup-haal-skills.sh"
-```
+Verify you can access `raw.githubusercontent.com`.
 
-## What it does
+### Permission Errors
 
-- Downloads the installer script (`setup-haal-skills.ps1`) from the `haal-ai/haal-skills` repository.
-- Executes the script in your current folder.
-
-## Recommended usage
-
-- Make sure you are in the repository you want to install into.
-- If your execution policy blocks scripts, you may need to allow running local scripts for your session.
-- If you want to inspect the script first, run only the download part, open the file, then execute it.
-
-## Troubleshooting
-
-- If you see network errors, verify you can access `raw.githubusercontent.com`.
-- If you see permission errors, try running PowerShell as Administrator.
+Try running PowerShell as Administrator.

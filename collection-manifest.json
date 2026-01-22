@@ -1,0 +1,30 @@
+{
+  "starter": [
+    "code-review",
+    "git-workflow",
+    "session-management"
+  ],
+  "developer": [
+    "code-review",
+    "git-workflow",
+    "documentation",
+    "session-management",
+    "analysis"
+  ],
+  "architect": [
+    "code-review",
+    "specification",
+    "scaffolding",
+    "analysis"
+  ],
+  "full": [
+    "code-review",
+    "documentation",
+    "git-workflow",
+    "specification",
+    "scaffolding",
+    "session-management",
+    "prompting",
+    "analysis"
+  ]
+}

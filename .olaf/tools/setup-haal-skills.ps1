@@ -1,137 +1,271 @@
-
 param(
     [string]$RepoPath = "",
     [string]$SkillsRepoUrl = "https://github.com/haal-ai/haal-skills",
     [string]$SkillsBranch = "main",
-    [int]$CloneDepth = 1
+    [string[]]$Competency = @(),
+    [string]$Collection = ""
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# Fixed temp folders
+$TempCloneFolder = Join-Path $env:TEMP "haal-skills-clone"
+$TempStagingFolder = Join-Path $env:TEMP "haal-skills-staging"
+
+# Destination folders
+$Destinations = @(
+    (Join-Path $env:USERPROFILE ".codeium\windsurf\skills"),
+    (Join-Path $env:USERPROFILE ".claude\skills"),
+    (Join-Path $env:USERPROFILE ".github\skills"),
+    (Join-Path $env:USERPROFILE ".kiro\skills")
+)
+
 function Require-Command([string]$Name) {
     $cmd = Get-Command $Name -ErrorAction SilentlyContinue
     if ($null -eq $cmd) {
-        throw "Required command '$Name' was not found on PATH. Please install it and restart your terminal."
+        throw "Required command '$Name' was not found on PATH."
     }
     return $cmd
 }
-
- function Normalize-GitRemoteUrl([string]$Url) {
-     if ([string]::IsNullOrWhiteSpace($Url)) { return "" }
-     $u = $Url.Trim()
-     while ($u.EndsWith('/')) { $u = $u.Substring(0, $u.Length - 1) }
-     return $u
- }
 
 function Resolve-RepoRoot([string]$Path) {
     if (![string]::IsNullOrWhiteSpace($Path)) {
         return (Resolve-Path -LiteralPath $Path).Path
     }
-
     try {
         $root = (& git rev-parse --show-toplevel 2>$null)
         if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($root)) {
             return $root.Trim()
         }
-    } catch {
-        # ignore
-    }
-
+    } catch { }
     return (Get-Location).Path
 }
 
+function Clean-Folder([string]$Path) {
+    if (Test-Path -LiteralPath $Path) {
+        Remove-Item -LiteralPath $Path -Recurse -Force
+        Write-Output "Cleaned: $Path"
+    }
+    New-Item -ItemType Directory -Path $Path -Force | Out-Null
+}
+
+function Read-JsonFile([string]$Path) {
+    if (!(Test-Path -LiteralPath $Path)) {
+        return $null
+    }
+    return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+}
+
+function Get-SkillsFromCompetencies([string[]]$CompetencyNames, [string]$ClonePath) {
+    $manifestPath = Join-Path $ClonePath "competency-manifest.json"
+    $manifest = Read-JsonFile $manifestPath
+    if ($null -eq $manifest) {
+        Write-Output "Warning: competency-manifest.json not found, skipping competency resolution"
+        return @()
+    }
+    
+    $skills = @()
+    foreach ($comp in $CompetencyNames) {
+        if ($manifest.PSObject.Properties.Name -contains $comp) {
+            $skills += $manifest.$comp
+            Write-Output "Competency '$comp': $($manifest.$comp.Count) skills"
+        } else {
+            Write-Output "Warning: Competency '$comp' not found in manifest"
+        }
+    }
+    return $skills | Select-Object -Unique
+}
+
+function Get-CompetenciesFromCollection([string]$CollectionName, [string]$ClonePath) {
+    $manifestPath = Join-Path $ClonePath "collection-manifest.json"
+    $manifest = Read-JsonFile $manifestPath
+    if ($null -eq $manifest) {
+        Write-Output "Warning: collection-manifest.json not found, skipping collection resolution"
+        return @()
+    }
+    
+    if ($manifest.PSObject.Properties.Name -contains $CollectionName) {
+        $competencies = $manifest.$CollectionName
+        Write-Output "Collection '$CollectionName': $($competencies.Count) competencies"
+        return $competencies
+    } else {
+        Write-Output "Warning: Collection '$CollectionName' not found in manifest"
+        return @()
+    }
+}
+
+function Get-PruneList([string]$ClonePath) {
+    $prunePath = Join-Path $ClonePath ".olaf\prune-skills.txt"
+    if (!(Test-Path -LiteralPath $prunePath)) {
+        return @()
+    }
+    
+    $lines = Get-Content -LiteralPath $prunePath
+    $skills = @()
+    foreach ($line in $lines) {
+        $trimmed = $line.Trim()
+        if ($trimmed -and !$trimmed.StartsWith('#')) {
+            $skills += $trimmed
+        }
+    }
+    return $skills
+}
+
+function Get-AllSkills([string]$ClonePath) {
+    $skillsPath = Join-Path $ClonePath "skills"
+    if (!(Test-Path -LiteralPath $skillsPath)) {
+        Write-Output "Warning: skills folder not found"
+        return @()
+    }
+    
+    $folders = Get-ChildItem -LiteralPath $skillsPath -Directory
+    return $folders | ForEach-Object { $_.Name }
+}
+
+function Prune-Skills([string[]]$SkillNames, [string[]]$Destinations) {
+    foreach ($dest in $Destinations) {
+        foreach ($skill in $SkillNames) {
+            $skillPath = Join-Path $dest $skill
+            if (Test-Path -LiteralPath $skillPath) {
+                Remove-Item -LiteralPath $skillPath -Recurse -Force
+                Write-Output "Pruned: $skillPath"
+            }
+        }
+    }
+}
+
+function Copy-SkillsToStaging([string[]]$SkillNames, [string]$ClonePath, [string]$StagingPath) {
+    $skillsSource = Join-Path $ClonePath "skills"
+    
+    foreach ($skill in $SkillNames) {
+        $sourcePath = Join-Path $skillsSource $skill
+        $destPath = Join-Path $StagingPath $skill
+        
+        if (Test-Path -LiteralPath $sourcePath) {
+            if (Test-Path -LiteralPath $destPath) {
+                Remove-Item -LiteralPath $destPath -Recurse -Force
+            }
+            Copy-Item -LiteralPath $sourcePath -Destination $destPath -Recurse
+            Write-Output "Staged: $skill"
+        } else {
+            Write-Output "Warning: Skill '$skill' not found in source"
+        }
+    }
+}
+
+function Deploy-StagingToDestinations([string]$StagingPath, [string[]]$Destinations) {
+    $stagedSkills = Get-ChildItem -LiteralPath $StagingPath -Directory -ErrorAction SilentlyContinue
+    
+    foreach ($dest in $Destinations) {
+        # Ensure destination exists
+        if (!(Test-Path -LiteralPath $dest)) {
+            New-Item -ItemType Directory -Path $dest -Force | Out-Null
+        }
+        
+        foreach ($skill in $stagedSkills) {
+            $destSkillPath = Join-Path $dest $skill.Name
+            
+            # Delete existing skill folder first
+            if (Test-Path -LiteralPath $destSkillPath) {
+                Remove-Item -LiteralPath $destSkillPath -Recurse -Force
+            }
+            
+            # Copy new version
+            Copy-Item -LiteralPath $skill.FullName -Destination $destSkillPath -Recurse
+        }
+        
+        Write-Output "Deployed $($stagedSkills.Count) skills to: $dest"
+    }
+}
+
+# Main execution
 $null = Require-Command 'git'
 $null = Require-Command 'python'
 
 $repoRoot = Resolve-RepoRoot $RepoPath
-$windsurfSkillsPath = Join-Path $env:USERPROFILE ".codeium\windsurf\skills"
-$syncScript = Join-Path $windsurfSkillsPath ".olaf\tools\sync_olaf_files.py"
 
 Write-Output "=== HAAL Skills Setup ==="
-Write-Output "Repo:   $repoRoot"
-Write-Output "Skills: $windsurfSkillsPath"
-Write-Output "Depth:  $CloneDepth"
+Write-Output "Repo: $repoRoot"
+Write-Output "Collection: $(if ($Collection) { $Collection } else { '(none)' })"
+Write-Output "Competencies: $(if ($Competency.Count -gt 0) { $Competency -join ', ' } else { '(none)' })"
+Write-Output ""
 
-if (!(Test-Path -LiteralPath (Join-Path $repoRoot '.git'))) {
-    throw "Target path is not a git repository: $repoRoot"
+# Step 1: Clean and clone to temp folder
+Write-Output "Step 1: Cloning to temp folder..."
+Clean-Folder $TempCloneFolder
+& git clone --depth 1 --branch $SkillsBranch $SkillsRepoUrl $TempCloneFolder
+Write-Output ""
+
+# Step 2: Read prune list and prune skills from destinations
+Write-Output "Step 2: Pruning deprecated skills..."
+$pruneList = Get-PruneList $TempCloneFolder
+if ($pruneList.Count -gt 0) {
+    Write-Output "Skills to prune: $($pruneList -join ', ')"
+    Prune-Skills $pruneList $Destinations
+} else {
+    Write-Output "No skills to prune"
+}
+Write-Output ""
+
+# Step 3: Resolve skills to install
+Write-Output "Step 3: Resolving skills..."
+$allCompetencies = @()
+
+# From collection
+if ($Collection) {
+    $collectionCompetencies = Get-CompetenciesFromCollection $Collection $TempCloneFolder
+    $allCompetencies += $collectionCompetencies
 }
 
-# Step 1: Ensure skills directory parent exists
-$skillsParent = Split-Path -Parent $windsurfSkillsPath
-if (!(Test-Path -LiteralPath $skillsParent)) {
-    New-Item -ItemType Directory -Path $skillsParent -Force | Out-Null
+# From explicit competencies
+if ($Competency.Count -gt 0) {
+    $allCompetencies += $Competency
 }
 
-# Step 2: Clone/update haal-skills repo into windsurf skills directory
-if (Test-Path -LiteralPath (Join-Path $windsurfSkillsPath '.git')) {
-    Push-Location $windsurfSkillsPath
+$allCompetencies = $allCompetencies | Select-Object -Unique
+
+# Get skills from competencies
+$skillsToInstall = @()
+if ($allCompetencies.Count -gt 0) {
+    $skillsToInstall = Get-SkillsFromCompetencies $allCompetencies $TempCloneFolder
+} else {
+    # No selection = all skills
+    Write-Output "No collection/competency specified, installing all skills"
+    $skillsToInstall = Get-AllSkills $TempCloneFolder
+}
+
+Write-Output "Skills to install: $($skillsToInstall.Count)"
+Write-Output ""
+
+# Step 4: Clean staging and copy selected skills
+Write-Output "Step 4: Staging skills..."
+Clean-Folder $TempStagingFolder
+Copy-SkillsToStaging $skillsToInstall $TempCloneFolder $TempStagingFolder
+Write-Output ""
+
+# Step 5: Deploy to all destinations
+Write-Output "Step 5: Deploying to destinations..."
+Deploy-StagingToDestinations $TempStagingFolder $Destinations
+Write-Output ""
+
+# Step 6: Run sync script for .olaf files
+Write-Output "Step 6: Syncing .olaf files..."
+$syncScript = Join-Path $TempCloneFolder ".olaf\tools\sync_olaf_files.py"
+if (Test-Path -LiteralPath $syncScript) {
+    Push-Location $repoRoot
     try {
-        $remote = (& git remote get-url origin 2>$null)
-        if ($LASTEXITCODE -ne 0) { $remote = "" }
-        $remoteNorm = Normalize-GitRemoteUrl $remote
-        $expectedNorm = Normalize-GitRemoteUrl $SkillsRepoUrl
-        if ($remoteNorm -ne $expectedNorm) {
-            throw "Existing skills folder has unexpected git remote: '$remote' (expected '$SkillsRepoUrl')."
-        }
-
-        Write-Output "Updating existing haal-skills checkout..."
-        if ($CloneDepth -gt 0) {
-            & git fetch --depth $CloneDepth origin $SkillsBranch
-        } else {
-            & git fetch origin
-        }
-        & git checkout $SkillsBranch | Out-Null
-        & git reset --hard "origin/$SkillsBranch" | Out-Null
+        # Update the sync script to use temp clone as source
+        $env:HAAL_SKILLS_SOURCE = $TempCloneFolder
+        & python $syncScript
     }
     finally {
+        Remove-Item Env:\HAAL_SKILLS_SOURCE -ErrorAction SilentlyContinue
         Pop-Location
     }
 } else {
-    if (!(Test-Path -LiteralPath $windsurfSkillsPath)) {
-        Write-Output "Creating skills folder: $windsurfSkillsPath"
-        New-Item -ItemType Directory -Path $windsurfSkillsPath -Force | Out-Null
-    } else {
-        # Folder exists but is not a git repo
-        $itemCount = (Get-ChildItem -LiteralPath $windsurfSkillsPath -Force -ErrorAction SilentlyContinue | Measure-Object).Count
-        if ($itemCount -gt 0) {
-            throw "Cannot install into '$windsurfSkillsPath' because it exists, is not a git repo, and is not empty (contains $itemCount items)."
-        }
-    }
-
-    Write-Output "Cloning haal-skills into $windsurfSkillsPath ..."
-    if ($CloneDepth -gt 0) {
-        & git clone --depth $CloneDepth --branch $SkillsBranch --single-branch $SkillsRepoUrl $windsurfSkillsPath
-    } else {
-        & git clone --branch $SkillsBranch $SkillsRepoUrl $windsurfSkillsPath
-    }
+    Write-Output "Warning: sync script not found"
 }
-
-# Step 3: Run OLAF sync script (copies into current repo)
-if (!(Test-Path -LiteralPath $syncScript)) {
-    throw "Sync script not found: $syncScript"
-}
-
-Write-Output "Running OLAF sync script..."
-Push-Location $repoRoot
-try {
-    & python $syncScript
-}
-finally {
-    Pop-Location
-}
-
-# Step 4: Basic verification
-$envValidationFile = Join-Path $repoRoot ".windsurf\workflows\environment-validation.md"
-$olafDataDir = Join-Path $repoRoot ".olaf\data"
-
-Write-Output "Verification:"
-Write-Output ("- environment-validation.md: " + (Test-Path -LiteralPath $envValidationFile))
-Write-Output ("- .olaf/data exists: " + (Test-Path -LiteralPath $olafDataDir))
-
-if (Test-Path -LiteralPath $olafDataDir) {
-    $fileCount = (Get-ChildItem -Path $olafDataDir -Recurse -File -ErrorAction SilentlyContinue | Measure-Object).Count
-    Write-Output "- .olaf/data file count: $fileCount"
-}
+Write-Output ""
 
 Write-Output "=== Done ==="
