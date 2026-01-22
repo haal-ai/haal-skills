@@ -1,6 +1,8 @@
 ---
 name: challenge-me
 description: Interactive ideation engine that challenges ideas through iterative cycles with research-backed insights and file generation
+disable-model-invocation: true
+argument-hint: [idea_topic]
 license: Apache-2.0
 metadata:
   olaf_tags: [ideation, challenge, research, collaboration, cyclic]
@@ -11,11 +13,7 @@ metadata:
   provider: Haal AI
 ---
 
-<olaf>
-
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
-
-**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 ## Input Parameters
 You MUST present these parameters as a numbered list and collect user responses:
@@ -202,3 +200,19 @@ You WILL handle these scenarios:
 - ALWAYS display cycle progress and continuation options
 - ALWAYS use loop control for ideation cycles
 - ALWAYS follow HAAL communication principles (concise, direct)
+
+## Supporting Files
+
+For detailed task execution, see:
+- [tasks/collect-parameters.md](tasks/collect-parameters.md) - Parameter collection logic
+- [tasks/initialize-session.md](tasks/initialize-session.md) - Session setup
+- [tasks/setup-research-sources.md](tasks/setup-research-sources.md) - Research configuration
+- [tasks/execute-ideation-cycle.md](tasks/execute-ideation-cycle.md) - Core cycle execution
+- [tasks/update-trajectory.md](tasks/update-trajectory.md) - Tracking evolution
+- [tasks/generate-deliverables.md](tasks/generate-deliverables.md) - Final output generation
+
+For output templates, see:
+- [templates/think-tank-think-template.md](templates/think-tank-think-template.md) - think.md format
+- [templates/think-tank-path-template.md](templates/think-tank-path-template.md) - path.md format
+- [templates/think-tank-sources-template.md](templates/think-tank-sources-template.md) - sources.md format
+- [templates/think-tank-reco-template.md](templates/think-tank-reco-template.md) - reco.md format

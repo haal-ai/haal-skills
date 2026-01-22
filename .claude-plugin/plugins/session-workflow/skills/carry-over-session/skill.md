@@ -1,6 +1,7 @@
 ---
 name: carry-over-session
 description: Create a simple carry-over note with next prompt and files needed for session continuation
+disable-model-invocation: true
 license: Apache-2.0
 metadata:
   olaf_tags: [session, carry-over, continuation, workflow]
@@ -10,11 +11,7 @@ metadata:
   provider: Haal AI
 ---
 
-<olaf>
-
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
-
-**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 # Create Carry-Over Session Note
 

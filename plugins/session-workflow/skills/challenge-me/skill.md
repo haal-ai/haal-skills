@@ -11,11 +11,7 @@ metadata:
   provider: Haal AI
 ---
 
-<olaf>
-
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
-
-**MANDATORY**: before doing anything else, read fully the `.olaf/team-delegation.md` file and apply its requirements strictly.
 
 ## Input Parameters
 You MUST present these parameters as a numbered list and collect user responses:
@@ -39,10 +35,8 @@ You MUST present these parameters as a numbered list and collect user responses:
 6. true
 ```
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- Select Act protocol for iterative cycling with user control
+## User Interaction
+- Iterative cycling with user control - execute directly
 
 ## Process
 

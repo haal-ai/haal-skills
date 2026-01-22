@@ -24,7 +24,7 @@ Brief description: Start the interactive ideation workflow by invoking the chall
 3. Prepare to share your initial ideas and thoughts
 
 **System Response:**
-The system will prompt for your subject and initial thoughts, then immediately begin challenging and exploring your ideas using Act protocol.
+The system will prompt for your subject and initial thoughts, then immediately begin challenging and exploring your ideas.
 
 ### Step 2: Provide Initial Ideas and Context
 
