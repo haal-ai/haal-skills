@@ -1,0 +1,5 @@
+# List verified (curated) skills (one per line)
+# Notes can be added in parentheses.
+# Example:
+# create-skill (example skill)
+

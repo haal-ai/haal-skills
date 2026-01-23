@@ -8,10 +8,8 @@ This repository is part of the [HAAL AI](../) organization. See the [main README
 
 ### Related Repositories
 
-- **[`haal-cli`](../haal-cli)** - Command-line interface for HAAL management
-- **[`haal-skills-sdk`](../haal-skills-sdk)** - Enhanced SDK with HAAL-specific extensions
-- **[`haal-ide`](../haal-ide)** - IDE integration for seamless development
-- **[`haal-skills-agentic-aws`](../haal-skills-agentic-aws)** - AWS integration for cloud deployment
+- **[`haal-ide`](../haal-ide)** - OLAF  based HAAL (now deprecated in favor of Skills)
+- **[`haal-skills-agentic-aws`](../haal-skills-agentic-aws)** - using AWS Strands based Agents with HAAL Skills
 
 ## 🧩 What are Agent Skills?
 
@@ -21,7 +19,7 @@ This repository is part of the [HAAL AI](../) organization. See the [main README
 
 - Core skill definitions following Anthropic's Agent Skills format
 - HAAL-specific skill templates and examples
-- Integration with HAAL SDK and CLI tools
+- Install scripts to deploy skills to supported agent platforms
 - Standardized skill structure for consistency
 
 ## 🚀 Quick Start
@@ -31,11 +29,12 @@ This repository is part of the [HAAL AI](../) organization. See the [main README
 git clone https://github.com/haal-ai/haal-skills.git
 cd haal-skills
 
-# Explore example skills
-ls examples/
+# Browse skills
+ls skills/
 
-# Use with HAAL CLI
-haal skill install examples/basic-skill
+# Install a collection of skills to a platform (example: "basic" to Kiro)
+# Options: --platform all|kiro|claude|windsurf|github
+bash .olaf/tools/setup-haal-skills.sh --collection basic --platform kiro --clean
 ```
 
 ## 📚 Documentation (GitHub Pages)
