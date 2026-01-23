@@ -23,12 +23,14 @@ create-skill
 deepen-tech-spec-developer
 esdi-chain
 evaluate-prompt-for-adoption
+execute-angular-migration
 generate-commits-from-changelog
 generate-design
 generate-implementation-plan
 generate-orchestrator
 get-bms-expertise
 onboard-me
+plan-angular-migration
 research-and-report
 review-code
 review-diff
