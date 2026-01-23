@@ -84,7 +84,7 @@ def _normalize_skill_id(raw: str) -> str:
     return raw.strip().lower().replace(' ', '-').replace('_', '-')
 
 
-def _build_verified_skills_homepage(
+def _build_verified_skills_page(
     repo_root: Path,
     generated_root: Path,
     skills: list[SkillDocs],
@@ -126,9 +126,9 @@ def _build_verified_skills_homepage(
 
         links: list[str] = []
         if description_path.is_file():
-            links.append(f"[Description](skills/{canonical}/description.md)")
+            links.append(f"[Description](./{canonical}/description.md)")
         if tutorial_path.is_file():
-            links.append(f"[Tutorial](skills/{canonical}/tutorial.md)")
+            links.append(f"[Tutorial](./{canonical}/tutorial.md)")
 
         note_part = f" — _{note}_" if note else ""
 
@@ -147,7 +147,7 @@ def _build_verified_skills_homepage(
         lines.append('Some entries could not be linked because a published `docs/description.md` or `docs/tutorial.md` was not found for them.')
         lines.append('')
 
-    (repo_root / 'docs' / 'index.md').write_text('\n'.join(lines), encoding='utf-8')
+    (generated_root / 'verified.md').write_text('\n'.join(lines), encoding='utf-8')
 
 
 def _verified_alias_map() -> dict[str, str]:
@@ -478,8 +478,8 @@ def build_docs_site(repo_root: Path) -> None:
 
     (generated_root / 'index.md').write_text('\n'.join(lines), encoding='utf-8')
 
-    # Generate homepage from verified-skills.txt (if present)
-    _build_verified_skills_homepage(repo_root, generated_root, skills)
+    # Generate verified skills page from verified-skills.txt (if present)
+    _build_verified_skills_page(repo_root, generated_root, skills)
 
     # Generate skills catalog page (Stable / Curated / To be curated)
     _build_skills_catalog_page(repo_root, generated_root, skills)
