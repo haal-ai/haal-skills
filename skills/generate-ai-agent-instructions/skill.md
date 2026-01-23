@@ -4,7 +4,6 @@ description: Analyze codebase to generate platform-agnostic AI agent instruction
 license: Apache-2.0
 metadata:
   olaf_tags: [ai-agents, codebase-analysis, documentation, platform-agnostic, onboarding]
-  olaf_protocol: Propose-Confirm-Act
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed

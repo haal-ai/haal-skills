@@ -4,7 +4,6 @@ description: Generate orchestrator skills (skills that orchestrate other skills)
 license: Apache-2.0
 metadata:
   olaf_tags: [orchestrator, workflow, orchestration, automation, code-generation, templates]
-  olaf_protocol: Propose-Confirm-Act
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide

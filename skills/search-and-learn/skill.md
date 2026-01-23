@@ -4,7 +4,6 @@ description: Master coordinator for systematic information discovery, knowledge 
 license: Apache-2.0
 metadata:
   olaf_tags: [research, learning, information, knowledge, search, discovery, systematic, master-chain]
-  olaf_protocol: Propose-Act
 ---
 
 # Search and Learn - Master Chain Coordinator

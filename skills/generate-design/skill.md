@@ -4,7 +4,6 @@ description: Master coordinator for transforming EARS specification into layered
 license: Apache-2.0
 metadata:
   olaf_tags: [design, architecture, specification, layered-design, master-chain]
-  olaf_protocol: Propose-Act
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed

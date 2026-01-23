@@ -4,7 +4,6 @@ description: Intelligent git add and commit with dependency chasing and user app
 license: Apache-2.0
 metadata:
   olaf_tags: [developer-workflow, git-operations, version-control]
-  olaf_protocol: Act
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed

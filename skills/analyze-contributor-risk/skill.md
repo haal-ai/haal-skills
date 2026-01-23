@@ -4,7 +4,6 @@ description: Analyze bus factor, knowledge concentration, and contributor risk p
 license: Apache-2.0
 metadata:
   olaf_tags: [contributors, bus-factor, risk, knowledge-concentration, team-health]
-  olaf_protocol: Act
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide

@@ -4,7 +4,6 @@ description: Master coordinator for comprehensive code review of git diffs using
 license: Apache-2.0
 metadata:
   olaf_tags: [code-review, git, diff, quality, standards, workflow, master-chain]
-  olaf_protocol: Propose-Act
 ---
 
 # Review Diff - Master Chain Coordinator

@@ -4,7 +4,6 @@ description: Load BMS expert persona with deep C/C++ build system knowledge and 
 license: Apache-2.0
 metadata:
   olaf_tags: [bms, build-system, c-cpp, expertise, persona, amadeus]
-  olaf_protocol: Act
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed

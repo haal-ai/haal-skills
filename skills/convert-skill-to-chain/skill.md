@@ -4,7 +4,6 @@ description: Master coordinator for converting existing OLAF skills to the maste
 license: Apache-2.0
 metadata:
   olaf_tags: [skill-conversion, refactoring, master-chain, automation]
-  olaf_protocol: Propose-Act
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide

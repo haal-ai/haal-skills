@@ -3,7 +3,6 @@ name: generate-external-docs
 description: Generates external documentation files (index.md, architecture.md, control-flow.md, use-cases.md, mkdocs.yml) using AWS Strands multi-agent system. Runs in spawn mode to allow parallel work. Output defaults to .olaf/data/product/documentations/<repo>/<folder>.
 license: Apache-2.0
 metadata:
-  olaf_protocol: "\"Act\""
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
