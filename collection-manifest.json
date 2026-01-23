@@ -7,7 +7,7 @@
     "business-analyst",
     "developer",
     "git-assistant",
-    "olaf-base-skills",
+    "base-skills",
     "project-manager",
     "prompt-engineer",
     "researcher",
@@ -19,7 +19,7 @@
     "developer",
     "git-assistant",
     "session-manager",
-    "olaf-base-skills"
+    "base-skills"
   ],
   "techie": [
     "developer",
@@ -45,6 +45,6 @@
     "session-manager",
     "prompt-engineer",
     "technical-writer",
-    "olaf-base-skills"
+    "base-skills"
   ]
 }
