@@ -136,17 +136,8 @@ Write-Host "=== HAAL Skills Multi-Repo Setup ===" -ForegroundColor Cyan
 Write-Host ""
 
 # Determine seed
-if ([string]::IsNullOrWhiteSpace($Seed)) {
-    # Try to get from current repo's origin
-    try {
-        $originUrl = & git remote get-url origin 2>$null
-        if ($LASTEXITCODE -eq 0 -and $originUrl) {
-            $Seed = $originUrl -replace '^https://github\.com/', '' -replace '\.git$', ''
-            $Seed = "$Seed`:main"
-        }
-    } catch { }
-}
-
+# If not specified, always use the canonical haal-ai/haal-skills repo.
+# Note: Try-CloneRepo automatically falls back to master when main is unavailable.
 if ([string]::IsNullOrWhiteSpace($Seed)) {
     $Seed = "haal-ai/haal-skills:main"
 }

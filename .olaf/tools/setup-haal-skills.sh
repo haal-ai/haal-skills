@@ -176,14 +176,8 @@ echo "=== HAAL Skills Multi-Repo Setup ==="
 echo ""
 
 # Determine seed
-if [[ -z "$SEED" ]]; then
-    origin_url=$(git remote get-url origin 2>/dev/null || true)
-    if [[ -n "$origin_url" ]]; then
-        SEED=$(echo "$origin_url" | sed -E 's|https://github\.com/||' | sed 's|\.git$||')
-        SEED="$SEED:main"
-    fi
-fi
-
+# If not specified, always use the canonical haal-ai/haal-skills repo.
+# Note: try_clone_repo automatically falls back to master when main is unavailable.
 if [[ -z "$SEED" ]]; then
     SEED="haal-ai/haal-skills:main"
 fi
