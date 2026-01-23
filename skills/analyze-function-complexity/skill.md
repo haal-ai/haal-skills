@@ -15,16 +15,18 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **function_name**: string - Name of the function to analyze (REQUIRED)
-- **file_path**: string - Path to the file containing the function (OPTIONAL)
-- **language**: string - Programming language (auto-detected if file_path provided) (OPTIONAL)
-- **context**: string - Additional context about the function's purpose (OPTIONAL)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **function_name**: string - Name of the function to analyze (REQUIRED)
+2. **file_path**: string - Path to the file containing the function (OPTIONAL)
+3. **language**: string - Programming language (auto-detected if file_path provided) (OPTIONAL)
+4. **context**: string - Additional context about the function's purpose (OPTIONAL)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating analysis files
+- Present options as numbered lists for easy selection
 - Select appropriate protocol based on operation risk and impact
+- Provide clear progress updates at each major step
 
 ## Process
 

@@ -13,20 +13,19 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **ears_spec_path**: string - Path to the decision-aligned EARS spec (Step 2) (REQUIRED)
-- **code_roots**: string[] - One or more root folders to scan (e.g., ["scripts/olaf", "vscode-extension/src"]) (REQUIRED)
-- **languages**: string[] - Languages of interest (e.g., ["go", "ts", "md"]) (OPTIONAL)
-- **output_folder**: string - Folder to write staging (e.g., `spec-<channel>-<model>` or `staging`) (REQUIRED)
-- **strict_template_compliance**: boolean - Enforce template structure (default: true) (OPTIONAL)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **ears_spec_path**: string - Path to the decision-aligned EARS spec (Step 2) (REQUIRED)
+2. **code_roots**: string[] - One or more root folders to scan (e.g., ["scripts/olaf", "vscode-extension/src"]) (REQUIRED)
+3. **languages**: string[] - Languages of interest (e.g., ["go", "ts", "md"]) (OPTIONAL)
+4. **output_folder**: string - Folder to write staging (e.g., `spec-<channel>-<model>` or `staging`) (REQUIRED)
+5. **strict_template_compliance**: boolean - Enforce template structure (default: true) (OPTIONAL)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- **Propose-Act**: For each phase, follow Propose → Act → Confirm
-- Select appropriate protocol based on operation risk and impact
-- Propose: Outline the structure using the template + which tools/scans you will run
-- Act: Generate the output file with fresh timestamp in output_folder
-- Confirm: Summarize outcomes and list any open questions
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before proceeding to each phase
+- Present options as numbered lists for easy selection
+- Use **Propose-Act** protocol: Propose → Act → Confirm for each phase
+- Provide clear progress updates at each major step
 
 ## Process
 

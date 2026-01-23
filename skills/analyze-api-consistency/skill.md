@@ -10,34 +10,31 @@ metadata:
   provider: Haal AI
 ---
 
-if you are in need to get the date and  time, use time tools, fallback to shell command if needed
+If you are in need to get the date and time, you MUST use time tools, fallback to shell command if needed
 
-# Analyze API Consistency with Code-Mapper
+## Input Parameters
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **project_path**: string - Absolute path or workspace-root-relative path to the repository under analysis (REQUIRED)
+2. **code_mapper_path**: string - Path to the OLAF code-mapper scripts relative to workspace root (OPTIONAL - default: `scripts/code-mapper`)
+3. **modules**: string[] - One or more target modules/packages to analyze for API consistency (REQUIRED)
+4. **output_location**: string - Target output location if different from default (OPTIONAL - default: `.olaf/work/staging/code-mapper/<repo-name>/`)
 
-You WILL act as a workflow skill that runs code-mapper on a target repository using FULL foundation analysis and generates an API consistency report for selected modules, using the `templates/api-consistency-analysis-structure.md` template.
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before running code-mapper or saving reports
+- Present options as numbered lists for easy selection
+- Provide clear progress updates at each major step
+- Confirm whether to reuse or rerun foundation analysis
 
-## Goal
+## Process
 
-You WILL help the user:
-- Run full code-mapper foundation analysis on a target repository (NOT foundation-lite).
-- Use the code-map output to extract complete public API signatures.
-- Analyze naming, parameter, and return-pattern consistency across a module/package.
-- Produce a structured API consistency report following `templates/api-consistency-analysis-structure.md`.
-
-## Workflow
-
-### 1. Collect Inputs
-
-You MUST ask the user for:
-- `project_path`: absolute path or **workspace-root–relative** path to the repository under analysis.
-- `code_mapper_path`: path to the OLAF code-mapper scripts **relative to the workspace root**. The default is `scripts/code-mapper`.
-- Optional: target output location if different from the default `.olaf/work/staging/code-mapper/<repo-name>/` **under the workspace root**.
-- `modules`: one or more target modules/packages (language-appropriate notion, e.g. Go packages, Python modules, Java packages) to analyze for API consistency.
-
-You MUST validate that:
-- `project_path` is non-empty and clearly identifies a directory (absolute or workspace-root–relative).
-- `code_mapper_path` is non-empty.
-- At least one target module/package is specified.
+### 1. Validation Phase
+You WILL verify all requirements:
+- Confirm all required parameters are provided
+- Validate `project_path` is non-empty and identifies a directory
+- Validate `code_mapper_path` is non-empty
+- Confirm at least one target module/package is specified
+- Resolve output directory based on workspace root and user input
 
 ### 2. Check Foundation Outputs and Run Full Foundation if Needed
 
@@ -155,15 +152,53 @@ You MUST handle these situations explicitly:
   - If some signatures are incomplete in the foundation outputs, explicitly call this out and limit the analysis to what is known.
 
 ### 8. Success Criteria
-
 You WILL consider the API consistency analysis successful when:
-- A complete report following `templates/api-consistency-analysis-structure.md` has been produced.
-- All requested modules/packages have been analyzed, or clearly marked as not analyzable (with reasons).
-- Major naming, parameter, and return-pattern inconsistencies have been identified and categorized by severity.
-- Canonical patterns and a phased improvement roadmap have been proposed.
+- [ ] A complete report following `templates/api-consistency-analysis-structure.md` has been produced
+- [ ] All requested modules/packages have been analyzed, or clearly marked as not analyzable (with reasons)
+- [ ] Major naming, parameter, and return-pattern inconsistencies have been identified and categorized by severity
+- [ ] Canonical patterns and a phased improvement roadmap have been proposed
+- [ ] User approved saving the report to the specified location
 
-### 9. Usage Notes
+## Required Actions
+1. Validate all required input parameters
+2. Check for full foundation outputs or run foundation analysis
+3. Extract public API signatures from code-map
+4. Analyze API consistency across modules
+5. Generate structured report following template
+6. Save report after user confirmation
 
-You WILL explain to the user:
-- That this skill relies on **full foundation** (`--foundation`) because the code-map output is required to see full API signatures.
-- That the analysis is **syntactic and structural**, based on code-mapper outputs, and should be combined with tests and code reviews for final decisions.
+## Error Handling
+You MUST handle these situations explicitly:
+- **Missing full foundation outputs**: Ask user to confirm full foundation analysis was run, suggest re-running if needed
+- **No public APIs found for a module**: Document in report that module does not expose public APIs
+- **Ambiguous or partial module matches**: Ask user to clarify exact module/package paths
+- **Incomplete signature information**: Call out limitations and analyze only what is known
+
+## User Communication
+You WILL provide these updates to the user:
+
+### Progress Updates
+- Foundation outputs validated or analysis running
+- API signatures extracted
+- Consistency analysis in progress
+- Report generated
+
+### Completion Summary
+- Number of modules analyzed
+- Inconsistencies found by severity
+- Canonical patterns recommended
+- Report saved location
+
+### Next Steps
+- Review API consistency report
+- Prioritize high-impact inconsistencies
+- Plan refactoring phases
+- Update API documentation
+
+⚠️ **Critical Requirements**
+- MANDATORY: Use FULL foundation analysis (--foundation), not foundation-lite
+- ALWAYS ask user whether to reuse or rerun existing foundation outputs
+- ALWAYS provide evidence with file:line references
+- ALWAYS categorize inconsistencies by severity (HIGH/MEDIUM/LOW)
+- ALWAYS propose canonical patterns with clear rationale
+- NEVER assume impact-query output is available unless explicitly provided

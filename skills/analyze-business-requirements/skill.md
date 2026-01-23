@@ -13,14 +13,16 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **requirements_document**: string - Path to the business requirements document to analyze (REQUIRED)
-- **strict_template_compliance**: boolean - Whether to strictly follow the template format (OPTIONAL, default: true)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **requirements_document**: string - Path to the business requirements document to analyze (REQUIRED)
+2. **strict_template_compliance**: boolean - Whether to strictly follow the template format (OPTIONAL, default: true)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present options as numbered lists for easy selection
 - Select appropriate protocol based on operation risk and impact
+- Provide clear progress updates at each major step
 
 ## Prerequisites (if applicable)
 If this prompt is part of a workflow chain:

@@ -13,18 +13,21 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **demand_folder**: string - Demand folder under `docs/specifications/` (example: `pet-clinic-01`) (REQUIRED)
-- **demand_root**: string - Root folder for demands (OPTIONAL - default: `docs/specifications`)
-- **change_spec_path**: string - Path to a change/deprecation spec markdown (REQUIRED)
-- **openapi_old_path**: string - Old OpenAPI contract (OPTIONAL)
-- **openapi_new_path**: string - New OpenAPI contract (OPTIONAL)
-- **consumer_code_roots**: string[] - Roots to search for consumer usage (OPTIONAL - default: `["apps", "sdks"]`)
-- **output_dir**: string - Where to write outputs (OPTIONAL - default: `{demand_root}/{demand_folder}/10-consumer-change-impact`)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **demand_folder**: string - Demand folder under `docs/specifications/` (example: `pet-clinic-01`) (REQUIRED)
+2. **demand_root**: string - Root folder for demands (OPTIONAL - default: `docs/specifications`)
+3. **change_spec_path**: string - Path to a change/deprecation spec markdown (REQUIRED)
+4. **openapi_old_path**: string - Old OpenAPI contract (OPTIONAL)
+5. **openapi_new_path**: string - New OpenAPI contract (OPTIONAL)
+6. **consumer_code_roots**: string[] - Roots to search for consumer usage (OPTIONAL - default: `["apps", "sdks"]`)
+7. **output_dir**: string - Where to write outputs (OPTIONAL - default: `{demand_root}/{demand_folder}/10-consumer-change-impact`)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- You WILL use **Propose-Confirm-Act** because the workflow writes files into the repository.
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present options as numbered lists for easy selection
+- Use **Propose-Confirm-Act** because the workflow writes files into the repository
+- Provide clear progress updates at each major step
 
 ## Prerequisites
 You MUST validate:
@@ -86,11 +89,41 @@ You WILL consider the task complete when:
 - [ ] (If provided) you read OpenAPI old/new in full
 - [ ] You proposed an impact plan and the user approved it
 - [ ] Impact report exists at `{output_dir}/{timestamp}-{demand_folder}-consumer-impact-tasklist.md`
+- [ ] All impacted code references identified
+- [ ] Retest plan generated
+
+## Required Actions
+1. Validate all required input parameters and prerequisites
+2. Read and analyze change/deprecation spec
+3. Search consumer code for impacted endpoints
+4. Generate impact report with tasklist
+5. Provide user communication and confirmations
 
 ## Error Handling
 You WILL handle these scenarios:
 - **Missing change spec**: Ask the user for the correct `change_spec_path`
 - **Ambiguous mapping**: Ask the user which client package/module is authoritative
 - **No code hits**: Explain likely causes (generated client renamed, basePath differences) and propose alternate search terms
+
+## User Communication
+You WILL provide these updates to the user:
+
+### Progress Updates
+- Change spec analyzed
+- Consumer code search in progress
+- Impact map generated
+- Tasklist created
+
+### Completion Summary
+- Files created with locations
+- Number of impacted endpoints
+- Code references found
+- Retest plan summary
+
+### Next Steps
+- Review impact tasklist
+- Prioritize code modifications
+- Execute retest plan
+- Update consumer documentation
 
 

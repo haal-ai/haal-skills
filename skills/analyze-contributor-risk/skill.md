@@ -19,16 +19,16 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 Analyze repository contributor patterns to identify bus factor risks, knowledge concentration, and team health metrics. Provides actionable insights for risk mitigation and succession planning.
 
 ## Input Parameters
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **repository_path**: string - Path to repository (OPTIONAL - default: current workspace)
+2. **analysis_period_months**: integer - Number of months to analyze (OPTIONAL - default: 12)
+3. **output_location**: string - Where to save the report (OPTIONAL - default: olaf-data/contributor-risk/)
 
-You MUST request these parameters if not provided:
-
-- **repository_path**: string - Path to repository (default: current workspace)
-- **analysis_period_months**: integer - Number of months to analyze (default: 12)
-- **output_location**: string - Where to save the report (default: olaf-data/contributor-risk/)
-
-## User Interaction Protocol
-
-You WILL use **Act** protocol for analysis execution.
+## User Interaction
+You MUST follow these interaction guidelines:
+- Use **Act** protocol for analysis execution
+- Present findings as numbered lists for clarity
+- Provide clear progress updates at each major step
 
 ## Process
 
@@ -141,14 +141,50 @@ You MUST handle these scenarios:
 - **Insufficient contributors**: Note that analysis may be limited
 
 ## Success Criteria
+You WILL consider the task complete when:
+- [ ] Report generated with bus factor calculation
+- [ ] Risk level assessed and justified
+- [ ] High-risk files identified
+- [ ] Actionable recommendations provided
+- [ ] User understands team health status
 
-- ✅ Report generated with bus factor calculation
-- ✅ Risk level assessed and justified
-- ✅ High-risk files identified
-- ✅ Actionable recommendations provided
-- ✅ User understands team health status
+## Required Actions
+1. Validate repository path and analysis parameters
+2. Execute contributor analysis tool
+3. Parse and interpret results
+4. Generate comprehensive report
+5. Provide actionable recommendations
 
----
+## Error Handling
+You MUST handle these scenarios:
+- **Missing Git repository**: Prompt user for valid repo path
+- **No commit history**: Report insufficient data
+- **Tool execution failure**: Display stderr and suggest fixes
+- **Insufficient contributors**: Note that analysis may be limited
 
-**Related Skills**: onboard-me, measure-ai-impact
-**Tools Used**: contributor_analyzer.py
+## User Communication
+You WILL provide these updates to the user:
+
+### Progress Updates
+- Repository validated
+- Analysis tool executing
+- Results parsed
+- Report generated
+
+### Completion Summary
+- Bus factor identified
+- Risk level determined
+- High-risk files listed
+- Recommendations provided
+
+### Next Steps
+- Review contributor risk report
+- Implement knowledge transfer plans
+- Schedule pair programming sessions
+- Update documentation for high-risk areas
+
+⚠️ **Critical Requirements**
+- MANDATORY: Provide specific, actionable recommendations
+- ALWAYS identify concrete high-risk files and areas
+- ALWAYS explain bus factor calculation methodology
+- ALWAYS provide both immediate and long-term mitigation strategies

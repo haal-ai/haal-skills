@@ -13,23 +13,26 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **demand_folder**: string - Demand folder under `docs/specifications/` (example: `pet-clinic-01`) (REQUIRED)
-- **analysis_mode**: initial|followup - Whether this is a first run or a successive run (OPTIONAL - default: initial)
-- **previous_analysis_path**: string - Path to a previous data-fit analysis markdown file (OPTIONAL - required if analysis_mode=followup)
-- **demand_root**: string - Root folder for demands (OPTIONAL - default: `docs/specifications`)
-- **spec_dir**: string - Folder containing functional spec + OpenAPI (OPTIONAL - default: `{demand_root}/{demand_folder}/04-specifications`)
-- **functional_spec_path**: string - Path to functional spec overview (OPTIONAL - default: latest `*-functional-spec.md` in `{spec_dir}`)
-- **functional_spec_detailed_path**: string - Path to functional spec detailed (OPTIONAL - default: latest `*-functional-spec-detailed.md` in `{spec_dir}`)
-- **openapi_path**: string - Path to OpenAPI YAML (OPTIONAL - default: latest `*-openapi.yaml` in `{spec_dir}`)
-- **db_artifacts_paths**: string[] - Paths to DB schema artifacts (DDL, migrations, ERD, data dictionary) (OPTIONAL)
-- **db_context_notes**: string - Notes about DB ownership, source-of-truth, constraints, legacy concerns (OPTIONAL)
-- **analysis_output_dir**: string - Folder where analysis markdown will be saved (OPTIONAL - default: `{demand_root}/{demand_folder}/05-data-fit-analysis`)
-- **output_basename**: string - Basename for output file (OPTIONAL - default: `demand_folder`)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **demand_folder**: string - Demand folder under `docs/specifications/` (example: `pet-clinic-01`) (REQUIRED)
+2. **analysis_mode**: initial|followup - Whether this is a first run or a successive run (OPTIONAL - default: initial)
+3. **previous_analysis_path**: string - Path to a previous data-fit analysis markdown file (OPTIONAL - required if analysis_mode=followup)
+4. **demand_root**: string - Root folder for demands (OPTIONAL - default: `docs/specifications`)
+5. **spec_dir**: string - Folder containing functional spec + OpenAPI (OPTIONAL - default: `{demand_root}/{demand_folder}/04-specifications`)
+6. **functional_spec_path**: string - Path to functional spec overview (OPTIONAL - default: latest `*-functional-spec.md` in `{spec_dir}`)
+7. **functional_spec_detailed_path**: string - Path to functional spec detailed (OPTIONAL - default: latest `*-functional-spec-detailed.md` in `{spec_dir}`)
+8. **openapi_path**: string - Path to OpenAPI YAML (OPTIONAL - default: latest `*-openapi.yaml` in `{spec_dir}`)
+9. **db_artifacts_paths**: string[] - Paths to DB schema artifacts (DDL, migrations, ERD, data dictionary) (OPTIONAL)
+10. **db_context_notes**: string - Notes about DB ownership, source-of-truth, constraints, legacy concerns (OPTIONAL)
+11. **analysis_output_dir**: string - Folder where analysis markdown will be saved (OPTIONAL - default: `{demand_root}/{demand_folder}/05-data-fit-analysis`)
+12. **output_basename**: string - Basename for output file (OPTIONAL - default: `demand_folder`)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- You WILL use **Propose-Confirm-Act** because the workflow writes files into the repository.
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present options as numbered lists for easy selection
+- Use **Propose-Confirm-Act** because the workflow writes files into the repository
+- Provide clear progress updates at each major step
 
 ## Prerequisites
 You MUST validate:
@@ -136,6 +139,14 @@ You WILL consider the task complete when:
 - [ ] You proposed the output file path and received user confirmation
 - [ ] The analysis markdown file has been written to `analysis_output_dir`
 
+## Required Actions
+1. Validate all required input parameters and prerequisites
+2. Read and analyze functional specs and OpenAPI
+3. Extract data requirements inventory
+4. Propose service boundaries and data ownership
+5. Perform DB-to-API mapping or generate artifact request
+6. Generate gap analysis and recommendations
+
 ## Error Handling
 You WILL handle these scenarios:
 - **Demand folder not found**: Ask the user for the correct `demand_folder`
@@ -144,5 +155,34 @@ You WILL handle these scenarios:
 - **DB artifacts missing**: Produce the artifact request list and stop short of claiming DB coverage
 - **DB artifact too large/partial**: Document limitations and ask for missing pieces (tables, constraints, indexes)
 - **Conflicting sources of truth**: Document conflict and ask the user to name the authoritative system
+
+## User Communication
+You WILL provide these updates to the user:
+
+### Progress Updates
+- Validation phase completed
+- Specs analyzed
+- Data inventory extracted
+- Service boundaries proposed
+- DB mapping completed (if applicable)
+
+### Completion Summary
+- Files created with locations
+- Data requirements identified
+- Gaps and blockers documented
+- Recommendations provided
+
+### Next Steps
+- Review data-fit analysis report
+- Provide missing DB artifacts if needed
+- Answer SME questions
+- Proceed with implementation planning
+
+⚠️ **Critical Requirements**
+- MANDATORY: Ask for user approval before writing files
+- ALWAYS use templates for report generation
+- ALWAYS document gaps and ambiguities clearly
+- ALWAYS provide structured artifact requests when DB info is missing
+- NEVER proceed with incomplete high-priority SME answers in followup mode
 
 

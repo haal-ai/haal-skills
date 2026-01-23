@@ -13,25 +13,29 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **demand_folder**: string - Demand folder under `docs/specifications/` (example: `pet-clinic-01`) (REQUIRED)
-- **demand_root**: string - Root folder for demands (OPTIONAL - default: `docs/specifications`)
-- **spec_dir**: string - Folder containing functional spec + OpenAPI (OPTIONAL - default: `{demand_root}/{demand_folder}/04-specifications`)
-- **data_fit_dir**: string - Folder containing DB↔API fit analyses (OPTIONAL - default: `{demand_root}/{demand_folder}/05-data-fit-analysis`)
-- **functional_spec_path**: string - Path to functional spec markdown (OPTIONAL - default: latest `*-functional-spec.md` in `{spec_dir}`)
-- **openapi_path**: string - Path to OpenAPI YAML (OPTIONAL - default: latest `*-openapi.yaml` in `{spec_dir}`)
-- **api_code_root**: string - Root folder of the API implementation (OPTIONAL - default: `apps/{demand_folder}-api-quarkus`)
-- **sdk_root**: string - Root folder of SDK implementation (OPTIONAL - default: `sdks/{demand_folder}-sdk-ts`)
-- **bruno_root_dir**: string - Root folder where Bruno collections live (OPTIONAL - default: `tests/bruno`)
-- **output_dir**: string - Output folder for drift analysis (OPTIONAL - default: `{demand_root}/{demand_folder}/08-drift-analysis`)
-- **alignment_mode**: analyze-only|analyze-and-align - Whether to apply alignment after approval (OPTIONAL - default: analyze-and-align)
-- **implementation_pending**: boolean - If true, implementation may intentionally lag specs; user must choose source of truth (OPTIONAL - default: false)
-- **source_of_truth**: code|openapi|functional_spec - What must be aligned to (OPTIONAL - default: code)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **demand_folder**: string - Demand folder under `docs/specifications/` (example: `pet-clinic-01`) (REQUIRED)
+2. **demand_root**: string - Root folder for demands (OPTIONAL - default: `docs/specifications`)
+3. **spec_dir**: string - Folder containing functional spec + OpenAPI (OPTIONAL - default: `{demand_root}/{demand_folder}/04-specifications`)
+4. **data_fit_dir**: string - Folder containing DB↔API fit analyses (OPTIONAL - default: `{demand_root}/{demand_folder}/05-data-fit-analysis`)
+5. **functional_spec_path**: string - Path to functional spec markdown (OPTIONAL - default: latest `*-functional-spec.md` in `{spec_dir}`)
+6. **openapi_path**: string - Path to OpenAPI YAML (OPTIONAL - default: latest `*-openapi.yaml` in `{spec_dir}`)
+7. **api_code_root**: string - Root folder of the API implementation (OPTIONAL - default: `apps/{demand_folder}-api-quarkus`)
+8. **sdk_root**: string - Root folder of SDK implementation (OPTIONAL - default: `sdks/{demand_folder}-sdk-ts`)
+9. **bruno_root_dir**: string - Root folder where Bruno collections live (OPTIONAL - default: `tests/bruno`)
+10. **output_dir**: string - Output folder for drift analysis (OPTIONAL - default: `{demand_root}/{demand_folder}/08-drift-analysis`)
+11. **alignment_mode**: analyze-only|analyze-and-align - Whether to apply alignment after approval (OPTIONAL - default: analyze-and-align)
+12. **implementation_pending**: boolean - If true, implementation may intentionally lag specs; user must choose source of truth (OPTIONAL - default: false)
+13. **source_of_truth**: code|openapi|functional_spec - What must be aligned to (OPTIONAL - default: code)
 
 If `implementation_pending=true`, you MUST stop and ask the user to explicitly choose `source_of_truth`.
 
-## User Interaction Protocol
-You MUST follow **Propose-Confirm-Act** because this workflow writes files into the repository.
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present options as numbered lists for easy selection
+- Use **Propose-Confirm-Act** because this workflow writes files into the repository
+- Provide clear progress updates at each major step
 
 ## Constraints (Hard Rules)
 - You MUST NOT modify database/DDL artifacts (including anything under `{demand_root}/{demand_folder}/07-db-artifacts`, SQL migrations, or schema DDL files).
@@ -113,6 +117,15 @@ You WILL consider the task complete when:
 - [ ] Recommendation string is present and actionable
 - [ ] If `alignment_mode=analyze-and-align`, artifacts are aligned to `source_of_truth`
 - [ ] No DB/DDL artifacts were modified
+- [ ] User approved all changes before application
+- [ ] All outputs follow template structure
+
+## Required Actions
+1. Validate all required input parameters and prerequisites
+2. Generate drift report and alignment plan following templates
+3. Apply alignment only after user confirmation (if mode=analyze-and-align)
+4. Provide user communication and confirmations
+5. Ensure no DB/DDL artifacts are modified
 
 ## Error Handling
 You WILL handle these scenarios:
@@ -121,3 +134,31 @@ You WILL handle these scenarios:
 - **OpenAPI missing**: Ask the user for explicit `openapi_path`
 - **Implementation pending ambiguity**: Stop and ask user to pick `source_of_truth`
 - **DB changes required**: Stop and ask user to handle DB separately
+
+## User Communication
+You WILL provide these updates to the user:
+
+### Progress Updates
+- Validation phase completed
+- Drift analysis in progress
+- Alignment plan generated
+- Changes applied (if applicable)
+
+### Completion Summary
+- Files created with locations
+- Drift categories identified
+- Alignment actions taken
+- Any issues encountered and resolutions
+
+### Next Steps
+- Review drift report and alignment plan
+- Verify aligned artifacts
+- Run tests to validate changes
+- Update documentation if needed
+
+⚠️ **Critical Requirements**
+- MANDATORY: Ask for user approval before modifying any files
+- NEVER modify DB/DDL artifacts under any circumstances
+- ALWAYS use templates for report generation
+- ALWAYS provide evidence with file:line references
+- ALWAYS stop if DB schema changes are required

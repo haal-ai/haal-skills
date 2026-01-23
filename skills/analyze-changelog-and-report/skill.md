@@ -13,14 +13,16 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **start_date**: string (YYYYMMDD) - The start date for changelog analysis (REQUIRED)
-- **prompt_dir**: string - Directory containing prompt files to check against (OPTIONAL)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **start_date**: string (YYYYMMDD) - The start date for changelog analysis (REQUIRED)
+2. **prompt_dir**: string - Directory containing prompt files to check against (OPTIONAL)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present options as numbered lists for easy selection
 - Select appropriate protocol based on operation risk and impact
+- Provide clear progress updates at each major step
 
 ## Prerequisites (if applicable)
 If this prompt is part of a workflow chain:
