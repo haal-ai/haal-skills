@@ -13,13 +13,16 @@ $ErrorActionPreference = 'Continue'
 # Fixed temp folder for staging
 $TempStagingFolder = Join-Path $env:TEMP "haal-skills-staging"
 
-# Destination folders
-$Destinations = @(
+# Destination folders for skills
+$SkillDestinations = @(
     (Join-Path $env:USERPROFILE ".codeium\windsurf\skills"),
     (Join-Path $env:USERPROFILE ".claude\skills"),
     (Join-Path $env:USERPROFILE ".github\skills"),
     (Join-Path $env:USERPROFILE ".kiro\skills")
 )
+
+# Global OLAF folder
+$OlafDestination = Join-Path $env:USERPROFILE ".olaf"
 
 function Test-Command([string]$Name) {
     $cmd = Get-Command $Name -ErrorAction SilentlyContinue
@@ -224,7 +227,7 @@ Write-Host "Step 1: Pruning deprecated skills..." -ForegroundColor Cyan
 $pruneList = @(Get-PruneList $ClonePath)
 $pruneCount = $pruneList.Count
 if ($pruneCount -gt 0) {
-    Prune-Skills $pruneList $Destinations
+    Prune-Skills $pruneList $SkillDestinations
 } else {
     Write-Host "  No skills to prune"
 }
@@ -275,23 +278,65 @@ Copy-SkillsToStaging $skillsToInstall $ClonePath $TempStagingFolder
 Write-Host ""
 
 # Step 4: Deploy to all destinations
-Write-Host "Step 4: Deploying to destinations..." -ForegroundColor Cyan
-Deploy-StagingToDestinations $TempStagingFolder $Destinations
+Write-Host "Step 4: Deploying skills to destinations..." -ForegroundColor Cyan
+Deploy-StagingToDestinations $TempStagingFolder $SkillDestinations
 Write-Host ""
 
-# Step 5: Run sync script for .olaf files (optional)
-Write-Host "Step 5: Syncing .olaf files..." -ForegroundColor Cyan
-$syncScript = Join-Path $ClonePath ".olaf\tools\sync-olaf-files.ps1"
-if (Test-Path -LiteralPath $syncScript) {
-    try {
-        & $syncScript -SourcePath $ClonePath -DestPath $repoRoot
-        Write-Host "  OK: .olaf files synced" -ForegroundColor Green
-    } catch {
-        Write-Host "  WARN: Sync script failed" -ForegroundColor Yellow
+# Step 5: Copy .olaf folder to global location
+Write-Host "Step 5: Syncing .olaf to global location..." -ForegroundColor Cyan
+$sourceOlaf = Join-Path $ClonePath ".olaf"
+if (Test-Path -LiteralPath $sourceOlaf) {
+    # Ensure destination exists
+    if (!(Test-Path -LiteralPath $OlafDestination)) {
+        New-Item -ItemType Directory -Path $OlafDestination -Force -ErrorAction SilentlyContinue | Out-Null
+    }
+    
+    # Copy .olaf subfolders (data, work, tools)
+    $olafFolders = @("data", "work", "tools")
+    foreach ($folder in $olafFolders) {
+        $srcFolder = Join-Path $sourceOlaf $folder
+        $destFolder = Join-Path $OlafDestination $folder
+        
+        if (Test-Path -LiteralPath $srcFolder) {
+            # Copy recursively, don't overwrite existing files
+            $files = Get-ChildItem -LiteralPath $srcFolder -Recurse -File -ErrorAction SilentlyContinue
+            $copied = 0
+            foreach ($file in $files) {
+                $relPath = $file.FullName.Substring($srcFolder.Length + 1)
+                $destFile = Join-Path $destFolder $relPath
+                
+                if (!(Test-Path -LiteralPath $destFile)) {
+                    $destDir = Split-Path -Parent $destFile
+                    if (!(Test-Path -LiteralPath $destDir)) {
+                        New-Item -ItemType Directory -Path $destDir -Force -ErrorAction SilentlyContinue | Out-Null
+                    }
+                    Copy-Item -LiteralPath $file.FullName -Destination $destFile -Force -ErrorAction SilentlyContinue
+                    $copied++
+                }
+            }
+            Write-Host "  .olaf/$folder: $copied new files" -ForegroundColor Green
+        }
     }
 } else {
-    Write-Host "  SKIP: Sync script not found" -ForegroundColor Yellow
+    Write-Host "  SKIP: No .olaf folder in source" -ForegroundColor Yellow
 }
 Write-Host ""
+
+# Step 6: Sync to repo if RepoPath specified
+if (![string]::IsNullOrWhiteSpace($RepoPath)) {
+    Write-Host "Step 6: Syncing to repo..." -ForegroundColor Cyan
+    $syncScript = Join-Path $ClonePath ".olaf\tools\sync-olaf-files.ps1"
+    if (Test-Path -LiteralPath $syncScript) {
+        try {
+            & $syncScript -SourcePath $OlafDestination -DestPath $repoRoot
+            Write-Host "  OK: .olaf files synced to repo" -ForegroundColor Green
+        } catch {
+            Write-Host "  WARN: Sync script failed: $_" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  SKIP: Sync script not found" -ForegroundColor Yellow
+    }
+    Write-Host ""
+}
 
 Write-Host "=== Done ===" -ForegroundColor Green

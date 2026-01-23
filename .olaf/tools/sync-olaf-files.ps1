@@ -9,12 +9,12 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Continue'
 
-# Determine source (from env var or default)
+# Determine source (from env var or default to global ~/.olaf)
 if ([string]::IsNullOrWhiteSpace($SourcePath)) {
     $SourcePath = $env:HAAL_SKILLS_SOURCE
 }
 if ([string]::IsNullOrWhiteSpace($SourcePath)) {
-    $SourcePath = Join-Path $env:USERPROFILE ".codeium\windsurf\skills"
+    $SourcePath = Join-Path $env:USERPROFILE ".olaf"
 }
 
 # Determine destination (current directory or param)
@@ -25,13 +25,11 @@ if ([string]::IsNullOrWhiteSpace($DestPath)) {
 # Config file location
 $ConfigPath = Join-Path $SourcePath ".olaf\local-file.json"
 
-# Default folders to sync
+# Default folders to sync (relative paths from ~/.olaf)
 $DefaultFolders = @(
-    ".olaf\data",
-    ".olaf\work", 
-    ".olaf\tools",
-    ".windsurf\rules",
-    ".windsurf\workflows"
+    "data",
+    "work", 
+    "tools"
 )
 
 # Git exclusions to add
@@ -62,11 +60,11 @@ function Read-Config([string]$Path) {
     }
 }
 
-function Sync-Folder([string]$SourceBase, [string]$RelFolder, [string]$DestBase, [string[]]$PruneFiles, [string[]]$ForceFiles) {
-    $sourcePath = Join-Path $SourceBase $RelFolder
+function Sync-Folder([string]$SourceBase, [string]$SrcRelFolder, [string]$DestBase, [string]$DestRelFolder, [string[]]$PruneFiles, [string[]]$ForceFiles) {
+    $sourcePath = Join-Path $SourceBase $SrcRelFolder
     
     if (!(Test-Path -LiteralPath $sourcePath)) {
-        Write-Host "  SKIP: $RelFolder (not found)" -ForegroundColor Yellow
+        Write-Host "  SKIP: $SrcRelFolder (not found)" -ForegroundColor Yellow
         return
     }
     
@@ -75,8 +73,8 @@ function Sync-Folder([string]$SourceBase, [string]$RelFolder, [string]$DestBase,
     $skipped = 0
     
     foreach ($file in $files) {
-        $relPath = $file.FullName.Substring($SourceBase.Length + 1)
-        $destFile = Join-Path $DestBase $relPath
+        $relPath = $file.FullName.Substring($sourcePath.Length + 1)
+        $destFile = Join-Path $DestBase (Join-Path $DestRelFolder $relPath)
         
         # Check prune list
         if ($PruneFiles -contains $relPath) {
@@ -100,7 +98,7 @@ function Sync-Folder([string]$SourceBase, [string]$RelFolder, [string]$DestBase,
         $copied++
     }
     
-    Write-Host "  $RelFolder : $copied copied, $skipped skipped" -ForegroundColor Green
+    Write-Host "  $DestRelFolder : $copied copied, $skipped skipped" -ForegroundColor Green
 }
 
 function Prune-Files([string[]]$Files, [string]$DestBase) {
@@ -152,6 +150,16 @@ function Update-GitExclude([string]$DestBase) {
 # === Main ===
 
 Write-Host "=== OLAF File Sync ===" -ForegroundColor Cyan
+
+# Resolve paths to absolute
+if (![System.IO.Path]::IsPathRooted($SourcePath)) {
+    $SourcePath = (Resolve-Path -LiteralPath $SourcePath -ErrorAction SilentlyContinue).Path
+    if (!$SourcePath) {
+        Write-Host "ERROR: Cannot resolve source path" -ForegroundColor Red
+        exit 1
+    }
+}
+
 Write-Host "Source: $SourcePath"
 Write-Host "Destination: $DestPath"
 Write-Host ""
@@ -171,9 +179,12 @@ if ($folders.Count -eq 0) {
     $folders = $DefaultFolders
 }
 
+Write-Host "Folders to sync: $($folders -join ', ')" -ForegroundColor Gray
+
 # Step 1: Prune files
 Write-Host "Step 1: Pruning files..." -ForegroundColor Cyan
-if ($pruneFiles.Count -gt 0) {
+$pruneCount = $pruneFiles.Count
+if ($pruneCount -gt 0) {
     Prune-Files $pruneFiles $DestPath
 } else {
     Write-Host "  No files to prune"
@@ -183,18 +194,26 @@ Write-Host ""
 # Step 2: Sync folders
 Write-Host "Step 2: Syncing folders..." -ForegroundColor Cyan
 foreach ($folder in $folders) {
-    # Handle both absolute and relative paths
+    $relFolder = $folder
+    
+    # Handle absolute paths - convert to relative
     if ([System.IO.Path]::IsPathRooted($folder)) {
-        # Absolute path - extract relative part
-        if ($folder.StartsWith($SourcePath)) {
-            $relFolder = $folder.Substring($SourcePath.Length + 1)
+        # Try to extract just the relative part
+        $parts = $folder -split '[/\\]'
+        $olafIdx = [Array]::IndexOf($parts, '.olaf')
+        
+        if ($olafIdx -ge 0) {
+            # Skip the .olaf part, get subfolders
+            $relFolder = ($parts[($olafIdx+1)..($parts.Length-1)]) -join '\'
         } else {
+            Write-Host "  SKIP: Cannot parse path $folder" -ForegroundColor Yellow
             continue
         }
-    } else {
-        $relFolder = $folder
     }
-    Sync-Folder $SourcePath $relFolder $DestPath $pruneFiles $forceFiles
+    
+    # Source is directly under ~/.olaf, dest goes to .olaf/ in repo
+    $destRelFolder = ".olaf\$relFolder"
+    Sync-Folder $SourcePath $relFolder $DestPath $destRelFolder $pruneFiles $forceFiles
 }
 Write-Host ""
 
