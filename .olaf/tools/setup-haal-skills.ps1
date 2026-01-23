@@ -1,4 +1,4 @@
-we have # Multi-repo setup script
+# Multi-repo setup script
 # 1. Clone seed repo
 # 2. Read repos-manifest.json from seed
 # 3. Clone additional repos (skip unavailable)
@@ -10,6 +10,7 @@ param(
     [string[]]$Competency = @(),
     [string]$Collection = ""
 )
+
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -37,28 +38,38 @@ function Try-CloneRepo([string]$RepoSpec, [string]$DestFolder) {
         $branch = "main"
     }
     
+    # Create unique folder name: owner_repo_branch
     $repoName = ($RepoSpec -split ':')[0] -replace '/', '_'
-    $clonePath = Join-Path $DestFolder $repoName
+    $branchSafe = $branch -replace '[/\\]', '_'
+    $clonePath = Join-Path $DestFolder "${repoName}_${branchSafe}"
     
     Write-Host "Cloning $RepoSpec..." -ForegroundColor Cyan
+    Write-Host "  URL: $repoUrl"
+    Write-Host "  Branch: $branch"
     
-    try {
-        & git clone --depth 1 --branch $branch $repoUrl $clonePath 2>$null
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "  OK: $repoName" -ForegroundColor Green
-            return $clonePath
-        }
-    } catch { }
+    # Remove existing clone path if it exists
+    if (Test-Path -LiteralPath $clonePath) {
+        Remove-Item -LiteralPath $clonePath -Recurse -Force -ErrorAction SilentlyContinue
+    }
+    
+    # Use Start-Process to avoid stderr issues
+    $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", $branch, $repoUrl, $clonePath -Wait -PassThru -NoNewWindow
+    
+    if ($process.ExitCode -eq 0 -and (Test-Path -LiteralPath $clonePath)) {
+        Write-Host "  OK: ${repoName}:${branch}" -ForegroundColor Green
+        return $clonePath
+    }
     
     # Try master if main failed
     if ($branch -eq "main") {
-        try {
-            & git clone --depth 1 --branch "master" $repoUrl $clonePath 2>$null
-            if ($LASTEXITCODE -eq 0) {
-                Write-Host "  OK: $repoName (master)" -ForegroundColor Green
-                return $clonePath
-            }
-        } catch { }
+        Write-Host "  Trying master branch..." -ForegroundColor Yellow
+        $clonePath = Join-Path $DestFolder "${repoName}_master"
+        $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", "master", $repoUrl, $clonePath -Wait -PassThru -NoNewWindow
+        
+        if ($process.ExitCode -eq 0 -and (Test-Path -LiteralPath $clonePath)) {
+            Write-Host "  OK: ${repoName}:master" -ForegroundColor Green
+            return $clonePath
+        }
     }
     
     Write-Host "  SKIP: $RepoSpec (not available)" -ForegroundColor Yellow
@@ -71,9 +82,13 @@ function Read-ReposManifest([string]$ClonePath) {
         return @()
     }
     
-    $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-    if ($manifest.repos) {
-        return $manifest.repos
+    try {
+        $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+        if ($manifest.repos) {
+            return @($manifest.repos)
+        }
+    } catch {
+        Write-Host "  WARN: Failed to parse repos-manifest.json" -ForegroundColor Yellow
     }
     return @()
 }
@@ -139,13 +154,14 @@ Write-Host ""
 
 # Step 2: Read repos manifest from seed
 Write-Host "Step 2: Reading repos manifest..." -ForegroundColor Cyan
-$additionalRepos = Read-ReposManifest $seedPath
-Write-Host "  Found $($additionalRepos.Count) additional repo(s)"
+$additionalRepos = @(Read-ReposManifest $seedPath)
+$repoCount = $additionalRepos.Count
+Write-Host "  Found $repoCount additional repo(s)"
 Write-Host ""
 
 # Step 3: Clone additional repos
 $clonedPaths = @()
-if ($additionalRepos.Count -gt 0) {
+if ($repoCount -gt 0) {
     Write-Host "Step 3: Cloning additional repos..." -ForegroundColor Cyan
     foreach ($repo in $additionalRepos) {
         $path = Try-CloneRepo $repo $TempBaseFolder
