@@ -12,8 +12,6 @@ Software releases need clear communication about what changed, why it matters, a
 
 **Command**: `generate professional release notes`
 
-**Protocol**: Propose-Act
-
 **When to Use**: Use this competency when preparing for a software release, creating release announcements, documenting version changes for stakeholders, or whenever you need to communicate what changed between two versions in a clear, professional, user-focused format.
 
 ## Parameters

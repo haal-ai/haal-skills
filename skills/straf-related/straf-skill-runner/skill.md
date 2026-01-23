@@ -4,11 +4,10 @@ description: Automatically analyze OLAF skill input requirements, intelligently 
 license: Apache-2.0
 ---
 
- ---
+---
 name: straf-skill-runner
 description: Interactive skill launcher - lists skills, analyzes requirements, gathers parameters, and launches via STRAF
 tags: [straf, skill, execution, interactive, launcher]
-protocol: Propose-Act
 aliases: [run skill with straf, execute skill, launch skill]
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)

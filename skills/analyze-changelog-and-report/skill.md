@@ -21,7 +21,6 @@ You MUST request these parameters if not provided by the user. Present them as a
 You MUST follow these interaction guidelines:
 - Ask for user approval before creating or modifying files
 - Present options as numbered lists for easy selection
-- Select appropriate protocol based on operation risk and impact
 - Provide clear progress updates at each major step
 
 ## Prerequisites (if applicable)
@@ -57,8 +56,7 @@ You WILL execute these operations as needed:
 - Read file: `skills/analyze-changelog-and-report/templates/changelog-analysis-report-template.md` - Structure output format
 - Write file: `.olaf/work/staging/ChangelogSummaries/YYYYMMDD-HHMM-summary.md` - Save analysis report
 
-**Core Logic**: Execute following protocol requirements
-- Apply appropriate interaction protocol
+**Core Logic**: Execute following requirements
 - Parse and categorize changelog entries by type/theme
 - Cross-reference with prompt files and flag discrepancies
 - Present findings to user for confirmation or correction
@@ -115,7 +113,7 @@ You WILL consider the task complete when:
 
 ## Required Actions
 1. Validate all required input parameters and prerequisites
-2. Execute operations following appropriate interaction protocol
+2. Execute operations with user approval
 3. Generate outputs in specified format
 4. Provide user communication and confirmations
 5. Define next steps if part of workflow
@@ -128,8 +126,7 @@ You WILL handle these scenarios:
 - **Validation Failures**: Stop process and request user guidance
 
 ⚠️ **Critical Requirements**
-- MANDATORY: Follow established interaction protocol (Act/Propose-Act/Propose-Confirm-Act)
-- NEVER bypass protocol requirements
+- MANDATORY: Ask for user approval before creating or modifying files
 - ALWAYS validate outputs before considering task complete
 - ALWAYS provide rollback instructions for destructive operations
 - ALWAYS document assumptions and limitations

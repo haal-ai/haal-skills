@@ -17,8 +17,6 @@ Developers often accumulate many changes across multiple files before committing
 
 **Command**: `propose commit thread` (or aliases: `propose commit`, `commit thread`, `smart commit`, `cluster commits`, `interactive commit`, `staged commit`, `organize commits`, `commit workflow`)
 
-**Protocol**: Propose-Confirm-Act
-
 **When to Use**: Use this when you have multiple uncommitted changes that should be organized into separate logical commits rather than one large commit. Ideal for feature development sessions where you've modified multiple components, or when you want to maintain clean git history with focused commits.
 
 ## Parameters

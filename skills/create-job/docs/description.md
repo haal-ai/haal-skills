@@ -12,8 +12,6 @@ Projects need a formal system for tracking work items beyond simple task lists. 
 
 **Command**: `create job`
 
-**Protocol**: Propose-Confirm-Act
-
 **When to Use**: Use this competency when defining new work items such as user stories, bug fixes, features, refactoring efforts, or any significant work that requires formal tracking, assignment, and status management throughout its lifecycle.
 
 ## Parameters

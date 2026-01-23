@@ -3,7 +3,7 @@ name: analyze-spec-vs-code
 description: Propose–Act protocol to compare an EARS specification against the codebase, produce Phase 1 gaps, Phase 2 impact analysis, and Phase 3 remediation plan.
 license: Apache-2.0
 metadata:
-  olaf_tags: [business-analyst, requirements, EARS, gap-analysis, impact-analysis, remediation-plan, propose-act]
+  olaf_tags: [business-analyst, requirements, EARS, gap-analysis, impact-analysis, remediation-plan]
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide
@@ -24,7 +24,6 @@ You MUST request these parameters if not provided by the user. Present them as a
 You MUST follow these interaction guidelines:
 - Ask for user approval before proceeding to each phase
 - Present options as numbered lists for easy selection
-- Use **Propose-Act** protocol: Propose → Act → Confirm for each phase
 - Provide clear progress updates at each major step
 
 ## Process

@@ -11,4 +11,4 @@ It produces an impact map and a tasklist of changes + retesting required in cons
 
 ## Notes
 
-This skill uses **Propose-Confirm-Act** and will always ask for approval before writing any files.
+This skill will always ask for approval before writing any files.

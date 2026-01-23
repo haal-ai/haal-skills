@@ -12,8 +12,6 @@ Project teams need to maintain a clear record of why decisions were made, what a
 
 **Command**: `create decision record`
 
-**Protocol**: Propose-Confirm-Act
-
 **When to Use**: Use this competency whenever a significant decision needs to be documented, including architectural choices, project direction changes, business strategy decisions, technical implementations, security policies, or any decision that will impact the project's future direction or stakeholders.
 
 ## Parameters

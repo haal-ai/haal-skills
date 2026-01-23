@@ -22,5 +22,6 @@ The skill can run in two modes:
 - **Without DB artifacts**: produces a data requirements inventory plus a structured request list for DB schemas and SME questions.
 - **With DB artifacts**: produces a DB ↔ requirements mapping and a gap/risk assessment.
 
-## Protocol
-This skill uses **Propose-Confirm-Act** because it writes files into the repository.
+## Notes
+
+This skill will always ask for approval before writing any files.

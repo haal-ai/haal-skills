@@ -18,7 +18,7 @@ This skill enables developers to:
 - **Tests-Pass-First**: Ensures existing tests pass before adding new ones
 - **Session Management**: Resume, restart, or start new augmentation sessions
 - **Persistent Tasklists**: Track progress in Markdown checklists
-- **Propose-Confirm-Act**: User approval required for all test changes
+- **User Approval Required**: User approval required for all test changes
 - **Universal Standards**: Applies coding standards in Evolution/Refactoring Mode
 
 ## Usage
@@ -91,7 +91,7 @@ Parameters:
 ┌─────────────────────────────────────────────────────────────────┐
 │                   ADD MISSING TESTS                              │
 │  • Propose concrete test cases                                   │
-│  • Get user approval (Propose-Confirm-Act)                       │
+│  • Get user approval                                             │
 │  • Implement approved tests                                      │
 │  • Re-run tests and verify                                       │
 └─────────────────────────────────────────────────────────────────┘

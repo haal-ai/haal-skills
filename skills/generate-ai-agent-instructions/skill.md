@@ -144,7 +144,7 @@ You WILL systematically examine the workspace:
 - Message queues or event systems
 - Database connections and migrations
 
-### 3. User Confirmation Phase (Propose-Confirm-Act)
+### 3. User Confirmation Phase
 You WILL present findings and proposal:
 
 ```markdown

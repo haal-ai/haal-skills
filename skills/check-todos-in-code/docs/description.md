@@ -14,8 +14,6 @@ TODO comments accumulate in codebases over time, representing technical debt and
 
 **Command**: `check todos`
 
-**Protocol**: Propose-Act
-
 **When to Use**:
 - Before release to identify and resolve pending work
 - During technical debt cleanup initiatives

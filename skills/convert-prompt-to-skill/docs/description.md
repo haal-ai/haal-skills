@@ -49,8 +49,6 @@ Teams often have valuable prompts that are not written as OLAF skills, missing c
 
 **Command**: `convert prompt to skill`
 
-**Protocol**: Propose-Confirm-Act
-
 **When to Use**: Use this skill when you want to create a new skill from existing prompt material rather than starting from scratch. Ideal for importing external prompts, modernizing legacy prompts, or consolidating multiple related prompts.
 
 ## Parameters

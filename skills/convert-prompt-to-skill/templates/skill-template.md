@@ -59,8 +59,7 @@ You MUST execute these operations as needed:
 - Read/Write file: `.olaf/work/<skill-specific-folder>/subfolder/file-name.md` or specific path when applicable
 - Process file content according to requirements
 
-**Core Logic**: Execute following protocol requirements
-- Apply appropriate interaction protocol
+**Core Logic**: Execute following requirements
 - Complete core processing steps
 - Provide required user confirmations
 
@@ -118,7 +117,7 @@ You WILL consider the task complete when:
 
 ## Required Actions
 1. Validate all required input parameters and prerequisites
-2. Execute operations following appropriate interaction protocol
+2. Execute operations with user approval
 3. Generate outputs in specified format
 4. Provide user communication and confirmations
 5. Define next steps if part of workflow
@@ -131,8 +130,7 @@ You WILL handle these scenarios:
 - **Validation Failures**: Stop process and request user guidance
 
 ⚠️ **Critical Requirements**
-- MANDATORY: Follow established interaction protocol (Act/Propose-Act/Propose-Confirm-Act)
-- NEVER bypass protocol requirements
+- MANDATORY: Ask for user approval before creating or modifying files
 - ALWAYS validate outputs before considering task complete
 - ALWAYS provide rollback instructions for destructive operations
 - ALWAYS document assumptions and limitations

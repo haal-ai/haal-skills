@@ -21,8 +21,8 @@ You MUST request these parameters if not provided by the user. Present them as a
 You MUST follow these interaction guidelines:
 - Ask for user approval before executing complex workflows
 - Present options as numbered lists for easy selection
-- Use **Act** for skill recommendations and guidance
-- Use **Propose-Confirm-Act** when executing complex workflows on user's behalf
+- Provide skill recommendations and guidance directly
+- Ask for user approval when executing complex workflows on user's behalf
 - Provide clear progress updates at each major step
 
 ## Process

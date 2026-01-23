@@ -238,7 +238,7 @@ Follow template: templates/quality-report-template.md
 
 ### Step 11: Approve or Request Changes
 
-**AI Asks:** "Does this converted skill look correct? (Propose-Confirm-Act)"
+**AI Asks:** "Does this converted skill look correct?"
 
 **User Options:**
 1. **Approve**: Type "approved" to create the skill

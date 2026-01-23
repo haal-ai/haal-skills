@@ -1,9 +1,9 @@
 ---
 name: transform-raw-spec
-description: Propose–Act protocol to transform a raw rules/spec document into a complete, testable specification via Steps 1–7, using curated templates, best examples, and timestamped outputs.
+description: Transform a raw rules/spec document into a complete, testable specification via Steps 1–7, using curated templates, best examples, and timestamped outputs.
 license: Apache-2.0
 metadata:
-  olaf_tags: [business-analyst, requirements, transformation, EARS, testability, mermaid, propose-act]
+  olaf_tags: [business-analyst, requirements, transformation, EARS, testability, mermaid]
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide
@@ -22,11 +22,11 @@ If the above commands don't work, use `scripts/now/bin/now-<os>-<arch>` with `-f
 - spec_name: string — Short name for the spec (used in headings)
 - strict_template_compliance: boolean — Enforce templates strictly (default: true)
 
-## Protocol (Propose–Act)
+## User Interaction
 For each step:
-- Propose: Show the planned structure using the template and cite the best example.
-- Act: Generate the output file using a fresh timestamp (YYYYMMDD-HHMM) and save it under `[output_folder]`.
-- Confirm: Summarize what was produced and any open decisions.
+- Propose: Show the planned structure using the template and cite the best example
+- Act: Generate the output file using a fresh timestamp (YYYYMMDD-HHMM) and save it under `[output_folder]`
+- Confirm: Summarize what was produced and any open decisions
 
 ## Global Rules
 - Each step file must use its own fresh timestamp (no shared timestamp).

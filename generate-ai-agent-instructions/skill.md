@@ -3,8 +3,7 @@ name: generate-ai-agent-instructions
 description: Analyze codebase to generate platform-agnostic AI agent instruction files (AGENTS.md, .cursorrules, .windsurfrules, .kiro/steering, etc.)
 license: Apache-2.0
 metadata:
-  olaf_tags: [ai-agents, codebase-analysis, documentation, platform-agnostic, onboarding]
-  olaf_protocol: Propose-Confirm-Act
+  olaf_tags: [ai-agents, codebase-analysis, documentation, platform-agnostic, onboarding] 
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
@@ -145,7 +144,7 @@ You WILL systematically examine the workspace:
 - Message queues or event systems
 - Database connections and migrations
 
-### 3. User Confirmation Phase (Propose-Confirm-Act)
+### 3. User Confirmation Phase
 You WILL present findings and proposal:
 
 ```markdown

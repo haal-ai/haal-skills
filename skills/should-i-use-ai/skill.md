@@ -16,7 +16,6 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 # Should I Use AI?
 
 **Purpose**: Analyze user task and recommend whether to use AI/LLM or IDE tools based on task categorization guide 
-**Protocol**: Act
 **Input**: User task description (single sentence)
 
 ## Core Logic
@@ -71,8 +70,7 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 **Check Existing Prompts**: [Search query-competency-index for relevant prompt]
 
 **If Existing Prompt Found**:
-- Use prompt: [prompt-file.md] 
-- Protocol: [Protocol from competency index]
+- Use prompt: [prompt-file.md]
 
 **If No Existing Prompt**:
 **Suggested Prompt**:

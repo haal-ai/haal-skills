@@ -12,8 +12,6 @@ Automates the creation of daily status reports by analyzing your actual work out
 
 **Command**: `report my daily`
 
-**Protocol**: Propose-Act
-
 **When to Use**: At end of day for status updates, standups, or personal work tracking.
 
 ## Parameters

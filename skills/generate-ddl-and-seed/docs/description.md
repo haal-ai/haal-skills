@@ -23,4 +23,4 @@ Inputs are taken from the latest:
 
 ## Notes
 
-This skill uses **Propose-Confirm-Act** and will always ask for approval before writing any files.
+This skill will always ask for approval before writing any files.

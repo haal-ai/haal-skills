@@ -1,0 +1,12 @@
+{
+  "name": "project-reporting",
+  "description": "Project progress and reporting skills",
+  "skills": [
+    "analyze-changelog-and-report",
+    "analyze-contributor-risk",
+    "generate-professional-release-notes",
+    "generate-validation-report",
+    "report-my-daily",
+    "review-progress"
+  ]
+}

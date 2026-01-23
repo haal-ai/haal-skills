@@ -44,7 +44,7 @@ You MUST read and analyze the target skill file:
 - Read: `skills/[skill_name]/skill.md`
 - Extract skill metadata (name, description, tags from frontmatter)
 - Identify input parameters and their types
-- Determine user interaction protocol
+- Determine user interaction guidelines
 - Extract process steps and workflow
 - Identify output format and deliverables
 - Note domain-specific rules and constraints

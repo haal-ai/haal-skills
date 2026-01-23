@@ -14,8 +14,6 @@ Converting designs into actionable implementation plans requires systematic task
 
 **Command**: `generate implementation plan`
 
-**Protocol**: Propose-Act with approval gates
-
 **When to Use**: Use this skill after completing the design phase (Phase 3 of ESDI) when you have both a specification and design document. It's the final phase before actual implementation begins.
 
 ## Parameters

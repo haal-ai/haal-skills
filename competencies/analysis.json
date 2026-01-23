@@ -2,9 +2,10 @@
   "name": "analysis",
   "description": "Code and API analysis skills",
   "skills": [
+    "align-spec-openapi-code-tests",
+    "analyze-api-change-impact-from-deprecation-spec",
     "analyze-api-consistency",
     "analyze-business-requirements",
-    "analyze-changelog-and-report",
     "analyze-db-api-fit",
     "analyze-function-complexity",
     "analyze-spec-vs-code"

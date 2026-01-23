@@ -25,7 +25,6 @@ You MUST request these parameters if not provided by the user. Present them as a
 You MUST follow these interaction guidelines:
 - Ask for user approval before creating analysis files
 - Present options as numbered lists for easy selection
-- Select appropriate protocol based on operation risk and impact
 - Provide clear progress updates at each major step
 
 ## Process
@@ -174,7 +173,7 @@ You WILL consider the task complete when:
 
 ## Required Actions
 1. Validate all required input parameters and function accessibility
-2. Extract function code and analyze structure following appropriate interaction protocol
+2. Extract function code and analyze structure with user approval
 3. Calculate all complexity metrics using language-specific patterns
 4. Generate outputs in specified template format
 5. Provide user communication with progress updates and completion summary
@@ -189,7 +188,7 @@ You WILL handle these scenarios:
 - **Template Formatting Problems**: Validate all required sections are included
 
 ⚠️ **Critical Requirements**
-- MANDATORY: Follow established interaction protocol (Act/Propose-Act/Propose-Confirm-Act)
+- MANDATORY: Ask for user approval before creating or modifying files
 - MUST use exact template format from `templates/function-complexity-analysis-template.md`
 - ALL template placeholders must be populated with actual values
 - ALWAYS provide actionable, specific guidance with line references when possible

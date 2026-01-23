@@ -251,7 +251,7 @@ When the active task is to ensure tests pass:
      - Summarize the failing tests and error messages.
      - Propose a concrete, minimal set of code or test changes to fix them,
        following the universal coding standards.
-     - Use **Propose-Confirm-Act** before applying any fix.
+     - Ask for user approval before applying any fix.
      - Re-run tests until they pass or until you reach a clearly-articulated
        blocking issue.
 
@@ -285,7 +285,7 @@ When the active task is to add tests for the scope:
      - Scenario/arrange conditions.
      - Expected behavior/assertions.
 
-2. **Get User Approval (Propose-Confirm-Act)**
+2. **Get User Approval**
    - Present the proposed test additions grouped by concern (e.g., error paths,
      edge cases).
    - Wait for user approval or requested adjustments.
@@ -411,8 +411,7 @@ You WILL handle these scenarios:
   stop and ask the user to correct the path.
 
 ⚠️ **Critical Requirements**
-- ALWAYS respect Propose-Confirm-Act for any change to tests or production
-  code.
+- ALWAYS ask for user approval before making any change to tests or production code
 - NEVER add new tests before confirming the current tests for the scope are
   passing or have an agreed fix plan.
 - ALWAYS use the tasklist in `[staging_dir]/unittest/<scope_path>/` as the

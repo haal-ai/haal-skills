@@ -46,7 +46,7 @@ You WILL analyze the target skill for these quality issues:
 - Missing type information
 
 **User Interaction Issues:**
-- References to vague external protocols ("defined externally", "Propose-Confirm-Act")
+- References to vague or outdated interaction patterns
 - Missing concrete interaction guidelines
 - Not following the standard interaction pattern
 
@@ -78,7 +78,7 @@ You WILL present findings to the user:
 After user approval, you WILL apply improvements:
 - Update frontmatter with proper metadata
 - Fix Input Parameters section formatting
-- Replace vague User Interaction protocols with concrete guidelines
+- Replace vague User Interaction patterns with concrete guidelines
 - Add missing sections following template structure
 - Fix file naming and path inconsistencies
 - Ensure consistent formatting throughout

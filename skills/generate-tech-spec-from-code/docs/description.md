@@ -12,8 +12,6 @@ Converting specifications into code is time-consuming and error-prone. This comp
 
 **Command**: `generate code from spec` (or aliases: `implement spec`, `code from specification`, `build from spec`)
 
-**Protocol**: Propose-Act
-
 **When to Use**: Use when you have detailed technical specifications and need to generate initial implementations, bootstrap new features, create proof-of-concepts, or ensure code matches documented requirements.
 
 ## Parameters

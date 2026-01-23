@@ -103,7 +103,7 @@ The documentation is organized into 6 developer-focused chapters:
 │    ↓                                                            │
 │ 3. Chapter Planning                                             │
 │    - Present chapter outline                                    │
-│    - Get user approval (Propose-Confirm-Act)                    │
+│    - Get user approval                                          │
 │    ↓                                                            │
 │ 4. Chapter Development Cycle (for each chapter)                 │
 │    a. Deep Analysis - Extract technical information             │

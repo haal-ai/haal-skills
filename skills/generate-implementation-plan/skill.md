@@ -42,7 +42,6 @@ This coordinator executes **7 sequential tasks**, asking for user approval at ke
 ```yaml
 workflow:
   type: master-chain
-  protocol: Propose-Act
   tasks:
     - id: 1
       name: extract-requirements-and-design

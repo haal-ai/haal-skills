@@ -14,8 +14,6 @@ Software projects often accumulate technical debt and quality issues over time. 
 
 **Skill**: `assess-code-quality-principles`
 
-**Protocol**: Propose-Act
-
 **When to Use**: 
 - Before major refactoring initiatives to establish baseline
 - During technical debt assessment and planning

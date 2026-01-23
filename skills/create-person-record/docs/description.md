@@ -12,8 +12,6 @@ Projects involve multiple people with different roles, expertise, and availabili
 
 **Command**: `create person record`
 
-**Protocol**: Propose-Act
-
 **When to Use**: Use this competency when onboarding new team members, documenting stakeholders, creating a team directory, or whenever you need to formally record information about people involved in the project for coordination and communication purposes.
 
 ## Parameters

@@ -12,8 +12,6 @@ Pull requests require thorough review to ensure code quality, prevent bugs, and 
 
 **Command**: `review github pr` (or aliases: `review pr`, `pull request review`, `check pr`, `github pr`)
 
-**Protocol**: Propose-Act
-
 **When to Use**: Use for reviewing pull requests before merging, assessing integration risks, validating that changes meet requirements, ensuring code quality standards, and identifying potential issues that span multiple files.
 
 ## Parameters

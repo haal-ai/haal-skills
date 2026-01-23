@@ -14,8 +14,6 @@ High cyclomatic complexity makes code difficult to understand, test, and maintai
 
 **Command**: `improve complexity`
 
-**Protocol**: Propose-Act
-
 **When to Use**:
 - When code complexity metrics exceed thresholds
 - During code review identifying complex methods

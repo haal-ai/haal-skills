@@ -31,7 +31,6 @@ You MUST request these parameters if not provided by the user. Present them as a
 You MUST follow these interaction guidelines:
 - Ask for user approval before creating or modifying files
 - Present options as numbered lists for easy selection
-- Use **Propose-Confirm-Act** because the workflow writes files into the repository
 - Provide clear progress updates at each major step
 
 ## Prerequisites

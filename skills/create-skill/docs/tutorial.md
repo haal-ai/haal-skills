@@ -189,7 +189,7 @@ Preview of generated `skill.md` with:
 
 ### Step 11: Approve or Request Changes
 
-**AI Asks:** "Does this skill structure look correct? (Propose-Confirm-Act)"
+**AI Asks:** "Does this skill structure look correct?"
 
 **User Options:**
 1. **Approve**: Type "approved" to create the skill

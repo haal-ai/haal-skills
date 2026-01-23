@@ -22,9 +22,9 @@ Execute systematic redocumentation of any multi-repository or complex applicatio
 
 **🚨 METHODOLOGY UPDATE (20251103):** Competency updated to prioritize direct source analysis over previous document synthesis, ensuring each step brings NEW insights through fresh code examination.
 
-## Execution Protocol
+## User Interaction
 
-**Protocol:** Act (automated execution with progress tracking)
+Execute automated execution with progress tracking.
 
 ## Process Flow
 
@@ -36,11 +36,11 @@ Execute systematic redocumentation of any multi-repository or complex applicatio
 - **Identify Next Step:** Determine the next pending step in the orchestration plan
 - **Validate Prerequisites:** Ensure all dependencies for the identified step are met
 
-### Step 1.5: Fresh Assessment Protocol - Direct Source Analysis
+### Step 1.5: Fresh Assessment - Direct Source Analysis
 
 **🚨 CRITICAL METHODOLOGY REQUIREMENT:** Execute FRESH ASSESSMENT focusing on **direct source code and file analysis** rather than reading previous analysis documents.
 
-**Fresh Assessment Protocol:**
+**Fresh Assessment Approach:**
 1. **Progress Tracking Only:** Review progress tracker ONLY for structural information:
    - Which step to execute next
    - File naming conventions and artifact locations
@@ -77,7 +77,7 @@ Execute systematic redocumentation of any multi-repository or complex applicatio
 ### Step 2: Execute Next Step with Fresh Assessment
 - **Load Competency:** Load the specific OLAF competency for the identified step
 - **Direct Source Analysis:** Apply competency directly to source code, configurations, and actual implementation files
-- **Execute with Protocol:** Follow the competency's defined interaction style
+- **Execute with Guidelines:** Follow the competency's defined interaction style
 - **Target Focus:** Apply the competency to the target repositories/application (typically in `your-repos/{project-name}/`)
 - **Generate New Insights:** Create artifacts containing fresh staging from direct code examination, not synthesis from previous analysis
 

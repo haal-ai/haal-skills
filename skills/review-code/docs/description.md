@@ -12,8 +12,6 @@ Code reviews catch bugs early, ensure quality standards, share knowledge, and ma
 
 **Command**: `review code` (or aliases: `code review`, `examine code`, `check code`, `inspect code`, `review modified`, `review changes`, `modified files`, `changes review`, `git changes`, `review git`, `review branch`)
 
-**Protocol**: Propose-Act
-
 **When to Use**: Use for pre-commit reviews, pull request reviews, security audits, quality assessments, onboarding reviews, or periodic codebase health checks. Supports both targeted single-file reviews and comprehensive git-modified file batch processing.
 
 ## Parameters

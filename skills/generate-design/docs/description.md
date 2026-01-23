@@ -14,8 +14,6 @@ Creating well-structured system designs from specifications requires systematic 
 
 **Command**: `generate design`
 
-**Protocol**: Propose-Act with approval gates
-
 **When to Use**: Use this skill after completing the specification phase (Phase 2 of ESDI) when you have a formal EARS specification and need to create a system architecture. It's essential for ensuring your design addresses all requirements and follows proven patterns.
 
 ## Parameters

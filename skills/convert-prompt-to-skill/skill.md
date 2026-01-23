@@ -58,7 +58,7 @@ You MUST determine where to create the converted skill BEFORE writing any files.
 You MUST follow these interaction guidelines:
 - Ask for user approval before creating or modifying files
 - Present options as numbered lists for easy selection
-- Use **Propose-Confirm-Act** for skill conversion due to high impact
+- Use careful review for skill conversion due to high impact
 - Provide clear progress updates at each major step
 
 ## Process
@@ -273,7 +273,7 @@ You WILL handle these scenarios:
 - **Duplicate Skill Found**: Present existing skill and ask for modification preferences
 - **Component Requirements Unclear**: Ask specific questions about each component type needed
 - **Template Separation Issues**: Guide user to separate embedded templates from external references
-- **User Rejection During Propose-Confirm-Act**: Request specific feedback and iterate
+- **User Rejection During Review**: Request specific feedback and iterate
 - **File Save Failures**: Provide alternative save methods and troubleshooting steps
 - **Component File Creation Failed**: Show specific errors for templates/tools/helpers/kb creation
 - **External Reference Validation Failed**: Ensure all referenced files exist and are accessible

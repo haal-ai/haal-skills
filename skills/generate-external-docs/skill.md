@@ -12,7 +12,7 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 ## Purpose
 Generate comprehensive external documentation (MkDocs format) from codebase analysis using AWS Strands multi-agent system. Runs in spawn mode allowing the user to continue working while documentation generates in the background.
 
-## Execution Protocol: Act
+## User Interaction
 
 Execute immediately without confirmation. The process runs asynchronously.
 

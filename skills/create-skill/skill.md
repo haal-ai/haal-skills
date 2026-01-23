@@ -234,7 +234,7 @@ You WILL validate the generated skill meets all requirements:
 - Confirmation that all external references are properly created
 
 ### Completion Summary
-- Generated skill presented for review via Propose-Confirm-Act
+- Generated skill presented for review with user approval
 - Validation checklist results showing schema compliance
 - Save location confirmation: 
   - `${skills_root}/[skill_name]/`
@@ -288,7 +288,7 @@ You WILL handle these scenarios:
 - **Duplicate Skill Found**: Present existing skill and ask for modification preferences
 - **Component Requirements Unclear**: Ask specific questions about each component type needed
 - **Template Separation Issues**: Guide user to separate embedded templates from external references
-- **User Rejection During Propose-Confirm-Act**: Request specific feedback and iterate
+- **User Rejection During Review**: Request specific feedback and iterate
 - **File Save Failures**: Provide alternative save methods and troubleshooting steps
 - **Component File Creation Failed**: Show specific errors for templates/tools/helpers/kb creation
 - **External Reference Validation Failed**: Ensure all referenced files exist and are accessible
