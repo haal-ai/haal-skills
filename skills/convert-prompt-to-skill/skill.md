@@ -20,15 +20,15 @@ You MUST request these parameters if not provided by the user. Present them as a
 4. **target_plugin**: string - Plugin name to assign the new skill to (REQUIRED)
 5. **agent_runtime**: string - One of: "windsurf", "cascade", "github-copilot", "claude-code", "other" (OPTIONAL - you SHOULD infer, else ask)
 6. **skills_root**: string - Explicit destination root folder for skills, relative to workspace root (OPTIONAL - preferred when user knows it)
-5. **user_request**: string - Extra requirements or modifications to apply during conversion (OPTIONAL)
-6. **needs_templates**: boolean - Whether skill needs external template files (OPTIONAL - default: false)
-7. **template_list**: array - List of template names/descriptions if needs_templates=true (OPTIONAL)
-8. **needs_tools**: boolean - Whether skill needs tool/script files (OPTIONAL - default: false)
-9.  **tool_list**: array - List of tool names/types if needs_tools=true (OPTIONAL)
-10. **needs_helpers**: boolean - Whether skill needs helper utility files (OPTIONAL - default: false)
-11. **helper_list**: array - List of helper names/descriptions if needs_helpers=true (OPTIONAL)
-12. **needs_kb**: boolean - Whether skill needs knowledge base articles (OPTIONAL - default: false)
-13. **kb_list**: array - List of kb article names/topics if needs_kb=true (OPTIONAL)
+7. **user_request**: string - Extra requirements or modifications to apply during conversion (OPTIONAL)
+8. **needs_templates**: boolean - Whether skill needs external template files (OPTIONAL - default: false)
+9. **template_list**: array - List of template names/descriptions if needs_templates=true (OPTIONAL)
+10. **needs_tools**: boolean - Whether skill needs tool/script files (OPTIONAL - default: false)
+11. **tool_list**: array - List of tool names/types if needs_tools=true (OPTIONAL)
+12. **needs_helpers**: boolean - Whether skill needs helper utility files (OPTIONAL - default: false)
+13. **helper_list**: array - List of helper names/descriptions if needs_helpers=true (OPTIONAL)
+14. **needs_kb**: boolean - Whether skill needs knowledge base articles (OPTIONAL - default: false)
+15. **kb_list**: array - List of kb article names/topics if needs_kb=true (OPTIONAL)
 
 ## Skill Location Discovery (Local Destination)
 You MUST determine where to create the converted skill BEFORE writing any files.
@@ -54,10 +54,12 @@ You MUST determine where to create the converted skill BEFORE writing any files.
   3. Update in place (preserve existing files; only add/modify what is necessary).
 - You MUST NOT overwrite any existing skill folder without explicit user confirmation.
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- You WILL use Propose-Confirm-Act for skill conversion due to high impact
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present options as numbered lists for easy selection
+- Use **Propose-Confirm-Act** for skill conversion due to high impact
+- Provide clear progress updates at each major step
 
 ## Process
 
@@ -242,17 +244,18 @@ You WILL consider the task complete when:
 ## Domain-Specific Rules
 You MUST follow these constraints:
 - Rule 1: Generated skill MUST follow skills architecture from `kb/skill-structure-schema.md`
+- Rule 2: Generated skill MUST follow skills architecture from `kb/skill-structure-schema.md`
 - Rule 3: Generated prompt MUST use imperative language consistently
 - Rule 4: Generated skill MUST include comprehensive error handling
 - Rule 5: Skill name MUST be kebab-case, 3-4 words
 - Rule 6: Generated skill MUST include measurable success criteria
 - Rule 7: Skill directory MUST be created locally under the resolved skills root: `${skills_root}/[skill_name]/`
-- Rule 9: **CRITICAL**: Main prompt MUST reference external files, NOT embed template content
-- Rule 10: **TEMPLATE SEPARATION**: Templates must be separate files in `templates/`, not embedded in prompt
-- Rule 11: Component files MUST only be created if user explicitly requests them
-- Rule 12: All generated external references MUST have corresponding files created
-- Rule 16: **SOURCE PRESERVATION**: NEVER modify original source file(s)
-- Rule 17: **FUNCTIONALITY PRESERVATION**: Original intent and functionality must be preserved
+- Rule 8: **CRITICAL**: Main prompt MUST reference external files, NOT embed template content
+- Rule 9: **TEMPLATE SEPARATION**: Templates must be separate files in `templates/`, not embedded in prompt
+- Rule 10: Component files MUST only be created if user explicitly requests them
+- Rule 11: All generated external references MUST have corresponding files created
+- Rule 12: **SOURCE PRESERVATION**: NEVER modify original source file(s)
+- Rule 13: **FUNCTIONALITY PRESERVATION**: Original intent and functionality must be preserved
 
 ## Required Actions
 1. Validate all required input parameters and prerequisites

@@ -13,14 +13,17 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **task_description**: string - What the user wants to accomplish (REQUIRED)
-- **expertise_level**: string - User's prompt engineering skill level: beginner/trained/advanced (OPTIONAL - will assess if not provided)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
+1. **task_description**: string - What the user wants to accomplish (REQUIRED)
+2. **expertise_level**: string - User's prompt engineering skill level: beginner/trained/advanced (OPTIONAL - will assess if not provided)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol:
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before executing complex workflows
+- Present options as numbered lists for easy selection
 - Use **Act** for skill recommendations and guidance
 - Use **Propose-Confirm-Act** when executing complex workflows on user's behalf
+- Provide clear progress updates at each major step
 
 ## Process
 
@@ -136,33 +139,10 @@ When appropriate, you WILL suggest advancement opportunities:
 
 ## Error Handling
 You WILL handle these scenarios:
-
-### Unknown Task
-**Trigger**: User request doesn't map to any known skill
-**Action**: 
-1. Ask clarifying questions about the goal
-2. Offer to route the question via `help-me-olaf` or `tell-me`
-
-### Skill Level Mismatch
-**Trigger**: Beginner attempting advanced-level task
-**Action**:
-1. Acknowledge the goal
-2. Recommend prerequisite skills to build up to it
-3. Provide learning path from current level to target skill
-
-### Multiple Skill Options
-**Trigger**: Several skills could address the task
-**Action**:
-1. Present top 2-3 options with trade-offs
-2. Ask user to choose based on their preference
-3. Explain differences clearly
-
-### Deprecated Skill
-**Trigger**: User requests functionality from replaced skill
-**Action**:
-1. Acknowledge the old skill name
-2. Provide current replacement skill
-3. Explain what changed and why
+- **Unknown Task**: Ask clarifying questions, offer to route via `help-me-olaf` or `tell-me`
+- **Skill Level Mismatch**: Acknowledge goal, recommend prerequisite skills, provide learning path
+- **Multiple Skill Options**: Present top 2-3 options with trade-offs, ask user to choose
+- **Deprecated Skill**: Acknowledge old skill name, provide current replacement, explain changes
 
 ## Output Format
 You WILL structure responses as:
@@ -174,11 +154,35 @@ You WILL structure responses as:
 5. **Next Action**: Clear, specific next step for user
 
 ## Success Criteria
-- User receives appropriate skill recommendation for their level
-- User understands how to invoke the recommended skill
-- User knows what outcome to expect
-- User has clear next action to take
-- Advanced users receive workflow orchestration when needed
+You WILL consider the task complete when:
+- [ ] User expertise level identified (assessed or provided)
+- [ ] Task mapped to appropriate skill capability
+- [ ] User receives appropriate skill recommendation for their level
+- [ ] User understands how to invoke the recommended skill
+- [ ] User knows what outcome to expect
+- [ ] User has clear next action to take
+- [ ] Advanced users receive workflow orchestration when needed
+
+## Required Actions
+1. Assess user expertise level if not provided
+2. Map task to appropriate skills based on level
+3. Provide clear recommendations with rationale
+4. Offer workflow guidance for complex tasks
+5. Suggest learning path advancement when appropriate
+
+## Error Handling
+You WILL handle these scenarios:
+- **Unknown Task**: Ask clarifying questions, offer to route via `help-me-olaf` or `tell-me`
+- **Skill Level Mismatch**: Acknowledge goal, recommend prerequisite skills, provide learning path
+- **Multiple Skill Options**: Present top 2-3 options with trade-offs, ask user to choose
+- **Deprecated Skill**: Acknowledge old skill name, provide current replacement, explain changes
+
+⚠️ **Critical Requirements**
+- MANDATORY: Adapt recommendations based on user expertise level
+- NEVER recommend advanced skills to beginners without learning path
+- ALWAYS provide clear, actionable next steps
+- ALWAYS explain why a particular skill is recommended
+- ALWAYS use numbered lists when presenting options to users
 
 ## User Communication
 
