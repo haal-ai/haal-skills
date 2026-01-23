@@ -114,33 +114,34 @@ function Prune-Files([string[]]$Files, [string]$DestBase) {
 }
 
 function Update-GitExclude([string]$DestBase) {
-    $excludeFile = Join-Path $DestBase ".git\info\exclude"
-    $infoDir = Split-Path -Parent $excludeFile
-    
-    if (!(Test-Path -LiteralPath (Join-Path $DestBase ".git"))) {
+    $gitDir = Join-Path $DestBase ".git"
+    if (!(Test-Path -LiteralPath $gitDir)) {
         Write-Host "  SKIP: Not a git repo" -ForegroundColor Yellow
         return
     }
     
+    $excludeFile = Join-Path $DestBase ".git\info\exclude"
+    $infoDir = Split-Path -Parent $excludeFile
+    
     # Ensure .git/info exists
     if (!(Test-Path -LiteralPath $infoDir)) {
-        New-Item -ItemType Directory -Path $infoDir -Force | Out-Null
+        New-Item -ItemType Directory -Path $infoDir -Force -ErrorAction SilentlyContinue | Out-Null
     }
     
     # Read existing exclusions
     $existing = @()
     if (Test-Path -LiteralPath $excludeFile) {
-        $existing = Get-Content -LiteralPath $excludeFile -ErrorAction SilentlyContinue | 
-            Where-Object { $_ -and !$_.StartsWith('#') }
+        $existing = @(Get-Content -LiteralPath $excludeFile -ErrorAction SilentlyContinue | 
+            Where-Object { $_ -and !$_.StartsWith('#') })
     }
     
     # Add new exclusions
-    $toAdd = $GitExclusions | Where-Object { $existing -notcontains $_ }
+    $toAdd = @($GitExclusions | Where-Object { $existing -notcontains $_ })
     
     if ($toAdd.Count -gt 0) {
-        Add-Content -LiteralPath $excludeFile -Value "`n# OLAF sync exclusions"
+        Add-Content -LiteralPath $excludeFile -Value "`n# OLAF sync exclusions" -ErrorAction SilentlyContinue
         foreach ($ex in $toAdd) {
-            Add-Content -LiteralPath $excludeFile -Value $ex
+            Add-Content -LiteralPath $excludeFile -Value $ex -ErrorAction SilentlyContinue
         }
         Write-Host "  Added $($toAdd.Count) git exclusions" -ForegroundColor Green
     } else {
