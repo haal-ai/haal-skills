@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Test Create Skill - Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/test-create-skill/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#test-create-skill-tutorial" class="nav-link">Test Create Skill - Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#basic-usage" class="nav-link">Basic Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#advanced-usage" class="nav-link">Advanced Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#understanding-test-results" class="nav-link">Understanding Test Results</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="test-create-skill-tutorial">Test Create Skill - Tutorial<a class="headerlink" href="#test-create-skill-tutorial" title="Permanent link">&para;</a></h1>
+<p>This tutorial will guide you through using the <code>test-create-skill</code> to validate create-skill functionality.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before running the test:
+1. Ensure you have access to the OLAF framework
+2. Verify you're in a workspace with the <code>.olaf</code> directory structure
+3. Confirm you have write permissions to the skills directory</p>
+<h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-invoke-the-skill">Step 1: Invoke the Skill<a class="headerlink" href="#step-1-invoke-the-skill" title="Permanent link">&para;</a></h3>
+<pre><code>olaf test create skill
+</code></pre>
+<p>The skill will automatically run with default settings:
+- Full test scope
+- Automatic cleanup enabled
+- Standard test skill name</p>
+<h3 id="step-2-monitor-test-execution">Step 2: Monitor Test Execution<a class="headerlink" href="#step-2-monitor-test-execution" title="Permanent link">&para;</a></h3>
+<p>The skill will provide progress updates as it executes:
+- Template access validation
+- Parameter collection tests
+- Component handling tests
+- Schema validation tests
+- Reindexing functionality tests
+- Error handling tests</p>
+<h3 id="step-3-review-results">Step 3: Review Results<a class="headerlink" href="#step-3-review-results" title="Permanent link">&para;</a></h3>
+<p>After execution, you'll receive:
+- Test summary with pass/fail counts
+- Detailed results for each test category
+- Regression report if issues detected
+- Cleanup confirmation</p>
+<h2 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
+<h3 id="custom-test-scope">Custom Test Scope<a class="headerlink" href="#custom-test-scope" title="Permanent link">&para;</a></h3>
+<p>To run only basic tests:</p>
+<pre><code>olaf test create skill
+</code></pre>
+<p>Then specify: <code>test_scope: "basic"</code></p>
+<h3 id="preserve-test-artifacts">Preserve Test Artifacts<a class="headerlink" href="#preserve-test-artifacts" title="Permanent link">&para;</a></h3>
+<p>To keep test files for inspection:</p>
+<pre><code>olaf test create skill
+</code></pre>
+<p>Then specify: <code>cleanup_after: false</code></p>
+<h3 id="custom-test-skill-name">Custom Test Skill Name<a class="headerlink" href="#custom-test-skill-name" title="Permanent link">&para;</a></h3>
+<p>To use a specific test skill name:</p>
+<pre><code>olaf test create skill
+</code></pre>
+<p>Then specify: <code>test_skill_name: "my-custom-test"</code></p>
+<h2 id="understanding-test-results">Understanding Test Results<a class="headerlink" href="#understanding-test-results" title="Permanent link">&para;</a></h2>
+<h3 id="success-indicators">Success Indicators<a class="headerlink" href="#success-indicators" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ All tests passed</li>
+<li>No regressions detected</li>
+<li>Clean test artifact removal</li>
+<li>Schema compliance validated</li>
+</ul>
+<h3 id="failure-indicators">Failure Indicators<a class="headerlink" href="#failure-indicators" title="Permanent link">&para;</a></h3>
+<ul>
+<li>❌ Specific test failures reported</li>
+<li>Regression details provided</li>
+<li>Error conditions documented</li>
+<li>Remediation steps suggested</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Template Access Errors</strong>
+- Verify <code>~/templates/</code> exists
+- Check file permissions on template files
+- Confirm templates contain expected content</p>
+<p><strong>Directory Permission Errors</strong>
+- Verify write access to skills directory
+- Check competencies directory permissions
+- Ensure test workspace can be created</p>
+<p><strong>Schema Validation Failures</strong>
+- Review create-skill template structure
+- Verify manifest generation logic
+- Check for schema definition changes</p>
+<h3 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h3>
+<p>If tests fail consistently:
+1. Review the detailed error messages
+2. Check the specific failure conditions
+3. Validate your OLAF framework installation
+4. Consult with the OLAF development team</p>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="regular-testing">Regular Testing<a class="headerlink" href="#regular-testing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Run regression tests before framework releases</li>
+<li>Execute tests after any create-skill modifications</li>
+<li>Include testing in CI/CD pipelines</li>
+</ul>
+<h3 id="test-environment">Test Environment<a class="headerlink" href="#test-environment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Always test in isolated environments</li>
+<li>Use cleanup to prevent artifact accumulation</li>
+<li>Preserve evidence when investigating failures</li>
+</ul>
+<h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Document any recurring test failures</li>
+<li>Track regression patterns over time</li>
+<li>Share results with the development team</li>
+</ul>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>After successful testing:
+- Consider the create-skill functionality validated
+- Document any improvements needed
+- Schedule next regression test cycle
+- Update test scenarios if new features added</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

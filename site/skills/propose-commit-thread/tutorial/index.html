@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Propose Commit Thread: Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/propose-commit-thread/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#propose-commit-thread-step-by-step-tutorial" class="nav-link">Propose Commit Thread: Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#how-to-execute-the-analyze-git-changes-and-create-smart-commit-sequences" class="nav-link">How to Execute the "Analyze Git Changes and Create Smart Commit Sequences"</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="propose-commit-thread-step-by-step-tutorial">Propose Commit Thread: Step-by-Step Tutorial<a class="headerlink" href="#propose-commit-thread-step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<h2 id="how-to-execute-the-analyze-git-changes-and-create-smart-commit-sequences">How to Execute the "Analyze Git Changes and Create Smart Commit Sequences"<a class="headerlink" href="#how-to-execute-the-analyze-git-changes-and-create-smart-commit-sequences" title="Permanent link">&para;</a></h2>
+<p>This tutorial shows exactly how to reproduce the intelligent commit clustering workflow for organizing changes into logical, coherent commits with GitHub issue integration.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Git installed and configured on your system</li>
+<li>Repository with uncommitted changes ready for analysis</li>
+<li>GitHub CLI installed (optional, for issue integration)</li>
+<li>Write permissions to the repository</li>
+<li>Understanding of your project's feature/component structure</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-initiate-commit-analysis">Step 1: Initiate Commit Analysis<a class="headerlink" href="#step-1-initiate-commit-analysis" title="Permanent link">&para;</a></h3>
+<p>[This step starts the OLAF commit analysis workflow]</p>
+<p><strong>User Action:</strong></p>
+<ol>
+<li>Invoke the propose-commit-thread competency in OLAF</li>
+<li>Navigate to your repository with pending changes</li>
+<li>Ensure git status shows files ready for commit organization</li>
+</ol>
+<p><strong>OLAF Response:</strong></p>
+<p>You should see OLAF validate the repository state and begin analyzing all uncommitted changes for intelligent clustering.</p>
+<h3 id="step-2-provide-analysis-parameters">Step 2: Provide Analysis Parameters<a class="headerlink" href="#step-2-provide-analysis-parameters" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Specify analysis preferences when prompted</p>
+<pre><code class="language-bash">Repository path: [current directory or specify path]
+Include GitHub issues integration? (y/n): [your choice]
+Commit strategy (granular/feature-based): [your preference]
+Auto-execute after approval? (y/n): [recommended: no]
+</code></pre>
+<p><strong>Provide Analysis Configuration:</strong></p>
+<ul>
+<li><strong>Repository Path</strong>: Path to git repository (defaults to current directory)</li>
+<li><strong>GitHub Issues</strong>: Enable to link commits with related open issues</li>
+<li><strong>Commit Strategy</strong>: Choose between granular (file-by-file) or feature-based clustering</li>
+<li><strong>Auto Execute</strong>: Keep false for safety - allows review before execution</li>
+</ul>
+<h3 id="step-3-change-analysis-and-categorization">Step 3: Change Analysis and Categorization<a class="headerlink" href="#step-3-change-analysis-and-categorization" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Executes <code>git status --porcelain</code> for machine-readable status</li>
+<li>Categorizes files by git status (Modified, Added, Deleted, Renamed, etc.)</li>
+<li>Analyzes <code>git diff</code> for each file to understand change scope</li>
+<li>Groups related files by functionality, dependencies, and components</li>
+<li>Scans for GitHub issues if integration enabled</li>
+</ul>
+<p><strong>You Should See:</strong> Comprehensive analysis of all changes with file categorization and initial clustering proposals</p>
+<h3 id="step-4-github-issues-integration">Step 4: GitHub Issues Integration<a class="headerlink" href="#step-4-github-issues-integration" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does (if enabled):</strong></p>
+<ul>
+<li>Retrieves open GitHub issues using <code>gh issue list</code></li>
+<li>Extracts keywords from your changes (file names, functions, classes)</li>
+<li>Matches potential issues by title keywords and labels</li>
+<li>Correlates changes with bug reports, enhancements, or features</li>
+</ul>
+<p><strong>You Should See:</strong> List of potentially related GitHub issues with relevance scores and suggested associations</p>
+<h3 id="step-5-interactive-commit-proposal">Step 5: Interactive Commit Proposal<a class="headerlink" href="#step-5-interactive-commit-proposal" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Review the structured commit thread proposal</p>
+<pre><code class="language-markdown"># 📋 Proposed Commit Thread - YYYYMMDD-HHmm
+
+## Repository Analysis
+**Repository**: your-repo-name
+**Branch**: current-branch
+**Files Changed**: X (Y untracked, Z modified, W staged)
+
+## 🎯 Proposed Commit Sequence
+
+### Commit 1: Feature Implementation
+**Files** (3):
+- src/feature/main.js (Modified)
+- src/feature/helper.js (Added)
+
+**Commit Message**:
+feat: implement user authentication feature
+
+- Add main authentication logic
+- Create helper utilities for token validation
+
+**Related GitHub Issues**: #42 - User Login System
+
+**👤 User Actions Available:**
+- ✅ APPROVE: Accept this commit as proposed
+- 🔄 MODIFY: Change commit message or file grouping
+- ➕ SPLIT: Break into smaller commits
+- ➖ MERGE: Combine with another commit
+- ❌ SKIP: Don't commit these changes now
+</code></pre>
+<p><strong>Available Interactive Commands:</strong></p>
+<ul>
+<li><code>1a</code> = Approve commit 1</li>
+<li><code>1m</code> = Modify commit 1  </li>
+<li><code>1s</code> = Split commit 1</li>
+<li><code>merge 1,2</code> = Merge commits 1 and 2</li>
+<li><code>skip 1</code> = Skip commit 1</li>
+<li><code>execute</code> = Execute all approved commits</li>
+</ul>
+<h3 id="step-6-interactive-modification-phase">Step 6: Interactive Modification Phase<a class="headerlink" href="#step-6-interactive-modification-phase" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Use commands to refine commit organization</p>
+<p><strong>Modification Operations:</strong></p>
+<ul>
+<li><strong>Message Edit</strong>: Update commit title and description</li>
+<li><strong>File Regrouping</strong>: Move files between commit clusters</li>
+<li><strong>Commit Splitting</strong>: Break large commits into focused smaller ones</li>
+<li><strong>Commit Merging</strong>: Combine related commits for cleaner history</li>
+<li><strong>Issue Association</strong>: Link/unlink GitHub issues</li>
+</ul>
+<p><strong>Real-time Updates:</strong></p>
+<p>OLAF provides immediate feedback as you modify the commit structure, ensuring consistency and preventing conflicts.</p>
+<h3 id="step-7-final-approval-and-execution">Step 7: Final Approval and Execution<a class="headerlink" href="#step-7-final-approval-and-execution" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Execute the final commit sequence</p>
+<pre><code class="language-bash">execute
+</code></pre>
+<p><strong>What OLAF Does:</strong></p>
+<ol>
+<li><strong>For each approved commit (in logical order):</strong></li>
+<li>Stage specified files: <code>git add [file_list]</code></li>
+<li>Create commit with detailed message: <code>git commit -m "[commit_message]"</code></li>
+<li>Update related GitHub issues with commit reference</li>
+<li>
+<p>Verify commit success before proceeding</p>
+</li>
+<li>
+<p><strong>GitHub Integration:</strong></p>
+</li>
+<li>Add commit references to related issues</li>
+<li>Update issue labels based on commit types</li>
+<li>Close issues if commit messages include closing keywords</li>
+</ol>
+<p><strong>You Should See:</strong> Step-by-step execution with confirmation of each successful commit and issue integration results</p>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>All intended files committed</strong> (git log shows proper commit sequence)</p>
+<p>✅ <strong>Logical commit organization</strong> (each commit has coherent purpose and scope)</p>
+<p>✅ <strong>Detailed commit messages</strong> (follows conventional commits with bullet points)</p>
+<p>✅ <strong>GitHub issues updated</strong> (commits referenced in related issues)</p>
+<p>✅ <strong>Clean working directory</strong> (git status shows no remaining uncommitted changes)</p>
+<p>✅ <strong>Git history integrity</strong> (no conflicts or broken dependencies between commits)</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If not a git repository:</strong></p>
+<pre><code class="language-bash">Error: Not a valid git repository
+</code></pre>
+<ul>
+<li>Navigate to correct directory containing .git folder</li>
+<li>Initialize repository with <code>git init</code> if needed</li>
+</ul>
+<p><strong>If merge conflicts present:</strong></p>
+<ul>
+<li>OLAF will stop and require resolution before proceeding</li>
+<li>Resolve conflicts manually using <code>git mergetool</code> or editor</li>
+<li>Re-run the competency after conflicts are resolved</li>
+</ul>
+<p><strong>If GitHub CLI not available:</strong></p>
+<ul>
+<li>OLAF will skip GitHub integration and proceed with git-only workflow</li>
+<li>Install GitHub CLI with <code>gh auth login</code> for issue integration</li>
+<li>Alternative: manually reference issues in commit messages</li>
+</ul>
+<p><strong>If commit permission denied:</strong></p>
+<ul>
+<li>Verify you have write access to the repository</li>
+<li>Check if branch is protected and requires specific permissions</li>
+<li>Ensure proper Git configuration with valid author information</li>
+</ul>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Intelligent Clustering:</strong> Changes are grouped by logical relationships rather than arbitrary file selection</li>
+<li><strong>Interactive Refinement:</strong> Full control over commit organization with real-time modification capabilities  </li>
+<li><strong>GitHub Integration:</strong> Automatic linking between commits and project issues for better project tracking</li>
+<li><strong>Safety First:</strong> Propose-Confirm-Act protocol prevents accidental commits and allows thorough review</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Review git log to see clean, logical commit sequence</li>
+<li>Check GitHub issues for automatic commit references and updates</li>
+<li>Push commits to remote repository for team collaboration</li>
+<li>Use similar approach for future change sets to maintain clean history</li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total analysis and execution time:</strong> 5-15 minutes</li>
+<li><strong>User input required:</strong> Analysis parameters, commit review and modification, final execution approval</li>
+<li><strong>OLAF execution time:</strong> Git analysis, GitHub integration, automated commit execution with issue updates</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

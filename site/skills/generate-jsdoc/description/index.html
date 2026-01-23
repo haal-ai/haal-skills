@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Generate JSDoc Documentation - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/generate-jsdoc/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#generate-jsdoc-documentation" class="nav-link">Generate JSDoc Documentation</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#safety-features" class="nav-link">Safety Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#jsdoc-standards-applied" class="nav-link">JSDoc Standards Applied</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#process-monitoring" class="nav-link">Process Monitoring</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#performance" class="nav-link">Performance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#review-and-commit-changes" class="nav-link">Review and Commit Changes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dependencies" class="nav-link">Dependencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tags" class="nav-link">Tags</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="generate-jsdoc-documentation">Generate JSDoc Documentation<a class="headerlink" href="#generate-jsdoc-documentation" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The <code>generate-jsdoc</code> skill generates comprehensive inline JSDoc comments for JavaScript and TypeScript source files using the AWS Strands multi-agent system.</p>
+<p><strong>⚠️ CRITICAL</strong>: This skill <strong>MODIFIES SOURCE CODE</strong> by adding JSDoc documentation directly to your files.</p>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Inline Documentation</strong>: Adds comprehensive JSDoc comments to .js and .ts files</li>
+<li><strong>High-Quality Output</strong>: Matches commit-d02da43 JSDoc standards with detailed @param, @returns, @throws, @example, and @remarks</li>
+<li><strong>Spawn Mode</strong>: Runs in background, allowing you to continue working</li>
+<li><strong>Git Safety</strong>: Creates git branch automatically (default) to protect against unwanted changes</li>
+<li><strong>Two Modes</strong>: In-place modification or copy-to-folder</li>
+<li><strong>Process Tracking</strong>: Monitor progress via <code>.olaf/work/straf-locks/jsdoc-generation-processes.json</code></li>
+<li><strong>Resume Support</strong>: Can resume interrupted operations</li>
+</ul>
+<h2 id="safety-features">Safety Features<a class="headerlink" href="#safety-features" title="Permanent link">&para;</a></h2>
+<h3 id="automatic-git-branch-creation">Automatic Git Branch Creation<a class="headerlink" href="#automatic-git-branch-creation" title="Permanent link">&para;</a></h3>
+<p><strong>Default Behavior</strong>: The skill creates a git branch automatically before modifying any files.</p>
+<ul>
+<li>Branch name format: <code>docs-jsdoc-gen-YYYYMMDD-HHMMSS</code></li>
+<li>Must explicitly use <code>--no-branch</code> flag to disable (NOT RECOMMENDED)</li>
+<li>Provides safety net to review and discard changes if needed</li>
+</ul>
+<h3 id="two-operating-modes">Two Operating Modes<a class="headerlink" href="#two-operating-modes" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>In-Place Mode</strong> (default):</li>
+<li>Modifies source files directly in repository</li>
+<li>⚠️ Changes original files</li>
+<li>✅ Git branch creation enabled by default</li>
+<li>
+<p>Use when you want to update your actual source code</p>
+</li>
+<li>
+<p><strong>Copy-to-Folder Mode</strong>:</p>
+</li>
+<li>Creates documented copies in separate directory</li>
+<li>ℹ️ Original files remain untouched</li>
+<li>Use when you want to preview changes first</li>
+</ol>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="basic-usage-in-place-default">Basic Usage (In-Place, Default)<a class="headerlink" href="#basic-usage-in-place-default" title="Permanent link">&para;</a></h3>
+<pre><code>User: &quot;olaf generate jsdoc&quot;
+</code></pre>
+<ul>
+<li>Processes entire workspace repository</li>
+<li>Creates git branch automatically</li>
+<li>Modifies source files with JSDoc comments</li>
+</ul>
+<h3 id="specific-folder">Specific Folder<a class="headerlink" href="#specific-folder" title="Permanent link">&para;</a></h3>
+<pre><code>User: &quot;olaf generate jsdoc for vscode-extension&quot;
+</code></pre>
+<ul>
+<li>Processes only the vscode-extension subfolder</li>
+<li>Creates git branch</li>
+<li>Modifies files in that subfolder only</li>
+</ul>
+<h3 id="copy-mode-safe-preview">Copy Mode (Safe Preview)<a class="headerlink" href="#copy-mode-safe-preview" title="Permanent link">&para;</a></h3>
+<pre><code>User: &quot;olaf generate jsdoc to c:\temp\jsdoc-output&quot;
+</code></pre>
+<ul>
+<li>Processes entire repository</li>
+<li>Saves documented copies to specified folder</li>
+<li>Original files untouched</li>
+</ul>
+<h3 id="without-git-branch-not-recommended">Without Git Branch (⚠️ NOT RECOMMENDED)<a class="headerlink" href="#without-git-branch-not-recommended" title="Permanent link">&para;</a></h3>
+<pre><code>User: &quot;olaf generate jsdoc --no-branch&quot;
+</code></pre>
+<ul>
+<li>Modifies files without creating branch</li>
+<li>Changes applied to current branch</li>
+<li>No easy way to undo</li>
+</ul>
+<h2 id="jsdoc-standards-applied">JSDoc Standards Applied<a class="headerlink" href="#jsdoc-standards-applied" title="Permanent link">&para;</a></h2>
+<p>The skill generates comprehensive JSDoc documentation including:</p>
+<ul>
+<li><strong>@param</strong>: Detailed parameter descriptions with types</li>
+<li><strong>@returns</strong>: Return value documentation with types</li>
+<li><strong>@throws</strong>: Error conditions and exception types</li>
+<li><strong>@example</strong>: Usage examples with code snippets</li>
+<li><strong>@remarks</strong>: Implementation notes and context</li>
+<li><strong>@see</strong>: Related references and links</li>
+</ul>
+<p><strong>Quality Target</strong>: Matches commit-d02da43 JSDoc standards</p>
+<h2 id="process-monitoring">Process Monitoring<a class="headerlink" href="#process-monitoring" title="Permanent link">&para;</a></h2>
+<h3 id="check-status">Check Status<a class="headerlink" href="#check-status" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">python skills/generate-jsdoc/tools/check-jsdoc-processes.py
+</code></pre>
+<h3 id="monitor-progress">Monitor Progress<a class="headerlink" href="#monitor-progress" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Windows
+Get-Content .jsdoc-generation.log -Tail 20
+
+# Unix/Linux
+tail -f .jsdoc-generation.log
+</code></pre>
+<h3 id="process-registry">Process Registry<a class="headerlink" href="#process-registry" title="Permanent link">&para;</a></h3>
+<p>Location: <code>.olaf/work/straf-locks/jsdoc-generation-processes.json</code></p>
+<p>Contains:
+- Process ID and name
+- Repository and output paths
+- Operating mode (in-place | copy-to-folder)
+- Status (running | completed | failed | interrupted)
+- Timestamps
+- Log file location</p>
+<h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Codebase Size</th>
+<th>Est. Time</th>
+<th>Files/Min</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Small (&lt;100 files)</td>
+<td>5-10 min</td>
+<td>10-20</td>
+</tr>
+<tr>
+<td>Medium (100-500 files)</td>
+<td>10-30 min</td>
+<td>10-20</td>
+</tr>
+<tr>
+<td>Large (500+ files)</td>
+<td>30-60 min</td>
+<td>8-15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: Actual time depends on:
+- File size and complexity
+- Number of functions/classes per file
+- AWS Bedrock API response time
+- System resources</p>
+<h2 id="review-and-commit-changes">Review and Commit Changes<a class="headerlink" href="#review-and-commit-changes" title="Permanent link">&para;</a></h2>
+<h3 id="after-completion-in-place-mode">After Completion (In-Place Mode)<a class="headerlink" href="#after-completion-in-place-mode" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Review changes</strong>:
+   <code>bash
+   git diff
+   git status</code></p>
+</li>
+<li>
+<p><strong>Commit if satisfied</strong>:
+   <code>bash
+   git add .
+   git commit -m "docs: add comprehensive JSDoc comments"</code></p>
+</li>
+<li>
+<p><strong>Discard if not satisfied</strong>:
+   <code>bash
+   git checkout .
+   git checkout main  # Return to main branch
+   git branch -D docs/jsdoc-gen-YYYYMMDD-HHMMSS  # Delete branch</code></p>
+</li>
+</ol>
+<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Python 3.x</li>
+<li>AWS credentials configured for Bedrock</li>
+<li>straf-cli installed at <code>.olaf/core/agentic/straf-cli/</code></li>
+<li>Git (optional but strongly recommended)</li>
+</ul>
+<h2 id="tags">Tags<a class="headerlink" href="#tags" title="Permanent link">&para;</a></h2>
+<p><code>documentation</code>, <code>jsdoc</code>, <code>inline-docs</code>, <code>spawn</code>, <code>async</code>, <code>strands</code>, <code>code-modification</code></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

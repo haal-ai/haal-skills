@@ -1,0 +1,21 @@
+{
+  "name": "base-skills",
+  "description": "Kernel skills required for foundational OLAF workflows",
+  "skills": [
+    "carry-on-session",
+    "carry-over-session",
+    "challenge-me",
+    "convert-prompt-to-skill",
+    "create-decision-record",
+    "create-job",
+    "create-person-record",
+    "create-skill",
+    "generate-step-by-step-tutorial",
+    "git-add-commit",
+    "help-me-olaf",
+    "should-i-use-ai",
+    "store-conversation-record",
+    "switch-context",
+    "tell-me"
+  ]
+}

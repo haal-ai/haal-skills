@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Improve Cyclomatic Complexity - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/improve-cyclomatic-complexity/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#improve-cyclomatic-complexity" class="nav-link">Improve Cyclomatic Complexity</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-competencies" class="nav-link">Related Competencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="improve-cyclomatic-complexity">Improve Cyclomatic Complexity<a class="headerlink" href="#improve-cyclomatic-complexity" title="Permanent link">&para;</a></h1>
+<p><strong>Source</strong>: core/competencies/developer/prompts/improve-cyclomatic-complexity.md</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Systematically reduce cyclomatic complexity of code sections while preserving functionality and improving maintainability. Provides phased refactoring approach with complexity measurement.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>High cyclomatic complexity makes code difficult to understand, test, and maintain. This competency analyzes complex code, identifies root causes, and applies targeted refactoring techniques to reduce complexity while preserving behavior. It ensures changes are validated through testing and measured for improvement.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><strong>Command</strong>: <code>improve complexity</code></p>
+<p><strong>Protocol</strong>: Propose-Act</p>
+<p><strong>When to Use</strong>:
+- When code complexity metrics exceed thresholds
+- During code review identifying complex methods
+- To improve code testability
+- When reducing technical debt
+- For making code more maintainable</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-inputs">Required Inputs<a class="headerlink" href="#required-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>target_code</strong>: The method/function with high cyclomatic complexity (include containing class/module and file location)</li>
+<li><strong>programming_language</strong>: The programming language of the code</li>
+</ul>
+<h3 id="optional-inputs">Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>test_information</strong>: Available test information and coverage details</li>
+<li><strong>interface_restrictions</strong>: Restrictions on changing interfaces/signatures</li>
+<li><strong>performance_requirements</strong>: Performance constraints to consider</li>
+<li><strong>compatibility_needs</strong>: Backward compatibility requirements</li>
+<li><strong>target_complexity</strong>: Target cyclomatic complexity score (default: &lt;10)</li>
+</ul>
+<h3 id="context-requirements">Context Requirements<a class="headerlink" href="#context-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Code with high cyclomatic complexity</li>
+<li>Existing tests for validation</li>
+<li>Understanding of interface constraints</li>
+</ul>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p>Refactored code with reduced complexity and preserved functionality.</p>
+<p><strong>Deliverables</strong>:
+- Current complexity assessment with score
+- Visual control flow representation
+- Root cause analysis of complexity
+- Phased refactoring strategy
+- Refactored code with reduced complexity
+- New complexity measurements
+- Test validation results</p>
+<p><strong>Format</strong>: Code transformations with complexity analysis, saved to <code>.olaf/work/staging/code-evolution/</code></p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-nested-conditionals-refactoring">Example 1: Nested Conditionals Refactoring<a class="headerlink" href="#example-1-nested-conditionals-refactoring" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Method with deeply nested if-else statements (complexity: 18)</p>
+<p><strong>Command</strong>:</p>
+<pre><code>improve complexity
+</code></pre>
+<p><strong>Input</strong>:
+- target_code: [processOrder method with nested conditionals]
+- programming_language: "Java"
+- target_complexity: 8</p>
+<p><strong>Result</strong>: Refactored using Extract Method and Guard Clauses, reduced complexity from 18 to 7</p>
+<h3 id="example-2-state-based-complexity-reduction">Example 2: State-Based Complexity Reduction<a class="headerlink" href="#example-2-state-based-complexity-reduction" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Complex state machine logic (complexity: 25)</p>
+<p><strong>Command</strong>:</p>
+<pre><code>improve complexity
+</code></pre>
+<p><strong>Input</strong>:
+- target_code: [handleEvent method with state transitions]
+- programming_language: "TypeScript"
+- target_complexity: 10</p>
+<p><strong>Result</strong>: Applied State Pattern, extracted state classes, reduced complexity from 25 to 6 per method</p>
+<h2 id="related-competencies">Related Competencies<a class="headerlink" href="#related-competencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>analyze-function-complexity</strong>: Use first to identify complex functions</li>
+<li><strong>fix-code-smells</strong>: Apply for broader code quality improvements</li>
+<li><strong>evolve-code-iteratively</strong>: Use for multi-iteration complexity reduction</li>
+<li><strong>review-code</strong>: Validate complexity improvements</li>
+<li><strong>augment-code-unit-test</strong>: Improve test coverage after refactoring</li>
+</ul>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Measure complexity before and after refactoring</li>
+<li>Start with highest complexity methods first</li>
+<li>Use Extract Method as primary technique</li>
+<li>Apply design patterns for state-based complexity</li>
+<li>Ensure tests pass after each refactoring step</li>
+<li>Consider Guard Clauses for early returns</li>
+<li>Replace conditionals with polymorphism when appropriate</li>
+<li>Keep target complexity realistic (&lt;10 is good goal)</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Some complexity is inherent to business logic</li>
+<li>Refactoring may increase number of methods/classes</li>
+<li>Interface restrictions may limit refactoring options</li>
+<li>Performance requirements may constrain approaches</li>
+<li>Requires good test coverage for safe refactoring</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

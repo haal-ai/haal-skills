@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/analyze-function-complexity/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#step-by-step-tutorial" class="nav-link">Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="step-by-step-tutorial">Step-by-Step Tutorial<a class="headerlink" href="#step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<p><strong>Analyze Function Complexity: Step-by-Step Tutorial</strong></p>
+<p><strong>How to Execute the "Function Complexity Analysis" Workflow</strong></p>
+<p>This tutorial shows exactly how to execute a detailed function complexity analysis using the OLAF developer competency's analyze-function-complexity functionality. This workflow analyzes a specific function's complexity, structure, and provides detailed metrics similar to complexity analyzer tools.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework properly installed and configured</li>
+<li>Function code to analyze (either file path or function name in workspace)</li>
+<li>Basic understanding of code complexity concepts</li>
+<li>Access to project files or codebase</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-initiate-function-complexity-analysis">Step 1: Initiate Function Complexity Analysis<a class="headerlink" href="#step-1-initiate-function-complexity-analysis" title="Permanent link">&para;</a></h3>
+<p>[Brief description: Start the function complexity analysis process by invoking the OLAF analyze-function-complexity competency]</p>
+<p><strong>User Action:</strong></p>
+<ol>
+<li>Open your terminal or OLAF interface</li>
+<li>Navigate to your project directory (if analyzing functions in workspace)</li>
+<li>Execute the OLAF analyze-function-complexity competency using one of these methods:</li>
+<li>Direct invocation: <code>olaf analyze-function-complexity</code></li>
+<li>Via aliases: <code>olaf analyze complexity</code>, <code>olaf function complexity</code>, <code>olaf complexity analysis</code></li>
+</ol>
+<p><strong>OLAF Response:</strong>
+The system will prompt you to provide the required parameters for function analysis.</p>
+<h3 id="step-2-provide-function-parameters">Step 2: Provide Function Parameters<a class="headerlink" href="#step-2-provide-function-parameters" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Specify the function to analyze and optional context</p>
+<pre><code class="language-text">Required Parameters:
+- function_name: Name of the function to analyze
+- file_path: Path to the file containing the function (optional)
+- language: Programming language (optional, auto-detected if file provided)
+- context: Additional context about the function's purpose (optional)
+</code></pre>
+<p><strong>Provide Requirements/Parameters:</strong></p>
+<ul>
+<li><strong>function_name</strong>: [Example - we used "calculateTotalPrice"]</li>
+<li><strong>file_path</strong>: [Example - we used "src/services/orderService.js"] (optional)</li>
+<li><strong>language</strong>: [Example - we used "JavaScript"] (optional)</li>
+<li><strong>context</strong>: [Example - we used "E-commerce order processing function"] (optional)</li>
+</ul>
+<h3 id="step-3-function-location-and-extraction">Step 3: Function Location and Extraction<a class="headerlink" href="#step-3-function-location-and-extraction" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>If file_path provided: Locates the function in the specified file</li>
+<li>If only function_name provided: Searches the current workspace for the function</li>
+<li>Extracts the complete function code including signature and body</li>
+<li>Validates that the function exists and is accessible</li>
+<li>Gets current timestamp for analysis report</li>
+</ul>
+<p><strong>You Should See:</strong> Confirmation that the function was located and extracted successfully</p>
+<h3 id="step-4-comprehensive-complexity-analysis">Step 4: Comprehensive Complexity Analysis<a class="headerlink" href="#step-4-comprehensive-complexity-analysis" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li><strong>Calculates cyclomatic complexity</strong> using standard patterns:</li>
+<li>Decision points: if, else if, else, switch, case</li>
+<li>Loops: for, foreach, while, do-while</li>
+<li>Logical operators: &amp;&amp;, ||, and, or</li>
+<li>Exception handling: try, catch, except, finally</li>
+<li>Ternary operators: ? :</li>
+<li><strong>Counts lines of code</strong> (excluding comments and blank lines)</li>
+<li><strong>Calculates complexity density</strong> (complexity / line_count)</li>
+<li><strong>Analyzes function structure</strong> (parameters, return type, nesting depth)</li>
+<li><strong>Performs dependency analysis</strong> (functions/methods called)</li>
+</ul>
+<p><strong>You Should See:</strong> Progress updates for complexity calculations and structural analysis</p>
+<h3 id="step-5-quality-assessment-and-report-generation">Step 5: Quality Assessment and Report Generation<a class="headerlink" href="#step-5-quality-assessment-and-report-generation" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Review the complexity analysis results when presented</p>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Generates code readability score and maintainability indicators</li>
+<li>Identifies potential refactoring opportunities</li>
+<li>Assesses best practices adherence</li>
+<li>Creates risk assessment with standard thresholds</li>
+<li>Generates comprehensive analysis report using the function-complexity-analysis template</li>
+<li>Provides specific, actionable recommendations for improvement</li>
+</ul>
+<p><strong>You Should See:</strong> Complete complexity analysis report with metrics, risk assessment, and recommendations</p>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Function successfully located and extracted</strong>
+✅ <strong>Cyclomatic complexity calculated with breakdown by construct type</strong>
+✅ <strong>Lines of code counted (excluding comments and blank lines)</strong>
+✅ <strong>Complexity density calculated and assessed</strong>
+✅ <strong>Function structure analyzed (signature, nesting, dependencies)</strong>
+✅ <strong>Quality assessment completed with specific recommendations</strong></p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If function cannot be located:</strong></p>
+<pre><code class="language-bash">grep -r &quot;function functionName&quot; . --include=&quot;*.js&quot; --include=&quot;*.ts&quot; --include=&quot;*.py&quot; --include=&quot;*.java&quot;
+find . -name &quot;*.js&quot; -exec grep -l &quot;functionName&quot; {} \;
+</code></pre>
+<p><strong>If complexity calculations seem incorrect:</strong></p>
+<ul>
+<li>Verify the programming language is correctly identified</li>
+<li>Check that all decision points and loops are counted</li>
+<li>Ensure nested complexity is properly calculated</li>
+<li>Review language-specific complexity patterns</li>
+</ul>
+<p><strong>If no refactoring opportunities identified:</strong></p>
+<ul>
+<li>Consider that the function may already be well-structured</li>
+<li>Review the complexity thresholds for the specific language</li>
+<li>Check if the function follows single responsibility principle</li>
+</ul>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Cyclomatic Complexity:</strong> Measures the number of linearly independent paths through a program's source code, helping identify testing requirements</li>
+<li><strong>Quality Indicators:</strong> Analysis includes readability, maintainability, and testability assessments beyond just complexity numbers</li>
+<li><strong>Actionable Recommendations:</strong> All suggestions are specific, prioritized, and include refactoring opportunities</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Use the complexity analysis to prioritize functions for refactoring</li>
+<li>Apply the recommended improvements and re-analyze to measure progress</li>
+<li>Set up complexity thresholds for your team's coding standards</li>
+<li>Use complexity density metrics to identify overly complex functions</li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total analysis time:</strong> 2-5 minutes (depending on function size and complexity)</li>
+<li><strong>User input required:</strong> Function identification and parameters (30 seconds - 1 minute)</li>
+<li><strong>OLAF execution time:</strong> Function extraction, complexity calculation, and analysis (1-3 minutes)</li>
+<li><strong>Report generation:</strong> Detailed analysis report with recommendations (30 seconds - 1 minute)</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "specification",
+  "description": "Specification review and transformation skills",
+  "skills": [
+    "align-spec-openapi-code-tests",
+    "review-human-written-spec",
+    "review-prd-spec",
+    "transform-raw-spec",
+    "improve-spec",
+    "extend-specification"
+  ]
+}

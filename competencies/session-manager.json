@@ -1,0 +1,10 @@
+{
+  "name": "session-manager",
+  "description": "Session lifecycle and context management",
+  "skills": [
+    "carry-on-session",
+    "carry-over-session",
+    "stash-restart-session",
+    "switch-context"
+  ]
+}

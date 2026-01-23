@@ -1,0 +1,26 @@
+{
+  "name": "developer",
+  "description": "Developer: code review, analysis, refactoring, and quality improvement",
+  "skills": [
+    "analyze-function-complexity",
+    "assess-code-quality-principles",
+    "augment-code-unit-test",
+    "check-todos-in-code",
+    "code-in-go",
+    "code-in-rust",
+    "create-practice-from-evidence",
+    "deepen-tech-spec-developer",
+    "detect-test-directives",
+    "evolve-code-iteratively",
+    "find-expert-contact",
+    "fix-code-smells",
+    "generate-code-mapper-docs",
+    "generate-tech-spec-from-code",
+    "improve-cyclomatic-complexity",
+    "review-code",
+    "review-diff",
+    "review-github-pr",
+    "run-implementation-plan",
+    "scaffold-quarkus-microservice"
+  ]
+}

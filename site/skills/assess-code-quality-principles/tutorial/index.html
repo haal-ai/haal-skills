@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Assess Code Quality Principles: Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/assess-code-quality-principles/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#assess-code-quality-principles-step-by-step-tutorial" class="nav-link">Assess Code Quality Principles: Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="assess-code-quality-principles-step-by-step-tutorial">Assess Code Quality Principles: Step-by-Step Tutorial<a class="headerlink" href="#assess-code-quality-principles-step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<p>How to Execute the "Assess Code Quality Principles" Skill</p>
+<p>This tutorial shows exactly how to use the comprehensive code quality assessment skill to evaluate codebases against established engineering principles (SOLID, DRY, YAGNI) with evidence-based scoring.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Access to OLAF Framework with assess-code-quality-principles skill</li>
+<li>Complete codebase to assess (source code directory)</li>
+<li>Basic understanding of SOLID principles and code quality concepts</li>
+<li>Optional: Existing technical specification for additional context</li>
+<li>File system access to read source files and write assessment reports</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-initialize-quality-assessment">Step 1: Initialize Quality Assessment<a class="headerlink" href="#step-1-initialize-quality-assessment" title="Permanent link">&para;</a></h3>
+<p>Brief description: Start the comprehensive code quality assessment workflow by invoking the assess-code-quality-principles skill.</p>
+<p><strong>User Action:</strong></p>
+<ol>
+<li>Navigate to your project workspace</li>
+<li>Execute the skill: <code>assess-code-quality-principles</code></li>
+<li>Prepare to provide application name and codebase path</li>
+</ol>
+<p><strong>System Response:</strong>
+The system will prompt for required parameters using Propose-Act protocol and begin gathering assessment inputs.</p>
+<h3 id="step-2-provide-assessment-parameters">Step 2: Provide Assessment Parameters<a class="headerlink" href="#step-2-provide-assessment-parameters" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Provide required parameters when prompted</p>
+<p><strong>Provide Requirements/Parameters:</strong></p>
+<ul>
+<li><strong>application_name</strong>: Name for file naming - we used "payment-service" (kebab-case format)</li>
+<li><strong>code_path</strong>: Path to codebase - we used "./src" (relative or absolute path)</li>
+<li><strong>tech_spec_path</strong>: Optional tech spec - we used "" (leave empty if not available)</li>
+<li><strong>focus_areas</strong>: Optional focus - we used [] (empty for all categories)</li>
+</ul>
+<p><strong>Example Input:</strong></p>
+<pre><code class="language-text">Application Name: payment-service
+Code Path: ./src
+Tech Spec Path: [press Enter to skip]
+Focus Areas: [press Enter for all categories]
+</code></pre>
+<h3 id="step-3-codebase-discovery-and-analysis">Step 3: Codebase Discovery and Analysis<a class="headerlink" href="#step-3-codebase-discovery-and-analysis" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<ul>
+<li>Scans all source files in specified code path</li>
+<li>Identifies file types, languages, and architectural patterns</li>
+<li>Maps module structure and dependencies</li>
+<li>Extracts initial metrics (file count, LOC, complexity)</li>
+<li>Catalogs design patterns and anti-patterns</li>
+</ul>
+<p><strong>You Should See:</strong> Progress indicators showing file discovery and initial analysis completion</p>
+<h3 id="step-4-solid-principles-evaluation">Step 4: SOLID Principles Evaluation<a class="headerlink" href="#step-4-solid-principles-evaluation" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<ul>
+<li><strong>Single Responsibility</strong>: Analyzes classes for multiple responsibilities and cohesion</li>
+<li><strong>Open/Closed</strong>: Evaluates extensibility patterns and modification hotspots</li>
+<li><strong>Liskov Substitution</strong>: Checks inheritance hierarchies and interface implementations</li>
+<li><strong>Interface Segregation</strong>: Assesses interface design and client dependencies</li>
+<li><strong>Dependency Inversion</strong>: Evaluates abstraction usage and dependency injection</li>
+</ul>
+<p><strong>You Should See:</strong> SOLID principles assessment with specific code examples and violation counts</p>
+<h3 id="step-5-code-quality-metrics-analysis">Step 5: Code Quality Metrics Analysis<a class="headerlink" href="#step-5-code-quality-metrics-analysis" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<ul>
+<li><strong>DRY Assessment</strong>: Detects code duplication and quantifies impact</li>
+<li><strong>YAGNI Assessment</strong>: Identifies unused code and over-engineering</li>
+<li><strong>Complexity Analysis</strong>: Calculates cyclomatic and cognitive complexity</li>
+<li><strong>Naming Conventions</strong>: Evaluates code readability and consistency</li>
+<li><strong>Maintainability</strong>: Assesses overall code maintainability index</li>
+</ul>
+<p><strong>You Should See:</strong> Code quality metrics with specific measurements and violation examples</p>
+<h3 id="step-6-testing-quality-evaluation">Step 6: Testing Quality Evaluation<a class="headerlink" href="#step-6-testing-quality-evaluation" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<ul>
+<li>Analyzes test coverage (line, branch, method coverage)</li>
+<li>Evaluates test quality and design patterns</li>
+<li>Assesses test maintainability and effectiveness</li>
+<li>Checks test pyramid compliance</li>
+<li>Identifies missing test scenarios</li>
+</ul>
+<p><strong>You Should See:</strong> Testing quality assessment with coverage percentages and test quality scores</p>
+<h3 id="step-7-architecture-and-security-assessment">Step 7: Architecture and Security Assessment<a class="headerlink" href="#step-7-architecture-and-security-assessment" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<p><strong>Architecture Quality:</strong>
+- Evaluates module structure and package organization
+- Analyzes coupling and cohesion metrics
+- Identifies circular dependencies
+- Assesses layer separation and boundaries</p>
+<p><strong>Security Practices:</strong>
+- Reviews input validation patterns
+- Evaluates authentication/authorization implementation
+- Identifies potential security vulnerabilities
+- Assesses cryptographic usage</p>
+<p><strong>Performance Patterns:</strong>
+- Detects performance anti-patterns
+- Evaluates resource management
+- Assesses caching strategies
+- Reviews database interaction patterns</p>
+<p><strong>You Should See:</strong> Architecture, security, and performance assessments with specific staging</p>
+<h3 id="step-8-evidence-collection-and-scoring">Step 8: Evidence Collection and Scoring<a class="headerlink" href="#step-8-evidence-collection-and-scoring" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<ul>
+<li>Collects specific code examples for each violation</li>
+<li>Quantifies impact of quality issues with metrics</li>
+<li>Calculates scores for each assessment category (A-F scale)</li>
+<li>Computes overall quality score</li>
+<li>Prioritizes staging by impact and effort</li>
+</ul>
+<p><strong>You Should See:</strong> Quality scorecard with grades and supporting evidence</p>
+<h3 id="step-9-recommendations-and-action-plan">Step 9: Recommendations and Action Plan<a class="headerlink" href="#step-9-recommendations-and-action-plan" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<ul>
+<li>Generates prioritized improvement recommendations</li>
+<li>Provides specific code examples for problems and solutions</li>
+<li>Estimates implementation effort for each recommendation</li>
+<li>Creates action plan organized by priority (high/medium/low)</li>
+<li>Suggests quick wins and long-term improvements</li>
+</ul>
+<p><strong>You Should See:</strong> Comprehensive improvement plan with effort estimates and priorities</p>
+<h3 id="step-10-report-generation-and-review">Step 10: Report Generation and Review<a class="headerlink" href="#step-10-report-generation-and-review" title="Permanent link">&para;</a></h3>
+<p><strong>What System Does:</strong></p>
+<ul>
+<li>Compiles complete assessment report with all staging</li>
+<li>Formats report following OLAF standards</li>
+<li>Saves report to staging directory with timestamp</li>
+<li>Presents summary scorecard for user review</li>
+<li>Requests feedback and incorporates adjustments</li>
+</ul>
+<p><strong>You Should See:</strong> Complete assessment document saved to <code>work/staging/assessments/code-quality-assessment-{application_name}-YYYYMMDD-NNN.md</code></p>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Parameters provided</strong>: Application name and code path specified correctly
+✅ <strong>Codebase analyzed</strong>: All source files discovered and scanned
+✅ <strong>SOLID principles evaluated</strong>: Each principle assessed with evidence
+✅ <strong>Code quality measured</strong>: DRY, YAGNI, complexity metrics calculated
+✅ <strong>Testing assessed</strong>: Test coverage and quality evaluated
+✅ <strong>Architecture reviewed</strong>: Module structure and coupling analyzed
+✅ <strong>Security checked</strong>: Security practices and vulnerabilities identified
+✅ <strong>Scores calculated</strong>: Grades assigned for each category (A-F scale)
+✅ <strong>Recommendations generated</strong>: Prioritized improvement plan created
+✅ <strong>Report saved</strong>: Assessment document created in staging directory</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If codebase analysis fails:</strong></p>
+<pre><code class="language-bash"># Verify code path exists and is accessible
+ls -la ./src
+# Check file permissions
+# Ensure path is relative to workspace root
+</code></pre>
+<p><strong>If assessment seems incomplete:</strong></p>
+<ul>
+<li>Verify all source files are in specified code_path</li>
+<li>Check that file types are recognized (common languages supported)</li>
+<li>Ensure sufficient file system permissions for reading</li>
+<li>Consider providing tech_spec_path for additional context</li>
+</ul>
+<p><strong>If scores seem inaccurate:</strong></p>
+<ul>
+<li>Review specific code examples provided as evidence</li>
+<li>Check if focus_areas parameter limited assessment scope</li>
+<li>Verify codebase represents complete application (not partial)</li>
+<li>Consider running assessment on specific modules separately</li>
+</ul>
+<p><strong>If report generation fails:</strong></p>
+<pre><code class="language-bash"># Verify staging directory exists
+mkdir -p work/staging/assessments
+# Check write permissions
+# Ensure sufficient disk space
+</code></pre>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Evidence-based assessment</strong>: All grades supported by specific code examples and metrics</li>
+<li><strong>Comprehensive evaluation</strong>: Covers SOLID, code quality, testing, architecture, security, and performance</li>
+<li><strong>Actionable recommendations</strong>: Prioritized improvements with effort estimates and code examples</li>
+<li><strong>Objective scoring</strong>: A-F grading scale with clear criteria for each category</li>
+<li><strong>Baseline establishment</strong>: Creates measurable baseline for tracking quality improvements over time</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Review high-priority recommendations and plan implementation</li>
+<li>Use <strong>fix-code-smells</strong> skill to address specific code smells identified</li>
+<li>Apply <strong>improve-cyclomatic-complexity</strong> to reduce complexity issues</li>
+<li>Use <strong>augment-code-unit-test</strong> to improve test coverage gaps</li>
+<li>Re-run assessment periodically to track quality improvements</li>
+<li>Share scorecard with team to build consensus on quality goals</li>
+<li>Integrate assessment into CI/CD pipeline for continuous monitoring</li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total assessment time:</strong> 20-60 minutes depending on codebase size and complexity</li>
+<li><strong>User input required:</strong> Parameter setup and review (5-10 minutes)</li>
+<li><strong>Codebase analysis:</strong> File discovery and initial scanning (5-15 minutes)</li>
+<li><strong>Skill evaluation:</strong> SOLID, quality, testing, architecture assessment (10-30 minutes)</li>
+<li><strong>Report generation:</strong> Scoring, recommendations, and documentation (5-10 minutes)</li>
+<li><strong>Review and feedback:</strong> User validation and adjustments (5-10 minutes)</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

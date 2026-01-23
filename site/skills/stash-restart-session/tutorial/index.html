@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Stash Restart: Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/stash-restart-session/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#stash-restart-step-by-step-tutorial" class="nav-link">Stash Restart: Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="stash-restart-step-by-step-tutorial">Stash Restart: Step-by-Step Tutorial<a class="headerlink" href="#stash-restart-step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<p><strong>How to Execute the "Stash Restart" Workflow</strong></p>
+<p>This tutorial shows how to resume previously stashed work.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Previously stashed work using <code>stash work</code></li>
+<li>Stash files exist in <code>carry-overs/</code> directory</li>
+<li>Ready to resume the stashed task</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-invoke-the-competency">Step 1: Invoke the Competency<a class="headerlink" href="#step-1-invoke-the-competency" title="Permanent link">&para;</a></h3>
+<p>Initiate stash restart</p>
+<p><strong>User Action:</strong>
+1. Type the command: <code>stash restart</code>
+2. Optionally specify which stash to resume</p>
+<p><strong>OLAF Response:</strong>
+OLAF will search for stashed work files</p>
+<h3 id="step-2-view-available-stashes">Step 2: View Available Stashes<a class="headerlink" href="#step-2-view-available-stashes" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Scans <code>carry-overs/</code> directory for stashed files
+- Lists all <code>stashed-*.txt</code> files
+- Displays task names and timestamps
+- Shows brief description of each stash</p>
+<p><strong>You Should See:</strong> Numbered list of available stashed work</p>
+<h3 id="step-3-select-stash">Step 3: Select Stash<a class="headerlink" href="#step-3-select-stash" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Choose which stash to resume</p>
+<pre><code>Option 2: feature-authentication (stashed 2 days ago)
+</code></pre>
+<p><strong>Provide Selection:</strong>
+- Enter the number or task name
+- Confirm the selection</p>
+<h3 id="step-4-context-restoration">Step 4: Context Restoration<a class="headerlink" href="#step-4-context-restoration" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Reads the selected stash file
+- Parses work context and state
+- Summarizes what was being worked on
+- Identifies progress made before stashing
+- Lists files and tasks involved
+- Notes any blockers or issues</p>
+<p><strong>You Should See:</strong> Detailed summary of stashed work</p>
+<h3 id="step-5-resume-working">Step 5: Resume Working<a class="headerlink" href="#step-5-resume-working" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Continue the work
+- Review the restored context
+- Verify understanding of where you left off
+- Ask clarifying questions if needed
+- Begin working on the task</p>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Correct stash file was loaded</strong>
+✅ <strong>Work context is accurately restored</strong>
+✅ <strong>Progress and state are clear</strong>
+✅ <strong>Files and tasks are identified</strong>
+✅ <strong>You can continue work without confusion</strong></p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If no stashes found:</strong></p>
+<pre><code>No stashed work found in carry-overs/ directory
+</code></pre>
+<p>Solution: You need to stash work first using <code>stash work</code></p>
+<p><strong>If wrong stash is loaded:</strong>
+- Specify the task name: "stash restart authentication"
+- List all stashes first: "show me all stashed work"
+- Select by number from the list</p>
+<p><strong>If context seems incomplete:</strong>
+- Ask for more details: "what files were being modified?"
+- Request specific information: "what was the blocker?"
+- Provide additional context as needed</p>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Task-Specific</strong>: Stashes are named by task for easy identification</li>
+<li><strong>Detailed State</strong>: More detailed than carry-over notes</li>
+<li><strong>Multiple Stashes</strong>: Can maintain multiple stashed tasks</li>
+<li><strong>Timestamped</strong>: Files include timestamps for tracking</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Continue working on the resumed task</li>
+<li>Stash again if you need to switch tasks</li>
+<li>Create carry-over when ending the session</li>
+<li>Clean up completed stashes</li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total restart time:</strong> 1-2 minutes</li>
+<li><strong>User input required:</strong> Command and selection (30 seconds)</li>
+<li><strong>OLAF execution time:</strong> File loading and context restoration (1-2 minutes)</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

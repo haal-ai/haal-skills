@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Tell Me: Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/tell-me/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#tell-me-step-by-step-tutorial" class="nav-link">Tell Me: Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-use-cases" class="nav-link">Common Use Cases</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#advanced-usage" class="nav-link">Advanced Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#integration-with-other-skills" class="nav-link">Integration with Other Skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#success-indicators" class="nav-link">Success Indicators</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="tell-me-step-by-step-tutorial">Tell Me: Step-by-Step Tutorial<a class="headerlink" href="#tell-me-step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<p><strong>How to Execute the "Tell Me" Skill for Quick Knowledge Retrieval</strong></p>
+<p>This tutorial shows how to get instant answers about your project from existing documentation.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework installed and loaded</li>
+<li><code>onboard-me</code> skill executed (recommended for best results)</li>
+<li>OR existing documentation in <code>.olaf/data/practices/</code> folder</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-invoke-the-tell-me-skill">Step 1: Invoke the Tell Me Skill<a class="headerlink" href="#step-1-invoke-the-tell-me-skill" title="Permanent link">&para;</a></h3>
+<p>Start the knowledge retrieval process</p>
+<p><strong>User Action:</strong>
+Type one of these commands:</p>
+<pre><code class="language-bash">olaf tell me [your question]
+olaf ask about [topic]
+olaf info about [subject]
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-bash">olaf tell me how to build this project
+</code></pre>
+<p><strong>OLAF Response:</strong>
+OLAF will search existing documentation for answers</p>
+<h3 id="step-2-olaf-searches-documentation">Step 2: OLAF Searches Documentation<a class="headerlink" href="#step-2-olaf-searches-documentation" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Searches <code>.olaf/data/product/{repo}/</code> for project-specific docs
+- Searches <code>.olaf/data/practices/</code> for team practices
+- Searches root docs (README.md, CONTRIBUTING.md)
+- Ranks results by relevance</p>
+<p><strong>You Should See:</strong> Search in progress message (if configured)</p>
+<h3 id="step-3-results-returned">Step 3: Results Returned<a class="headerlink" href="#step-3-results-returned" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario A: Documentation Found</strong></p>
+<p><strong>What OLAF Does:</strong>
+- Extracts relevant sections from found documents
+- Synthesizes a comprehensive answer
+- Includes source citations with file paths and line numbers</p>
+<p><strong>Example Output:</strong></p>
+<pre><code class="language-markdown"># How to Build This Project
+
+Prerequisites:
+- Node.js 18+
+- npm 9+
+
+Build Steps:
+1. Install dependencies: npm install
+2. Build the project: npm run build
+3. Run tests: npm test
+
+Development Mode:
+- npm run dev (starts development server on port 3000)
+
+---
+📚 Sources:
+- .olaf/data/product/my-repo/repo-guide.md (lines 45-62)
+- .olaf/data/product/my-repo/development-setup.md (lines 12-18)
+</code></pre>
+<p><strong>Scenario B: No Documentation Found</strong></p>
+<p><strong>What OLAF Does:</strong>
+- Reports that no documentation exists for the topic
+- Suggests the appropriate skill to generate the documentation</p>
+<p><strong>Example Output:</strong></p>
+<pre><code class="language-markdown">❌ No existing documentation found for: &quot;contributor risk analysis&quot;
+
+💡 Suggested Action:
+Run `olaf analyze-contributor-risk` to generate this information.
+
+This skill will:
+- Analyze git commit history
+- Identify key contributors
+- Assess knowledge concentration
+- Generate risk mitigation recommendations
+</code></pre>
+<h3 id="step-4-browse-available-documentation-optional">Step 4: Browse Available Documentation (Optional)<a class="headerlink" href="#step-4-browse-available-documentation-optional" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong>
+Type <code>olaf tell me</code> without a question</p>
+<p><strong>What OLAF Does:</strong>
+- Lists all available documentation topics
+- Groups by category (Development, Architecture, Operations, etc.)
+- Shows what questions can be answered</p>
+<p><strong>Example Output:</strong></p>
+<pre><code class="language-markdown">📚 Available Documentation
+
+🔨 For Developers:
+• How do I build this project locally?
+• How do I run the application?
+• What are the coding standards?
+• How do I run tests?
+
+🏗️ For Architects:
+• What architectural pattern is used?
+• What are the key components?
+
+📊 For Managers:
+• What is the AI impact analysis?
+• What are the contributor risks?
+</code></pre>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Answer is relevant to your question</strong>
+✅ <strong>Sources are cited with file paths</strong>
+✅ <strong>Information comes from YOUR repository</strong>
+✅ <strong>Suggested skills are actionable (if no docs found)</strong></p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="issue-no-artifacts-found">Issue: "No artifacts found"<a class="headerlink" href="#issue-no-artifacts-found" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> No documentation has been generated yet</p>
+<p><strong>Solution:</strong> </p>
+<pre><code class="language-bash">olaf onboard-me
+</code></pre>
+<p>This will generate comprehensive project documentation.</p>
+<h3 id="issue-low-relevance-results">Issue: "Low relevance results"<a class="headerlink" href="#issue-low-relevance-results" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Question may be too vague or use different terminology</p>
+<p><strong>Solutions:</strong>
+- Rephrase your question with more specific terms
+- Try broader keywords
+- Browse available docs: <code>olaf tell me</code>
+- Check if topic requires analysis: try suggested skill</p>
+<h3 id="issue-answer-is-incomplete">Issue: "Answer is incomplete"<a class="headerlink" href="#issue-answer-is-incomplete" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Documentation may not cover all aspects of your question</p>
+<p><strong>Solutions:</strong>
+- Ask more specific sub-questions
+- Check source files directly for more detail
+- Run suggested analysis skill to generate comprehensive docs
+- Contribute missing information to documentation</p>
+<h3 id="issue-wrong-topic-returned">Issue: "Wrong topic returned"<a class="headerlink" href="#issue-wrong-topic-returned" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Keywords matched different documentation</p>
+<p><strong>Solutions:</strong>
+- Use more specific terminology
+- Include context: "tell me about [topic] in [area]"
+- Exclude unrelated terms: "tell me about builds, not deployments"</p>
+<h2 id="common-use-cases">Common Use Cases<a class="headerlink" href="#common-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="1-onboarding-new-developers">1. Onboarding New Developers<a class="headerlink" href="#1-onboarding-new-developers" title="Permanent link">&para;</a></h3>
+<p><strong>Question:</strong> "How do I get started with this project?"</p>
+<p><strong>Expected Flow:</strong>
+1. Tell me searches for setup guides
+2. Returns build instructions, prerequisites, first-run steps
+3. Cites development setup documentation</p>
+<h3 id="2-checking-team-practices">2. Checking Team Practices<a class="headerlink" href="#2-checking-team-practices" title="Permanent link">&para;</a></h3>
+<p><strong>Question:</strong> "What are our git commit message standards?"</p>
+<p><strong>Expected Flow:</strong>
+1. Tell me searches practices folder
+2. Returns git guidelines from <code>.olaf/data/practices/git-guidelines.md</code>
+3. Shows commit message format and examples</p>
+<h3 id="3-understanding-architecture">3. Understanding Architecture<a class="headerlink" href="#3-understanding-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Question:</strong> "What design patterns are used in this codebase?"</p>
+<p><strong>Expected Flow:</strong>
+1. Tell me searches architecture documentation
+2. Returns patterns from <code>.olaf/data/product/{repo}/architecture-overview.md</code>
+3. Cites specific sections with line numbers</p>
+<h3 id="4-pre-analysis-check">4. Pre-Analysis Check<a class="headerlink" href="#4-pre-analysis-check" title="Permanent link">&para;</a></h3>
+<p><strong>Question:</strong> "What metrics do we have on AI usage?"</p>
+<p><strong>Expected Flow (No Docs):</strong>
+1. Tell me searches and finds no documentation
+2. Suggests: "Run <code>olaf measure-ai-impact</code>"
+3. Explains what the skill will generate</p>
+<h2 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
+<h3 id="scoped-searches">Scoped Searches<a class="headerlink" href="#scoped-searches" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Search only in specific area
+olaf tell me about error handling in the API layer
+
+# Search for specific file types
+olaf tell me about configuration files
+</code></pre>
+<h3 id="follow-up-questions">Follow-up Questions<a class="headerlink" href="#follow-up-questions" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Initial question
+olaf tell me how to deploy
+
+# Follow-up based on answer
+olaf tell me more about production deployment prerequisites
+</code></pre>
+<h3 id="cross-referencing">Cross-Referencing<a class="headerlink" href="#cross-referencing" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Ask about related topics
+olaf tell me about testing strategy
+olaf tell me about code coverage requirements
+</code></pre>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Documentation-First</strong>: Always searches existing docs before suggesting analysis</li>
+<li><strong>Source Citations</strong>: Every answer includes file references for verification</li>
+<li><strong>Smart Fallback</strong>: Suggests the right skill when documentation is missing</li>
+<li><strong>Repository-Specific</strong>: Only answers from YOUR project's documentation</li>
+<li><strong>Fast &amp; Lightweight</strong>: No heavy analysis, just quick retrieval</li>
+</ol>
+<h2 id="integration-with-other-skills">Integration with Other Skills<a class="headerlink" href="#integration-with-other-skills" title="Permanent link">&para;</a></h2>
+<h3 id="with-onboard-me">With onboard-me<a class="headerlink" href="#with-onboard-me" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># First: Generate documentation
+olaf onboard-me
+
+# Then: Ask questions about the project
+olaf tell me how to build this project
+</code></pre>
+<h3 id="with-analysis-skills">With Analysis Skills<a class="headerlink" href="#with-analysis-skills" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Check if analysis exists
+olaf tell me about contributor risk
+
+# If not, run suggested skill
+olaf analyze-contributor-risk
+
+# Then ask again
+olaf tell me about contributor risk
+</code></pre>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total execution time:</strong> 5-30 seconds</li>
+<li><strong>Search time:</strong> 2-10 seconds (depends on documentation size)</li>
+<li><strong>Answer synthesis:</strong> 3-20 seconds (depends on answer complexity)</li>
+<li><strong>User action required:</strong> Initial question only (no interactive prompts)</li>
+</ul>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Explore Available Docs</strong>: Run <code>olaf tell me</code> to see what's available</li>
+<li><strong>Ask Common Questions</strong>: Build process, coding standards, architecture</li>
+<li><strong>Generate Missing Docs</strong>: Run <code>olaf onboard-me</code> if few results</li>
+<li><strong>Use Daily</strong>: Make it your first stop for project questions</li>
+<li><strong>Contribute</strong>: Add to <code>.olaf/data/practices/</code> for team-wide knowledge</li>
+</ol>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Do:</strong>
+- Ask specific, clear questions
+- Use natural language
+- Check sources for more detail
+- Run suggested skills when docs missing
+- Use for quick reference during coding</p>
+<p>❌ <strong>Don't:</strong>
+- Expect generic programming knowledge (repository-specific only)
+- Ask questions requiring new analysis without running suggested skill
+- Ignore source citations (verify information)
+- Skip running <code>onboard-me</code> first</p>
+<h2 id="success-indicators">Success Indicators<a class="headerlink" href="#success-indicators" title="Permanent link">&para;</a></h2>
+<p>You're using tell-me effectively when:
+- Getting instant answers to project questions
+- Saving time by not searching through files manually
+- Finding accurate information with source citations
+- Knowing which skill to run when documentation is missing
+- Onboarding new team members faster with documentation access</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

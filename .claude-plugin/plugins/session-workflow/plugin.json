@@ -1,0 +1,10 @@
+{
+  "name": "session-workflow",
+  "description": "Session carry-over and carry-on and challenge workflows",
+  "version": "1.0.0",
+  "author": {
+    "name": "HAAL AI"
+  },
+  "license": "Apache-2.0",
+  "skills": "./skills/"
+}

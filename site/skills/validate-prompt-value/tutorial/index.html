@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>How to Use Validate Prompt Value - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/validate-prompt-value/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#how-to-use-validate-prompt-value" class="nav-link">How to Use Validate Prompt Value</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-tutorial" class="nav-link">Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example-scenarios" class="nav-link">Example Scenarios</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-issues-and-solutions" class="nav-link">Common Issues and Solutions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-for-success" class="nav-link">Tips for Success</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="how-to-use-validate-prompt-value">How to Use Validate Prompt Value<a class="headerlink" href="#how-to-use-validate-prompt-value" title="Permanent link">&para;</a></h1>
+<h2 id="step-by-step-tutorial">Step-by-Step Tutorial<a class="headerlink" href="#step-by-step-tutorial" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Have a prompt ready for validation (file, text, or name)</li>
+<li>Understand your intended use case for the prompt</li>
+<li>Know what validation scope you need</li>
+</ul>
+<h3 id="step-1-invoke-the-skill">Step 1: Invoke the Skill<a class="headerlink" href="#step-1-invoke-the-skill" title="Permanent link">&para;</a></h3>
+<p>Use any of these commands:
+- <code>validate prompt value</code>
+- <code>assess prompt value</code> 
+- <code>evaluate prompt effectiveness</code>
+- <code>prompt quality check</code></p>
+<h3 id="step-2-provide-required-parameters">Step 2: Provide Required Parameters<a class="headerlink" href="#step-2-provide-required-parameters" title="Permanent link">&para;</a></h3>
+<p>The skill will request:
+- <strong>Prompt source</strong>: File path, copy-paste text, or prompt name
+- <strong>Validation scope</strong>: Choose from:
+  - <code>effectiveness</code> - Focus on prompt clarity and instruction quality
+  - <code>business-value</code> - Assess ROI and automation potential
+  - <code>technical-quality</code> - Review best practices and compliance
+  - <code>complete</code> - Comprehensive evaluation across all dimensions</p>
+<h3 id="step-3-optional-context-recommended">Step 3: Optional Context (Recommended)<a class="headerlink" href="#step-3-optional-context-recommended" title="Permanent link">&para;</a></h3>
+<p>Provide additional details for better assessment:
+- <strong>Use case context</strong>: How you plan to use the prompt
+- <strong>Success metrics</strong>: What outcomes you expect
+- <strong>Target audience</strong>: Who will use this prompt</p>
+<h3 id="step-4-review-assessment-results">Step 4: Review Assessment Results<a class="headerlink" href="#step-4-review-assessment-results" title="Permanent link">&para;</a></h3>
+<p>The skill provides:
+- Quantified scores (1-10) for each validation dimension
+- Detailed analysis of strengths and weaknesses
+- Prioritized improvement recommendations
+- Implementation effort estimates</p>
+<h3 id="step-5-act-on-recommendations">Step 5: Act on Recommendations<a class="headerlink" href="#step-5-act-on-recommendations" title="Permanent link">&para;</a></h3>
+<p>Follow the prioritized action items:
+- Address critical issues first
+- Implement high-impact, low-effort improvements
+- Plan for complex enhancements
+- Schedule follow-up validation</p>
+<h2 id="example-scenarios">Example Scenarios<a class="headerlink" href="#example-scenarios" title="Permanent link">&para;</a></h2>
+<h3 id="scenario-1-pre-deployment-check">Scenario 1: Pre-Deployment Check<a class="headerlink" href="#scenario-1-pre-deployment-check" title="Permanent link">&para;</a></h3>
+<pre><code>Input: New automation prompt for code review
+Scope: complete
+Context: Team workflow integration
+Result: Full assessment with deployment readiness score
+</code></pre>
+<h3 id="scenario-2-optimization-project">Scenario 2: Optimization Project<a class="headerlink" href="#scenario-2-optimization-project" title="Permanent link">&para;</a></h3>
+<pre><code>Input: Existing prompt with performance issues
+Scope: effectiveness
+Context: Improving output quality
+Result: Targeted recommendations for clarity improvements
+</code></pre>
+<h3 id="scenario-3-business-case-development">Scenario 3: Business Case Development<a class="headerlink" href="#scenario-3-business-case-development" title="Permanent link">&para;</a></h3>
+<pre><code>Input: Proposed prompt for customer service automation
+Scope: business-value
+Context: ROI justification needed
+Result: Value assessment with time savings calculations
+</code></pre>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Always provide use case context for accurate assessment</li>
+<li>Start with <code>complete</code> scope for new prompts</li>
+<li>Use targeted scopes for specific improvement areas</li>
+<li>Re-validate after implementing major changes</li>
+<li>Document validation results for future reference</li>
+</ul>
+<h2 id="common-issues-and-solutions">Common Issues and Solutions<a class="headerlink" href="#common-issues-and-solutions" title="Permanent link">&para;</a></h2>
+<p><strong>Issue</strong>: Low effectiveness scores
+<strong>Solution</strong>: Focus on clarity, specificity, and instruction structure</p>
+<p><strong>Issue</strong>: Poor business value assessment
+<strong>Solution</strong>: Better define use case and success metrics</p>
+<p><strong>Issue</strong>: Technical quality concerns
+<strong>Solution</strong>: Review framework compliance and best practices</p>
+<h2 id="tips-for-success">Tips for Success<a class="headerlink" href="#tips-for-success" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Be honest about prompt limitations during assessment</li>
+<li>Prioritize recommendations by business impact</li>
+<li>Consider maintenance and scalability in improvements</li>
+<li>Test changes incrementally</li>
+<li>Validate effectiveness with real use cases</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

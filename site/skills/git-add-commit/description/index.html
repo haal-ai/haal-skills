@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Git Add Commit - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/git-add-commit/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#git-add-commit" class="nav-link">Git Add Commit</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#when-to-use" class="nav-link">When to Use</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#how-it-works" class="nav-link">How It Works</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example" class="nav-link">Example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#integration" class="nav-link">Integration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#version-history" class="nav-link">Version History</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="git-add-commit">Git Add Commit<a class="headerlink" href="#git-add-commit" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The <strong>git-add-commit</strong> skill provides an intelligent, LLM-driven approach to git commits by automatically discovering related files through dependency analysis and generating meaningful semantic commit messages.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>Traditional git workflows require manually tracking which files are related to a change. This skill automates that process by:</p>
+<ol>
+<li><strong>Dependency Chasing</strong>: Starting from a scope (folder/file), it reads files to extract imports, references, and links</li>
+<li><strong>Smart Discovery</strong>: Loops through git status to find all referenced files that have been modified</li>
+<li><strong>Semantic Analysis</strong>: Deeply analyzes diffs to understand what actually changed and why</li>
+<li><strong>Meaningful Commits</strong>: Generates conventional commit messages that explain the real intent</li>
+</ol>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Universal Language Support</strong>: Works with Python imports, TypeScript/JavaScript imports, markdown links, JSON paths</li>
+<li><strong>Dependency-Aware</strong>: Finds connected files even if they're in different directories</li>
+<li><strong>Semantic Understanding</strong>: Analyzes what changed (features, fixes, refactors) not just which files</li>
+<li><strong>Safety Validation</strong>: Checks for large files, sensitive data, and common mistakes</li>
+<li><strong>Conventional Commits</strong>: Follows standardized format with type, scope, subject, and body</li>
+</ul>
+<h2 id="when-to-use">When to Use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
+<p>Use this skill when you:
+- Want to commit logically related changes together
+- Need help understanding what files are connected
+- Want meaningful commit messages without manual writing
+- Have changes spanning multiple files/directories
+- Want to ensure nothing related is missed</p>
+<h2 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<h3 id="1-scope-based-discovery">1. Scope-Based Discovery<a class="headerlink" href="#1-scope-based-discovery" title="Permanent link">&para;</a></h3>
+<p>You provide a scope (e.g., "create-prompt", "vscode-extension/src"), and the skill finds all matching files in git status.</p>
+<h3 id="2-reference-chasing">2. Reference Chasing<a class="headerlink" href="#2-reference-chasing" title="Permanent link">&para;</a></h3>
+<p>For each matched file, it:
+- Reads the content
+- Extracts imports (<code>import X from './Y'</code>, <code>from X import Y</code>)
+- Extracts links (<code>[link](../path)</code>, <code>[id:dir]path</code>)
+- Extracts JSON paths (<code>"manifest": "path/to/file"</code>)
+- Checks if those referenced files are in git status
+- Loops until no new references found</p>
+<h3 id="3-semantic-analysis">3. Semantic Analysis<a class="headerlink" href="#3-semantic-analysis" title="Permanent link">&para;</a></h3>
+<p>Analyzes all diffs to identify:
+- Structural changes (new sections, reorganization)
+- Functional changes (features, fixes, behavior)
+- Knowledge base changes (KB files, schemas, validation)
+- Terminology/UX changes (user messages, help text)
+- Dependencies (new imports, schema updates)</p>
+<h3 id="4-commit-message-generation">4. Commit Message Generation<a class="headerlink" href="#4-commit-message-generation" title="Permanent link">&para;</a></h3>
+<p>Creates conventional commit with:
+- <strong>Type</strong>: feat/fix/refactor/docs/chore/test
+- <strong>Scope</strong>: Affected area (from user's input)
+- <strong>Subject</strong>: One-line summary
+- <strong>Body</strong>: Detailed explanation of what, why, and major changes</p>
+<h3 id="5-safe-execution">5. Safe Execution<a class="headerlink" href="#5-safe-execution" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Validates for large files (&gt;10MB)</li>
+<li>Checks for sensitive data patterns</li>
+<li>Requires user confirmation</li>
+<li>Stages files with <code>git add</code></li>
+<li>Commits with generated message</li>
+</ul>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p><strong>User</strong>: "commit create-prompt"</p>
+<p><strong>Skill discovers</strong>:</p>
+<pre><code>Initial: create-prompt.md (modified)
+References found: kb/prompt-structure-schema.md (new)
+References found: kb/file-modification-rules.md (new)
+No more references → Stop
+
+Result: 3 connected files
+</code></pre>
+<p><strong>Generated commit</strong>:</p>
+<pre><code>refactor(create-prompt): enforce KB-driven structure validation
+
+Added mandatory KB loading:
+- prompt-structure-schema.md: minimal BOM requirements  
+- file-modification-rules.md: read-only file rules
+
+Ensures prompts follow canonical structure.
+</code></pre>
+<h2 id="integration">Integration<a class="headerlink" href="#integration" title="Permanent link">&para;</a></h2>
+<p>This skill integrates with:
+- <strong>Git</strong>: All standard git operations
+- <strong>File System</strong>: Reads files to extract references
+- <strong>LLM Context</strong>: Uses semantic understanding for analysis</p>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Requires files to be in git status (modified/new/staged)</li>
+<li>Reference extraction is pattern-based (may miss dynamic imports)</li>
+<li>Best for projects with clear dependency structures</li>
+<li>Cannot handle very large codebases (&gt;1000 changed files) efficiently</li>
+</ul>
+<h2 id="version-history">Version History<a class="headerlink" href="#version-history" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>2.0.0</strong> (2025-11-25): Complete refactor to dependency-aware LLM approach</li>
+<li><strong>1.0.0</strong> (2025-11-15): Initial version with task-based workflow</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

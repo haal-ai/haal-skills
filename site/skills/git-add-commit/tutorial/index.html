@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Git Add Commit - Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/git-add-commit/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#git-add-commit-tutorial" class="nav-link">Git Add Commit - Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#getting-started" class="nav-link">Getting Started</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-guide" class="nav-link">Step-by-Step Guide</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#advanced-usage" class="nav-link">Advanced Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips" class="nav-link">Tips</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="git-add-commit-tutorial">Git Add Commit - Tutorial<a class="headerlink" href="#git-add-commit-tutorial" title="Permanent link">&para;</a></h1>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>This tutorial walks you through using the git-add-commit skill to intelligently commit related changes.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Git repository initialized</li>
+<li>Files modified/added in your working directory</li>
+<li>Understanding of what you changed (general scope)</li>
+</ul>
+<h2 id="step-by-step-guide">Step-by-Step Guide<a class="headerlink" href="#step-by-step-guide" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-make-your-changes">Step 1: Make Your Changes<a class="headerlink" href="#step-1-make-your-changes" title="Permanent link">&para;</a></h3>
+<p>Edit files in your project. For this example, let's say you updated a skill:</p>
+<pre><code class="language-bash"># Modified files
+skills/create-prompt/prompts/create-prompt.md
+skills/create-prompt/skill-manifest.json
+
+# New files
+skills/create-prompt/kb/prompt-structure-schema.md
+skills/create-prompt/kb/file-modification-rules.md
+</code></pre>
+<h3 id="step-2-invoke-the-skill">Step 2: Invoke the Skill<a class="headerlink" href="#step-2-invoke-the-skill" title="Permanent link">&para;</a></h3>
+<p>Tell the LLM you want to commit with a scope:</p>
+<pre><code>commit create-prompt
+</code></pre>
+<p>Or more explicitly:</p>
+<pre><code>Use git-add-commit skill to commit changes to create-prompt
+</code></pre>
+<h3 id="step-3-skill-discovers-related-files">Step 3: Skill Discovers Related Files<a class="headerlink" href="#step-3-skill-discovers-related-files" title="Permanent link">&para;</a></h3>
+<p>The skill will:</p>
+<ol>
+<li><strong>Run git status</strong> to see all changes</li>
+<li><strong>Filter by scope</strong> "create-prompt"</li>
+<li><strong>Read matched files</strong> to find references</li>
+<li><strong>Check git status</strong> for referenced files</li>
+<li><strong>Loop</strong> until no new references found</li>
+</ol>
+<p><strong>Output</strong>:</p>
+<pre><code>📦 Dependency Analysis for 'create-prompt':
+
+Initial matches (2):
+  M create-prompt.md
+  M skill-manifest.json
+
+Referenced files found (2):
+  ?? kb/prompt-structure-schema.md ← create-prompt.md:34
+  ?? kb/file-modification-rules.md ← create-prompt.md:37
+
+Total: 4 connected files
+</code></pre>
+<h3 id="step-4-review-dependency-graph">Step 4: Review Dependency Graph<a class="headerlink" href="#step-4-review-dependency-graph" title="Permanent link">&para;</a></h3>
+<p>The skill shows you WHY files are related:</p>
+<pre><code>create-prompt.md
+├─ References: kb/prompt-structure-schema.md
+└─ References: kb/file-modification-rules.md
+
+skill-manifest.json
+└─ (no references)
+</code></pre>
+<h3 id="step-5-semantic-analysis">Step 5: Semantic Analysis<a class="headerlink" href="#step-5-semantic-analysis" title="Permanent link">&para;</a></h3>
+<p>The skill reads all diffs and identifies:</p>
+<pre><code>🔍 Analysis Results:
+
+Structural changes:
+- Added KB loading section in create-prompt.md
+
+Functional changes:
+- Enforce structure validation before generation
+- Add file safety rules
+
+Knowledge base changes:
+- New file: prompt-structure-schema.md (BOM requirements)
+- New file: file-modification-rules.md (read-only rules)
+</code></pre>
+<h3 id="step-6-review-generated-commit-message">Step 6: Review Generated Commit Message<a class="headerlink" href="#step-6-review-generated-commit-message" title="Permanent link">&para;</a></h3>
+<pre><code>📝 Proposed Commit Message:
+────────────────────────────────────────
+refactor(create-prompt): enforce KB-driven structure validation
+
+Added mandatory KB loading for canonical structure enforcement:
+- prompt-structure-schema.md: minimal BOM requirements
+- file-modification-rules.md: read-only vs editable file rules
+- JSON schema validation enforcement
+
+Strengthened validation:
+- Enforce minimal BOM (prompts + docs only)
+- Directory structure restrictions
+- Schema compliance checks
+
+Ensures prompts follow canonical structure and prevents
+corruption of auto-generated files.
+────────────────────────────────────────
+
+Files (4):
+  M skills/create-prompt/prompts/create-prompt.md
+  M skills/create-prompt/skill-manifest.json
+  ?? skills/create-prompt/kb/prompt-structure-schema.md
+  ?? skills/create-prompt/kb/file-modification-rules.md
+</code></pre>
+<h3 id="step-7-approve-or-modify">Step 7: Approve or Modify<a class="headerlink" href="#step-7-approve-or-modify" title="Permanent link">&para;</a></h3>
+<p>You have three options:</p>
+<p><strong>Option 1: Approve (y)</strong></p>
+<pre><code>Proceed? (y/n/edit): y
+</code></pre>
+<p><strong>Option 2: Cancel (n)</strong></p>
+<pre><code>Proceed? (y/n/edit): n
+❌ Commit cancelled
+</code></pre>
+<p><strong>Option 3: Edit (edit)</strong></p>
+<pre><code>Proceed? (y/n/edit): edit
+Provide your commit message: [type your own]
+</code></pre>
+<h3 id="step-8-execution">Step 8: Execution<a class="headerlink" href="#step-8-execution" title="Permanent link">&para;</a></h3>
+<p>If approved, the skill:</p>
+<pre><code class="language-bash"># Stages all files
+git add skills/create-prompt/prompts/create-prompt.md \
+        skills/create-prompt/skill-manifest.json \
+        skills/create-prompt/kb/
+
+# Commits with message
+git commit -m &quot;refactor(create-prompt): enforce KB-driven structure validation
+...&quot;
+</code></pre>
+<p><strong>Result</strong>:</p>
+<pre><code>✅ Commit successful
+
+Commit: abc1234
+Branch: main
+Files: 4 changed (120 insertions, 10 deletions)
+</code></pre>
+<h2 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
+<h3 id="commit-specific-file">Commit Specific File<a class="headerlink" href="#commit-specific-file" title="Permanent link">&para;</a></h3>
+<pre><code>commit vscode-extension/src/services/installationManager.ts
+</code></pre>
+<h3 id="commit-entire-directory">Commit Entire Directory<a class="headerlink" href="#commit-entire-directory" title="Permanent link">&para;</a></h3>
+<pre><code>commit vscode-extension/src/commands
+</code></pre>
+<h3 id="include-untracked-files">Include Untracked Files<a class="headerlink" href="#include-untracked-files" title="Permanent link">&para;</a></h3>
+<pre><code>commit create-prompt with new files
+</code></pre>
+<h3 id="provide-custom-message">Provide Custom Message<a class="headerlink" href="#provide-custom-message" title="Permanent link">&para;</a></h3>
+<pre><code>commit create-prompt with message &quot;Add validation rules&quot;
+</code></pre>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Use descriptive scopes</strong>: "create-prompt" better than "core"</li>
+<li><strong>Trust dependency chasing</strong>: It finds connections you might miss</li>
+<li><strong>Review the graph</strong>: Understand why files are grouped</li>
+<li><strong>Check the analysis</strong>: Make sure it understood your changes</li>
+<li><strong>Edit if needed</strong>: The generated message is a starting point</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>Problem</strong>: No files found</p>
+<pre><code>❌ No files match scope 'xyz'
+
+Solution: Check spelling, try broader scope, or run git status manually
+</code></pre>
+<p><strong>Problem</strong>: Too many files included</p>
+<pre><code>⚠️  Found 50 files - seems too broad
+
+Solution: Use more specific scope like &quot;folder/subfolder&quot; instead of &quot;folder&quot;
+</code></pre>
+<p><strong>Problem</strong>: Reference not resolved</p>
+<pre><code>⚠️  Could not resolve: ../missing/file.md
+
+Solution: This is OK - reference might be to uncommitted file or incorrect path
+</code></pre>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Explore dependency graphs for your codebase</li>
+<li>Create conventional commits consistently</li>
+<li>Use for complex multi-file changes</li>
+<li>Integrate into your git workflow</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

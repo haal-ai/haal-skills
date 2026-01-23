@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Generate Professional Release Notes - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/generate-professional-release-notes/description.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#generate-professional-release-notes" class="nav-link">Generate Professional Release Notes</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#purpose" class="nav-link">Purpose</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#output" class="nav-link">Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-competencies" class="nav-link">Related Competencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-best-practices" class="nav-link">Tips &amp; Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#limitations" class="nav-link">Limitations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="generate-professional-release-notes">Generate Professional Release Notes<a class="headerlink" href="#generate-professional-release-notes" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Generates professional, user-friendly release notes by analyzing git commit history between two version tags, categorizing changes, transforming technical messages into clear descriptions, and producing comprehensive release documentation.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>Software releases need clear communication about what changed, why it matters, and what users need to do. This competency solves the problem of technical, developer-focused commit messages by automatically analyzing git history, categorizing changes by type and impact, translating technical details into user benefits, and producing polished release notes suitable for various audiences.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><strong>Command</strong>: <code>generate professional release notes</code></p>
+<p><strong>Protocol</strong>: Propose-Act</p>
+<p><strong>When to Use</strong>: Use this competency when preparing for a software release, creating release announcements, documenting version changes for stakeholders, or whenever you need to communicate what changed between two versions in a clear, professional, user-focused format.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="required-inputs">Required Inputs<a class="headerlink" href="#required-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>lower_tag</strong>: Starting version tag for the release notes (e.g., v1.0.0, v2.3.1)</li>
+<li><strong>higher_tag</strong>: Ending version tag for the release notes (e.g., v1.1.0, v2.4.0)</li>
+<li><strong>release_date</strong>: Release date in YYYY-MM-DD format</li>
+<li><strong>project_name</strong>: Name of the project or product</li>
+<li><strong>target_audience</strong>: Intended readers (e.g., developers, end-users, administrators, technical stakeholders)</li>
+</ul>
+<h3 id="optional-inputs">Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>release_theme</strong>: Main theme or focus of this release (e.g., "Performance improvements", "Security hardening")</li>
+<li><strong>release_manager</strong>: Name of the person managing the release</li>
+<li><strong>tag_link_base</strong>: Base URL for linking to tags (e.g., https://github.com/org/repo/tree/)</li>
+</ul>
+<h3 id="context-requirements">Context Requirements<a class="headerlink" href="#context-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Git repository with commit history between the specified tags</li>
+<li>Access to git commands for analyzing commits, files, and contributors</li>
+<li>Understanding of commit message conventions used in the project</li>
+<li>Knowledge of breaking changes and migration requirements</li>
+</ul>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p><strong>Deliverables</strong>:
+- Professional release notes document with sections for features, fixes, improvements, breaking changes
+- User-friendly descriptions of changes with business value and impact
+- Contributor acknowledgments
+- Upgrade instructions and migration guidance
+- Links to commits, pull requests, and issues for traceability</p>
+<p><strong>Format</strong>: Markdown document with emoji-enhanced sections, clear categorization, actionable upgrade instructions, and proper attribution.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-minor-version-release">Example 1: Minor Version Release<a class="headerlink" href="#example-1-minor-version-release" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Releasing v1.5.0 with new features and bug fixes</p>
+<p><strong>Command</strong>:</p>
+<pre><code>generate professional release notes
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>Lower Tag: v1.4.0
+Higher Tag: v1.5.0
+Release Date: 2025-10-27
+Project Name: Customer Portal
+Target Audience: end-users
+Release Theme: Enhanced user experience and performance
+Tag Link Base: https://github.com/company/customer-portal/tree/
+</code></pre>
+<p><strong>Result</strong>: Generated release notes with 5 new features (dark mode, export functionality, etc.), 8 bug fixes, 3 performance improvements, contributor list, and simple upgrade instructions</p>
+<h3 id="example-2-major-version-with-breaking-changes">Example 2: Major Version with Breaking Changes<a class="headerlink" href="#example-2-major-version-with-breaking-changes" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Releasing v2.0.0 with significant architectural changes</p>
+<p><strong>Command</strong>:</p>
+<pre><code>generate professional release notes
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>Lower Tag: v1.9.5
+Higher Tag: v2.0.0
+Release Date: 2025-11-01
+Project Name: Analytics API
+Target Audience: developers
+Release Theme: Modern architecture and improved scalability
+Release Manager: Sarah Chen
+</code></pre>
+<p><strong>Result</strong>: Comprehensive release notes highlighting 12 new features, 15 improvements, 3 breaking changes with detailed migration guide, deprecation notices, and step-by-step upgrade instructions</p>
+<h3 id="example-3-patch-release">Example 3: Patch Release<a class="headerlink" href="#example-3-patch-release" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario</strong>: Emergency patch release for security fix</p>
+<p><strong>Command</strong>:</p>
+<pre><code>generate professional release notes
+</code></pre>
+<p><strong>Input</strong>:</p>
+<pre><code>Lower Tag: v1.4.2
+Higher Tag: v1.4.3
+Release Date: 2025-10-28
+Project Name: Authentication Service
+Target Audience: administrators
+Release Theme: Security patch
+</code></pre>
+<p><strong>Result</strong>: Focused release notes emphasizing security fix, impact assessment, urgency of upgrade, and minimal changes to other functionality</p>
+<h2 id="related-competencies">Related Competencies<a class="headerlink" href="#related-competencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>analyze-changelog-and-report</strong>: Provides changelog analysis that can supplement git history analysis</li>
+<li><strong>generate-commits-from-changelog</strong>: Ensures commits reference changelog entries for richer release notes</li>
+<li><strong>create-changelog-entry</strong>: Changelog entries provide additional context for release note generation</li>
+<li><strong>create-decision-record</strong>: Major architectural decisions can be referenced in release notes</li>
+</ul>
+<h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Use semantic versioning tags (v1.2.3) for clear version identification</li>
+<li>Run the competency before the actual release to allow time for review and refinement</li>
+<li>Tailor language and technical depth to your target audience - developers need different details than end-users</li>
+<li>Include specific issue/PR numbers for traceability and credibility</li>
+<li>Highlight breaking changes prominently with clear migration instructions</li>
+<li>Acknowledge all contributors to build community and recognition</li>
+<li>Test upgrade instructions before publishing to ensure they're accurate</li>
+<li>Include metrics or performance improvements with specific numbers when available</li>
+<li>Link to detailed documentation for complex changes</li>
+<li>Review generated notes for accuracy - automated categorization may need adjustment</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Quality depends on commit message quality - vague commits produce vague release notes</li>
+<li>Cannot automatically determine user impact - requires human judgment for business value assessment</li>
+<li>Categorization is based on commit prefixes - inconsistent conventions reduce accuracy</li>
+<li>Cannot access external context like issue descriptions or PR discussions automatically</li>
+<li>Does not validate that upgrade instructions are complete or accurate</li>
+<li>Cannot automatically identify all breaking changes - relies on commit message indicators</li>
+<li>Generated descriptions may need refinement for specific audience needs</li>
+</ul>
+<p><strong>Source</strong>: <code>core/competencies/project-manager/prompts/generate-professional-release-notes.md</code></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

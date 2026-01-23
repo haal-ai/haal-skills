@@ -1,0 +1,18 @@
+{
+  "name": "architect",
+  "description": "Generic software architecture, design patterns, and system design",
+  "skills": [
+    "analyze-api-consistency",
+    "analyze-contributor-risk",
+    "analyze-function-complexity",
+    "assess-code-quality-principles",
+    "bootstrap-functional-spec-from-code",
+    "create-practice-from-evidence",
+    "esdi-chain",
+    "generate-design",
+    "generate-external-docs",
+    "generate-implementation-plan",
+    "onboard-me",
+    "transform-raw-spec"
+  ]
+}

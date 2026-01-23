@@ -1,0 +1,4 @@
+# Skills to prune (delete from destinations)
+# One skill name per line
+# Lines starting with # are comments
+

@@ -1,0 +1,44 @@
+# List stable skills (one per line)
+# Example:
+# create-skill
+
+analyze-contributor-risk
+analyze-function-complexity
+assess-genai-initiative-idea
+assist-me-as-prompt-engineer
+augment-code-unit-test
+bootstrap-functional-spec-from-code
+carry-on-session
+carry-over-session
+challenge-me
+check-prompt-compliance
+code-in-go
+code-in-rust
+convert-prompt-to-skill
+convert-skill-to-chain
+create-changelog-entry
+create-otf-variable
+create-prompt
+create-skill
+deepen-tech-spec-developer
+esdi-chain
+evaluate-prompt-for-adoption
+generate-commits-from-changelog
+generate-design
+generate-implementation-plan
+generate-orchestrator
+get-bms-expertise
+onboard-me
+research-and-report
+review-code
+review-diff
+review-user-story
+run-implementation-plan
+run-redocumentation
+scaffold-quarkus-microservice
+search-and-learn
+should-i-use-ai
+store-conversation-record
+switch-context
+tell-me
+transform-raw-spec

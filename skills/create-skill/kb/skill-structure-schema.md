@@ -1,0 +1,145 @@
+# OLAF Skill Structure Schema
+
+**Purpose**: Canonical reference for skill directory structure - eliminates need to search for example skills.
+
+## Minimal Required Structure
+
+Every skill MUST have this minimal structure:
+
+```
+skill-name/
+├── skill.md                    [REQUIRED - Main prompt entry point]
+└── docs/
+    ├── description.md          [REQUIRED - Auto-generated]
+    └── tutorial.md             [OPTIONAL - Auto-generated if requested]
+```
+
+## Extended Structure (Component-Based)
+
+Create additional directories ONLY when user explicitly requests components:
+
+```
+skill-name/
+├── skill.md
+├── docs/
+│   ├── description.md          [REQUIRED - main prompt description]
+│   └── tutorial.md             [OPTIONAL]
+├── templates/                   [OPTIONAL - Only if needs_templates=true]
+│   ├── output-format.md        [User-requested template files]
+│   ├── validation-rules.md     [Separate from main prompt]
+│   └── *.md                    [Any format: md, json, yaml, txt]
+├── tools/                       [OPTIONAL - Only if needs_tools=true]
+│   ├── analyzer.py             [Executable scripts]
+│   ├── formatter.sh            [Types: py, sh, js, ps1]
+│   └── *.[py|sh|js|ps1]       [User-requested tools]
+├── helpers/                     [OPTIONAL - Only if needs_helpers=true]
+│   ├── input-validator.md      [Reusable prompt fragments]
+│   ├── output-processor.md     [Composable components]
+│   └── *.md                    [Helper prompt files]
+├── kb/                          [OPTIONAL - Only if needs_kb=true]
+│   ├── reference-guide.md      [Knowledge base articles]
+│   ├── specifications.md       [Types: reference, specification, examples, data]
+│   └── *.md                    [Domain knowledge]
+├── tasks/                       [OPTIONAL - Only if needs_tasks=true]
+|   └──task-name-1/                  # Optional: group related files
+│      ├── prompt.md                 # Main task prompt
+│      ├── validation.md             # Optional: validation rules
+│      └── examples.md               # Optional: example inputs/outputs
+├── task-name-2/
+│      ├── prompt.md                # Main task prompt
+│      └── helpers.md               # Optional: shared helpers
+└── scripts/                     [OPTIONAL - Infrastructure/maintenance only]
+    ├── validate.py             [Build/test automation]
+    └── setup.sh                [Installation/configuration]
+```
+
+## Component Creation Rules
+
+### When to Create Each Component
+
+| Component | Create When | Purpose |
+|-----------|-------------|---------|
+| `templates/` | User needs separate template files | External format definitions, schemas, output templates |
+| `tools/` | User needs executable scripts | Automation, processing, validation scripts |
+| `helpers/` | User needs reusable prompt fragments | Composable prompt components, sub-prompts |
+| `kb/` | User needs domain knowledge | Reference docs, specifications, examples, lookup data |
+| `scripts/` | Skill needs build/test automation | Infrastructure scripts (rare, usually not needed) |
+| `tasks/` | User needs sub-tasks | Group related files for complex skills that used sequence of tasks |
+
+### Component File Naming Conventions
+
+**Templates** (`templates/`):
+- Use descriptive kebab-case: `output-format.md`, `validation-checklist.json`
+- Extension matches content type: `.md`, `.json`, `.yaml`, `.txt`
+- Referenced in main prompt as: `Use template: /templates/output-format.md`
+
+**Tools** (`/tools/`):
+- Use verb-noun format: `analyze-code.py`, `format-output.sh`
+- Extension matches language: `.py`, `.sh`, `.js`, `.ps1`
+- Include shebang for shell/python scripts
+- Referenced in main prompt as: `Execute: /tools/analyze-code.py`
+
+**Helpers** (`/helpers/`):
+- Use purpose-based names: `input-validator.md`, `error-handler.md`
+- Always markdown format (they're prompt fragments)
+- Referenced in main prompt as: `Apply helper: /helpers/input-validator.md`
+
+**Knowledge Base** (`/kb/`):
+- Use topic-based names: `api-reference.md`, `coding-standards.md`
+- Always markdown format
+- Include metadata header with type: reference|specification|examples|data
+- Referenced in main prompt as: `Refer to: /kb/api-reference.md`
+
+**Tasks** (`/tasks/`):
+- Use kebab-case: `task-name.md`
+- Always markdown format
+- Referenced in main prompt as: `Execute task: /tasks/task-name.md`
+## File Generation Order
+
+When creating a new skill, generate files in this order:
+
+1. **Create directory structure** - All required directories
+2. **Create main prompt** - `<skill-name>/skill.md` using template
+3. **Generate documentation** - `/docs/description.md` and `/docs/tutorial.md`
+4. **Create component files** - Based on user requests:
+   - Templates in `templates/`
+   - Tools in `/tools/`
+   - Helpers in `/helpers/`
+   - KB articles in `/kb/`
+
+## Validation Checklist
+
+Before considering skill creation complete:
+
+- [ ] Directory structure matches requirements (minimal or extended)
+- [ ] Main prompt exists at `<skill-name>/skill.md`
+- [ ] Description exists at `/docs/description.md`
+- [ ] All external references in main prompt have corresponding files
+- [ ] Component directories only exist if user requested them
+- [ ] Skill name is kebab-case, max 4 words
+
+## Common Mistakes to Avoid
+
+❌ **Creating component directories without user request**
+```
+skill-name/
+├── templates/     # ❌ Created but user didn't ask for templates
+└── tools/         # ❌ Created but user didn't need tools
+```
+
+❌ **Embedding templates in main prompt instead of separate files**
+```markdown
+## Output Format
+Use this template:
+```json
+{
+  "result": "..."  # ❌ Template embedded, should be external file
+}
+```
+
+✅ **Correct approach**
+```
+1. Ask user: "Will you need external templates?" → NO
+2. Don't create /templates/ directory
+3. Main prompt uses embedded examples only
+```

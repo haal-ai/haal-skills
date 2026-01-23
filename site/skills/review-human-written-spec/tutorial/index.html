@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Tutorial: Review a human specification for API design readiness - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/review-human-written-spec/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#tutorial-review-a-human-specification-for-api-design-readiness" class="nav-link">Tutorial: Review a human specification for API design readiness</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-provide-the-input-specification" class="nav-link">1) Provide the input specification</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-run-the-skill" class="nav-link">2) Run the skill</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-review-and-confirm-file-writing" class="nav-link">3) Review and confirm file writing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-sme-answers-edit-the-ai-review-directly" class="nav-link">4) SME answers (edit the AI review directly)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-follow-up-review-generates-business-decisions-strict-gating" class="nav-link">5) Follow-up review (generates business decisions + strict gating)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="tutorial-review-a-human-specification-for-api-design-readiness">Tutorial: Review a human specification for API design readiness<a class="headerlink" href="#tutorial-review-a-human-specification-for-api-design-readiness" title="Permanent link">&para;</a></h1>
+<h2 id="1-provide-the-input-specification">1) Provide the input specification<a class="headerlink" href="#1-provide-the-input-specification" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Create (or pick) a demand folder under <code>docs/specifications/</code> (example: <code>pet-clinic-01/</code>)</li>
+<li>Place the demand documents under: <code>docs/specifications/&lt;demand_folder&gt;/01-demand/</code></li>
+</ul>
+<h2 id="2-run-the-skill">2) Run the skill<a class="headerlink" href="#2-run-the-skill" title="Permanent link">&para;</a></h2>
+<p>Invoke the skill and provide:
+- <code>demand_folder</code> (example: <code>pet-clinic-01</code>)
+- Optionally <code>review_mode=followup</code> and <code>previous_review_path</code></p>
+<h2 id="3-review-and-confirm-file-writing">3) Review and confirm file writing<a class="headerlink" href="#3-review-and-confirm-file-writing" title="Permanent link">&para;</a></h2>
+<p>The skill will:
+- Produce the review content
+- Propose an output file path under <code>docs/specifications/&lt;demand_folder&gt;/02-ai-review/</code>
+- Ask for confirmation before writing</p>
+<h2 id="4-sme-answers-edit-the-ai-review-directly">4) SME answers (edit the AI review directly)<a class="headerlink" href="#4-sme-answers-edit-the-ai-review-directly" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The SME SHOULD edit the generated AI review file directly.</li>
+<li>Fill the SME answer worksheet (and/or SME answer column) for each question.</li>
+</ul>
+<h2 id="5-follow-up-review-generates-business-decisions-strict-gating">5) Follow-up review (generates business decisions + strict gating)<a class="headerlink" href="#5-follow-up-review-generates-business-decisions-strict-gating" title="Permanent link">&para;</a></h2>
+<p>After the SME answers are filled, run a follow-up review by copy/pasting:</p>
+<pre><code class="language-text">@[/olaf-review-human-written-spec]
+demand_folder: &lt;demand_folder&gt;
+review_mode: followup
+previous_review_path: &lt;path-to-previous-ai-review&gt;
+</code></pre>
+<p>In follow-up mode the skill will:
+- Enforce strict gating on High-priority questions
+- Draft business decisions under <code>docs/specifications/&lt;demand_folder&gt;/03-business-decisions/</code></p>
+<p>After the decisions draft is written:
+- Review it
+- To approve and allow spec generation, reply with this exact sentence:
+  - <code>I approved this decision</code></p>
+<p>Only after approval, the workflow will generate <code>docs/specifications/&lt;demand_folder&gt;/04-specifications/</code>:
+- A dev-ready functional specification (overview)
+- A dev-ready functional specification (detailed, including Mermaid diagrams)
+- An OpenAPI specification</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

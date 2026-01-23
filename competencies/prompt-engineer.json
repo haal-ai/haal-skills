@@ -1,0 +1,19 @@
+{
+  "name": "prompt-engineer",
+  "description": "Prompt engineering: create, test, convert, and optimize LLM prompts",
+  "skills": [
+    "assist-me-as-prompt-engineer",
+    "check-prompt-compliance",
+    "convert-prompt-to-skill",
+    "convert-skill-to-chain",
+    "create-prompt",
+    "create-skill-description",
+    "evaluate-prompt-for-adoption",
+    "generate-ai-agent-instructions",
+    "generate-orchestrator",
+    "generate-step-by-step-tutorial",
+    "review-skill-quality",
+    "test-create-skill",
+    "validate-prompt-value"
+  ]
+}

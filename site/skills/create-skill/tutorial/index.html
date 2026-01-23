@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Tutorial: Create Skill - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/create-skill/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#tutorial-create-skill" class="nav-link">Tutorial: Create Skill</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#estimated-time" class="nav-link">Estimated Time</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#steps" class="nav-link">Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-outcomes" class="nav-link">Expected Outcomes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="tutorial-create-skill">Tutorial: Create Skill<a class="headerlink" href="#tutorial-create-skill" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This tutorial guides you through creating a new structured skill for OLAF using the Create Skill skill. You'll learn how to generate skills that follow OLAF's skills architecture and integrate seamlessly with the framework.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework installed and configured</li>
+<li>Access to OLAF skills directory</li>
+<li>Understanding of the task your skill will address</li>
+<li>Terminal access for timestamp generation</li>
+<li>Basic knowledge of OLAF skills architecture</li>
+</ul>
+<h2 id="estimated-time">Estimated Time<a class="headerlink" href="#estimated-time" title="Permanent link">&para;</a></h2>
+<p>45-60 minutes</p>
+<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-invoke-the-create-skill">Step 1: Invoke the Create Skill<a class="headerlink" href="#step-1-invoke-the-create-skill" title="Permanent link">&para;</a></h3>
+<p>Open your IDE and invoke the skill:</p>
+<pre><code>olaf create skill
+</code></pre>
+<p><strong>Expected Result</strong>: The skill activates and begins the skill creation workflow.</p>
+<h3 id="step-2-provide-user-request">Step 2: Provide User Request<a class="headerlink" href="#step-2-provide-user-request" title="Permanent link">&para;</a></h3>
+<p>When prompted, describe what your new skill should do:</p>
+<pre><code>Example: &quot;Create a skill that analyzes code quality metrics and generates improvement recommendations&quot;
+</code></pre>
+<p><strong>Expected Result</strong>: The skill acknowledges your request and proceeds to next parameter.</p>
+<h3 id="step-3-specify-skill-name">Step 3: Specify Skill Name<a class="headerlink" href="#step-3-specify-skill-name" title="Permanent link">&para;</a></h3>
+<p>Provide a descriptive name in kebab-case (max 4 words):</p>
+<pre><code>Example: &quot;analyze-code-quality&quot;
+</code></pre>
+<p><strong>Expected Result</strong>: Name is validated and checked for duplicates in skills directory.</p>
+<h3 id="step-4-select-skill-type">Step 4: Select Skill Type<a class="headerlink" href="#step-4-select-skill-type" title="Permanent link">&para;</a></h3>
+<p>Choose the appropriate skill type:</p>
+<pre><code>Options:
+1. &quot;prompt&quot; - Simple, standalone skill
+2. &quot;orchestrator&quot; - Complex skill coordinating multiple operations  
+3. &quot;workflow&quot; - Step-by-step process skill
+
+Example: &quot;prompt&quot;
+</code></pre>
+<p><strong>Expected Result</strong>: Skill type selection confirmed and skill architecture determined.</p>
+<h3 id="step-5-review-generated-skill-structure">Step 5: Review Generated Skill Structure<a class="headerlink" href="#step-5-review-generated-skill-structure" title="Permanent link">&para;</a></h3>
+<p>The skill generates a complete directory structure:</p>
+<pre><code>analyze-code-quality/
+├── skill.md
+├── docs/
+│   ├── description.md
+│   └── tutorial.md
+├── templates/   # optional
+├── tools/       # optional
+├── kb/          # optional
+└── helpers/     # optional
+</code></pre>
+<p><strong>Expected Result</strong>: Complete skill structure created with proper organization.</p>
+<h3 id="step-6-review-main-skill-prompt">Step 6: Review Main Skill Prompt<a class="headerlink" href="#step-6-review-main-skill-prompt" title="Permanent link">&para;</a></h3>
+<p>Examine the generated main prompt file:
+- Follows OLAF skill template structure
+- Uses imperative language consistently
+- Includes comprehensive error handling
+- Has measurable success criteria</p>
+<p><strong>Expected Result</strong>: Skill prompt meets all OLAF standards.</p>
+<h3 id="step-7-approve-or-request-changes">Step 7: Approve or Request Changes<a class="headerlink" href="#step-7-approve-or-request-changes" title="Permanent link">&para;</a></h3>
+<p>Use the Propose-Confirm-Act protocol:
+- <strong>Approve</strong>: Type "approved" to create the skill
+- <strong>Request Changes</strong>: Provide specific feedback for modifications</p>
+<p><strong>Expected Result</strong>: Skill creation proceeds based on your response.</p>
+<h3 id="step-8-verify-skill-creation">Step 8: Verify Skill Creation<a class="headerlink" href="#step-8-verify-skill-creation" title="Permanent link">&para;</a></h3>
+<p>After approval, verify the skill was created successfully:</p>
+<pre><code>Check: analyze-code-quality/ exists with all files
+</code></pre>
+<p><strong>Expected Result</strong>: Complete skill package available for use.</p>
+<h3 id="step-9-test-your-new-skill">Step 9: Test Your New Skill<a class="headerlink" href="#step-9-test-your-new-skill" title="Permanent link">&para;</a></h3>
+<p>Test the skill to ensure it works correctly:</p>
+<pre><code>olaf analyze code quality
+</code></pre>
+<p><strong>Expected Result</strong>: Skill executes and performs as expected.</p>
+<h2 id="expected-outcomes">Expected Outcomes<a class="headerlink" href="#expected-outcomes" title="Permanent link">&para;</a></h2>
+<h3 id="successful-completion">Successful Completion<a class="headerlink" href="#successful-completion" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Complete skill directory structure under <code>[skill-name]/</code></li>
+<li>Functional main skill prompt following OLAF standards</li>
+<li>Complete documentation package</li>
+<li>Skill discoverable through OLAF framework</li>
+</ul>
+<h3 id="files-created">Files Created<a class="headerlink" href="#files-created" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>skill.md</code> - Main skill prompt</li>
+<li><code>docs/description.md</code> - Skill overview and usage</li>
+<li><code>docs/tutorial.md</code> - Step-by-step guide</li>
+<li>Template files (if applicable)</li>
+<li>Tool files (if applicable)</li>
+</ul>
+<h3 id="validation-checklist">Validation Checklist<a class="headerlink" href="#validation-checklist" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Main prompt follows OLAF template structure</li>
+<li>[ ] Documentation is complete and accurate</li>
+<li>[ ] Skill can be invoked through OLAF framework</li>
+<li>[ ] No naming conflicts with existing skills</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Issue</strong>: "Skill name already exists"
+<strong>Solution</strong>: Choose a different, more specific name or review existing skill for potential merge</p>
+<p><strong>Issue</strong>: "Directory creation failed"
+<strong>Solution</strong>: Check permissions and available disk space</p>
+<p><strong>Issue</strong>: "Template files not found"
+<strong>Solution</strong>: Verify OLAF framework installation and template availability</p>
+<h3 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Plan before creating</strong>: Think through your skill's purpose and dependencies</li>
+<li><strong>Use descriptive names</strong>: Choose clear, action-oriented names</li>
+<li><strong>Test thoroughly</strong>: Always test your skill after creation</li>
+<li><strong>Document well</strong>: Provide comprehensive documentation for users</li>
+<li><strong>Follow conventions</strong>: Stick to OLAF naming and structure conventions</li>
+</ol>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>After creating your skill:
+1. <strong>Test functionality</strong>: Verify the skill works as expected
+2. <strong>Refine prompt</strong>: Adjust the main prompt based on testing results
+3. <strong>Add dependencies</strong>: Include any needed templates, tools, or knowledge base articles
+4. <strong>Update documentation</strong>: Enhance docs based on actual usage
+5. <strong>Share with team</strong>: Make the skill available to other team members</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/review-prd-spec/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#step-by-step-tutorial" class="nav-link">Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="step-by-step-tutorial">Step-by-Step Tutorial<a class="headerlink" href="#step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<p><strong>Review PRD Spec: Step-by-Step Tutorial</strong></p>
+<p><strong>How to Execute the "Review PRD Spec" Workflow</strong></p>
+<p>This tutorial shows exactly how to review Product Requirements Documents (PRDs) for completeness, identify gaps, and generate standardized formatted documents using the OLAF business-analyst competency.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework properly installed and configured</li>
+<li>Access to a PRD or evolution request document to review</li>
+<li>PRD template files available in the templates directory</li>
+<li>Understanding of PRD structure and standard sections</li>
+<li>Access to the business-analyst competency pack</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-prepare-the-prd-content">Step 1: Prepare the PRD Content<a class="headerlink" href="#step-1-prepare-the-prd-content" title="Permanent link">&para;</a></h3>
+<p>[Ensure you have the PRD document ready for review]</p>
+<p><strong>User Action:</strong>
+1. Locate the PRD or evolution request document you want to review
+2. Ensure the document is accessible (file path or content string)
+3. Identify the project name for proper document naming
+4. Decide on review depth level (basic, comprehensive, or detailed)</p>
+<p><strong>System Response:</strong>
+Document should be readable and accessible for processing.</p>
+<h3 id="step-2-invoke-the-review-command">Step 2: Invoke the Review Command<a class="headerlink" href="#step-2-invoke-the-review-command" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Execute the OLAF command to start PRD review</p>
+<pre><code>olaf review prd spec
+</code></pre>
+<p><strong>Provide Parameters:</strong>
+- <strong>prd_content</strong>: [path/to/prd-document.md or content string] - The PRD to review
+- <strong>project_name</strong>: [your-project-name] - Name for output file naming
+- <strong>review_depth</strong>: [comprehensive] - Level of analysis (default: comprehensive)
+- <strong>save_format</strong>: [true] - Whether to save formatted output (default: true)
+- <strong>template_type</strong>: [standard] - Template format to use (default: standard)</p>
+<h3 id="step-3-content-analysis-phase">Step 3: Content Analysis Phase<a class="headerlink" href="#step-3-content-analysis-phase" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Reads and parses the PRD content structure
+- Analyzes business objectives and success metrics
+- Reviews user stories and acceptance criteria
+- Evaluates technical requirements and constraints
+- Assesses risk management and mitigation strategies
+- Checks timeline and resource requirements
+- Validates stakeholder identification</p>
+<p><strong>You Should See:</strong> Progress messages indicating content analysis is underway</p>
+<h3 id="step-4-completeness-review-and-gap-identification">Step 4: Completeness Review and Gap Identification<a class="headerlink" href="#step-4-completeness-review-and-gap-identification" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Evaluates each PRD section against standard requirements:
+  - Executive Summary (problem statement, solution overview)
+  - Business Case (value proposition, ROI, strategic alignment)
+  - User Requirements (personas, journeys, functional requirements)
+  - Technical Specifications (architecture, integrations, performance)
+  - Implementation Plan (phases, milestones, dependencies)
+  - Success Criteria (measurable outcomes, KPIs)
+  - Risk Management (identified risks, mitigation plans)
+- Creates prioritized gap list (Critical, Important, Nice-to-have)
+- Generates specific questions to address each gap
+- Provides examples of complete sections</p>
+<p><strong>You Should See:</strong> Categorized list of gaps with priority levels and specific questions</p>
+<h3 id="step-5-user-interaction-for-improvements">Step 5: User Interaction for Improvements<a class="headerlink" href="#step-5-user-interaction-for-improvements" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Presents staging using Propose-Act protocol
+- Asks targeted questions to fill identified gaps
+- Requests clarification on ambiguous requirements
+- Validates user responses iteratively
+- Ensures all critical gaps are addressed</p>
+<p><strong>User Action:</strong>
+1. Review the identified gaps and their priority levels
+2. Answer the targeted improvement questions
+3. Provide clarification for ambiguous sections
+4. Confirm when critical gaps have been addressed</p>
+<p><strong>You Should See:</strong> Interactive question-and-answer session with specific, actionable questions</p>
+<h3 id="step-6-document-formatting">Step 6: Document Formatting<a class="headerlink" href="#step-6-document-formatting" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Applies selected PRD template structure (standard/agile/enterprise)
+- Ensures consistent formatting and style throughout
+- Adds proper section numbering and cross-references
+- Includes timestamp and version information
+- Generates table of contents and appendices
+- Validates internal consistency and clarity</p>
+<p><strong>You Should See:</strong> Formatted document preview following template structure</p>
+<h3 id="step-7-quality-validation-and-final-output">Step 7: Quality Validation and Final Output<a class="headerlink" href="#step-7-quality-validation-and-final-output" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong>
+- Confirms all critical gaps have been addressed
+- Verifies document follows template structure completely
+- Checks for internal consistency and clarity
+- Validates that success criteria are measurable
+- Calculates quality score and template compliance percentage
+- Saves final document using Propose-Confirm-Act protocol</p>
+<p><strong>User Action:</strong>
+Review and approve the final formatted document for saving</p>
+<p><strong>You Should See:</strong>
+- Complete formatted PRD document
+- Quality checklist with validation results
+- Template compliance score (target: 95%+)
+- File save confirmation: <code>[product_docs_dir]/[project_name]-prd-[timestamp].md</code></p>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>PRD content thoroughly analyzed for completeness</strong>
+✅ <strong>All critical gaps identified and prioritized</strong>
+✅ <strong>Targeted improvement questions generated and answered</strong>
+✅ <strong>Document formatted according to selected template</strong>
+✅ <strong>Quality validation confirms 95%+ template compliance</strong>
+✅ <strong>Success criteria are measurable and time-bound</strong>
+✅ <strong>Risk assessment includes both technical and business risks</strong>
+✅ <strong>Final document saved with proper naming convention</strong>
+✅ <strong>User approval obtained for final formatted version</strong></p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If PRD content cannot be read:</strong>
+- Verify the file path is correct and accessible
+- Ensure the document format is supported
+- Check file permissions</p>
+<p><strong>If template files are not found:</strong></p>
+<pre><code>Check templates directory: [templates_dir]/business-analyst/
+Verify template_type parameter matches available templates
+</code></pre>
+<p><strong>If critical gaps remain unaddressed:</strong>
+- Review the prioritized gap list systematically
+- Engage subject matter experts for technical sections
+- Consider scheduling stakeholder workshops for complex gaps</p>
+<p><strong>If template compliance is below 95%:</strong>
+- Review sections flagged in quality validation
+- Ensure all required sections are present
+- Verify formatting consistency throughout document</p>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Systematic Gap Analysis:</strong> The workflow uses a structured approach to identify missing or incomplete PRD sections across all standard categories</li>
+<li><strong>Prioritized Improvements:</strong> Gaps are categorized by severity (Critical, Important, Nice-to-have) to focus efforts efficiently</li>
+<li><strong>Interactive Refinement:</strong> The Propose-Act protocol ensures collaborative improvement rather than automated assumptions</li>
+<li><strong>Template Standardization:</strong> Applying consistent templates ensures organizational alignment and reduces review friction</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Share the formatted PRD with stakeholders for approval</li>
+<li>Use analyze-business-requirements to validate detailed requirement sections</li>
+<li>Apply improve-spec to add technical diagrams and data models</li>
+<li>Schedule technical review with development team</li>
+<li>Track PRD quality metrics over multiple projects to improve process</li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total review time:</strong> 10-20 minutes depending on PRD size and gap count</li>
+<li><strong>User input required:</strong> Answering improvement questions, providing clarifications, approving final document</li>
+<li><strong>OLAF execution time:</strong> Automated analysis, gap identification, formatting, and validation</li>
+<li><strong>Interactive phases:</strong> Gap discussion and document approval require active user participation</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

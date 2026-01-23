@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Measure AI Impact - Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/measure-ai-impact/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#measure-ai-impact-tutorial" class="nav-link">Measure AI Impact - Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tutorial-1-detect-ai-usage-in-specific-files" class="nav-link">Tutorial 1: Detect AI Usage in Specific Files</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tutorial-2-track-quarterly-productivity-trends" class="nav-link">Tutorial 2: Track Quarterly Productivity Trends</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tutorial-3-create-baseline-for-future-comparison" class="nav-link">Tutorial 3: Create Baseline for Future Comparison</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tutorial-4-identify-files-needing-ai-assistance" class="nav-link">Tutorial 4: Identify Files Needing AI Assistance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tutorial-5-quarterly-review-workflow" class="nav-link">Tutorial 5: Quarterly Review Workflow</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-patterns" class="nav-link">Common Patterns</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="measure-ai-impact-tutorial">Measure AI Impact - Tutorial<a class="headerlink" href="#measure-ai-impact-tutorial" title="Permanent link">&para;</a></h1>
+<p>This tutorial walks you through practical examples of using the <strong>measure-ai-impact</strong> skill to analyze AI's impact on your codebase.</p>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before starting, ensure:</p>
+<p>✅ You're in a Git repository
+✅ Python 3.10+ is installed
+✅ You have at least 6 months of commit history (recommended)
+✅ Radon library is installed (optional): <code>pip install radon</code></p>
+<hr />
+<h2 id="tutorial-1-detect-ai-usage-in-specific-files">Tutorial 1: Detect AI Usage in Specific Files<a class="headerlink" href="#tutorial-1-detect-ai-usage-in-specific-files" title="Permanent link">&para;</a></h2>
+<h3 id="scenario">Scenario<a class="headerlink" href="#scenario" title="Permanent link">&para;</a></h3>
+<p>You used GitHub Copilot to refactor <code>src/auth.py</code> and <code>src/validator.py</code> last week. You want to confirm the AI actually improved code quality.</p>
+<h3 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h3>
+<h4 id="1-invoke-the-skill">1. Invoke the Skill<a class="headerlink" href="#1-invoke-the-skill" title="Permanent link">&para;</a></h4>
+<pre><code>@olaf measure-ai-impact mode:file-analysis files:[&quot;src/auth.py&quot;, &quot;src/validator.py&quot;]
+</code></pre>
+<h4 id="2-what-happens">2. What Happens<a class="headerlink" href="#2-what-happens" title="Permanent link">&para;</a></h4>
+<p>The skill will:
+1. ✅ Validate repository and file paths
+2. ✅ Extract baseline metrics from 6 months ago
+3. ✅ Calculate current metrics from working directory
+4. ✅ Run AI signature detection
+5. ✅ Generate detailed comparison report</p>
+<h4 id="3-review-the-report">3. Review the Report<a class="headerlink" href="#3-review-the-report" title="Permanent link">&para;</a></h4>
+<p>Open the generated report at <code>olaf-data/ai-impact/ai-impact-file-analysis-[timestamp].md</code>:</p>
+<pre><code class="language-markdown">### File: `src/auth.py`
+
+**AI Likelihood**: 0.87 (High)
+
+**Detection Indicators**:
+- ✓ MI_JUMP_SIGNIFICANT: Maintainability Index increased by 35 points
+- ✓ DIFFICULTY_DROP_MAJOR: Halstead Difficulty decreased by 42%
+- ✓ EFFORT_REDUCTION: Halstead Effort reduced by 68%
+
+**Metrics Comparison**:
+
+| Metric | Before | After | Change | Impact |
+|--------|--------|-------|--------|--------|
+| Maintainability Index | 42 | 77 | +35 | ✅ Excellent |
+| Cyclomatic Complexity | 18 | 9 | -50% | ✅ Improved |
+| Halstead Difficulty | 28.4 | 16.5 | -42% | ✅ Simplified |
+| Halstead Effort | 18500 | 5900 | -68% | ✅ Optimized |
+</code></pre>
+<h4 id="4-interpretation">4. Interpretation<a class="headerlink" href="#4-interpretation" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>High AI Likelihood (0.87)</strong>: Very confident AI was used</li>
+<li><strong>All indicators present</strong>: Strong evidence of AI-assisted refactoring</li>
+<li><strong>Metrics improved dramatically</strong>: Code is now easier to understand and maintain</li>
+</ul>
+<h3 id="key-takeaways">Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permanent link">&para;</a></h3>
+<p>✅ <code>auth.py</code> was likely improved using AI
+✅ Quality metrics show significant improvement
+✅ Code is now more maintainable</p>
+<hr />
+<h2 id="tutorial-2-track-quarterly-productivity-trends">Tutorial 2: Track Quarterly Productivity Trends<a class="headerlink" href="#tutorial-2-track-quarterly-productivity-trends" title="Permanent link">&para;</a></h2>
+<h3 id="scenario_1">Scenario<a class="headerlink" href="#scenario_1" title="Permanent link">&para;</a></h3>
+<p>Your team started using GitHub Copilot in January 2025 (Q1). It's now the end of Q1, and you want to measure productivity impact.</p>
+<h3 id="steps_1">Steps<a class="headerlink" href="#steps_1" title="Permanent link">&para;</a></h3>
+<h4 id="1-generate-quarterly-snapshots">1. Generate Quarterly Snapshots<a class="headerlink" href="#1-generate-quarterly-snapshots" title="Permanent link">&para;</a></h4>
+<pre><code>@olaf measure-ai-impact mode:quarterly-trends since:&quot;2024-01-01&quot;
+</code></pre>
+<h4 id="2-what-happens_1">2. What Happens<a class="headerlink" href="#2-what-happens_1" title="Permanent link">&para;</a></h4>
+<p>The skill will:
+1. ✅ Analyze Git commit history from 2024-01-01 to present
+2. ✅ Generate snapshots for each quarter (2024-Q1, Q2, Q3, Q4, 2025-Q1)
+3. ✅ Calculate productivity metrics per quarter
+4. ✅ Identify trends and AI correlation</p>
+<h4 id="3-review-the-report_1">3. Review the Report<a class="headerlink" href="#3-review-the-report_1" title="Permanent link">&para;</a></h4>
+<p>Open <code>olaf-data/ai-impact/ai-impact-quarterly-trends-[timestamp].md</code>:</p>
+<pre><code class="language-markdown">## Productivity Overview
+
+| Quarter | Commits | Code Churn | Commits/Day | Contributors |
+|---------|---------|------------|-------------|--------------|
+| 2024-Q4 | 150 | 12,000 LOC | 2.3 | 5 |
+| 2025-Q1 | 210 | 18,500 LOC | 3.2 | 5 |
+
+### Key Trends
+- ✅ Commits increased by 40% in Q1 2025
+- ✅ Code churn up 54% (more code produced)
+- ✅ Daily commit rate improved from 2.3 → 3.2 (+39%)
+- ⚠️ Contributor count stable (AI adoption, not team growth)
+
+### Estimated AI Impact
+**Assessment**: High (Confident)
+
+Based on:
+- Productivity spike in Q1 2025 (AI adoption quarter)
+- Increased velocity without team size change
+- Commit patterns consistent with AI-assisted development
+</code></pre>
+<h4 id="4-compare-specific-quarters">4. Compare Specific Quarters<a class="headerlink" href="#4-compare-specific-quarters" title="Permanent link">&para;</a></h4>
+<p>For deeper analysis:</p>
+<pre><code>@olaf measure-ai-impact mode:quarterly-trends compare:[&quot;2024-Q4&quot;, &quot;2025-Q1&quot;]
+</code></pre>
+<p>This generates a detailed comparison:</p>
+<pre><code class="language-markdown">### 2024-Q4 vs 2025-Q1
+
+| Metric | 2024-Q4 | 2025-Q1 | Change | Trend |
+|--------|---------|---------|--------|-------|
+| Commits | 150 | 210 | +60 (+40%) | ↗ |
+| Code Churn | 12K | 18.5K | +6.5K (+54%) | ↗ |
+| Commits/Day | 2.3 | 3.2 | +0.9 (+39%) | ↗ |
+| LOC/Commit | 80 | 88 | +8 (+10%) | ↗ |
+</code></pre>
+<h3 id="key-takeaways_1">Key Takeaways<a class="headerlink" href="#key-takeaways_1" title="Permanent link">&para;</a></h3>
+<p>✅ Productivity increased significantly in Q1 2025
+✅ AI adoption likely contributed to 39% improvement in daily commits
+✅ Code velocity up without team expansion</p>
+<hr />
+<h2 id="tutorial-3-create-baseline-for-future-comparison">Tutorial 3: Create Baseline for Future Comparison<a class="headerlink" href="#tutorial-3-create-baseline-for-future-comparison" title="Permanent link">&para;</a></h2>
+<h3 id="scenario_2">Scenario<a class="headerlink" href="#scenario_2" title="Permanent link">&para;</a></h3>
+<p>You're about to introduce AI tools to your team next month. You want a baseline snapshot to measure future impact.</p>
+<h3 id="steps_2">Steps<a class="headerlink" href="#steps_2" title="Permanent link">&para;</a></h3>
+<h4 id="1-create-baseline-snapshot">1. Create Baseline Snapshot<a class="headerlink" href="#1-create-baseline-snapshot" title="Permanent link">&para;</a></h4>
+<pre><code>@olaf measure-ai-impact mode:snapshot name:&quot;baseline-pre-ai&quot;
+</code></pre>
+<h4 id="2-what-happens_2">2. What Happens<a class="headerlink" href="#2-what-happens_2" title="Permanent link">&para;</a></h4>
+<p>The skill will:
+1. ✅ Collect current repository metrics
+2. ✅ Save snapshot JSON file
+3. ✅ Display summary</p>
+<p>Output:</p>
+<pre><code class="language-markdown"># Snapshot Created: baseline-pre-ai
+
+**Timestamp**: 2025-01-24 14:30:00
+**Git Commit**: a3f7d9c
+**Total Files**: 125
+**Total LOC**: 45,000
+
+**Metrics Collected**:
+- Maintainability Index (avg): 58
+- Cyclomatic Complexity (avg): 12
+- Halstead Difficulty (avg): 22.5
+- Commit activity (last 90 days): 85 commits
+
+**Snapshot saved**: olaf-data/ai-impact/snapshots/snapshot-baseline-pre-ai.json
+</code></pre>
+<h4 id="3-use-baseline-later">3. Use Baseline Later<a class="headerlink" href="#3-use-baseline-later" title="Permanent link">&para;</a></h4>
+<p>Three months later, after AI adoption:</p>
+<pre><code>@olaf measure-ai-impact mode:file-analysis baseline_date:&quot;baseline-pre-ai&quot; files:[&quot;src/**/*.py&quot;]
+</code></pre>
+<p>The skill will compare current state against your pre-AI baseline.</p>
+<h3 id="key-takeaways_2">Key Takeaways<a class="headerlink" href="#key-takeaways_2" title="Permanent link">&para;</a></h3>
+<p>✅ Baseline snapshot created for future comparison
+✅ Can measure AI impact accurately using historical data
+✅ JSON file preserves all metrics for long-term analysis</p>
+<hr />
+<h2 id="tutorial-4-identify-files-needing-ai-assistance">Tutorial 4: Identify Files Needing AI Assistance<a class="headerlink" href="#tutorial-4-identify-files-needing-ai-assistance" title="Permanent link">&para;</a></h2>
+<h3 id="scenario_3">Scenario<a class="headerlink" href="#scenario_3" title="Permanent link">&para;</a></h3>
+<p>You want to find files with low maintainability that could benefit from AI-assisted refactoring.</p>
+<h3 id="steps_3">Steps<a class="headerlink" href="#steps_3" title="Permanent link">&para;</a></h3>
+<h4 id="1-run-file-analysis-on-all-python-files">1. Run File Analysis on All Python Files<a class="headerlink" href="#1-run-file-analysis-on-all-python-files" title="Permanent link">&para;</a></h4>
+<pre><code>@olaf measure-ai-impact mode:file-analysis files:[&quot;src/**/*.py&quot;]
+</code></pre>
+<h4 id="2-review-recommendations-section">2. Review Recommendations Section<a class="headerlink" href="#2-review-recommendations-section" title="Permanent link">&para;</a></h4>
+<p>The report includes:</p>
+<pre><code class="language-markdown">## Suggested Next Targets for AI Assistance
+
+- `src/legacy_parser.py` - Current MI: 32 - Complexity: 28
+- `src/old_validator.py` - Current MI: 41 - Complexity: 22
+- `src/data_processor.py` - Current MI: 38 - Complexity: 19
+</code></pre>
+<h4 id="3-refactor-with-ai">3. Refactor with AI<a class="headerlink" href="#3-refactor-with-ai" title="Permanent link">&para;</a></h4>
+<p>Use GitHub Copilot or similar tools to refactor <code>legacy_parser.py</code>.</p>
+<h4 id="4-validate-improvement">4. Validate Improvement<a class="headerlink" href="#4-validate-improvement" title="Permanent link">&para;</a></h4>
+<pre><code>@olaf measure-ai-impact mode:file-analysis files:[&quot;src/legacy_parser.py&quot;]
+</code></pre>
+<p>Expected result:</p>
+<pre><code class="language-markdown">### File: `src/legacy_parser.py`
+
+**AI Likelihood**: 0.92 (High)
+
+**Metrics Comparison**:
+
+| Metric | Before | After | Change |
+|--------|--------|-------|--------|
+| Maintainability Index | 32 | 68 | +36 ✅ |
+| Cyclomatic Complexity | 28 | 12 | -57% ✅ |
+</code></pre>
+<h3 id="key-takeaways_3">Key Takeaways<a class="headerlink" href="#key-takeaways_3" title="Permanent link">&para;</a></h3>
+<p>✅ Identified low-quality files systematically
+✅ Validated AI improvements with metrics
+✅ Iteratively improved codebase quality</p>
+<hr />
+<h2 id="tutorial-5-quarterly-review-workflow">Tutorial 5: Quarterly Review Workflow<a class="headerlink" href="#tutorial-5-quarterly-review-workflow" title="Permanent link">&para;</a></h2>
+<h3 id="scenario_4">Scenario<a class="headerlink" href="#scenario_4" title="Permanent link">&para;</a></h3>
+<p>Every quarter, you want to generate a standard AI impact report for leadership.</p>
+<h3 id="standard-workflow">Standard Workflow<a class="headerlink" href="#standard-workflow" title="Permanent link">&para;</a></h3>
+<h4 id="end-of-each-quarter-eg-march-31">End of Each Quarter (e.g., March 31)<a class="headerlink" href="#end-of-each-quarter-eg-march-31" title="Permanent link">&para;</a></h4>
+<p><strong>Step 1</strong>: Generate quarterly snapshot</p>
+<pre><code>@olaf measure-ai-impact mode:quarterly-trends since:&quot;2024-01-01&quot;
+</code></pre>
+<p><strong>Step 2</strong>: Compare current quarter vs previous</p>
+<pre><code>@olaf measure-ai-impact mode:quarterly-trends compare:[&quot;2024-Q4&quot;, &quot;2025-Q1&quot;]
+</code></pre>
+<p><strong>Step 3</strong>: Create checkpoint snapshot</p>
+<pre><code>@olaf measure-ai-impact mode:snapshot name:&quot;2025-Q1-checkpoint&quot;
+</code></pre>
+<p><strong>Step 4</strong>: Review and share reports</p>
+<ul>
+<li>File analysis: <code>olaf-data/ai-impact/ai-impact-quarterly-trends-[timestamp].md</code></li>
+<li>Snapshot: <code>olaf-data/ai-impact/snapshots/snapshot-2025-Q1-checkpoint.json</code></li>
+</ul>
+<h3 id="automation-optional">Automation (Optional)<a class="headerlink" href="#automation-optional" title="Permanent link">&para;</a></h3>
+<p>Add to your CI/CD or scheduled tasks:</p>
+<pre><code class="language-bash"># End-of-quarter automation (PowerShell)
+$quarter = &quot;2025-Q1&quot;
+python skills/onboard/tools/commons/project-onboarding/git_productivity_analyzer.py snapshots --since 2024-01-01
+python skills/onboard/tools/commons/project-onboarding/ai_impact_analyzer.py snapshot --name $quarter
+</code></pre>
+<hr />
+<h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="pattern-1-beforeafter-validation">Pattern 1: Before/After Validation<a class="headerlink" href="#pattern-1-beforeafter-validation" title="Permanent link">&para;</a></h3>
+<p><strong>Use Case</strong>: Validate AI-assisted changes</p>
+<pre><code># Before refactoring
+@olaf measure-ai-impact mode:snapshot name:&quot;before-refactor&quot;
+
+# [Perform AI refactoring]
+
+# After refactoring
+@olaf measure-ai-impact mode:file-analysis baseline_date:&quot;before-refactor&quot;
+</code></pre>
+<h3 id="pattern-2-team-retrospective">Pattern 2: Team Retrospective<a class="headerlink" href="#pattern-2-team-retrospective" title="Permanent link">&para;</a></h3>
+<p><strong>Use Case</strong>: Quarterly team review</p>
+<pre><code># Generate trends
+@olaf measure-ai-impact mode:quarterly-trends since:&quot;2024-01-01&quot;
+
+# Compare specific quarters
+@olaf measure-ai-impact mode:quarterly-trends compare:[&quot;2024-Q3&quot;, &quot;2024-Q4&quot;]
+</code></pre>
+<h3 id="pattern-3-continuous-monitoring">Pattern 3: Continuous Monitoring<a class="headerlink" href="#pattern-3-continuous-monitoring" title="Permanent link">&para;</a></h3>
+<p><strong>Use Case</strong>: Track ongoing AI impact</p>
+<pre><code># Monthly snapshots
+@olaf measure-ai-impact mode:snapshot name:&quot;2025-01-monthly&quot;
+
+# Quarterly full analysis
+@olaf measure-ai-impact mode:quarterly-trends
+</code></pre>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="issue-no-baseline-data-available">Issue: "No baseline data available"<a class="headerlink" href="#issue-no-baseline-data-available" title="Permanent link">&para;</a></h3>
+<p><strong>Solution</strong>: Create a snapshot first:</p>
+<pre><code>@olaf measure-ai-impact mode:snapshot name:&quot;baseline&quot;
+</code></pre>
+<h3 id="issue-halstead-metrics-unavailable">Issue: "Halstead metrics unavailable"<a class="headerlink" href="#issue-halstead-metrics-unavailable" title="Permanent link">&para;</a></h3>
+<p><strong>Solution</strong>: Install Radon library:</p>
+<pre><code class="language-bash">pip install radon
+</code></pre>
+<p>Or use limited mode:</p>
+<pre><code>@olaf measure-ai-impact mode:snapshot include_halstead:false
+</code></pre>
+<h3 id="issue-invalid-quarter-format">Issue: "Invalid quarter format"<a class="headerlink" href="#issue-invalid-quarter-format" title="Permanent link">&para;</a></h3>
+<p><strong>Solution</strong>: Use correct format: <code>YYYY-QN</code> (e.g., <code>2025-Q1</code>, <code>2024-Q4</code>)</p>
+<h3 id="issue-not-a-git-repository">Issue: "Not a Git repository"<a class="headerlink" href="#issue-not-a-git-repository" title="Permanent link">&para;</a></h3>
+<p><strong>Solution</strong>: Run from repository root with <code>.git</code> folder</p>
+<hr />
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>After completing these tutorials:</p>
+<ol>
+<li>✅ Create a baseline snapshot for your repository</li>
+<li>✅ Set up quarterly review schedule</li>
+<li>✅ Identify low-MI files for AI assistance</li>
+<li>✅ Track AI impact over time</li>
+</ol>
+<p>For advanced usage, see:
+- <code>description.md</code> - Full capability reference
+- Analyzer tool documentation - Technical details</p>
+<hr />
+<p><strong>Tutorial Version</strong>: 1.0.0
+<strong>Last Updated</strong>: 2025-01-24</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

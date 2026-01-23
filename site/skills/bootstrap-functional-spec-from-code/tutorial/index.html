@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>Step-by-Step Tutorial - HAAL Skills</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">HAAL Skills</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../installer/" class="nav-link">Installer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../" class="nav-link">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../catalog/" class="nav-link">Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/haal-ai/haal-skills/edit/master/docs/skills/bootstrap-functional-spec-from-code/tutorial.md" class="nav-link">Edit on haal-ai/haal-skills
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#step-by-step-tutorial" class="nav-link">Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#bootstrap-functional-spec-from-code-step-by-step-tutorial" class="nav-link">Bootstrap Functional Spec from Code: Step-by-Step Tutorial</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-by-step-instructions" class="nav-link">Step-by-Step Instructions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-learning-points" class="nav-link">Key Learning Points</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps-to-try" class="nav-link">Next Steps to Try</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#expected-timeline" class="nav-link">Expected Timeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="step-by-step-tutorial">Step-by-Step Tutorial<a class="headerlink" href="#step-by-step-tutorial" title="Permanent link">&para;</a></h1>
+<h2 id="bootstrap-functional-spec-from-code-step-by-step-tutorial">Bootstrap Functional Spec from Code: Step-by-Step Tutorial<a class="headerlink" href="#bootstrap-functional-spec-from-code-step-by-step-tutorial" title="Permanent link">&para;</a></h2>
+<p><strong>How to Execute the "Bootstrap Functional Spec from Code" Workflow</strong></p>
+<p>This tutorial shows exactly how to analyze source code and extract functionalities to create a draft functional specification using the OLAF business-analyst competency.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OLAF framework properly installed and configured</li>
+<li>Access to a source code directory or codebase to analyze</li>
+<li>Understanding of functional specification structure</li>
+<li>Access to the business-analyst competency pack</li>
+</ul>
+<h2 id="step-by-step-instructions">Step-by-Step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-prepare-the-source-code">Step 1: Prepare the Source Code<a class="headerlink" href="#step-1-prepare-the-source-code" title="Permanent link">&para;</a></h3>
+<p>[Ensure you have the codebase ready for analysis]</p>
+<p><strong>User Action:</strong></p>
+<ol>
+<li>Locate the application's source code or codebase directory</li>
+<li>Ensure the directory is accessible and contains the main application code</li>
+<li>Note the full path to the source code directory</li>
+</ol>
+<p><strong>System Response:</strong>
+Directory should be readable and contain analyzable source code files.</p>
+<h3 id="step-2-invoke-the-bootstrap-command">Step 2: Invoke the Bootstrap Command<a class="headerlink" href="#step-2-invoke-the-bootstrap-command" title="Permanent link">&para;</a></h3>
+<p><strong>User Action:</strong> Execute the OLAF command to start functional spec generation</p>
+<pre><code class="language-bash">olaf bootstrap functional spec from code
+</code></pre>
+<p><strong>Provide Parameters:</strong></p>
+<ul>
+<li><strong>source_path</strong>: [path/to/your/source-code] - Full path to the codebase directory</li>
+<li><strong>output_format</strong>: [markdown/html/pdf] - Output format (default: markdown)</li>
+<li><strong>detail_level</strong>: [overview/standard/detailed] - Level of detail (default: standard)</li>
+</ul>
+<h3 id="step-3-code-analysis-process">Step 3: Code Analysis Process<a class="headerlink" href="#step-3-code-analysis-process" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Scans the directory structure and identifies entry points</li>
+<li>Analyzes main components and their relationships</li>
+<li>Extracts business logic and workflows from the source code</li>
+<li>Documents data models and system relationships</li>
+</ul>
+<p><strong>You Should See:</strong> Progress messages indicating directory scanning and code analysis phases</p>
+<h3 id="step-4-business-logic-extraction">Step 4: Business Logic Extraction<a class="headerlink" href="#step-4-business-logic-extraction" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Identifies core business rules embedded in the code</li>
+<li>Maps out user flows and system interactions</li>
+<li>Documents system boundaries and external dependencies</li>
+<li>Identifies integration points and external services</li>
+</ul>
+<p><strong>You Should See:</strong> Summary of identified business processes and system components</p>
+<h3 id="step-5-specification-generation">Step 5: Specification Generation<a class="headerlink" href="#step-5-specification-generation" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Loads the functional specification template</li>
+<li>Structures extracted content for business audience</li>
+<li>Translates technical code into business-focused language</li>
+<li>Includes relevant code examples and visual diagrams where helpful</li>
+</ul>
+<p><strong>You Should See:</strong> Formatted functional specification following the standard template structure</p>
+<h3 id="step-6-output-generation-and-saving">Step 6: Output Generation and Saving<a class="headerlink" href="#step-6-output-generation-and-saving" title="Permanent link">&para;</a></h3>
+<p><strong>What OLAF Does:</strong></p>
+<ul>
+<li>Generates filename in format: <code>FunctionalSpec-YYYYMMDD-NNN.md</code></li>
+<li>Saves the specification to <code>data/specs/</code> directory</li>
+<li>Creates business-focused documentation without technical jargon</li>
+<li>Includes technical details in appendices for reference</li>
+</ul>
+<p><strong>You Should See:</strong></p>
+<ul>
+<li>Complete functional specification in chosen format</li>
+<li>File save confirmation with location</li>
+<li>Executive summary of identified functionalities</li>
+<li>Clear separation between business and technical views</li>
+</ul>
+<h2 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Source code successfully analyzed and components identified</strong>
+✅ <strong>Business logic extracted and documented in business terms</strong>
+✅ <strong>Functional specification generated following template structure</strong>
+✅ <strong>Specification saved to data/specs/ with proper naming convention</strong>
+✅ <strong>Business-focused language used (no technical jargon in main sections)</strong>
+✅ <strong>Traceability to source code maintained for validation</strong></p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>If source code cannot be analyzed:</strong></p>
+<ul>
+<li>Verify the source path is correct and accessible</li>
+<li>Ensure the directory contains recognizable source code files</li>
+<li>Check if the codebase uses supported programming languages</li>
+</ul>
+<p><strong>If business logic extraction is incomplete:</strong></p>
+<ul>
+<li>Try using 'detailed' level for more comprehensive analysis</li>
+<li>Ensure the source code contains meaningful business logic</li>
+<li>Check if code comments and documentation help with context</li>
+</ul>
+<p><strong>If specification template errors occur:</strong></p>
+<ul>
+<li>Verify the functional specification template exists in the competency pack</li>
+<li>Check if the template is properly formatted and accessible</li>
+</ul>
+<h2 id="key-learning-points">Key Learning Points<a class="headerlink" href="#key-learning-points" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Code-to-Business Translation:</strong> The workflow translates technical implementation into business-understandable functional requirements</li>
+<li><strong>Template-Driven Consistency:</strong> Uses standardized templates to ensure consistent specification structure</li>
+<li><strong>Traceability Maintenance:</strong> Maintains clear links between generated specification and source code for validation</li>
+</ol>
+<h2 id="next-steps-to-try">Next Steps to Try<a class="headerlink" href="#next-steps-to-try" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Review the generated functional specification with business stakeholders</li>
+<li>Validate the extracted functionalities against actual system behavior</li>
+<li>Use the specification as a starting point for requirements refinement</li>
+<li>Update and maintain the specification as the codebase evolves</li>
+</ul>
+<h2 id="expected-timeline">Expected Timeline<a class="headerlink" href="#expected-timeline" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Total analysis time:</strong> 5-15 minutes depending on codebase size</li>
+<li><strong>User input required:</strong> Providing source path and configuration parameters</li>
+<li><strong>OLAF execution time:</strong> Automated code analysis, business logic extraction, and specification generation</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
