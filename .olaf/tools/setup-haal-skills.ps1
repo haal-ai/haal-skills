@@ -8,7 +8,8 @@ param(
     [string]$RepoPath = "",
     [string]$Seed = "",
     [string[]]$Competency = @(),
-    [string]$Collection = ""
+    [string]$Collection = "",
+    [switch]$Conserve  # If set, don't delete existing skills (update only)
 )
 
 
@@ -93,7 +94,7 @@ function Read-ReposManifest([string]$ClonePath) {
     return @()
 }
 
-function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs) {
+function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$ConserveMode) {
     $installScript = Join-Path $ClonePath ".olaf\tools\install-haal-skills.ps1"
     
     if (!(Test-Path -LiteralPath $installScript)) {
@@ -111,6 +112,9 @@ function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs) {
     }
     if ($InstallArgs.ContainsKey('Competency') -and $InstallArgs['Competency'] -and $InstallArgs['Competency'].Count -gt 0) { 
         $args['Competency'] = $InstallArgs['Competency'] 
+    }
+    if ($ConserveMode) {
+        $args['Conserve'] = $true
     }
     
     try {
@@ -193,7 +197,9 @@ if ($Competency.Count -gt 0) { $installArgs['Competency'] = $Competency }
 foreach ($clonePath in $clonedPaths) {
     $repoName = Split-Path -Leaf $clonePath
     Write-Host "Installing from: $repoName" -ForegroundColor Cyan
-    Install-FromClone $clonePath $installArgs
+    # First install cleans (unless Conserve), subsequent ones conserve
+    $conserveThis = $Conserve -or ($clonePath -ne $clonedPaths[0])
+    Install-FromClone $clonePath $installArgs $conserveThis
     Write-Host ""
 }
 

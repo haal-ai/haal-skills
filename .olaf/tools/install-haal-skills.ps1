@@ -3,7 +3,8 @@ param(
     [string]$ClonePath,
     [string]$RepoPath = "",
     [string[]]$Competency = @(),
-    [string]$Collection = ""
+    [string]$Collection = "",
+    [switch]$Conserve  # If set, don't delete existing skills (update only)
 )
 
 Set-StrictMode -Version Latest
@@ -153,6 +154,20 @@ function Prune-Skills([string[]]$SkillNames, [string[]]$Destinations) {
     }
 }
 
+function Clean-SkillDestinations([string[]]$Destinations) {
+    foreach ($dest in $Destinations) {
+        if (Test-Path -LiteralPath $dest) {
+            $skillFolders = Get-ChildItem -LiteralPath $dest -Directory -ErrorAction SilentlyContinue
+            $count = 0
+            foreach ($folder in $skillFolders) {
+                Remove-Item -LiteralPath $folder.FullName -Recurse -Force -ErrorAction SilentlyContinue
+                $count++
+            }
+            Write-Host "  Cleaned $count skills from: $dest" -ForegroundColor Gray
+        }
+    }
+}
+
 function Copy-SkillsToStaging([string[]]$SkillNames, [string]$ClonePath, [string]$StagingPath) {
     $skillsSource = Get-SkillsPath $ClonePath
     $copied = 0
@@ -220,7 +235,15 @@ Write-Host "Clone path: $ClonePath"
 Write-Host "Repo: $repoRoot"
 Write-Host "Collection: $(if ($Collection) { $Collection } else { '(none)' })"
 Write-Host "Competencies: $(if ($Competency.Count -gt 0) { $Competency -join ', ' } else { '(none)' })"
+Write-Host "Mode: $(if ($Conserve) { 'Conserve (update only)' } else { 'Clean install' })"
 Write-Host ""
+
+# Step 0: Clean skill destinations (unless --Conserve)
+if (-not $Conserve) {
+    Write-Host "Step 0: Cleaning skill destinations..." -ForegroundColor Cyan
+    Clean-SkillDestinations $SkillDestinations
+    Write-Host ""
+}
 
 # Step 1: Read prune list and prune skills from destinations
 Write-Host "Step 1: Pruning deprecated skills..." -ForegroundColor Cyan
