@@ -34,8 +34,8 @@ $DefaultFolders = @(
 
 # Git exclusions to add
 $GitExclusions = @(
-    "olaf-*",
-    "my-skills-*",
+    "olaf-*/",
+    "my-skills-*/",
     ".olaf/work/",
     ".olaf/data/context/"
 )
@@ -222,4 +222,4 @@ Write-Host "Step 3: Updating git exclude..." -ForegroundColor Cyan
 Update-GitExclude $DestPath
 Write-Host ""
 
-Write-Host "=== Done ===" -ForegroundColor Green
+Write-Host "=== Sync Complete ===" -ForegroundColor Green

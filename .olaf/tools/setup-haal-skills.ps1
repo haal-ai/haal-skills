@@ -9,7 +9,7 @@ param(
     [string]$Seed = "",
     [string[]]$Competency = @(),
     [string]$Collection = "",
-    [switch]$Conserve,  # If set, don't delete existing skills (update only)
+    [switch]$Clean,  # If set, delete existing skills first (default: update only)
     [ValidateSet("all", "kiro", "claude", "windsurf", "github")]
     [string]$Platform = "all"  # Which platform(s) to install to
 )
@@ -96,7 +96,7 @@ function Read-ReposManifest([string]$ClonePath) {
     return @()
 }
 
-function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$ConserveMode, [string]$PlatformMode) {
+function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$CleanMode, [string]$PlatformMode) {
     $installScript = Join-Path $ClonePath ".olaf\tools\install-haal-skills.ps1"
     
     if (!(Test-Path -LiteralPath $installScript)) {
@@ -115,8 +115,8 @@ function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$C
     if ($InstallArgs.ContainsKey('Competency') -and $InstallArgs['Competency'] -and $InstallArgs['Competency'].Count -gt 0) { 
         $args['Competency'] = $InstallArgs['Competency'] 
     }
-    if ($ConserveMode) {
-        $args['Conserve'] = $true
+    if ($CleanMode) {
+        $args['Clean'] = $true
     }
     if ($PlatformMode) {
         $args['Platform'] = $PlatformMode
@@ -202,9 +202,9 @@ if ($Competency.Count -gt 0) { $installArgs['Competency'] = $Competency }
 foreach ($clonePath in $clonedPaths) {
     $repoName = Split-Path -Leaf $clonePath
     Write-Host "Installing from: $repoName" -ForegroundColor Cyan
-    # First install cleans (unless Conserve), subsequent ones conserve
-    $conserveThis = $Conserve -or ($clonePath -ne $clonedPaths[0])
-    Install-FromClone $clonePath $installArgs $conserveThis $Platform
+    # Only first install can clean (if --Clean), subsequent ones never clean
+    $cleanThis = $Clean -and ($clonePath -eq $clonedPaths[0])
+    Install-FromClone $clonePath $installArgs $cleanThis $Platform
     Write-Host ""
 }
 

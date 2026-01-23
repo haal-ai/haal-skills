@@ -4,7 +4,7 @@ param(
     [string]$RepoPath = "",
     [string[]]$Competency = @(),
     [string]$Collection = "",
-    [switch]$Conserve,  # If set, don't delete existing skills (update only)
+    [switch]$Clean,  # If set, delete existing skills first (default: update only)
     [ValidateSet("all", "kiro", "claude", "windsurf", "github")]
     [string]$Platform = "all"  # Which platform(s) to install to
 )
@@ -244,12 +244,12 @@ Write-Host "Clone path: $ClonePath"
 Write-Host "Repo: $repoRoot"
 Write-Host "Collection: $(if ($Collection) { $Collection } else { '(none)' })"
 Write-Host "Competencies: $(if ($Competency.Count -gt 0) { $Competency -join ', ' } else { '(none)' })"
-Write-Host "Mode: $(if ($Conserve) { 'Conserve (update only)' } else { 'Clean install' })"
+Write-Host "Mode: $(if ($Clean) { 'Clean install' } else { 'Update only' })"
 Write-Host "Platform: $Platform"
 Write-Host ""
 
-# Step 0: Clean skill destinations (unless --Conserve)
-if (-not $Conserve) {
+# Step 0: Clean skill destinations (only if --Clean)
+if ($Clean) {
     Write-Host "Step 0: Cleaning skill destinations..." -ForegroundColor Cyan
     Clean-SkillDestinations $SkillDestinations
     Write-Host ""
@@ -372,4 +372,4 @@ if (![string]::IsNullOrWhiteSpace($RepoPath)) {
     Write-Host ""
 }
 
-Write-Host "=== Done ===" -ForegroundColor Green
+Write-Host "=== Install Complete ===" -ForegroundColor Green
