@@ -1,34 +1,34 @@
-# Skill Checklist
+# Checklist for Effective Skills
 
-Use this checklist before sharing a skill (PR, verified list, or stable list).
+Before sharing a Skill, verify:
 
-## Content
+## Core Quality
 
-- [ ] The skill has a clear intent (1–2 sentences) and a crisp “when to use / when not to use”.
-- [ ] Inputs/outputs are explicit: required parameters, optional parameters, defaults, and constraints.
-- [ ] The happy path is step-by-step and reproducible.
-- [ ] Edge cases are called out (missing files, wrong folder, permissions, network failures).
-- [ ] Any destructive operations are explicitly confirmed and reversible where possible.
+- [ ] Description is specific and includes key terms
+- [ ] Description includes both what the Skill does and when to use it
+- [ ] skill.md body is under 500 lines
+- [ ] Additional details are in separate files (if needed)
+- [ ] No time-sensitive information (or in "old patterns" section)
+- [ ] Consistent terminology throughout
+- [ ] Examples are concrete, not abstract
+- [ ] File references are one level deep
+- [ ] Progressive disclosure used appropriately
+- [ ] Workflows have clear steps
 
-## Instructions quality
+## Code and Scripts
 
-- [ ] Commands are copy/paste-safe for the intended shell (PowerShell vs bash) and OS.
-- [ ] File references use repo-relative paths when possible.
-- [ ] The skill avoids over-configurability; advanced options are documented but not required.
-- [ ] There is no hidden state: required tools, env vars, and credentials are stated.
+- [ ] Scripts handle errors explicitly rather than failing silently
+- [ ] Error handling is explicit and helpful
+- [ ] No unexplained magic numbers (all values justified with comments)
+- [ ] Required packages listed in instructions and verified as available
+- [ ] Scripts have clear documentation
+- [ ] No Windows-style paths (all forward slashes)
+- [ ] Validation/verification steps for critical operations
+- [ ] Feedback loops included for quality-critical tasks
 
-## Safety
+## Testing
 
-- [ ] The skill avoids leaking secrets (logs, env dumps, config prints).
-- [ ] It does not encourage unsafe commands (blind `rm -rf`, running remote scripts without review).
-- [ ] External calls are bounded (rate limits, paging/limits, timeouts where appropriate).
-
-## Verification
-
-- [ ] There is a verification section with observable outcomes (files created, commands succeed, expected output).
-- [ ] There is basic troubleshooting guidance for common failure modes.
-
-## Maintainability
-
-- [ ] Links are valid (no 404s) and point to the canonical docs location.
-- [ ] The skill is consistent with repo conventions (folder layout, naming, style).
+- [ ] At least three evaluations created
+- [ ] Tested with multiple agent models (small, medium, large)
+- [ ] Tested with real usage scenarios
+- [ ] Team feedback incorporated (if applicable)
