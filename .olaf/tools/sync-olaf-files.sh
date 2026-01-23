@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
+set -uo pipefail
+
 # OLAF File Synchronization Script
 # Syncs .olaf/ config files from source to target repo
-
-set -uo pipefail
 
 SOURCE_PATH="${1:-}"
 DEST_PATH="${2:-}"
 
-# Determine source (from env var or default)
+# Determine source (from env var or default to global ~/.olaf)
 if [[ -z "$SOURCE_PATH" ]]; then
     SOURCE_PATH="${HAAL_SKILLS_SOURCE:-}"
 fi
 if [[ -z "$SOURCE_PATH" ]]; then
-    SOURCE_PATH="$HOME/.codeium/windsurf/skills"
+    SOURCE_PATH="$HOME/.olaf"
 fi
 
 # Determine destination (current directory or param)
@@ -20,22 +20,17 @@ if [[ -z "$DEST_PATH" ]]; then
     DEST_PATH="$(pwd)"
 fi
 
-# Config file location
-CONFIG_PATH="$SOURCE_PATH/.olaf/local-file.json"
-
-# Default folders to sync
+# Default folders to sync (relative paths from ~/.olaf)
 DEFAULT_FOLDERS=(
-    ".olaf/data"
-    ".olaf/work"
-    ".olaf/tools"
-    ".windsurf/rules"
-    ".windsurf/workflows"
+    "data"
+    "work"
+    "tools"
 )
 
 # Git exclusions to add
 GIT_EXCLUSIONS=(
-    "olaf-*"
-    "my-skills-*"
+    "olaf-*/"
+    "my-skills-*/"
     ".olaf/work/"
     ".olaf/data/context/"
 )
@@ -60,15 +55,16 @@ except:
 
 sync_folder() {
     local source_base="$1"
-    local rel_folder="$2"
+    local src_rel_folder="$2"
     local dest_base="$3"
-    shift 3
+    local dest_rel_folder="$4"
+    shift 4
     local prune_files=("$@")
     
-    local source_path="$source_base/$rel_folder"
+    local source_path="$source_base/$src_rel_folder"
     
     if [[ ! -d "$source_path" ]]; then
-        echo "  SKIP: $rel_folder (not found)"
+        echo "  SKIP: $src_rel_folder (not found)"
         return
     fi
     
@@ -76,8 +72,8 @@ sync_folder() {
     local skipped=0
     
     while IFS= read -r -d '' file; do
-        local rel_path="${file#$source_base/}"
-        local dest_file="$dest_base/$rel_path"
+        local rel_path="${file#$source_path/}"
+        local dest_file="$dest_base/$dest_rel_folder/$rel_path"
         
         # Check prune list
         local should_prune=false
@@ -89,14 +85,14 @@ sync_folder() {
         done
         [[ "$should_prune" == "true" ]] && continue
         
-        # Check if exists (skip if exists, unless force)
+        # Check if exists (skip if exists)
         if [[ -f "$dest_file" ]]; then
             ((skipped++)) || true
             continue
         fi
         
         # Create parent directory
-        mkdir -p "$(dirname "$dest_file")"
+        mkdir -p "$(dirname "$dest_file")" 2>/dev/null || true
         
         # Copy file
         cp "$file" "$dest_file"
@@ -104,7 +100,7 @@ sync_folder() {
         
     done < <(find "$source_path" -type f -print0 2>/dev/null)
     
-    echo "  $rel_folder: $copied copied, $skipped skipped"
+    echo "  $dest_rel_folder: $copied copied, $skipped skipped"
 }
 
 prune_files() {
@@ -123,15 +119,17 @@ prune_files() {
 
 update_git_exclude() {
     local dest_base="$1"
-    local exclude_file="$dest_base/.git/info/exclude"
+    local git_dir="$dest_base/.git"
     
-    if [[ ! -d "$dest_base/.git" ]]; then
+    if [[ ! -d "$git_dir" ]]; then
         echo "  SKIP: Not a git repo"
         return
     fi
     
+    local exclude_file="$git_dir/info/exclude"
+    
     # Ensure .git/info exists
-    mkdir -p "$dest_base/.git/info"
+    mkdir -p "$git_dir/info" 2>/dev/null || true
     
     # Read existing exclusions
     local existing=()
@@ -165,6 +163,15 @@ update_git_exclude() {
 # === Main ===
 
 echo "=== OLAF File Sync ==="
+
+# Resolve source path to absolute
+if [[ ! "$SOURCE_PATH" = /* ]]; then
+    SOURCE_PATH="$(cd "$SOURCE_PATH" 2>/dev/null && pwd)" || {
+        echo "ERROR: Cannot resolve source path" >&2
+        exit 1
+    }
+fi
+
 echo "Source: $SOURCE_PATH"
 echo "Destination: $DEST_PATH"
 echo ""
@@ -175,6 +182,7 @@ if [[ ! -d "$SOURCE_PATH" ]]; then
 fi
 
 # Load config
+CONFIG_PATH="$SOURCE_PATH/local-file.json"
 prune_files_list=()
 while IFS= read -r line; do
     [[ -n "$line" ]] && prune_files_list+=("$line")
@@ -189,6 +197,8 @@ if [[ ${#folders[@]} -eq 0 ]]; then
     folders=("${DEFAULT_FOLDERS[@]}")
 fi
 
+echo "Folders to sync: ${folders[*]}"
+
 # Step 1: Prune files
 echo "Step 1: Pruning files..."
 if [[ ${#prune_files_list[@]} -gt 0 ]]; then
@@ -201,18 +211,22 @@ echo ""
 # Step 2: Sync folders
 echo "Step 2: Syncing folders..."
 for folder in "${folders[@]}"; do
-    # Handle both absolute and relative paths
+    rel_folder="$folder"
+    
+    # Handle absolute paths - convert to relative
     if [[ "$folder" = /* ]]; then
-        # Absolute path - extract relative part
-        if [[ "$folder" == "$SOURCE_PATH"* ]]; then
-            rel_folder="${folder#$SOURCE_PATH/}"
+        # Try to extract just the relative part
+        if [[ "$folder" == *".olaf"* ]]; then
+            rel_folder="${folder##*.olaf/}"
         else
+            echo "  SKIP: Cannot parse path $folder"
             continue
         fi
-    else
-        rel_folder="$folder"
     fi
-    sync_folder "$SOURCE_PATH" "$rel_folder" "$DEST_PATH" "${prune_files_list[@]}"
+    
+    # Source is directly under ~/.olaf, dest goes to .olaf/ in repo
+    dest_rel_folder=".olaf/$rel_folder"
+    sync_folder "$SOURCE_PATH" "$rel_folder" "$DEST_PATH" "$dest_rel_folder" "${prune_files_list[@]}"
 done
 echo ""
 
@@ -221,4 +235,4 @@ echo "Step 3: Updating git exclude..."
 update_git_exclude "$DEST_PATH"
 echo ""
 
-echo "=== Done ==="
+echo "=== Sync Complete ==="

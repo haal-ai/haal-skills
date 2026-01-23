@@ -14,6 +14,8 @@ REPO_PATH=""
 SEED=""
 COMPETENCIES=()
 COLLECTION=""
+CLEAN=false
+PLATFORM="all"
 
 show_help() {
     echo "Usage: $0 [options]"
@@ -25,6 +27,8 @@ show_help() {
     echo "  --seed OWNER/REPO:BRANCH Seed repo (e.g., 'haal-ai/haal-skills:main')"
     echo "  --collection NAME        Collection name to install"
     echo "  --competency NAME        Competency name (can be repeated)"
+    echo "  --clean                  Delete existing skills first (default: update only)"
+    echo "  --platform PLATFORM      Platform to install to: all, kiro, claude, windsurf, github"
     echo "  -h, --help               Show this help message"
 }
 
@@ -51,20 +55,28 @@ try_clone_repo() {
     
     local repo_name="${repo_spec%%:*}"
     repo_name="${repo_name//\//_}"
-    local clone_path="$dest_folder/$repo_name"
+    local branch_safe="${branch//\//_}"
+    local clone_path="$dest_folder/${repo_name}_${branch_safe}"
     
     echo "Cloning $repo_spec..."
+    echo "  URL: $repo_url"
+    echo "  Branch: $branch"
+    
+    # Remove existing if present
+    rm -rf "$clone_path" 2>/dev/null || true
     
     if git clone --depth 1 --branch "$branch" "$repo_url" "$clone_path" 2>/dev/null; then
-        echo "  OK: $repo_name"
+        echo "  OK: ${repo_name}:${branch}"
         echo "$clone_path"
         return 0
     fi
     
     # Try master if main failed
     if [[ "$branch" == "main" ]]; then
+        echo "  Trying master branch..."
+        clone_path="$dest_folder/${repo_name}_master"
         if git clone --depth 1 --branch "master" "$repo_url" "$clone_path" 2>/dev/null; then
-            echo "  OK: $repo_name (master)"
+            echo "  OK: ${repo_name}:master"
             echo "$clone_path"
             return 0
         fi
@@ -82,7 +94,6 @@ read_repos_manifest() {
         return
     fi
     
-    # Extract repos array using python or jq
     if command -v python3 &>/dev/null; then
         python3 -c "import json; data=json.load(open('$manifest_path')); print('\n'.join(data.get('repos', [])))" 2>/dev/null
     elif command -v jq &>/dev/null; then
@@ -92,7 +103,9 @@ read_repos_manifest() {
 
 install_from_clone() {
     local clone_path="$1"
-    shift
+    local clean_mode="$2"
+    local platform_mode="$3"
+    shift 3
     local install_args=("$@")
     
     local install_script="$clone_path/.olaf/tools/install-haal-skills.sh"
@@ -103,7 +116,13 @@ install_from_clone() {
     fi
     
     chmod +x "$install_script" 2>/dev/null || true
-    "$install_script" --clone-path "$clone_path" "${install_args[@]}" || {
+    
+    local args=(--clone-path "$clone_path")
+    [[ "$clean_mode" == "true" ]] && args+=(--clean)
+    [[ -n "$platform_mode" ]] && args+=(--platform "$platform_mode")
+    args+=("${install_args[@]}")
+    
+    "$install_script" "${args[@]}" || {
         echo "  WARN: Install had errors for $clone_path - continuing"
     }
 }
@@ -119,6 +138,10 @@ while [[ $# -gt 0 ]]; do
             COMPETENCIES+=("${2:-}"); shift 2;;
         --collection)
             COLLECTION="${2:-}"; shift 2;;
+        --clean)
+            CLEAN=true; shift;;
+        --platform)
+            PLATFORM="${2:-all}"; shift 2;;
         -h|--help)
             show_help
             exit 0;;
@@ -203,10 +226,17 @@ for comp in "${COMPETENCIES[@]}"; do
     install_args+=(--competency "$comp")
 done
 
+first_clone=true
 for clone_path in "${cloned_paths[@]}"; do
     repo_name=$(basename "$clone_path")
     echo "Installing from: $repo_name"
-    install_from_clone "$clone_path" "${install_args[@]}"
+    # Only first install can clean (if --clean), subsequent ones never clean
+    if [[ "$first_clone" == "true" && "$CLEAN" == "true" ]]; then
+        install_from_clone "$clone_path" "true" "$PLATFORM" "${install_args[@]}"
+    else
+        install_from_clone "$clone_path" "false" "$PLATFORM" "${install_args[@]}"
+    fi
+    first_clone=false
     echo ""
 done
 

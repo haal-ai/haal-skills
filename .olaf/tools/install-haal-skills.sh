@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
-# Continue on errors - don't block on missing items
 set -uo pipefail
 
 REPO_PATH=""
 CLONE_PATH=""
 COMPETENCIES=()
 COLLECTION=""
+CLEAN=false
+PLATFORM="all"
 
 # Fixed temp folder for staging
 TEMP_STAGING_FOLDER="${TMPDIR:-/tmp}/haal-skills-staging"
 
-# Destination folders
-DESTINATIONS=(
-    "$HOME/.codeium/windsurf/skills"
-    "$HOME/.claude/skills"
-    "$HOME/.github/skills"
-    "$HOME/.kiro/skills"
+# Destination folders for skills
+declare -A ALL_SKILL_DESTINATIONS=(
+    ["windsurf"]="$HOME/.codeium/windsurf/skills"
+    ["claude"]="$HOME/.claude/skills"
+    ["github"]="$HOME/.github/skills"
+    ["kiro"]="$HOME/.kiro/skills"
 )
+
+# Global OLAF folder
+OLAF_DESTINATION="$HOME/.olaf"
 
 show_help() {
     echo "Usage: $0 --clone-path PATH [options]"
@@ -30,9 +34,9 @@ show_help() {
     echo "  --repo-path PATH         Target repository path (for sync script)"
     echo "  --collection NAME        Collection name to install"
     echo "  --competency NAME        Competency name (can be repeated)"
+    echo "  --clean                  Delete existing skills first (default: update only)"
+    echo "  --platform PLATFORM      Platform: all, kiro, claude, windsurf, github"
     echo "  -h, --help               Show this help message"
-    echo ""
-    echo "If no collection or competency is specified, all skills are installed."
 }
 
 while [[ $# -gt 0 ]]; do
@@ -45,6 +49,10 @@ while [[ $# -gt 0 ]]; do
             COMPETENCIES+=("${2:-}"); shift 2;;
         --collection)
             COLLECTION="${2:-}"; shift 2;;
+        --clean)
+            CLEAN=true; shift;;
+        --platform)
+            PLATFORM="${2:-all}"; shift 2;;
         -h|--help)
             show_help
             exit 0;;
@@ -67,6 +75,16 @@ if [[ ! -d "$CLONE_PATH" ]]; then
     exit 1
 fi
 
+# Select destinations based on platform
+SKILL_DESTINATIONS=()
+if [[ "$PLATFORM" == "all" ]]; then
+    for dest in "${ALL_SKILL_DESTINATIONS[@]}"; do
+        SKILL_DESTINATIONS+=("$dest")
+    done
+else
+    SKILL_DESTINATIONS+=("${ALL_SKILL_DESTINATIONS[$PLATFORM]}")
+fi
+
 resolve_repo_root() {
     if [[ -n "$REPO_PATH" ]]; then
         (cd "$REPO_PATH" 2>/dev/null && pwd -P) || echo "$REPO_PATH"
@@ -85,6 +103,21 @@ clean_folder() {
     mkdir -p "$path"
 }
 
+clean_skill_destinations() {
+    for dest in "${SKILL_DESTINATIONS[@]}"; do
+        if [[ -d "$dest" ]]; then
+            local count=0
+            for folder in "$dest"/*/; do
+                if [[ -d "$folder" ]]; then
+                    rm -rf "$folder"
+                    ((count++)) || true
+                fi
+            done
+            echo "  Cleaned $count skills from: $dest"
+        fi
+    done
+}
+
 read_json_array() {
     local file="$1"
     local key="$2"
@@ -92,13 +125,12 @@ read_json_array() {
         return
     fi
     python3 -c "
-import json, sys
+import json
 try:
     with open('$file') as f:
         data = json.load(f)
-    if '$key' in data:
-        for item in data['$key']:
-            print(item)
+    for item in data.get('$key', []):
+        print(item)
 except:
     pass
 " 2>/dev/null || true
@@ -153,7 +185,7 @@ get_skills_from_competency() {
 
 prune_skills() {
     local skill="$1"
-    for dest in "${DESTINATIONS[@]}"; do
+    for dest in "${SKILL_DESTINATIONS[@]}"; do
         local skill_path="$dest/$skill"
         if [[ -d "$skill_path" ]]; then
             rm -rf "$skill_path" 2>/dev/null || true
@@ -184,7 +216,7 @@ copy_skill_to_staging() {
 deploy_staging_to_destinations() {
     local staging_path="$1"
     
-    for dest in "${DESTINATIONS[@]}"; do
+    for dest in "${SKILL_DESTINATIONS[@]}"; do
         mkdir -p "$dest" 2>/dev/null || true
         
         local count=0
@@ -204,6 +236,39 @@ deploy_staging_to_destinations() {
     done
 }
 
+copy_olaf_folder() {
+    local clone_path="$1"
+    local source_olaf="$clone_path/.olaf"
+    
+    if [[ ! -d "$source_olaf" ]]; then
+        echo "  SKIP: No .olaf folder in source"
+        return
+    fi
+    
+    mkdir -p "$OLAF_DESTINATION" 2>/dev/null || true
+    
+    local olaf_folders=("data" "work" "tools")
+    for folder in "${olaf_folders[@]}"; do
+        local src_folder="$source_olaf/$folder"
+        local dest_folder="$OLAF_DESTINATION/$folder"
+        
+        if [[ -d "$src_folder" ]]; then
+            local copied=0
+            while IFS= read -r -d '' file; do
+                local rel_path="${file#$src_folder/}"
+                local dest_file="$dest_folder/$rel_path"
+                
+                if [[ ! -f "$dest_file" ]]; then
+                    mkdir -p "$(dirname "$dest_file")" 2>/dev/null || true
+                    cp "$file" "$dest_file"
+                    ((copied++)) || true
+                fi
+            done < <(find "$src_folder" -type f -print0 2>/dev/null)
+            echo "  .olaf/$folder: $copied new files"
+        fi
+    done
+}
+
 # === Main execution ===
 
 echo "=== HAAL Skills Install ==="
@@ -214,7 +279,16 @@ echo "Clone path: $CLONE_PATH"
 echo "Repo: $REPO_ROOT"
 echo "Collection: ${COLLECTION:-(none)}"
 echo "Competencies: ${COMPETENCIES[*]:-(none)}"
+echo "Mode: $(if [[ "$CLEAN" == "true" ]]; then echo 'Clean install'; else echo 'Update only'; fi)"
+echo "Platform: $PLATFORM"
 echo ""
+
+# Step 0: Clean skill destinations (only if --clean)
+if [[ "$CLEAN" == "true" ]]; then
+    echo "Step 0: Cleaning skill destinations..."
+    clean_skill_destinations
+    echo ""
+fi
 
 # Step 1: Read prune list and prune skills
 echo "Step 1: Pruning deprecated skills..."
@@ -305,19 +379,26 @@ echo "  Staged $staged skills"
 echo ""
 
 # Step 4: Deploy to all destinations
-echo "Step 4: Deploying to destinations..."
+echo "Step 4: Deploying skills to destinations..."
 deploy_staging_to_destinations "$TEMP_STAGING_FOLDER"
 echo ""
 
-# Step 5: Run sync script for .olaf files (optional)
-echo "Step 5: Syncing .olaf files..."
-sync_script="$CLONE_PATH/.olaf/tools/sync-olaf-files.sh"
-if [[ -f "$sync_script" ]]; then
-    chmod +x "$sync_script" 2>/dev/null || true
-    "$sync_script" "$CLONE_PATH" "$REPO_ROOT" && echo "  OK: .olaf files synced" || echo "  WARN: Sync script had issues"
-else
-    echo "  SKIP: Sync script not found"
-fi
+# Step 5: Copy .olaf folder to global location
+echo "Step 5: Syncing .olaf to global location..."
+copy_olaf_folder "$CLONE_PATH"
 echo ""
 
-echo "=== Done ==="
+# Step 6: Sync to repo if RepoPath specified
+if [[ -n "$REPO_PATH" ]]; then
+    echo "Step 6: Syncing to repo..."
+    sync_script="$CLONE_PATH/.olaf/tools/sync-olaf-files.sh"
+    if [[ -f "$sync_script" ]]; then
+        chmod +x "$sync_script" 2>/dev/null || true
+        "$sync_script" "$OLAF_DESTINATION" "$REPO_ROOT" && echo "  OK: .olaf files synced to repo" || echo "  WARN: Sync script failed"
+    else
+        echo "  SKIP: Sync script not found"
+    fi
+    echo ""
+fi
+
+echo "=== Install Complete ==="
