@@ -221,8 +221,9 @@ Write-Host ""
 
 # Step 1: Read prune list and prune skills from destinations
 Write-Host "Step 1: Pruning deprecated skills..." -ForegroundColor Cyan
-$pruneList = Get-PruneList $ClonePath
-if ($pruneList.Count -gt 0) {
+$pruneList = @(Get-PruneList $ClonePath)
+$pruneCount = $pruneList.Count
+if ($pruneCount -gt 0) {
     Prune-Skills $pruneList $Destinations
 } else {
     Write-Host "  No skills to prune"
@@ -235,31 +236,34 @@ $allCompetencies = @()
 
 # From collection
 if ($Collection) {
-    $collectionCompetencies = Get-CompetenciesFromCollection $Collection $ClonePath
+    $collectionCompetencies = @(Get-CompetenciesFromCollection $Collection $ClonePath)
     $allCompetencies += $collectionCompetencies
 }
 
 # From explicit competencies
-if ($Competency.Count -gt 0) {
+$compCount = $Competency.Count
+if ($compCount -gt 0) {
     $allCompetencies += $Competency
 }
 
-$allCompetencies = $allCompetencies | Select-Object -Unique
+$allCompetencies = @($allCompetencies | Select-Object -Unique)
 
 # Get skills from competencies
 $skillsToInstall = @()
-if ($allCompetencies.Count -gt 0) {
-    $skillsToInstall = Get-SkillsFromCompetencies $allCompetencies $ClonePath
+$allCompCount = $allCompetencies.Count
+if ($allCompCount -gt 0) {
+    $skillsToInstall = @(Get-SkillsFromCompetencies $allCompetencies $ClonePath)
 } else {
     # No selection = all skills
     Write-Host "  No collection/competency specified, installing all skills"
-    $skillsToInstall = Get-AllSkills $ClonePath
+    $skillsToInstall = @(Get-AllSkills $ClonePath)
 }
 
-Write-Host "  Skills to install: $($skillsToInstall.Count)"
+$skillCount = $skillsToInstall.Count
+Write-Host "  Skills to install: $skillCount"
 Write-Host ""
 
-if ($skillsToInstall.Count -eq 0) {
+if ($skillCount -eq 0) {
     Write-Host "WARN: No skills found to install" -ForegroundColor Yellow
     exit 0
 }

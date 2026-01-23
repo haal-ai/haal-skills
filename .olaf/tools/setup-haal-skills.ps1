@@ -101,18 +101,23 @@ function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs) {
         return
     }
     
-    # Run install from the cloned repo's script
+    # Build args for install script
     $args = @{ ClonePath = $ClonePath }
-    if ($InstallArgs.RepoPath) { $args['RepoPath'] = $InstallArgs.RepoPath }
-    if ($InstallArgs.Collection) { $args['Collection'] = $InstallArgs.Collection }
-    if ($InstallArgs.Competency -and $InstallArgs.Competency.Count -gt 0) { 
-        $args['Competency'] = $InstallArgs.Competency 
+    if ($InstallArgs.ContainsKey('RepoPath') -and $InstallArgs['RepoPath']) { 
+        $args['RepoPath'] = $InstallArgs['RepoPath'] 
+    }
+    if ($InstallArgs.ContainsKey('Collection') -and $InstallArgs['Collection']) { 
+        $args['Collection'] = $InstallArgs['Collection'] 
+    }
+    if ($InstallArgs.ContainsKey('Competency') -and $InstallArgs['Competency'] -and $InstallArgs['Competency'].Count -gt 0) { 
+        $args['Competency'] = $InstallArgs['Competency'] 
     }
     
     try {
         & $installScript @args
     } catch {
         Write-Host "  WARN: Install had errors for $ClonePath - continuing" -ForegroundColor Yellow
+        Write-Host "  Error: $_" -ForegroundColor Yellow
     }
 }
 
