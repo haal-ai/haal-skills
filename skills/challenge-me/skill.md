@@ -4,7 +4,6 @@ description: Interactive ideation engine that challenges ideas through iterative
 license: Apache-2.0
 metadata:
   olaf_tags: [ideation, challenge, research, collaboration, cyclic]
-  olaf_protocol: Propose-Act
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide
@@ -35,10 +34,13 @@ You MUST present these parameters as a numbered list and collect user responses:
 6. true
 ```
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- Select Act protocol for iterative cycling with user control
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Execute iterative cycles directly with user control (user says "stop" or "save" to end)
+- Present challenges using numbered lists for choices and lettered lists for clarifications
+- Adapt challenge intensity based on user preference (gentle/moderate/rigorous)
+- Generate and save deliverable files only when user explicitly requests ("save")
 
 ## Process
 

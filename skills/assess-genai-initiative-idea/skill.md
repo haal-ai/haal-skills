@@ -19,10 +19,13 @@ You MUST request these parameters if not provided by the user:
 - **stakeholder_context**: string - Primary users and organizational context (OPTIONAL)
 - **timeline_constraints**: string - Expected implementation timeline (OPTIONAL)
 
-## User Interaction Protocol
+## User Interaction
 
-You MUST follow the established interaction rules:
-- Ask for user approval before creating or modifying files
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files (assessment documents)
+- Present questionnaire responses for user review and sign-off before research phase
+- Confirm critical quality issues and request clarification before proceeding
+- Provide clear progress updates at each major phase transition
 
 ## Process
 

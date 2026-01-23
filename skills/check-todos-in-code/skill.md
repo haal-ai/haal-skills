@@ -22,11 +22,13 @@ You MUST request these parameters if not provided by the user:
 - **save_document**: boolean - Save resolution document (OPTIONAL, default: true)
 - **max_todos_threshold**: number - Maximum TODOs to analyze in one session (OPTIONAL, default: 50)
 
-## User Interaction Protocol
+## User Interaction
 
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- Use **Propose-Act** protocol for TODO analysis and document generation
+You MUST follow these interaction guidelines:
+- Ask for user approval before generating and saving TODO resolution documents
+- Present subset selection options when TODO count exceeds threshold
+- Provide clear progress updates during analysis and document generation
+- Confirm document save location and format before writing files
 
 ## Process
 

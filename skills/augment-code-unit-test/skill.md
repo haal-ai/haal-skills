@@ -76,12 +76,13 @@ You MUST provide a user-friendly way to reuse or restart existing unit-test augm
   - Go directly to the tasklist for that `scope_path`, applying the **Tasklist Creation vs. Loading** rules.
   - You MAY still summarize whether this is a new, in-progress, or completed session for clarity.
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Use **Propose-Confirm-Act** for any change that modifies tests or code.
-- Use **Act** for routine, low-risk operations such as listing files,
-  reading existing tests, or parsing tasklists.
-- When in doubt, prefer **Propose-Confirm-Act**.
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Ask for user approval before modifying tests or production code
+- Present proposed test additions grouped by concern for user approval
+- Provide iteration authorization after completing each task
+- Confirm whether to proceed to next unchecked task in tasklist
 
 ## Prerequisites & Scope Handling
 

@@ -21,12 +21,13 @@ You MUST request these parameters if not provided by the user:
 - **feature_description**: string - Brief description of what the feature does (REQUIRED)
 - **files_to_extract**: array - List of files from source branch (OPTIONAL - will be discovered)
 
-## User Interaction Protocol
+## User Interaction
 
-You MUST follow the established interaction protocol strictly:
-- Propose-Confirm-Act for all destructive operations and branch creation
-- Act for file discovery and documentation generation
-- Propose-Act for final PR creation
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files (branch creation, file extraction)
+- Present numbered lists for branch selection to enable easy user choice
+- Confirm destructive operations (branch deletion, file removal) before executing
+- Provide clear progress updates at each major phase (discovery, extraction, PR preparation)
 
 ## Process
 

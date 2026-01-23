@@ -18,11 +18,13 @@ You MUST request these parameters if not provided by the user:
 - **task_description**: string - What the user wants to implement or fix (REQUIRED if reference not provided)
 - **working_directory**: string - Path to the Rust project (OPTIONAL - defaults to current workspace)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Use **Propose-Confirm-Act** behavior for any code generation or code change recommendations
-- You MUST obtain explicit user agreement before generating or modifying code
-- Apply practices strictly during the coding session
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Ask for user approval before generating or modifying code
+- Present impact analysis and solution proposal before implementation
+- Confirm practice violations and provide compliant alternatives
+- Provide commit suggestions after each logical code change
 
 ## Process
 

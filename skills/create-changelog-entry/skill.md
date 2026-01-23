@@ -28,7 +28,13 @@ Before any file read/write operations, you MUST:
     - Detail file: `.olaf/data/product/[changelog_type-lowercase]/[subject_name].md`
 2. Only write files under `<.olaf/data/product/`.
 
-## User Interaction Protocol
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files (changelog and detail files)
+- Present resolved file paths for confirmation before writing
+- Confirm entry format and placement in changelog structure
+- Provide clear verification of clickable markdown links
 
 ## Process
 
