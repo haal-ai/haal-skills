@@ -236,6 +236,7 @@ deploy_staging_to_destinations() {
     done
 }
 
+
 copy_olaf_folder() {
     local clone_path="$1"
     local source_olaf="$clone_path/.olaf"

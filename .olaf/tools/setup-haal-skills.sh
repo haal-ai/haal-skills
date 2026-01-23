@@ -41,6 +41,7 @@ clean_folder() {
 try_clone_repo() {
     local repo_spec="$1"
     local dest_folder="$2"
+    local result_file="$3"
     
     local repo_url=""
     local branch=""
@@ -65,9 +66,9 @@ try_clone_repo() {
     # Remove existing if present
     rm -rf "$clone_path" 2>/dev/null || true
     
-    if git clone --depth 1 --branch "$branch" "$repo_url" "$clone_path" 2>/dev/null; then
+    if git clone --depth 1 --branch "$branch" "$repo_url" "$clone_path" >/dev/null 2>&1; then
         echo "  OK: ${repo_name}:${branch}"
-        echo "$clone_path"
+        echo "$clone_path" > "$result_file"
         return 0
     fi
     
@@ -75,9 +76,9 @@ try_clone_repo() {
     if [[ "$branch" == "main" ]]; then
         echo "  Trying master branch..."
         clone_path="$dest_folder/${repo_name}_master"
-        if git clone --depth 1 --branch "master" "$repo_url" "$clone_path" 2>/dev/null; then
+        if git clone --depth 1 --branch "master" "$repo_url" "$clone_path" >/dev/null 2>&1; then
             echo "  OK: ${repo_name}:master"
-            echo "$clone_path"
+            echo "$clone_path" > "$result_file"
             return 0
         fi
     fi
@@ -178,7 +179,12 @@ clean_folder "$TEMP_BASE_FOLDER"
 
 # Step 1: Clone seed repo
 echo "Step 1: Cloning seed repo..."
-seed_path=$(try_clone_repo "$SEED" "$TEMP_BASE_FOLDER")
+CLONE_RESULT_FILE=$(mktemp)
+seed_path=""
+if try_clone_repo "$SEED" "$TEMP_BASE_FOLDER" "$CLONE_RESULT_FILE"; then
+    seed_path=$(cat "$CLONE_RESULT_FILE")
+fi
+rm -f "$CLONE_RESULT_FILE"
 
 if [[ -z "$seed_path" || ! -d "$seed_path" ]]; then
     echo "ERROR: Failed to clone seed repo: $SEED" >&2
@@ -198,10 +204,14 @@ if [[ ${#additional_repos[@]} -gt 0 ]]; then
     echo "Step 3: Cloning additional repos..."
     for repo in "${additional_repos[@]}"; do
         if [[ -n "$repo" ]]; then
-            path=$(try_clone_repo "$repo" "$TEMP_BASE_FOLDER") || true
-            if [[ -n "$path" && -d "$path" ]]; then
-                cloned_paths+=("$path")
+            CLONE_RESULT_FILE=$(mktemp)
+            if try_clone_repo "$repo" "$TEMP_BASE_FOLDER" "$CLONE_RESULT_FILE"; then
+                path=$(cat "$CLONE_RESULT_FILE")
+                if [[ -n "$path" && -d "$path" ]]; then
+                    cloned_paths+=("$path")
+                fi
             fi
+            rm -f "$CLONE_RESULT_FILE"
         fi
     done
     echo ""
