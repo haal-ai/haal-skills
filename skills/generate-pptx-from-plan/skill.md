@@ -18,10 +18,13 @@ You MUST request these parameters if not provided by the user:
 - **output_directory**: string - Target directory for PowerPoint file (OPTIONAL, default: `.olaf/work/staging/pptx-folder/`)
 - **confirmation**: boolean - User approval to proceed with generation (REQUIRED)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- **Protocol**: Act (for direct PowerPoint generation with user confirmation)
-- Present plan and get user confirmation before proceeding with generation
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Present plan summary and request user confirmation before generating PowerPoint
+- Provide clear progress updates during dependency checks and generation
+- Report any errors immediately with actionable resolution steps
+- Confirm successful generation with file location
 
 ## Prerequisites (if applicable)
 If this skill is part of a workflow chain:

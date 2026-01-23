@@ -4,7 +4,6 @@ description: Measure AI's impact on code quality and team productivity through f
 license: Apache-2.0
 metadata:
   olaf_tags: [ai, impact, metrics, productivity, quality, halstead, maintainability]
-  olaf_protocol: Act
 ---
 
 # Measure AI Impact
@@ -46,9 +45,13 @@ You MUST request these parameters if not provided:
 - **repository_path**: string - Path to repository (default: current workspace)
 - **output_location**: string - Where to save the report (default: olaf-data/ai-impact/)
 
-## User Interaction Protocol
+## User Interaction
 
-You WILL use **Act** protocol for analysis execution.
+You MUST follow these interaction guidelines:
+- Execute analysis directly without requiring approval
+- Provide clear progress updates during metric collection
+- Present findings with actionable insights
+- Offer to create baseline snapshots when missing historical data
 
 ## Process
 

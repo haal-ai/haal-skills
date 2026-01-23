@@ -13,38 +13,28 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response:
 
-**MANDATORY**: You MUST determine the review mode and gather appropriate parameters:
-
-### Review Mode Selection
-
-**source_mode**: [manual|git-modified|file-path|copy-paste] - How to identify code for review
-
-### For Manual Mode (Ask User)
-- **code_source**: string - REQUIRED - What to review (can be: copy-pasted code, specific file path, folder path, or repository)
-- **language**: string - REQUIRED - Programming language of the code
-- **context**: string - (Optional) Additional context about the changes
-
-### For Git-Modified Mode (Automatic Discovery)
-- **branch_name**: string - Optional specific branch to review (defaults to current branch)
-- **file_filter**: string - Optional file types to include (e.g., "*.cs,*.js,*.py")
-- **batch_size**: number - Optional number of files to process per batch (default: 10)
-
-### Universal Parameters (All Modes)
-- **focus_areas**: array[enum] - (Optional) Specific areas to focus on (security, performance, style, etc.)
-- **review_standards**: string/file - (Optional) Custom coding standards, style guides, or review principles to apply
-- **team_conventions**: string/file - (Optional) Team-specific conventions, patterns, or architectural guidelines
-- **compliance_requirements**: array[string] - (Optional) Specific compliance standards (OWASP, NIST, company policies)
+1. **source_mode**: [manual|git-modified|file-path|copy-paste] - How to identify code for review (REQUIRED)
+2. **code_source**: string - What to review (copy-pasted code, file path, folder path, or repository) (REQUIRED for manual mode)
+3. **language**: string - Programming language of the code (REQUIRED for manual mode)
+4. **context**: string - Additional context about the changes (OPTIONAL)
+5. **branch_name**: string - Specific branch to review (OPTIONAL for git-modified mode - defaults to current branch)
+6. **file_filter**: string - File types to include (e.g., "*.cs,*.js,*.py") (OPTIONAL for git-modified mode)
+7. **batch_size**: number - Number of files to process per batch (OPTIONAL for git-modified mode - default: 10)
+8. **focus_areas**: array[enum] - Specific areas to focus on (security, performance, style, etc.) (OPTIONAL)
+9. **review_standards**: string/file - Custom coding standards, style guides, or review principles to apply (OPTIONAL)
+10. **team_conventions**: string/file - Team-specific conventions, patterns, or architectural guidelines (OPTIONAL)
+11. **compliance_requirements**: array[string] - Specific compliance standards (OWASP, NIST, company policies) (OPTIONAL)
 
 **DEFAULT STANDARDS**: You MUST apply these universal coding standards:
-- **Universal Standards**: `.olaf/data/practices/standards/universal-coding-standards.md` - Universal coding principles, including the default **Evolution/Refactoring Mode** for existing code and **Creation/New Code Mode** for new modules.
+- **Universal Standards**: `.olaf/data/practices/standards/universal-coding-standards.md` - Universal coding principles, including the default **Evolution/Refactoring Mode** for existing code and **Creation/New Code Mode** for new modules
 - **Team Standards Search**: Automatically search `.olaf/data/practices/standards/` for team-specific standards files
 - **Integration Standards**: `.olaf/data/practices/standards/integration-testing-standards.md` - If applicable
 
-When the code under review is part of an **existing system**, treat the
-**Evolution/Refactoring Mode** as default:
-- Assume public APIs and observable behavior are frozen unless the user explicitly requests API changes.
-- Focus feedback on internal structure: SRP, DI for externals, function size, complexity, naming, error handling, and test coverage.
+When the code under review is part of an **existing system**, treat the **Evolution/Refactoring Mode** as default:
+- Assume public APIs and observable behavior are frozen unless the user explicitly requests API changes
+- Focus feedback on internal structure: SRP, DI for externals, function size, complexity, naming, error handling, and test coverage
 
 When the user explicitly asks for feedback on a **new module/tool/feature** (greenfield), also apply the **Creation/New Code Mode** from the universal standards (small design first, module boundaries, file size discipline, public API coherence, tests alongside new behavior).
 
@@ -164,33 +154,51 @@ stable]
 Keep **public APIs and behavior frozen** in these refactor suggestions unless
 the user explicitly requests API-level changes.
 
-## Output/Result Format
+## Output Format
+You WILL generate outputs following this structure:
 
-Use `templates/developer/code-review-template.md` to structure the review staging:
+**Primary Deliverable**: Use `templates/developer/code-review-template.md` to structure the review:
 - Follow the template's sections for consistency
 - Include all required fields from the template
-- Replace placeholder content with actual staging
+- Replace placeholder content with actual analysis
 - Maintain the structured format for documentation
 
-## Output to USER
+**Save Locations**:
+- Single file/manual mode: `.olaf/work/staging/code-review/<entity-name>-YYYYMMDD/review.md`
+- Action plan: `.olaf/work/staging/code-review/<entity-name>-YYYYMMDD/action-plan.md`
+- Git-modified mode summary: `.olaf/work/staging/code-reviews/code-review-summary-YYYYMMDD-NNN.md`
 
-### For Single File/Manual Mode1. **Critical Issues**: Security vulnerabilities, major bugs, performance concerns
-2. **Recommendations**: Code improvements, best practices, refactoring suggestions  
-3. **Positive Feedback**: Well-implemented features, clean code examples, good practices followed
-4. **Save Review Results**: Always propose to save the review and action plan under
-   `.olaf/work/staging/code-review/<entity-name>-YYYYMMDD/`.
+## User Communication
 
-### For Git-Modified Mode (Multiple Files)
-1. **Files gathered**: [number of modified/new/deleted files]
-2. **Reviews completed**: [number of files successfully reviewed]
-3. **Individual reviews**: Generated for each analyzed file
-4. **Summary report created**: `.olaf/work/staging/code-reviews/code-review-summary-YYYYMMDD-NNN.md` containing:
-   - Number of files reviewed by type (modified, new, deleted)
-   - List of all generated code review files
-   - Aggregated staging by severity level
-   - Common patterns or issues found across multiple files
-   - Recommendations for team-wide improvements5. **Key staging**: Brief overview of critical issues found across all files
-6. **Recommendations**: High-priority actions for code quality improvement
+### Progress Updates
+- Confirmation when review mode is determined
+- Status when loading standards and practices
+- Notification when analyzing each file or batch
+- Progress tracking for git-modified mode (X of Y files reviewed)
+
+### Completion Summary
+- **For Single File/Manual Mode**:
+  - Critical issues found (security vulnerabilities, major bugs, performance concerns)
+  - Recommendations for improvements (code quality, best practices, refactoring)
+  - Positive feedback (well-implemented features, clean code examples)
+  - Files saved with locations
+- **For Git-Modified Mode**:
+  - Number of files reviewed by type (modified, new, deleted)
+  - List of all generated code review files
+  - Aggregated findings by severity level
+  - Common patterns or issues found across multiple files
+
+### Next Steps
+- **For Single File/Manual Mode**:
+  - Review the saved analysis at `.olaf/work/staging/code-review/<entity-name>-YYYYMMDD/review.md`
+  - Follow the action plan at `.olaf/work/staging/code-review/<entity-name>-YYYYMMDD/action-plan.md`
+  - Prioritize critical issues first
+  - Consider applying similar improvements to related code
+- **For Git-Modified Mode**:
+  - Review the summary report at `.olaf/work/staging/code-reviews/code-review-summary-YYYYMMDD-NNN.md`
+  - Address high-priority issues across all files
+  - Consider team-wide improvements for common patterns
+  - Review individual file analyses for detailed feedback
 
 ## Domain-Specific Rules
 - Rule 1: Be constructive and specific
@@ -199,18 +207,34 @@ Use `templates/developer/code-review-template.md` to structure the review stagin
 - Rule 4: Provide clear examples
 - Rule 5: Consider context and constraints
 
+## Success Criteria
+You WILL consider the task complete when:
+- [ ] Review mode determined and parameters gathered
+- [ ] Standards and practices loaded from repository
+- [ ] Code analyzed against loaded standards
+- [ ] Security assessment completed
+- [ ] Quality evaluation completed
+- [ ] Performance check completed
+- [ ] Review report generated and saved
+- [ ] Action plan generated (for single file/manual mode)
+- [ ] Summary report generated (for git-modified mode)
+- [ ] User notified of completion with file locations
+
 ## Required Actions
 
-### For All Review Modes1. Analyze code changes
+### For All Review Modes
+1. Analyze code changes
 2. Identify issues and improvements
 3. Document staging
-4. Provide actionable feedback5. Highlight positive aspects
+4. Provide actionable feedback
+5. Highlight positive aspects
 
-### Single File/Manual Mode Actions6. **ALWAYS propose saving results** - Ask user if they want to save the review as a file
+### Single File/Manual Mode Actions
+6. **ALWAYS propose saving results** - Ask user if they want to save the review as a file
 7. **If user agrees**, derive `entity_name`:
-   - For a single file: use the file basename without extension.
-   - For a folder or repository: use the last path segment as name.
-   - For copy-paste input: ask the user for a short, kebab-case entity name.
+   - For a single file: use the file basename without extension
+   - For a folder or repository: use the last path segment as name
+   - For copy-paste input: ask the user for a short, kebab-case entity name
 8. **Save the review** to: `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/review.md`
 9. **AFTER SAVING**: Automatically propose a curative action plan with specific, actionable steps
 10. **Save the action plan** to: `.olaf/work/staging/code-review/<entity_name>-YYYYMMDD/action-plan.md`
@@ -223,6 +247,16 @@ Use `templates/developer/code-review-template.md` to structure the review stagin
 10. **Create comprehensive summary** with serial number: `.olaf/work/staging/code-reviews/code-review-summary-YYYYMMDD-NNN.md`
 11. **Aggregate staging** across all reviewed files by severity level
 12. **Identify common patterns** or issues found across multiple files
+
+## Error Handling
+You WILL handle these scenarios:
+- **Missing Parameters**: Request specific missing items (code source, language, mode) from user
+- **Invalid Review Mode**: Ask user to select from valid options (manual, git-modified, file-path, copy-paste)
+- **Git Command Failures**: Provide error details and suggest manual mode as alternative
+- **Standards File Not Found**: Proceed with built-in knowledge, note limitation in review
+- **File Access Issues**: Report specific files that couldn't be accessed, continue with accessible files
+- **Large Batch Size**: Warn user and suggest smaller batch size for better performance
+- **No Modified Files Found**: Inform user and ask if they want to review specific files instead
 
 ## Curative Action Plan Requirements
 

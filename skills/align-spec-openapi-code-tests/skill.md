@@ -34,7 +34,6 @@ If `implementation_pending=true`, you MUST stop and ask the user to explicitly c
 You MUST follow these interaction guidelines:
 - Ask for user approval before creating or modifying files
 - Present options as numbered lists for easy selection
-- Use **Propose-Confirm-Act** because this workflow writes files into the repository
 - Provide clear progress updates at each major step
 
 ## Constraints (Hard Rules)

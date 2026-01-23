@@ -4,7 +4,6 @@ description: Lightweight knowledge retrieval from existing artifacts with smart 
 license: Apache-2.0
 metadata:
   olaf_tags: [knowledge-retrieval, search, artifacts, onboarding]
-  olaf_protocol: Act
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
@@ -24,9 +23,13 @@ You MUST request if not provided:
 - **question**: string - User's question about the project/practices (REQUIRED)
 - **repository_name**: string - Name of repository (OPTIONAL, default: auto-detect from workspace)
 
-## User Interaction Protocol
+## User Interaction
 
-You WILL use **Act** protocol.
+You MUST follow these interaction guidelines:
+- Execute searches and provide answers directly without requiring approval
+- Present options as numbered lists when multiple matches found
+- Provide clear source citations for all information
+- Suggest appropriate analysis skills when artifacts are missing
 
 ## Process
 

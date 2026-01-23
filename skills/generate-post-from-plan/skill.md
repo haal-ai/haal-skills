@@ -20,8 +20,13 @@ You MUST request these parameters if not provided by the user:
 - **language**: english|french|spanish|german - Target language (default: "english") (OPTIONAL)
 - **reading_time**: string - Target reading time (default: "Under 2 minutes (300-600 words)") (OPTIONAL)
 
-## User Interaction Protocol
-Following the "Act" protocol - execute directly without requiring user approval for routine content generation operations.
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Execute content generation directly without requiring approval for routine operations
+- Provide progress updates during content analysis and generation
+- Report completion with file locations and quality metrics
+- Present style options clearly when user preference is unclear
 
 ## Process
 

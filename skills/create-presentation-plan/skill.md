@@ -22,10 +22,13 @@ You MUST request these parameters if not provided by the user:
 - **language**: english|french|spanish|german - Target language (OPTIONAL, default: english)
 - **include_image_prompts**: boolean - Whether to include visual element descriptions (OPTIONAL, default: false)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- **Protocol**: Propose-Act (as defined in competency manifest)
+## User Interaction
+
+You MUST follow these interaction guidelines:
 - Present presentation plan structure for user approval before creating
+- Provide clear progress updates during slide count calculations
+- Confirm content accuracy and source validation with user
+- Report completion with file location and next steps
 
 ## Process
 

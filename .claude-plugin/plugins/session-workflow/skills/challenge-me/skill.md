@@ -6,7 +6,6 @@ argument-hint: [idea_topic]
 license: Apache-2.0
 metadata:
   olaf_tags: [ideation, challenge, research, collaboration, cyclic]
-  olaf_protocol: Propose-Act
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/haal-ai/haal-ide
@@ -37,10 +36,13 @@ You MUST present these parameters as a numbered list and collect user responses:
 6. true
 ```
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- Select Act protocol for iterative cycling with user control
+## User Interaction
+You MUST follow these interaction guidelines:
+- Use Act protocol for iterative cycling with user control
+- Present challenges using numbered lists for choices (1, 2, 3, 4)
+- Use lettered lists for clarifying questions (A, B, C, D)
+- Wait for user response before proceeding to next cycle
+- Ask for explicit termination ("stop" or "save") to end cycles
 
 ## Process
 

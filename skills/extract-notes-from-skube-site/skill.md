@@ -49,8 +49,13 @@ Within `.olaf/work/skube/syntheise-${run_id}/` you MUST create:
   - `02-introduction.md`
   - `12-messaging.md`
 
-## User Interaction Protocol
-You MUST follow **Propose-Confirm-Act** because this skill writes/updates files under `.olaf/work/`.
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files (this skill writes to .olaf/work/)
+- Present chapter structure and progress tracker for confirmation
+- Provide clear progress updates for each chapter completion
+- Confirm multi-agent coordination status when resuming work
 
 ## Templates (MANDATORY)
 You MUST follow these external templates:

@@ -19,11 +19,13 @@ You MUST request these parameters if not provided by the user:
 - **application_name**: string - Name of the application for file naming (REQUIRED)
 - **chapter_focus**: string - Specific chapter to start with, defaults to first chapter (OPTIONAL)
 
-## User Interaction Protocol
+## User Interaction
 
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- You WILL use Propose-Confirm-Act for this competency due to high complexity and session management requirements
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files (high complexity workflow)
+- Present chapter outline for approval before proceeding
+- Execute mandatory user review checkpoint after each chapter completion
+- Offer session transition after each chapter to manage complexity
 
 ## Chapter Structure - Developer Focus
 

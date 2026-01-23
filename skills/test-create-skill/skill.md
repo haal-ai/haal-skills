@@ -25,10 +25,13 @@ You MUST request these parameters if not provided by the user:
 - **cleanup_after**: boolean - Remove test artifacts after completion (OPTIONAL - default: true)
 - **test_skill_name**: string - Name for test skill if testing specific scenario (OPTIONAL - default: "test-regression-skill")
 
-## User Interaction Protocol
+## User Interaction
 
-You MUST follow the established interaction protocol strictly:
-- Act (automated testing execution)
+You MUST follow these interaction guidelines:
+- Execute tests directly without requiring approval (automated testing)
+- Provide clear progress updates at each test phase
+- Report failures immediately with detailed diagnostics
+- Confirm cleanup completion before finishing
 
 ## Prerequisites
 

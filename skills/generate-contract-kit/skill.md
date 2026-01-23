@@ -29,9 +29,13 @@ You MUST request these parameters if not provided by the user:
 - **auth_example**: none|bearer - Auth model for examples (OPTIONAL - default: none)
 - **example_language**: typescript|python|java|csharp - Additional language besides curl (REQUIRED; curl is always included)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- You WILL use **Propose-Confirm-Act** because the workflow writes files into the repository.
+## User Interaction
+
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files (this workflow writes to repository)
+- Present proposed bundle structure and file locations for confirmation
+- Clearly mark missing artifacts and suggest next steps
+- Confirm successful bundle creation with inventory summary
 
 ## Prerequisites
 You MUST validate:
