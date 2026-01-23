@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -172,6 +173,135 @@ def _docs_links_for_skill(generated_root: Path, skill_id: str) -> str:
         links.append(f"[Tutorial](./{skill_id}/tutorial.md)")
 
     return ' | '.join(links)
+
+
+def _load_json(path: Path) -> object:
+    return json.loads(path.read_text(encoding='utf-8'))
+
+
+def _build_competencies_page(
+    repo_root: Path,
+    generated_root: Path,
+) -> None:
+    competencies_dir = repo_root / 'competencies'
+    if not competencies_dir.is_dir():
+        return
+
+    items: list[tuple[str, str | None, list[str]]] = []
+
+    for path in sorted(competencies_dir.glob('*.json'), key=lambda p: p.name.lower()):
+        try:
+            data = _load_json(path)
+        except Exception:
+            continue
+
+        if not isinstance(data, dict):
+            continue
+
+        name = data.get('name')
+        if not isinstance(name, str) or not name.strip():
+            name = path.stem
+
+        description = data.get('description')
+        if not isinstance(description, str) or not description.strip():
+            description = None
+
+        skills_raw = data.get('skills')
+        skills: list[str] = []
+        if isinstance(skills_raw, list):
+            for s in skills_raw:
+                if isinstance(s, str) and s.strip():
+                    skills.append(s.strip())
+
+        items.append((name, description, skills))
+
+    if not items:
+        return
+
+    lines: list[str] = []
+    lines.append('# Competencies')
+    lines.append('')
+    lines.append('This page is generated from `competencies/*.json` at build time.')
+    lines.append('')
+
+    # Index
+    lines.append('## List')
+    lines.append('')
+    for name, _desc, skills in items:
+        lines.append(f"- [{name}](#{name}) — {len(skills)} skill(s)")
+    lines.append('')
+
+    for name, description, skills in items:
+        lines.append(f"## {name}")
+        lines.append('')
+        if description:
+            lines.append(description)
+            lines.append('')
+
+        if not skills:
+            lines.append('_No skills listed._')
+            lines.append('')
+            continue
+
+        for skill_id in skills:
+            links = _docs_links_for_skill(generated_root, skill_id)
+            if links:
+                lines.append(f"- **{skill_id}** — {links}")
+            else:
+                lines.append(f"- **{skill_id}**")
+        lines.append('')
+
+    (repo_root / 'docs' / 'competencies.md').write_text('\n'.join(lines), encoding='utf-8')
+
+
+def _build_collections_page(
+    repo_root: Path,
+) -> None:
+    manifest_path = repo_root / 'collection-manifest.json'
+    if not manifest_path.is_file():
+        return
+
+    try:
+        data = _load_json(manifest_path)
+    except Exception:
+        return
+
+    if not isinstance(data, dict):
+        return
+
+    preferred_order = ['starter', 'basic', 'techie', 'full', 'all']
+    remaining = sorted([k for k in data.keys() if k not in preferred_order], key=str.lower)
+    ordered = [k for k in preferred_order if k in data] + remaining
+
+    lines: list[str] = []
+    lines.append('# Collections')
+    lines.append('')
+    lines.append('This page is generated from `collection-manifest.json` at build time.')
+    lines.append('')
+
+    for collection_name in ordered:
+        comps_raw = data.get(collection_name)
+        competencies: list[str] = []
+        if isinstance(comps_raw, list):
+            for c in comps_raw:
+                if isinstance(c, str) and c.strip():
+                    competencies.append(c.strip())
+
+        lines.append(f"## {collection_name}")
+        lines.append('')
+
+        if not competencies:
+            lines.append('_No competencies listed._')
+            lines.append('')
+            continue
+
+        lines.append('Competencies:')
+        lines.append('')
+        for comp in competencies:
+            lines.append(f"- [{comp}](competencies.md#{comp})")
+        lines.append('')
+
+    (repo_root / 'docs' / 'collections.md').write_text('\n'.join(lines), encoding='utf-8')
 
 
 def _build_skills_catalog_page(
@@ -353,6 +483,10 @@ def build_docs_site(repo_root: Path) -> None:
 
     # Generate skills catalog page (Stable / Curated / To be curated)
     _build_skills_catalog_page(repo_root, generated_root, skills)
+
+    # Generate collections/competencies pages
+    _build_collections_page(repo_root)
+    _build_competencies_page(repo_root, generated_root)
 
 
 def main() -> int:
