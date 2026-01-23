@@ -9,7 +9,9 @@ param(
     [string]$Seed = "",
     [string[]]$Competency = @(),
     [string]$Collection = "",
-    [switch]$Conserve  # If set, don't delete existing skills (update only)
+    [switch]$Conserve,  # If set, don't delete existing skills (update only)
+    [ValidateSet("all", "kiro", "claude", "windsurf", "github")]
+    [string]$Platform = "all"  # Which platform(s) to install to
 )
 
 
@@ -94,7 +96,7 @@ function Read-ReposManifest([string]$ClonePath) {
     return @()
 }
 
-function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$ConserveMode) {
+function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$ConserveMode, [string]$PlatformMode) {
     $installScript = Join-Path $ClonePath ".olaf\tools\install-haal-skills.ps1"
     
     if (!(Test-Path -LiteralPath $installScript)) {
@@ -115,6 +117,9 @@ function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$C
     }
     if ($ConserveMode) {
         $args['Conserve'] = $true
+    }
+    if ($PlatformMode) {
+        $args['Platform'] = $PlatformMode
     }
     
     try {
@@ -199,7 +204,7 @@ foreach ($clonePath in $clonedPaths) {
     Write-Host "Installing from: $repoName" -ForegroundColor Cyan
     # First install cleans (unless Conserve), subsequent ones conserve
     $conserveThis = $Conserve -or ($clonePath -ne $clonedPaths[0])
-    Install-FromClone $clonePath $installArgs $conserveThis
+    Install-FromClone $clonePath $installArgs $conserveThis $Platform
     Write-Host ""
 }
 

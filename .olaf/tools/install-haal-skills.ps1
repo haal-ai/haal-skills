@@ -4,7 +4,9 @@ param(
     [string]$RepoPath = "",
     [string[]]$Competency = @(),
     [string]$Collection = "",
-    [switch]$Conserve  # If set, don't delete existing skills (update only)
+    [switch]$Conserve,  # If set, don't delete existing skills (update only)
+    [ValidateSet("all", "kiro", "claude", "windsurf", "github")]
+    [string]$Platform = "all"  # Which platform(s) to install to
 )
 
 Set-StrictMode -Version Latest
@@ -15,12 +17,19 @@ $ErrorActionPreference = 'Continue'
 $TempStagingFolder = Join-Path $env:TEMP "haal-skills-staging"
 
 # Destination folders for skills
-$SkillDestinations = @(
-    (Join-Path $env:USERPROFILE ".codeium\windsurf\skills"),
-    (Join-Path $env:USERPROFILE ".claude\skills"),
-    (Join-Path $env:USERPROFILE ".github\skills"),
-    (Join-Path $env:USERPROFILE ".kiro\skills")
-)
+$AllSkillDestinations = @{
+    "windsurf" = (Join-Path $env:USERPROFILE ".codeium\windsurf\skills")
+    "claude"   = (Join-Path $env:USERPROFILE ".claude\skills")
+    "github"   = (Join-Path $env:USERPROFILE ".github\skills")
+    "kiro"     = (Join-Path $env:USERPROFILE ".kiro\skills")
+}
+
+# Select destinations based on platform
+if ($Platform -eq "all") {
+    $SkillDestinations = @($AllSkillDestinations.Values)
+} else {
+    $SkillDestinations = @($AllSkillDestinations[$Platform])
+}
 
 # Global OLAF folder
 $OlafDestination = Join-Path $env:USERPROFILE ".olaf"
@@ -236,6 +245,7 @@ Write-Host "Repo: $repoRoot"
 Write-Host "Collection: $(if ($Collection) { $Collection } else { '(none)' })"
 Write-Host "Competencies: $(if ($Competency.Count -gt 0) { $Competency -join ', ' } else { '(none)' })"
 Write-Host "Mode: $(if ($Conserve) { 'Conserve (update only)' } else { 'Clean install' })"
+Write-Host "Platform: $Platform"
 Write-Host ""
 
 # Step 0: Clean skill destinations (unless --Conserve)
