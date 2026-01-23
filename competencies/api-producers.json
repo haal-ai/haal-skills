@@ -1,0 +1,13 @@
+{
+  "name": "api-producers",
+  "description": "API Producers: turn business specifications into challenge questions and API-ready inputs.",
+  "skills": [
+    "review-human-written-spec",
+    "analyze-db-api-fit",
+    "plan-db-api-remediation",
+    "generate-ddl-and-seed",
+    "scaffold-api-from-spec",
+    "align-spec-openapi-code-tests",
+    "generate-contract-kit"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "project-manager",
+  "description": "Project Manager: project tracking, task management, and team coordination",
+  "skills": [
+    "analyze-changelog-and-report",
+    "analyze-contributor-risk",
+    "archive-changelog-entries",
+    "create-changelog-entry",
+    "create-decision-record",
+    "create-job",
+    "create-person-record",
+    "find-expert-contact",
+    "generate-professional-release-notes",
+    "generate-tasklist",
+    "generate-validation-report",
+    "measure-ai-impact",
+    "report-my-daily",
+    "review-progress",
+    "work-on-job"
+  ]
+}

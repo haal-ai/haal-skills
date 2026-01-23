@@ -1,0 +1,9 @@
+{
+  "name": "api-consumers",
+  "description": "API Consumers: review producer contracts, scaffold a consumer UI, and analyze change impact.",
+  "skills": [
+    "review-producer-api-as-consumer",
+    "scaffold-angular-frontend-from-spec",
+    "analyze-api-change-impact-from-deprecation-spec"
+  ]
+}

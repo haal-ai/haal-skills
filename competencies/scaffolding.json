@@ -1,9 +1,0 @@
-{
-  "name": "scaffolding",
-  "description": "API and frontend scaffolding skills",
-  "skills": [
-    "scaffold-api-from-spec",
-    "scaffold-angular-frontend-from-spec",
-    "scaffold-quarkus-microservice"
-  ]
-}

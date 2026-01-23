@@ -1,0 +1,15 @@
+{
+  "name": "technical-writer",
+  "description": "Technical Writer: content creation, presentation planning, and professional documentation",
+  "skills": [
+    "assess-genai-initiative-idea",
+    "create-presentation-and-posts-workflow",
+    "create-presentation-plan",
+    "extract-notes-from-skube-site",
+    "generate-jsdoc",
+    "generate-post-from-plan",
+    "generate-pptx-from-plan",
+    "review-document-jargon",
+    "run-redocumentation"
+  ]
+}

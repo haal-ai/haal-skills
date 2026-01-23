@@ -1,6 +1,6 @@
 {
-  "name": "session-management",
-  "description": "Session carry-over and context switching skills",
+  "name": "session-manager",
+  "description": "Session lifecycle and context management",
   "skills": [
     "carry-on-session",
     "carry-over-session",

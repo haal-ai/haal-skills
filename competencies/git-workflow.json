@@ -1,9 +1,0 @@
-{
-  "name": "git-workflow",
-  "description": "Git workflow and commit management skills",
-  "skills": [
-    "git-add-commit",
-    "propose-commit-thread",
-    "merge-branch-with-safety"
-  ]
-}
