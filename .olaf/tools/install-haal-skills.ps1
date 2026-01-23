@@ -314,7 +314,7 @@ if (Test-Path -LiteralPath $sourceOlaf) {
                     $copied++
                 }
             }
-            Write-Host "  .olaf/$folder: $copied new files" -ForegroundColor Green
+            Write-Host "  .olaf/${folder}: $copied new files" -ForegroundColor Green
         }
     }
 } else {
