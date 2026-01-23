@@ -8,7 +8,14 @@ set -uo pipefail
 # 4. Install from bottom to top (seed wins on conflicts)
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TEMP_BASE_FOLDER="${TMPDIR:-/tmp}/haal-skills-repos"
+
+# Use Windows-compatible temp path if on Windows (Git Bash)
+if [[ -n "${USERPROFILE:-}" ]]; then
+    # Windows - use AppData\Local\Temp
+    TEMP_BASE_FOLDER="$(cygpath -u "$LOCALAPPDATA")/Temp/haal-skills-repos"
+else
+    TEMP_BASE_FOLDER="${TMPDIR:-/tmp}/haal-skills-repos"
+fi
 
 REPO_PATH=""
 SEED=""
@@ -95,11 +102,21 @@ read_repos_manifest() {
         return
     fi
     
-    if command -v python3 &>/dev/null; then
-        python3 -c "import json; data=json.load(open('$manifest_path')); print('\n'.join(data.get('repos', [])))" 2>/dev/null
-    elif command -v jq &>/dev/null; then
-        jq -r '.repos[]?' "$manifest_path" 2>/dev/null
+    if command -v jq &>/dev/null; then
+        jq -r '.repos[]?' "$manifest_path" 2>/dev/null | tr -d '\r' || true
+        return
     fi
+
+    # Bash-only fallback for simple JSON: {"repos": ["a","b", ...]}
+    local compact
+    compact=$(tr -d '\n\r\t ' < "$manifest_path" 2>/dev/null || true)
+    [[ -z "$compact" ]] && return
+
+    local array_contents
+    array_contents=$(printf '%s' "$compact" | sed -n 's/.*"repos":\[\([^]]*\)\].*/\1/p' | head -n 1)
+    [[ -z "$array_contents" ]] && return
+
+    printf '%s\n' "$array_contents" | tr ',' '\n' | sed -n 's/^"\(.*\)"$/\1/p' | tr -d '\r' || true
 }
 
 install_from_clone() {

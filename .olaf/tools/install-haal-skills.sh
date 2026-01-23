@@ -9,7 +9,12 @@ CLEAN=false
 PLATFORM="all"
 
 # Fixed temp folder for staging
-TEMP_STAGING_FOLDER="${TMPDIR:-/tmp}/haal-skills-staging"
+# Use Windows-compatible temp path if on Windows (Git Bash)
+if [[ -n "${USERPROFILE:-}" ]]; then
+    TEMP_STAGING_FOLDER="$(cygpath -u "$LOCALAPPDATA")/Temp/haal-skills-staging"
+else
+    TEMP_STAGING_FOLDER="${TMPDIR:-/tmp}/haal-skills-staging"
+fi
 
 # Destination folders for skills
 declare -A ALL_SKILL_DESTINATIONS=(
@@ -124,16 +129,27 @@ read_json_array() {
     if [[ ! -f "$file" ]]; then
         return
     fi
-    python3 -c "
-import json
-try:
-    with open('$file') as f:
-        data = json.load(f)
-    for item in data.get('$key', []):
-        print(item)
-except:
-    pass
-" 2>/dev/null || true
+    if command -v jq &>/dev/null; then
+        jq -r --arg key "$key" '.[$key][]? // empty' "$file" 2>/dev/null | tr -d '\r' || true
+        return
+    fi
+
+    # Bash-only fallback (supports our simple top-level: {"key": ["a","b", ...]})
+    # Works for both pretty-printed and minified JSON.
+    local key_escaped
+    key_escaped=$(printf '%s' "$key" | sed 's/[][\\.^$*]/\\&/g')
+
+    local compact
+    compact=$(tr -d '\n\r\t ' < "$file" 2>/dev/null || true)
+    [[ -z "$compact" ]] && return
+
+    local array_contents
+    array_contents=$(printf '%s' "$compact" | sed -n "s/.*\"$key_escaped\":\\[\\([^]]*\\)\\].*/\\1/p" | head -n 1)
+    [[ -z "$array_contents" ]] && return
+
+    # Extract quoted string elements.
+    # Example input: "a","b","c"  -> outputs a\nb\nc
+    printf '%s\n' "$array_contents" | tr ',' '\n' | sed -n 's/^"\(.*\)"$/\1/p' | tr -d '\r' || true
 }
 
 get_skills_path() {
