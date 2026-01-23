@@ -4,6 +4,8 @@
   "skills": [
     "create-prompt",
     "create-skill",
+    "create-skill-description",
+    "review-skill-quality",
     "convert-prompt-to-skill",
     "assist-me-as-prompt-engineer",
     "check-prompt-compliance"

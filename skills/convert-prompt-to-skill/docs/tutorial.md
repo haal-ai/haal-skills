@@ -233,7 +233,7 @@ Follow template: templates/quality-report-template.md
 - **Unsupported language**: List supported languages
 - **No issues found**: Confirm code quality is good
 
-</olaf>
+ 
 ```
 
 ### Step 11: Approve or Request Changes

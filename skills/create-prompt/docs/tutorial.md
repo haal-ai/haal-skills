@@ -10,9 +10,10 @@ Create a well-structured OLAF prompt file from your informal idea.
 ## Step-by-Step Instructions
 
 ### Step 1: Invoke the Skill
-```
-@create-prompt
-```
+
+Say: "use skill create prompt" or describe what you want, for example:
+- "create a prompt for reviewing pull requests"
+- "make a prompt that helps write documentation"
 
 ### Step 2: Provide Your Request
 Answer the numbered questions:
@@ -47,12 +48,12 @@ File saves to `.olaf/staging/generated-prompts/{timestamp}-{name}.md`
 ## Troubleshooting
 
 ### Prompt doesn't capture intent
-Use the "edit" option to refine the rewritten version before generation.
+When asked to confirm, reply "edit" and explain what to change. The skill will iterate until you're satisfied.
 
 ### File save fails
 Check write permissions on `.olaf/staging/generated-prompts/`
 
 ## Next Steps
-- Test your prompt in a conversation
-- Use `evaluate-prompt-for-adoption` to assess quality
-- Convert to a skill with `convert-prompt-to-skill`
+- Test your prompt in a fresh conversation
+- Iterate based on how well it works
+- Convert to a skill with `convert-prompt-to-skill` if you want to reuse it on many other platforms

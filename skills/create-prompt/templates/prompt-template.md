@@ -20,10 +20,8 @@ You MUST request these parameters if not provided by the user:
 1. **context**: string - Any relevant project context (OPTIONAL)
 2. **constraints**: string - Constraints to respect (OPTIONAL)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- Select appropriate protocol based on operation risk and impact
+## User Interaction
+- Ask for clarification if the goal is unclear
 
 ## Process
 
@@ -31,7 +29,7 @@ You MUST follow the established interaction protocol strictly:
 You WILL ask targeted questions until you can proceed.
 
 ### 2. Execute
-You WILL complete the user’s request following the rules and constraints.
+You WILL complete the user's request following the rules and constraints.
 
 ### 3. Validate
 You WILL validate the output against the goal and constraints.
@@ -50,4 +48,3 @@ You WILL handle these scenarios:
 - **Missing Information**: Ask for the minimum missing details
 - **Ambiguous Goal**: Propose 2-3 interpretations and ask the user to choose
 - **Constraint Conflict**: Explain the conflict and ask which constraint wins
-

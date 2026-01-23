@@ -17,10 +17,12 @@ You MUST request these parameters if not provided by the user:
 - **skill_name**: string - The name/ID of the skill to document (REQUIRED)
 - **skill_path**: string - Absolute path to the skill directory (OPTIONAL - will be auto-detected if not provided)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Propose-Confirm-Act (defined externally)
-- You WILL use Propose-Confirm-Act for documentation generation due to file creation impact
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present generated documentation for review before saving
+- Confirm destructive operations (like overwriting existing files) before executing
+- Provide clear progress updates at each major step
 
 ## Process
 

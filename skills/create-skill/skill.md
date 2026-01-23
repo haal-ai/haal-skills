@@ -1,6 +1,7 @@
 ---
 name: create-skill
-description: Generate structured skills following established template and principles for OLAF skills architecture
+description: Create a new skill with proper structure and templates. Use when user says "create a skill", "make a skill for...", or wants to build a reusable agent capability.
+argument-hint: "[goal] - describe what the skill should do"
 license: Apache-2.0
 metadata:
   olaf_tags: [skill, generation, engineering, template, prompt-engineer]
@@ -13,89 +14,106 @@ metadata:
 If you are in need to get the date and time, you MUST use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user. Present  it as a numbered list to ease user response:
-1. **user_request**: string - The user's requirement or task description for the skill (REQUIRED)
-2. **skill_name**: string - Desired name for the skill (max 4 words, kebab-case) (OPTIONAL)
-3. **skill_type**: string - Type of skill: "orchestrator", "workflow", "prompt" (OPTIONAL - default: "prompt")
-4. **target_plugin**: string - Plugin name to assign the skill to (REQUIRED)
-5. **agent_runtime**: string - One of: "windsurf", "cascade", "github-copilot", "claude-code", "other" (OPTIONAL - you SHOULD infer, else ask)
-6. **skills_root**: string - Explicit destination root folder for skills, relative to workspace root (OPTIONAL - preferred when user knows it)
-5. **needs_templates**: boolean - Whether skill needs external template files (OPTIONAL - default: false)
-6. **template_list**: array - List of template names/descriptions if needs_templates=true (OPTIONAL)
-7. **needs_tools**: boolean - Whether skill needs tool/script files (OPTIONAL - default: false)
-8. **tool_list**: array - List of tool names/types if needs_tools=true (OPTIONAL)
-9. **needs_helpers**: boolean - Whether skill needs helper utility files (OPTIONAL - default: false)
-10. **helper_list**: array - List of helper names/descriptions if needs_helpers=true (OPTIONAL)
-11. **needs_kb**: boolean - Whether skill needs knowledge base articles (OPTIONAL - default: false)
-12. **kb_list**: array - List of kb article names/topics if needs_kb=true (OPTIONAL)
+You MUST request these parameters if not provided by the user. Present them in this logical order:
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- You MUST use Propose-Confirm-Act for skill creation
+**Start with the idea:**
+1. **goal**: string - What should this skill do? What's the purpose? (REQUIRED)
+
+**Then name and classify it:**
+2. **skill_name**: string - What should we call it? (max 4 words, kebab-case) (OPTIONAL - will suggest based on goal)
+3. **skill_type**: string - Type: "orchestrator", "workflow", "prompt" (OPTIONAL - default: "prompt")
+
+**Then determine what it needs:**
+4. **needs_templates**: boolean - Does it need external template files? (OPTIONAL - default: false)
+5. **needs_tools**: boolean - Does it need tool/script files? (OPTIONAL - default: false)
+6. **needs_kb**: boolean - Does it need knowledge base articles? (OPTIONAL - default: false)
+
+**Finally, where to save it:**
+7. **skills_root**: string - Destination folder for skills (OPTIONAL - will auto-detect)
+
+## User Interaction
+- Always ask for user approval before creating or modifying files
 
 ## Process
 
+**CRITICAL ENTRY POINT**: When this skill is invoked, you MUST immediately ask for the **goal** parameter if not provided. Do NOT ask multiple questions at once. Follow the Input Parameters order strictly — one question at a time, waiting for user response before proceeding.
+
+### 0. Parameter Collection Phase
+You MUST collect parameters in this exact order, one at a time:
+
+1. **First, ask for goal** (REQUIRED): "What should this skill do? What's the purpose?"
+   - Wait for user response before continuing
+   
+2. **Then suggest a name**: Based on the goal, propose a skill name (kebab-case, max 4 words)
+   - Ask: "Based on your goal, I suggest naming it `[suggested-name]`. Does that work, or would you prefer something else?"
+   
+3. **Then determine skill type**: Ask which type fits best
+   - Ask: "What type of skill is this? (prompt / workflow / orchestrator) — default is 'prompt'"
+
+4. **Then ask about components**: Ask about each component need
+   - Ask: "Does this skill need any of these? (answer yes/no for each)"
+     - Templates (external template files)?
+     - Tools (scripts/utilities)?
+     - Knowledge base articles?
+
+5. **Finally, determine save location**: Proceed to Phase 1.a
+
+Only after collecting all parameters, proceed to validation.
+
 ### 1. Validation Phase
 You MUST verify all requirements:
-- Confirm user request is clear and actionable
+- Confirm user goal is clear and actionable
 - Validate skill name follows kebab-case convention (max 4 words)
-- Duplicate avoidance: you MUST check for a folder named `[skill_name]/` across ALL supported local skill roots:
-  - `.windsurf/skills/[skill_name]/`
-  - `.claude/skills/[skill_name]/`
-  - `agents/skills/[skill_name]/`
-  - AND the resolved `${skills_root}/[skill_name]/` (if different)
-  If any exist, you MUST stop and ask the user what to do (numbered list):
-  1. Pick a different `skill_name`, OR
-  2. Choose which existing skill to update in place (preferred), OR
-  3. Overwrite the chosen one (delete and recreate).
 - Validate skill type selection (prompt/workflow/orchestrator)
-- Validate target plugin: check if it exists in `.olaf/plugins.json` or add it if missing
-- Check access to required templates, tools, helpers, kb articles, principles files for newskill
 
-### 1.a Skill Location Discovery Phase
-You WILL determine where to create the skill:
+### 1.a Skill Destination Phase
+You MUST ask the user where to save the skill:
 
-**Skill Location Discovery (Local Destination):**
-- You MUST create skills locally in the user's workspace, under a skills root directory determined by the active agent runtime.
-- You MUST determine `skills_root` using this priority order:
-  1. If user provided `skills_root`, you MUST use it.
-  2. Else you MUST infer `skills_root` from the workspace:
-     - If `.windsurf/skills/` exists → use `.windsurf/skills`
-     - Else if `.claude/skills/` exists → use `.claude/skills`
-     - Else if `agents/skills/` exists → use `agents/skills`
-     - Else you MUST ask the user to choose `agent_runtime` (numbered list) and set `skills_root` using the mapping below.
-  3. If you must rely on `agent_runtime`, use this mapping:
-     - `windsurf` or `cascade` → `.windsurf/skills`
-     - `github-copilot` or `claude-code` → `.claude/skills`
-     - `other` → `agents/skills`
+**Ask:** "Where should this skill be saved?"
+1. **For me (all my repos)** - Save to user home directory
+2. **For this repo (team)** - Save to workspace skills folders
+3. **Specific tool only** - Save to one specific tool's folder
 
-**Critical Save Rules:**
-- Final destination for the new skill MUST be: `${skills_root}/[skill_name]/`
-- Before creating files, you MUST check whether `${skills_root}/[skill_name]/` already exists.
-- If it exists, you MUST stop and ask for an explicit choice (numbered list):
-  1. Pick a different `skill_name`, OR
-  2. Overwrite (delete and recreate), OR
-  3. Update in place (preserve existing files; only add/modify what is necessary).
-- You MUST NOT overwrite any existing skill folder without explicit user confirmation.
+**If user chooses "For me (all my repos)":**
+Ask which tools they use (can select multiple):
+- Claude Code → `~/.claude/skills/[skill_name]/`
+- Windsurf → `~/.windsurf/skills/[skill_name]/`
+- Kiro → `~/.kiro/skills/[skill_name]/`
+- GitHub Copilot → `~/.github/skills/[skill_name]/`
 
-**Template Validation:**
-- If needs_templates=true, ask user: "Provide links to the template files"
-- Copy those to the  `templates/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
+**If user chooses "For this repo (team)":**
+Detect which tool folders exist in workspace and ask which to target (can select "all"):
+- `.claude/skills/`
+- `.windsurf/skills/`
+- `.kiro/skills/`
+- `.github/skills/`
+- `agents/skills/`
 
-**Tool Discovery:**
-- if needs_tools=true, ask user: "Provide links to the tool/script files"
-- Copy those to the  `tools/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
-- Ask for tool type: python|shell|javascript|powershell
+If user says "all", save to all detected folders.
 
-**Helper Discovery:**
-- if needs_helpers=true, ask user: "Provide links to the helper files"
-- Copy those to the  `helpers/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
-- Explain: "Helpers are reusable prompt fragments used by the main skill"
+**If user chooses "Specific tool only":**
+Ask which tool and save to that folder only.
 
-**Knowledge Base Discovery:**
-- if needs_kb=true, ask user: "Provide links to the KB articles"
-- Copy those to the  `kb/` folder under `[skill_name]/` so that they are available to the skill and kept separate from `skill.md`
+**Duplicate Check:**
+Before creating, check if `[skill_name]/` exists in any target location.
+If found, ask:
+1. Pick a different name
+2. Update existing skill
+3. Overwrite (delete and recreate)
+
+### 1.b Component Discovery Phase
+
+**If needs_templates=true:**
+Ask: "Provide links to the template files or describe what templates you need"
+Templates go in `templates/` folder under the skill.
+
+**If needs_tools=true:**
+Ask: "Provide links to the tool/script files or describe what tools you need"
+Prefer Python over shell scripts. Tools go in `tools/` folder.
+
+**If needs_kb=true:**
+Ask: "Provide links to the KB articles or describe what knowledge base content you need"
+KB articles go in `kb/` folder.
 
 ### 2. Execution Phase
 
@@ -121,7 +139,6 @@ You MUST read in full and apply: `templates/prompting-principles.md`
   - Optional component files based on user requirements
   - Proper folder organization under `[skill-name]/`
 - You MUST use imperative language throughout ("You WILL", "You MUST")
-- You WILL include XML markup for complex sections
 - You MUST ensure generated skill includes comprehensive error handling
 - You WILL validate generated skill includes all required template sections
 - **CRITICAL**: Generated prompts must reference external files, DO NOT / NEVER embed template content

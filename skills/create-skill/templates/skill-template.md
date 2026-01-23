@@ -19,10 +19,12 @@ You MUST request these parameters if not provided by the user:
 - **param_name**: type|options - Description (REQUIRED/OPTIONAL)
 - **optional_param**: type|options - Optional description
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- Act / Propose-Act / Propose-Confirm-Act (defined externally)
-- Select appropriate protocol based on operation risk and impact
+## User Interaction
+You MUST follow these interaction guidelines:
+- Ask for user approval before creating or modifying files
+- Present options as numbered lists for easy selection
+- Confirm destructive operations before executing
+- Provide clear progress updates at each major step
 
 ## Prerequisites (if applicable)
 If this skill is part of a workflow chain:

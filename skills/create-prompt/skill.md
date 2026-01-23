@@ -1,6 +1,7 @@
 ---
 name: create-prompt
-description: Draft and stage an OLAF prompt file from a raw user request
+description: Create a reusable prompt file when user wants to formalize a request into a saved, structured prompt
+argument-hint: "[goal] - describe what you want the prompt to do"
 license: Apache-2.0
 metadata:
   olaf_tags: [prompt, generation, staging, prompt-engineer]
@@ -14,16 +15,15 @@ If you are in need to get the date and time, you MUST use time tools, fallback t
 
 ## Input Parameters
 You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response:
-1. **raw_request**: string - What the user wants the prompt to do (REQUIRED)
+1. **goal**: string - What the user wants the prompt to do (REQUIRED)
 2. **intended_user**: string - Who will use this prompt (e.g., "developer", "product manager") (OPTIONAL)
 3. **context**: string - Project or domain context the prompt should assume (OPTIONAL)
 4. **constraints**: string - Constraints to respect (e.g., "must be short", "no external tools") (OPTIONAL)
 5. **prompt_name**: string - Kebab-case name for the prompt (OPTIONAL - will be suggested)
 6. **tags**: array - 3-6 tags for metadata (OPTIONAL - will be suggested)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- You WILL use **Propose-Confirm-Act** because you will create files under `.olaf/`
+## User Interaction
+- Always ask for user approval before saving files
 
 ## Process
 
@@ -43,7 +43,7 @@ You WILL:
 You MUST apply the principles in `templates/prompting-principles.md`.
 
 You WILL generate a complete OLAF prompt markdown file using template:
-- `templates/generated-prompt-template.md`
+- `templates/prompt-template.md`
 
 You MUST fill these placeholders:
 - `{prompt_name}`
@@ -68,6 +68,7 @@ After user confirmation:
 You WILL produce:
 - One prompt markdown file staged under `.olaf/staging/generated-prompts/`
 - A short summary including the final file path
+- A reminder to test the prompt in a fresh session before relying on it
 
 ## Success Criteria
 You WILL consider the task complete when:
@@ -77,9 +78,7 @@ You WILL consider the task complete when:
 
 ## Error Handling
 You WILL handle:
-- **Missing raw_request**: Ask the user what they want the prompt to do
+- **Missing goal**: Ask the user what they want the prompt to do
 - **Unsafe prompt_name**: Propose a corrected kebab-case name
 - **User rejects draft**: Iterate until approved
 - **File write failure**: Explain why and propose an alternative filename
-
-</olaf>

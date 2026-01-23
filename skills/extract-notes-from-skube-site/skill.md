@@ -157,4 +157,4 @@ You WILL consider the run successful when:
 - [ ] Each completed chapter is marked DONE with a valid Output File path
 - [ ] `00-global-synthesis.md` exists and is updated at end of run
 
-</olaf>
+ 

@@ -20,28 +20,21 @@ This tutorial guides you through creating a new structured skill that follows OL
 
 ### Step 1: Invoke the Skill
 
-**User Action:**
-```
-create skill
-```
+Say: "use skill create skill" or describe what you want:
+- "create a skill for analyzing code quality"
+- "make a skill that generates API documentation"
 
-**AI Response:**
-The skill activates and begins the skill creation workflow, asking for user approval before creating files.
-
-### Step 2: Provide User Request
+### Step 2: Describe What the Skill Should Do
 
 **AI Asks:** "What should this new skill do?"
 
-**User Provides:**
+**You Provide:**
 Describe what your new skill should accomplish.
 
 **Example:**
 ```
 Create a skill that analyzes code quality metrics and generates improvement recommendations
 ```
-
-**AI Response:**
-Acknowledges your request and proceeds to gather additional parameters.
 
 ### Step 3: Specify Skill Name
 
@@ -321,11 +314,9 @@ After creation, verify:
 
 ## Next Steps After Creation
 
-1. **Test functionality**: Verify the skill works as expected
-2. **Refine prompt**: Adjust based on testing results
-3. **Add dependencies**: Include needed templates, tools, or kb articles
-4. **Update documentation**: Enhance docs based on actual usage
-5. **Share with team**: Make the skill available to others
+1. **Test in a fresh session**: Open a new conversation and test the skill
+2. **Iterate based on results**: Refine the skill based on how well it works
+3. **Add components if needed**: Include templates, tools, or kb articles as you discover needs
 
 ## Expected Timeline
 

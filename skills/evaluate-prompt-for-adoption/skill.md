@@ -13,16 +13,18 @@ metadata:
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
 ## Input Parameters
-You MUST request these parameters if not provided by the user:
-- **source_url**: string - URL to the prompt (GitHub, gist, registry, webpage) (REQUIRED if source_text not provided)
-- **source_text**: string - Direct paste of prompt content (REQUIRED if source_url not provided)
-- **source_description**: string - Brief description of what the prompt does (OPTIONAL - will analyze if not provided)
-- **available_skills_list**: string - List of skills the user currently has available/installed (OPTIONAL - improves duplicate detection)
+You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response:
+1. **source_url**: string - URL to the prompt (GitHub, gist, registry, webpage) (REQUIRED if source_text not provided)
+2. **source_text**: string - Direct paste of prompt content (REQUIRED if source_url not provided)
+3. **source_description**: string - Brief description of what the prompt does (OPTIONAL - will analyze if not provided)
+4. **available_skills_list**: string - List of skills the user currently has available/installed (OPTIONAL - improves duplicate detection)
 
-## User Interaction Protocol
-You MUST follow the established interaction protocol strictly:
-- You WILL use Act protocol for this evaluation skill
+## User Interaction
+You MUST follow these interaction guidelines:
 - Provide thorough analysis with clear recommendation
+- Present evaluation findings in structured format
+- Ask for user confirmation before proceeding with adoption actions
+- Use numbered lists when presenting options or findings
 
 ## Process
 
@@ -282,7 +284,7 @@ You WILL provide final recommendation:
 ## Output Format
 You WILL generate outputs following this structure:
 
-**Evaluation Report** (as defined above)
+**Evaluation Report** (as defined in Process section)
 
 **Interactive Follow-up:**
 After presenting report, ask user:
@@ -290,6 +292,26 @@ After presenting report, ask user:
 - If **available_skills_list** was not provided: "To avoid adopting a duplicate, can you paste your available skills list (answer to 'what skills do you have?')?"
 - If ADOPT: "Should I modernize it now using convert-prompt, or package an OLAF-native version with create-skill?"
 - If EXTRACT: "Which OLAF skill should I enhance with the extracted parts?"
+
+## User Communication
+
+### Progress Updates
+- Confirmation when prompt content is fetched/received
+- Status when analyzing similarity to existing skills
+- Notification when quality evaluation is complete
+- Presentation of evaluation report with recommendation
+
+### Completion Summary
+- Final recommendation (ADOPT/MODIFY/EXTRACT/SKIP)
+- Value score and rationale
+- Similar skills identified
+- Next steps for adoption (if applicable)
+
+### Next Steps
+- If ADOPT: Use convert-prompt or create-skill to integrate
+- If EXTRACT: Identify target skill and integration approach
+- If SKIP: Consider alternative existing skills
+- Review evaluation report for detailed analysis
 
 ## Domain-Specific Rules
 You MUST follow these constraints:
@@ -303,8 +325,8 @@ You MUST follow these constraints:
 - NEVER recommend adopting near-duplicate (>80% overlap)
 - ALWAYS highlight unique features even in similar prompts
 - CONSIDER merging similar prompts rather than having both
-- If **available_skills_list** is provided, treat near-duplicates from that list as duplicates for adoption decisions.
-- If **available_skills_list** is not provided, explicitly label the similarity check as workspace-only.
+- If **available_skills_list** is provided, treat near-duplicates from that list as duplicates for adoption decisions
+- If **available_skills_list** is not provided, explicitly label the similarity check as workspace-only
 
 **Quality Rules:**
 - BE HONEST about quality issues
@@ -320,6 +342,33 @@ You MUST follow these constraints:
 - PROVIDE SPECIFIC next steps, not vague suggestions
 - ESTIMATE effort required for modifications
 - SUGGEST specific OLAF skills to enhance if extracting
+
+## Success Criteria
+You WILL consider the task complete when:
+- [ ] Prompt content fetched or received
+- [ ] Similarity check completed against existing skills
+- [ ] Quality evaluation completed across all dimensions
+- [ ] Value-add score calculated
+- [ ] Evaluation report generated with clear recommendation
+- [ ] User presented with findings and next steps
+- [ ] User confirmation obtained for any adoption actions
+
+## Required Actions
+1. Fetch or receive prompt content
+2. Parse prompt structure and extract metadata
+3. Check similarity against existing OLAF skills
+4. Evaluate quality across all dimensions
+5. Calculate value-add score
+6. Generate evaluation report with recommendation
+7. Present findings to user and await confirmation
+
+## Error Handling
+You WILL handle these scenarios:
+- **URL Not Accessible**: Request alternative source or direct text paste
+- **Invalid Prompt Content**: Ask user to verify source or provide clearer content
+- **Similarity Check Fails**: Proceed with quality evaluation, note limitation
+- **Missing available_skills_list**: Warn about potential duplicates, proceed with workspace-only check
+- **Unclear Recommendation**: Provide multiple options with trade-offs
 
 ⚠️ **Critical Requirements**
 - MANDATORY: Fetch actual prompt content before evaluating
