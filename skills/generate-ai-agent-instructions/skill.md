@@ -3,7 +3,7 @@ name: generate-ai-agent-instructions
 description: Analyze codebase to generate platform-agnostic AI agent instruction files (AGENTS.md, .cursorrules, .windsurfrules, .kiro/steering, etc.)
 license: Apache-2.0
 metadata:
-  olaf_tags: [ai-agents, codebase-analysis, documentation, platform-agnostic, onboarding]
+  olaf_tags: [ai-agents, codebase-analysis, documentation, platform-agnostic, onboarding] 
 ---
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
@@ -101,7 +101,7 @@ You WILL systematically examine the workspace:
 
 **CRITICAL**: Exclude these directories from analysis:
 - `.git`, `.github`
-- `.olaf/**` (EXCEPT you may read `.olaf/team-delegation.md` when required)
+- `.olaf/**`
 - `node_modules`, `.venv`, `venv`, `dist`, `build`, `out`, `target`, `.next`, `.cache`, `coverage`, `.idea`, `.vscode`
 
 **Architecture & Organization**:

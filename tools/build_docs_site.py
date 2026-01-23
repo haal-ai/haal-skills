@@ -23,7 +23,11 @@ def _is_skill_dir(path: Path) -> bool:
 def _collect_skill_docs(repo_root: Path) -> list[SkillDocs]:
     skills: list[SkillDocs] = []
 
-    for child in sorted(repo_root.iterdir(), key=lambda p: p.name.lower()):
+    skills_dir = repo_root / 'skills'
+    if not skills_dir.is_dir():
+        return skills
+
+    for child in sorted(skills_dir.iterdir(), key=lambda p: p.name.lower()):
         if not _is_skill_dir(child):
             continue
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# Continue on errors - don't block on missing items
+set -uo pipefail
 
 REPO_PATH=""
 CLONE_PATH=""
@@ -28,7 +29,7 @@ show_help() {
     echo "Options:"
     echo "  --repo-path PATH         Target repository path (for sync script)"
     echo "  --collection NAME        Collection name to install"
-    echo "  --competency NAME,NAME   Competency names (comma-separated)"
+    echo "  --competency NAME        Competency name (can be repeated)"
     echo "  -h, --help               Show this help message"
     echo ""
     echo "If no collection or competency is specified, all skills are installed."
@@ -41,9 +42,7 @@ while [[ $# -gt 0 ]]; do
         --repo-path)
             REPO_PATH="${2:-}"; shift 2;;
         --competency)
-            IFS=',' read -ra COMP_ARRAY <<< "${2:-}"
-            COMPETENCIES+=("${COMP_ARRAY[@]}")
-            shift 2;;
+            COMPETENCIES+=("${2:-}"); shift 2;;
         --collection)
             COLLECTION="${2:-}"; shift 2;;
         -h|--help)
@@ -70,7 +69,7 @@ fi
 
 resolve_repo_root() {
     if [[ -n "$REPO_PATH" ]]; then
-        (cd "$REPO_PATH" && pwd -P)
+        (cd "$REPO_PATH" 2>/dev/null && pwd -P) || echo "$REPO_PATH"
         return
     fi
     if git_root=$(git rev-parse --show-toplevel 2>/dev/null) && [[ -n "$git_root" ]]; then
@@ -82,10 +81,7 @@ resolve_repo_root() {
 
 clean_folder() {
     local path="$1"
-    if [[ -d "$path" ]]; then
-        rm -rf "$path"
-        echo "Cleaned: $path"
-    fi
+    rm -rf "$path" 2>/dev/null || true
     mkdir -p "$path"
 }
 
@@ -97,19 +93,38 @@ read_json_array() {
     fi
     python3 -c "
 import json, sys
-with open('$file') as f:
-    data = json.load(f)
-if '$key' in data:
-    for item in data['$key']:
-        print(item)
+try:
+    with open('$file') as f:
+        data = json.load(f)
+    if '$key' in data:
+        for item in data['$key']:
+            print(item)
+except:
+    pass
 " 2>/dev/null || true
+}
+
+get_skills_path() {
+    local clone_path="$1"
+    local skills_subfolder="$clone_path/skills"
+    if [[ -d "$skills_subfolder" ]]; then
+        echo "$skills_subfolder"
+    else
+        echo "$clone_path"
+    fi
 }
 
 get_all_skills() {
     local clone_path="$1"
-    local skills_path="$clone_path/skills"
+    local skills_path
+    skills_path=$(get_skills_path "$clone_path")
+    
     if [[ -d "$skills_path" ]]; then
-        ls -1 "$skills_path" 2>/dev/null || true
+        for dir in "$skills_path"/*/; do
+            if [[ -f "${dir}skill.md" ]]; then
+                basename "$dir"
+            fi
+        done
     fi
 }
 
@@ -117,7 +132,7 @@ get_prune_list() {
     local clone_path="$1"
     local prune_file="$clone_path/.olaf/prune-skills.txt"
     if [[ -f "$prune_file" ]]; then
-        grep -v '^#' "$prune_file" | grep -v '^$' | tr -d '\r' || true
+        grep -v '^#' "$prune_file" 2>/dev/null | grep -v '^$' | tr -d '\r' || true
     fi
 }
 
@@ -133,8 +148,6 @@ get_skills_from_competency() {
     local manifest_file="$clone_path/competencies/$competency.json"
     if [[ -f "$manifest_file" ]]; then
         read_json_array "$manifest_file" "skills"
-    else
-        echo "Warning: Competency '$competency' manifest not found" >&2
     fi
 }
 
@@ -143,8 +156,8 @@ prune_skills() {
     for dest in "${DESTINATIONS[@]}"; do
         local skill_path="$dest/$skill"
         if [[ -d "$skill_path" ]]; then
-            rm -rf "$skill_path"
-            echo "Pruned: $skill_path"
+            rm -rf "$skill_path" 2>/dev/null || true
+            echo "  Pruned: $skill"
         fi
     done
 }
@@ -153,15 +166,18 @@ copy_skill_to_staging() {
     local skill="$1"
     local clone_path="$2"
     local staging_path="$3"
-    local source_path="$clone_path/skills/$skill"
+    local skills_path
+    skills_path=$(get_skills_path "$clone_path")
+    local source_path="$skills_path/$skill"
     local dest_path="$staging_path/$skill"
     
     if [[ -d "$source_path" ]]; then
         rm -rf "$dest_path" 2>/dev/null || true
         cp -r "$source_path" "$dest_path"
-        echo "Staged: $skill"
+        return 0
     else
-        echo "Warning: Skill '$skill' not found in source"
+        echo "  SKIP: Skill '$skill' not found"
+        return 1
     fi
 }
 
@@ -169,37 +185,31 @@ deploy_staging_to_destinations() {
     local staging_path="$1"
     
     for dest in "${DESTINATIONS[@]}"; do
-        mkdir -p "$dest"
+        mkdir -p "$dest" 2>/dev/null || true
         
         local count=0
         for skill_dir in "$staging_path"/*/; do
             if [[ -d "$skill_dir" ]]; then
-                local skill_name=$(basename "$skill_dir")
+                local skill_name
+                skill_name=$(basename "$skill_dir")
                 local dest_skill_path="$dest/$skill_name"
                 
                 rm -rf "$dest_skill_path" 2>/dev/null || true
-                cp -r "$skill_dir" "$dest_skill_path"
+                cp -r "$skill_dir" "$dest_skill_path" 2>/dev/null || true
                 ((count++)) || true
             fi
         done
         
-        echo "Deployed $count skills to: $dest"
+        echo "  Deployed $count skills to: $dest"
     done
 }
 
-# Main execution
-PYTHON_BIN=""
-if command -v python3 >/dev/null 2>&1; then
-    PYTHON_BIN="python3"
-elif command -v python >/dev/null 2>&1; then
-    PYTHON_BIN="python"
-else
-    echo "Required command 'python' or 'python3' not found."; exit 1
-fi
+# === Main execution ===
+
+echo "=== HAAL Skills Install ==="
 
 REPO_ROOT="$(resolve_repo_root)"
 
-echo "=== HAAL Skills Install ==="
 echo "Clone path: $CLONE_PATH"
 echo "Repo: $REPO_ROOT"
 echo "Collection: ${COLLECTION:-(none)}"
@@ -210,12 +220,11 @@ echo ""
 echo "Step 1: Pruning deprecated skills..."
 prune_list=$(get_prune_list "$CLONE_PATH")
 if [[ -n "$prune_list" ]]; then
-    echo "Skills to prune: $prune_list"
     while IFS= read -r skill; do
         [[ -n "$skill" ]] && prune_skills "$skill"
     done <<< "$prune_list"
 else
-    echo "No skills to prune"
+    echo "  No skills to prune"
 fi
 echo ""
 
@@ -224,47 +233,75 @@ echo "Step 2: Resolving skills..."
 all_competencies=()
 
 if [[ -n "$COLLECTION" ]]; then
-    echo "Collection '$COLLECTION':"
     while IFS= read -r comp; do
-        [[ -n "$comp" ]] && all_competencies+=("$comp")
+        if [[ -n "$comp" ]]; then
+            all_competencies+=("$comp")
+        fi
     done < <(get_competencies_from_collection "$COLLECTION" "$CLONE_PATH")
-    echo "  Competencies: ${all_competencies[*]}"
+    
+    if [[ ${#all_competencies[@]} -gt 0 ]]; then
+        echo "  OK: Collection '$COLLECTION' (${#all_competencies[@]} competencies)"
+    else
+        echo "  SKIP: Collection '$COLLECTION' not found"
+    fi
 fi
 
 for comp in "${COMPETENCIES[@]}"; do
     all_competencies+=("$comp")
 done
 
-all_competencies=($(printf '%s\n' "${all_competencies[@]}" | sort -u))
+# Dedupe
+if [[ ${#all_competencies[@]} -gt 0 ]]; then
+    mapfile -t all_competencies < <(printf '%s\n' "${all_competencies[@]}" | sort -u)
+fi
 
 skills_to_install=()
 if [[ ${#all_competencies[@]} -gt 0 ]]; then
     for comp in "${all_competencies[@]}"; do
-        echo "Competency '$comp':"
+        comp_skills=()
         while IFS= read -r skill; do
             if [[ -n "$skill" ]]; then
+                comp_skills+=("$skill")
                 skills_to_install+=("$skill")
-                echo "  - $skill"
             fi
         done < <(get_skills_from_competency "$comp" "$CLONE_PATH")
+        
+        if [[ ${#comp_skills[@]} -gt 0 ]]; then
+            echo "  OK: Competency '$comp' (${#comp_skills[@]} skills)"
+        else
+            echo "  SKIP: Competency '$comp' not found"
+        fi
     done
 else
-    echo "No collection/competency specified, installing all skills"
+    echo "  No collection/competency specified, installing all skills"
     while IFS= read -r skill; do
         [[ -n "$skill" ]] && skills_to_install+=("$skill")
     done < <(get_all_skills "$CLONE_PATH")
 fi
 
-skills_to_install=($(printf '%s\n' "${skills_to_install[@]}" | sort -u))
-echo "Skills to install: ${#skills_to_install[@]}"
+# Dedupe
+if [[ ${#skills_to_install[@]} -gt 0 ]]; then
+    mapfile -t skills_to_install < <(printf '%s\n' "${skills_to_install[@]}" | sort -u)
+fi
+
+echo "  Skills to install: ${#skills_to_install[@]}"
 echo ""
+
+if [[ ${#skills_to_install[@]} -eq 0 ]]; then
+    echo "WARN: No skills found to install"
+    exit 0
+fi
 
 # Step 3: Clean staging and copy selected skills
 echo "Step 3: Staging skills..."
 clean_folder "$TEMP_STAGING_FOLDER"
+staged=0
 for skill in "${skills_to_install[@]}"; do
-    copy_skill_to_staging "$skill" "$CLONE_PATH" "$TEMP_STAGING_FOLDER"
+    if copy_skill_to_staging "$skill" "$CLONE_PATH" "$TEMP_STAGING_FOLDER"; then
+        ((staged++)) || true
+    fi
 done
+echo "  Staged $staged skills"
 echo ""
 
 # Step 4: Deploy to all destinations
@@ -272,17 +309,14 @@ echo "Step 4: Deploying to destinations..."
 deploy_staging_to_destinations "$TEMP_STAGING_FOLDER"
 echo ""
 
-# Step 5: Run sync script for .olaf files
+# Step 5: Run sync script for .olaf files (optional)
 echo "Step 5: Syncing .olaf files..."
-sync_script="$CLONE_PATH/.olaf/tools/sync_olaf_files.py"
+sync_script="$CLONE_PATH/.olaf/tools/sync-olaf-files.sh"
 if [[ -f "$sync_script" ]]; then
-    (
-        cd "$REPO_ROOT"
-        export HAAL_SKILLS_SOURCE="$CLONE_PATH"
-        "$PYTHON_BIN" "$sync_script"
-    )
+    chmod +x "$sync_script" 2>/dev/null || true
+    "$sync_script" "$CLONE_PATH" "$REPO_ROOT" && echo "  OK: .olaf files synced" || echo "  WARN: Sync script had issues"
 else
-    echo "Warning: sync script not found"
+    echo "  SKIP: Sync script not found"
 fi
 echo ""
 

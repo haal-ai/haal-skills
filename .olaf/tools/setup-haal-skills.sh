@@ -1,49 +1,122 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
-# Wrapper script for backward compatibility
-# Calls clone-haal-skills.sh and install-haal-skills.sh in sequence
+# Multi-repo setup script
+# 1. Clone seed repo
+# 2. Read repos-manifest.json from seed
+# 3. Clone additional repos (skip unavailable)
+# 4. Install from bottom to top (seed wins on conflicts)
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEMP_BASE_FOLDER="${TMPDIR:-/tmp}/haal-skills-repos"
 
 REPO_PATH=""
 SEED=""
 COMPETENCIES=()
 COLLECTION=""
 
-# Legacy parameters (converted to new format)
-SKILLS_REPO_URL=""
-SKILLS_BRANCH=""
-
 show_help() {
     echo "Usage: $0 [options]"
     echo ""
-    echo "Setup HAAL skills (wrapper for clone + install)."
+    echo "Setup HAAL skills from multiple repos."
     echo ""
     echo "Options:"
     echo "  --repo-path PATH         Target repository path"
-    echo "  --seed OWNER/REPO:BRANCH Override source repo (e.g., 'haal-ai/haal-skills:main')"
-    echo "  --skills-repo-url URL    Skills repository URL (legacy, prefer --seed)"
-    echo "  --skills-branch BRANCH   Branch to clone (legacy, prefer --seed)"
+    echo "  --seed OWNER/REPO:BRANCH Seed repo (e.g., 'haal-ai/haal-skills:main')"
     echo "  --collection NAME        Collection name to install"
-    echo "  --competency NAME,NAME   Competency names (comma-separated)"
+    echo "  --competency NAME        Competency name (can be repeated)"
     echo "  -h, --help               Show this help message"
 }
 
+clean_folder() {
+    local path="$1"
+    rm -rf "$path" 2>/dev/null || true
+    mkdir -p "$path"
+}
+
+try_clone_repo() {
+    local repo_spec="$1"
+    local dest_folder="$2"
+    
+    local repo_url=""
+    local branch=""
+    
+    if [[ "$repo_spec" == *:* ]]; then
+        repo_url="https://github.com/${repo_spec%%:*}"
+        branch="${repo_spec##*:}"
+    else
+        repo_url="https://github.com/$repo_spec"
+        branch="main"
+    fi
+    
+    local repo_name="${repo_spec%%:*}"
+    repo_name="${repo_name//\//_}"
+    local clone_path="$dest_folder/$repo_name"
+    
+    echo "Cloning $repo_spec..."
+    
+    if git clone --depth 1 --branch "$branch" "$repo_url" "$clone_path" 2>/dev/null; then
+        echo "  OK: $repo_name"
+        echo "$clone_path"
+        return 0
+    fi
+    
+    # Try master if main failed
+    if [[ "$branch" == "main" ]]; then
+        if git clone --depth 1 --branch "master" "$repo_url" "$clone_path" 2>/dev/null; then
+            echo "  OK: $repo_name (master)"
+            echo "$clone_path"
+            return 0
+        fi
+    fi
+    
+    echo "  SKIP: $repo_spec (not available)"
+    return 1
+}
+
+read_repos_manifest() {
+    local clone_path="$1"
+    local manifest_path="$clone_path/repos-manifest.json"
+    
+    if [[ ! -f "$manifest_path" ]]; then
+        return
+    fi
+    
+    # Extract repos array using python or jq
+    if command -v python3 &>/dev/null; then
+        python3 -c "import json; data=json.load(open('$manifest_path')); print('\n'.join(data.get('repos', [])))" 2>/dev/null
+    elif command -v jq &>/dev/null; then
+        jq -r '.repos[]?' "$manifest_path" 2>/dev/null
+    fi
+}
+
+install_from_clone() {
+    local clone_path="$1"
+    shift
+    local install_args=("$@")
+    
+    local install_script="$clone_path/.olaf/tools/install-haal-skills.sh"
+    
+    if [[ ! -f "$install_script" ]]; then
+        echo "  SKIP: No install script in $clone_path"
+        return
+    fi
+    
+    chmod +x "$install_script" 2>/dev/null || true
+    "$install_script" --clone-path "$clone_path" "${install_args[@]}" || {
+        echo "  WARN: Install had errors for $clone_path - continuing"
+    }
+}
+
+# Parse arguments
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --repo-path)
             REPO_PATH="${2:-}"; shift 2;;
         --seed)
             SEED="${2:-}"; shift 2;;
-        --skills-repo-url)
-            SKILLS_REPO_URL="${2:-}"; shift 2;;
-        --skills-branch)
-            SKILLS_BRANCH="${2:-}"; shift 2;;
         --competency)
-            IFS=',' read -ra COMP_ARRAY <<< "${2:-}"
-            COMPETENCIES+=("${COMP_ARRAY[@]}")
-            shift 2;;
+            COMPETENCIES+=("${2:-}"); shift 2;;
         --collection)
             COLLECTION="${2:-}"; shift 2;;
         -h|--help)
@@ -56,40 +129,85 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Build seed from legacy parameters if not provided
-if [[ -z "$SEED" && -n "$SKILLS_REPO_URL" ]]; then
-    # Extract owner/repo from URL
-    repo_part=$(echo "$SKILLS_REPO_URL" | sed -E 's|https?://github\.com/||' | sed 's|\.git$||')
-    if [[ -n "$SKILLS_BRANCH" ]]; then
-        SEED="$repo_part:$SKILLS_BRANCH"
-    else
-        SEED="$repo_part"
+# === Main ===
+
+echo "=== HAAL Skills Multi-Repo Setup ==="
+echo ""
+
+# Determine seed
+if [[ -z "$SEED" ]]; then
+    origin_url=$(git remote get-url origin 2>/dev/null || true)
+    if [[ -n "$origin_url" ]]; then
+        SEED=$(echo "$origin_url" | sed -E 's|https://github\.com/||' | sed 's|\.git$||')
+        SEED="$SEED:main"
     fi
 fi
 
-# Build clone arguments
-CLONE_ARGS=()
-if [[ -n "$SEED" ]]; then
-    CLONE_ARGS+=(--seed "$SEED")
+if [[ -z "$SEED" ]]; then
+    SEED="haal-ai/haal-skills:main"
 fi
 
-# Build install arguments
-INSTALL_ARGS=()
+echo "Seed: $SEED"
+echo ""
+
+# Clean temp folder
+clean_folder "$TEMP_BASE_FOLDER"
+
+# Step 1: Clone seed repo
+echo "Step 1: Cloning seed repo..."
+seed_path=$(try_clone_repo "$SEED" "$TEMP_BASE_FOLDER")
+
+if [[ -z "$seed_path" || ! -d "$seed_path" ]]; then
+    echo "ERROR: Failed to clone seed repo: $SEED" >&2
+    exit 1
+fi
+echo ""
+
+# Step 2: Read repos manifest from seed
+echo "Step 2: Reading repos manifest..."
+mapfile -t additional_repos < <(read_repos_manifest "$seed_path")
+echo "  Found ${#additional_repos[@]} additional repo(s)"
+echo ""
+
+# Step 3: Clone additional repos
+cloned_paths=()
+if [[ ${#additional_repos[@]} -gt 0 ]]; then
+    echo "Step 3: Cloning additional repos..."
+    for repo in "${additional_repos[@]}"; do
+        if [[ -n "$repo" ]]; then
+            path=$(try_clone_repo "$repo" "$TEMP_BASE_FOLDER") || true
+            if [[ -n "$path" && -d "$path" ]]; then
+                cloned_paths+=("$path")
+            fi
+        fi
+    done
+    echo ""
+fi
+
+# Add seed path last (so it installs last and wins conflicts)
+cloned_paths+=("$seed_path")
+
+# Step 4: Install from bottom to top
+echo "Step 4: Installing skills (bottom to top)..."
+echo "  Order: ${cloned_paths[*]}"
+echo ""
+
+install_args=()
 if [[ -n "$REPO_PATH" ]]; then
-    INSTALL_ARGS+=(--repo-path "$REPO_PATH")
+    install_args+=(--repo-path "$REPO_PATH")
 fi
 if [[ -n "$COLLECTION" ]]; then
-    INSTALL_ARGS+=(--collection "$COLLECTION")
+    install_args+=(--collection "$COLLECTION")
 fi
 for comp in "${COMPETENCIES[@]}"; do
-    INSTALL_ARGS+=(--competency "$comp")
+    install_args+=(--competency "$comp")
 done
 
-# Step 1: Clone
-echo "=== Running clone-haal-skills.sh ===" 
-CLONE_PATH=$("$SCRIPT_DIR/clone-haal-skills.sh" "${CLONE_ARGS[@]}")
+for clone_path in "${cloned_paths[@]}"; do
+    repo_name=$(basename "$clone_path")
+    echo "Installing from: $repo_name"
+    install_from_clone "$clone_path" "${install_args[@]}"
+    echo ""
+done
 
-# Step 2: Install
-echo ""
-echo "=== Running install-haal-skills.sh ==="
-"$SCRIPT_DIR/install-haal-skills.sh" --clone-path "$CLONE_PATH" "${INSTALL_ARGS[@]}"
+echo "=== Done ==="
