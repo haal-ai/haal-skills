@@ -23,6 +23,8 @@ if ([string]::IsNullOrWhiteSpace($RepoPath)) {
     $RepoPath = (Get-Location).Path
 }
 
+Write-Host "DEBUG: RepoPath = '$RepoPath'" -ForegroundColor Magenta
+
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $TempBaseFolder = Join-Path $env:TEMP "haal-skills-repos"
 
@@ -194,6 +196,8 @@ $installArgs = @{}
 $installArgs['RepoPath'] = $RepoPath
 if (![string]::IsNullOrWhiteSpace($Collection)) { $installArgs['Collection'] = $Collection }
 if ($Competency.Count -gt 0) { $installArgs['Competency'] = $Competency }
+
+Write-Host "DEBUG: installArgs.RepoPath = '$($installArgs['RepoPath'])'" -ForegroundColor Magenta
 
 foreach ($clonePath in $clonedPaths) {
     $repoName = Split-Path -Leaf $clonePath

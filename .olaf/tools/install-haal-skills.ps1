@@ -217,6 +217,8 @@ Write-Host ""
 Write-Host "=== HAAL Skills Install ===" -ForegroundColor Cyan
 Write-Host ""
 
+Write-Host "DEBUG: RepoPath param = '$RepoPath'" -ForegroundColor Magenta
+
 # Validate clone path
 if (!(Test-Path -LiteralPath $ClonePath)) {
     Write-Host "ERROR: Clone path does not exist: $ClonePath" -ForegroundColor Red
@@ -354,6 +356,7 @@ if (Test-Path -LiteralPath $powersScript) {
 }
 
 # Sync to repo if RepoPath specified
+Write-Host "DEBUG: Checking RepoPath for sync: '$RepoPath'" -ForegroundColor Magenta
 if (![string]::IsNullOrWhiteSpace($RepoPath)) {
     Write-Host "  Syncing to repo..." -ForegroundColor Cyan
     $syncScript = Join-Path $ClonePath ".olaf\tools\sync-olaf-files.ps1"
