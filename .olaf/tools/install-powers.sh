@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Haal AI Powers Installation Script for Kiro
-# Copies powers to ~/.kiro/powers/installed/ and updates registry.json
+# Copies powers to ~/.kiro/powers/installed/
+# Registry update is done separately with --update-registry flag
 
 set -uo pipefail
 
@@ -8,6 +9,7 @@ SOURCE_PATH=""
 COMPETENCIES=()
 COLLECTION=""
 FORCE=""
+UPDATE_REGISTRY=""
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -15,6 +17,7 @@ while [[ $# -gt 0 ]]; do
         --competency) COMPETENCIES+=("${2:-}"); shift 2;;
         --collection) COLLECTION="${2:-}"; shift 2;;
         --force) FORCE="true"; shift;;
+        --update-registry) UPDATE_REGISTRY="true"; shift;;
         *) 
             if [[ -z "$SOURCE_PATH" ]]; then
                 SOURCE_PATH="$1"
@@ -45,12 +48,6 @@ if ! command -v jq &> /dev/null; then
     exit 1
 fi
 
-# Validate paths
-if [[ ! -d "$POWERS_SOURCE_DIR" ]]; then
-    echo "    ERROR: Powers source not found: $POWERS_SOURCE_DIR"
-    exit 1
-fi
-
 # Get powers from competency
 get_powers_from_competency() {
     local comp="$1"
@@ -68,9 +65,24 @@ get_competencies_from_collection() {
     fi
 }
 
-# Get all powers
+# Get all powers from source
 get_all_powers() {
+    if [[ ! -d "$POWERS_SOURCE_DIR" ]]; then
+        return
+    fi
     for dir in "$POWERS_SOURCE_DIR"/*/; do
+        if [[ -f "${dir}POWER.md" ]]; then
+            basename "$dir"
+        fi
+    done
+}
+
+# Get all installed powers
+get_installed_powers() {
+    if [[ ! -d "$KIRO_INSTALLED_DIR" ]]; then
+        return
+    fi
+    for dir in "$KIRO_INSTALLED_DIR"/*/; do
         if [[ -f "${dir}POWER.md" ]]; then
             basename "$dir"
         fi
@@ -100,6 +112,96 @@ parse_power_md() {
     
     [[ -z "$KEYWORDS" || "$KEYWORDS" == "null" ]] && KEYWORDS="[]"
 }
+
+# Update registry with ALL installed powers
+update_kiro_powers_registry() {
+    # Get all installed powers
+    mapfile -t INSTALLED_POWERS < <(get_installed_powers)
+    
+    if [[ ${#INSTALLED_POWERS[@]} -eq 0 ]]; then
+        echo "    No powers to register"
+        return
+    fi
+    
+    if [[ ! -f "$REGISTRY_FILE" ]]; then
+        echo "    WARN: No Kiro registry found. Open Kiro Powers panel first."
+        return
+    fi
+    
+    local TIMESTAMP
+    TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
+    local REPO_ID="haal-ai-powers"
+    
+    # Build powers JSON
+    local POWERS_JSON="{"
+    local FIRST=true
+    
+    for POWER_NAME in "${INSTALLED_POWERS[@]}"; do
+        local POWER_PATH="$KIRO_INSTALLED_DIR/$POWER_NAME"
+        
+        # Parse metadata
+        NAME=""
+        DISPLAY_NAME=""
+        DESCRIPTION=""
+        AUTHOR=""
+        KEYWORDS="[]"
+        parse_power_md "$POWER_PATH"
+        
+        [[ -z "$NAME" ]] && NAME="$POWER_NAME"
+        [[ -z "$DISPLAY_NAME" ]] && DISPLAY_NAME="$POWER_NAME"
+        [[ -z "$AUTHOR" ]] && AUTHOR="Haal AI"
+        
+        if [[ "$FIRST" != "true" ]]; then
+            POWERS_JSON+=","
+        fi
+        FIRST=false
+        
+        # Escape strings for JSON
+        local DESCRIPTION_ESC
+        DESCRIPTION_ESC=$(echo "$DESCRIPTION" | jq -Rs . | sed 's/^"//;s/"$//')
+        
+        POWERS_JSON+="\"$POWER_NAME\":{\"name\":\"$NAME\",\"description\":\"$DESCRIPTION_ESC\",\"displayName\":\"$DISPLAY_NAME\",\"author\":\"$AUTHOR\",\"keywords\":$KEYWORDS,\"installed\":true,\"installedAt\":\"$TIMESTAMP\",\"installPath\":\"$POWER_PATH\",\"source\":{\"type\":\"repo\",\"repoId\":\"$REPO_ID\",\"repoName\":\"Haal AI Powers\"},\"sourcePath\":\"$POWER_PATH\"}"
+    done
+    
+    POWERS_JSON+="}"
+    
+    # Update registry using jq
+    jq --argjson newPowers "$POWERS_JSON" \
+       --arg repoId "$REPO_ID" \
+       --arg installDir "$KIRO_INSTALLED_DIR" \
+       --arg timestamp "$TIMESTAMP" \
+       --arg powerCount "${#INSTALLED_POWERS[@]}" '
+      # Merge new powers into existing
+      .powers = (.powers + $newPowers) |
+      # Add/update repo source
+      .repoSources[$repoId] = {
+        name: "Haal AI Powers",
+        type: "local",
+        enabled: true,
+        addedAt: $timestamp,
+        path: $installDir,
+        lastSync: $timestamp,
+        powerCount: ($powerCount | tonumber)
+      } |
+      .lastUpdated = $timestamp
+    ' "$REGISTRY_FILE" > "$REGISTRY_FILE.tmp" && mv "$REGISTRY_FILE.tmp" "$REGISTRY_FILE"
+    
+    echo "    Registry updated: ${#INSTALLED_POWERS[@]} powers"
+}
+
+# === Main ===
+
+# If only updating registry, do that and exit
+if [[ "$UPDATE_REGISTRY" == "true" ]]; then
+    update_kiro_powers_registry
+    exit 0
+fi
+
+# Validate paths
+if [[ ! -d "$POWERS_SOURCE_DIR" ]]; then
+    echo "    ERROR: Powers source not found: $POWERS_SOURCE_DIR"
+    exit 1
+fi
 
 # Resolve powers to install
 ALL_COMPETENCIES=()
@@ -142,21 +244,12 @@ if [[ ${#POWERS_TO_INSTALL[@]} -eq 0 ]]; then
     exit 0
 fi
 
-# Check registry exists
-if [[ ! -f "$REGISTRY_FILE" ]]; then
-    echo "    WARN: No Kiro registry found. Open Kiro Powers panel first."
-    exit 0
-fi
-
 # Create installed directory
 mkdir -p "$KIRO_INSTALLED_DIR"
 
-# Copy powers and collect metadata
+# Copy powers
 COPIED=0
 SKIPPED=0
-INSTALLED_POWERS=()
-TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
-REPO_ID="haal-ai-powers"
 
 for POWER_NAME in "${POWERS_TO_INSTALL[@]}"; do
     POWER_SOURCE="$POWERS_SOURCE_DIR/$POWER_NAME"
@@ -168,69 +261,11 @@ for POWER_NAME in "${POWERS_TO_INSTALL[@]}"; do
     
     if [[ -d "$POWER_DEST" && "$FORCE" != "true" ]]; then
         ((SKIPPED++))
-        INSTALLED_POWERS+=("$POWER_NAME")
     else
         rm -rf "$POWER_DEST"
         cp -r "$POWER_SOURCE" "$POWER_DEST"
         ((COPIED++))
-        INSTALLED_POWERS+=("$POWER_NAME")
     fi
 done
 
-# Update registry with all powers at once
-if [[ ${#INSTALLED_POWERS[@]} -gt 0 ]]; then
-    # Build powers JSON
-    POWERS_JSON="{"
-    FIRST=true
-    
-    for POWER_NAME in "${INSTALLED_POWERS[@]}"; do
-        POWER_PATH="$KIRO_INSTALLED_DIR/$POWER_NAME"
-        
-        # Parse metadata
-        NAME=""
-        DISPLAY_NAME=""
-        DESCRIPTION=""
-        AUTHOR=""
-        KEYWORDS="[]"
-        parse_power_md "$POWER_PATH"
-        
-        [[ -z "$NAME" ]] && NAME="$POWER_NAME"
-        [[ -z "$DISPLAY_NAME" ]] && DISPLAY_NAME="$POWER_NAME"
-        [[ -z "$AUTHOR" ]] && AUTHOR="Haal AI"
-        
-        if [[ "$FIRST" != "true" ]]; then
-            POWERS_JSON+=","
-        fi
-        FIRST=false
-        
-        # Escape strings for JSON
-        DESCRIPTION_ESC=$(echo "$DESCRIPTION" | jq -Rs . | sed 's/^"//;s/"$//')
-        
-        POWERS_JSON+="\"$POWER_NAME\":{\"name\":\"$NAME\",\"description\":\"$DESCRIPTION_ESC\",\"displayName\":\"$DISPLAY_NAME\",\"author\":\"$AUTHOR\",\"keywords\":$KEYWORDS,\"installed\":true,\"installedAt\":\"$TIMESTAMP\",\"installPath\":\"$POWER_PATH\",\"source\":{\"type\":\"repo\",\"repoId\":\"$REPO_ID\",\"repoName\":\"Haal AI Powers\"},\"sourcePath\":\"$POWER_PATH\"}"
-    done
-    
-    POWERS_JSON+="}"
-    
-    # Update registry using jq
-    jq --argjson newPowers "$POWERS_JSON" \
-       --arg repoId "$REPO_ID" \
-       --arg installDir "$KIRO_INSTALLED_DIR" \
-       --arg timestamp "$TIMESTAMP" \
-       --arg powerCount "${#INSTALLED_POWERS[@]}" '
-      # Merge new powers into existing
-      .powers = (.powers + $newPowers) |
-      # Add/update repo source
-      .repoSources[$repoId] = {
-        name: "Haal AI Powers",
-        type: "local",
-        enabled: true,
-        addedAt: $timestamp,
-        path: $installDir,
-        lastSync: $timestamp,
-        powerCount: ($powerCount | tonumber)
-      } |
-      .lastUpdated = $timestamp
-    ' "$REGISTRY_FILE" > "$REGISTRY_FILE.tmp" && mv "$REGISTRY_FILE.tmp" "$REGISTRY_FILE"
-fi
-
-echo "    Powers: $COPIED copied, $SKIPPED existing (registry updated)"
+echo "    Powers: $COPIED copied, $SKIPPED existing"

@@ -204,4 +204,18 @@ foreach ($clonePath in $clonedPaths) {
     Write-Host ""
 }
 
+# Step 5: Final registry update for all installed powers
+Write-Host "Step 5: Updating Kiro Powers registry..." -ForegroundColor Cyan
+$powersScript = Join-Path $seedPath ".olaf\tools\install-powers.ps1"
+if (Test-Path -LiteralPath $powersScript) {
+    try {
+        & $powersScript -SourcePath $seedPath -UpdateRegistry
+    } catch {
+        Write-Host "  WARN: Registry update failed: $_" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  No powers script found" -ForegroundColor Gray
+}
+Write-Host ""
+
 Write-Host "=== Done ===" -ForegroundColor Green

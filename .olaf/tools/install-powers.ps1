@@ -1,11 +1,13 @@
 # Haal AI Powers Installation Script for Kiro
-# Copies powers to ~/.kiro/powers/installed/ and updates registry.json
+# Copies powers to ~/.kiro/powers/installed/
+# Registry update is done separately by Update-KiroPowersRegistry
 
 param(
     [string]$SourcePath = ".",
     [string[]]$Competency = @(),
     [string]$Collection = "",
-    [switch]$Force
+    [switch]$Force,
+    [switch]$UpdateRegistry  # If set, update registry after copying (for standalone use)
 )
 
 $ErrorActionPreference = 'Continue'
@@ -43,6 +45,13 @@ function Get-AllPowers {
         ForEach-Object { $_.Name }
 }
 
+function Get-InstalledPowers {
+    if (!(Test-Path $KiroInstalledDir)) { return @() }
+    Get-ChildItem $KiroInstalledDir -Directory | 
+        Where-Object { Test-Path (Join-Path $_.FullName "POWER.md") } |
+        ForEach-Object { $_.Name }
+}
+
 function Parse-PowerMd([string]$PowerPath) {
     $powerMdPath = Join-Path $PowerPath "POWER.md"
     if (!(Test-Path $powerMdPath)) { return $null }
@@ -73,6 +82,95 @@ function Parse-PowerMd([string]$PowerPath) {
     }
     
     return $result
+}
+
+# Update registry with ALL installed powers (scans the installed directory)
+function Update-KiroPowersRegistry {
+    $installedPowers = @(Get-InstalledPowers)
+    
+    if ($installedPowers.Count -eq 0) {
+        Write-Host "    No powers to register" -ForegroundColor Gray
+        return
+    }
+    
+    if (!(Test-Path $KiroRegistryFile)) {
+        Write-Host "    WARN: No Kiro registry found. Open Kiro Powers panel first." -ForegroundColor Yellow
+        return
+    }
+    
+    $registryContent = Get-Content $KiroRegistryFile -Raw
+    $registry = $registryContent | ConvertFrom-Json
+    
+    if ($null -eq $registry) {
+        Write-Host "    WARN: Invalid Kiro registry." -ForegroundColor Yellow
+        return
+    }
+    
+    $timestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+    $repoId = "haal-ai-powers"
+    
+    # Ensure repoSources exists
+    if ($null -eq $registry.repoSources) {
+        $registry | Add-Member -NotePropertyName "repoSources" -NotePropertyValue ([PSCustomObject]@{}) -Force
+    }
+    
+    # Add repo source
+    $repoSource = [PSCustomObject]@{
+        name = "Haal AI Powers"
+        type = "local"
+        enabled = $true
+        addedAt = $timestamp
+        path = $KiroInstalledDir
+        lastSync = $timestamp
+        powerCount = $installedPowers.Count
+    }
+    
+    if ($registry.repoSources.PSObject.Properties.Name -contains $repoId) {
+        $registry.repoSources.$repoId = $repoSource
+    } else {
+        $registry.repoSources | Add-Member -NotePropertyName $repoId -NotePropertyValue $repoSource
+    }
+    
+    # Add/update each installed power
+    foreach ($powerName in $installedPowers) {
+        $powerPath = Join-Path $KiroInstalledDir $powerName
+        $metadata = Parse-PowerMd $powerPath
+        
+        if ($null -eq $metadata) { continue }
+        
+        $powerEntry = [PSCustomObject]@{
+            name = if ($metadata.name) { $metadata.name } else { $powerName }
+            description = if ($metadata.description) { $metadata.description } else { "" }
+            displayName = if ($metadata.displayName) { $metadata.displayName } else { $powerName }
+            author = if ($metadata.author) { $metadata.author } else { "Haal AI" }
+            keywords = $metadata.keywords
+            installed = $true
+            installedAt = $timestamp
+            installPath = $powerPath
+            source = [PSCustomObject]@{
+                type = "repo"
+                repoId = $repoId
+                repoName = "Haal AI Powers"
+            }
+            sourcePath = $powerPath
+        }
+        
+        if ($registry.powers.PSObject.Properties.Name -contains $powerName) {
+            $registry.powers.$powerName = $powerEntry
+        } else {
+            $registry.powers | Add-Member -NotePropertyName $powerName -NotePropertyValue $powerEntry
+        }
+    }
+    
+    $registry.lastUpdated = $timestamp
+    
+    # Convert to compact JSON then pretty-print with 2-space indent
+    $compactJson = $registry | ConvertTo-Json -Depth 10 -Compress
+    $prettyJson = Format-Json $compactJson
+    
+    [System.IO.File]::WriteAllText($KiroRegistryFile, $prettyJson)
+    
+    Write-Host "    Registry updated: $($installedPowers.Count) powers" -ForegroundColor Green
 }
 
 function Format-Json([string]$Json) {
@@ -158,82 +256,9 @@ function Format-Json([string]$Json) {
 }
 
 function Update-KiroRegistry([string[]]$InstalledPowers, [string]$InstallDir) {
-    # Load existing registry
-    if (!(Test-Path $KiroRegistryFile)) {
-        Write-Host "    WARN: No Kiro registry found. Open Kiro Powers panel first." -ForegroundColor Yellow
-        return
-    }
-    
-    $registryContent = Get-Content $KiroRegistryFile -Raw
-    $registry = $registryContent | ConvertFrom-Json
-    
-    if ($null -eq $registry) {
-        Write-Host "    WARN: Invalid Kiro registry. Open Kiro Powers panel first." -ForegroundColor Yellow
-        return
-    }
-    
-    $timestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
-    $repoId = "haal-ai-powers"
-    
-    # Add repo source
-    if ($null -eq $registry.repoSources) {
-        $registry | Add-Member -NotePropertyName "repoSources" -NotePropertyValue ([PSCustomObject]@{}) -Force
-    }
-    
-    $repoSource = [PSCustomObject]@{
-        name = "Haal AI Powers"
-        type = "local"
-        enabled = $true
-        addedAt = $timestamp
-        path = $InstallDir
-        lastSync = $timestamp
-        powerCount = $InstalledPowers.Count
-    }
-    
-    if ($registry.repoSources.PSObject.Properties.Name -contains $repoId) {
-        $registry.repoSources.$repoId = $repoSource
-    } else {
-        $registry.repoSources | Add-Member -NotePropertyName $repoId -NotePropertyValue $repoSource
-    }
-    
-    # Add/update each power
-    foreach ($powerName in $InstalledPowers) {
-        $powerPath = Join-Path $InstallDir $powerName
-        $metadata = Parse-PowerMd $powerPath
-        
-        if ($null -eq $metadata) { continue }
-        
-        $powerEntry = [PSCustomObject]@{
-            name = if ($metadata.name) { $metadata.name } else { $powerName }
-            description = if ($metadata.description) { $metadata.description } else { "" }
-            displayName = if ($metadata.displayName) { $metadata.displayName } else { $powerName }
-            author = if ($metadata.author) { $metadata.author } else { "Haal AI" }
-            keywords = $metadata.keywords
-            installed = $true
-            installedAt = $timestamp
-            installPath = $powerPath
-            source = [PSCustomObject]@{
-                type = "repo"
-                repoId = $repoId
-                repoName = "Haal AI Powers"
-            }
-            sourcePath = $powerPath
-        }
-        
-        if ($registry.powers.PSObject.Properties.Name -contains $powerName) {
-            $registry.powers.$powerName = $powerEntry
-        } else {
-            $registry.powers | Add-Member -NotePropertyName $powerName -NotePropertyValue $powerEntry
-        }
-    }
-    
-    $registry.lastUpdated = $timestamp
-    
-    # Convert to compact JSON then pretty-print with 2-space indent
-    $compactJson = $registry | ConvertTo-Json -Depth 10 -Compress
-    $prettyJson = Format-Json $compactJson
-    
-    [System.IO.File]::WriteAllText($KiroRegistryFile, $prettyJson)
+    # DEPRECATED: Use Update-KiroPowersRegistry instead
+    # This function is kept for backward compatibility
+    Update-KiroPowersRegistry
 }
 
 # === Main ===
@@ -272,7 +297,6 @@ if (!(Test-Path $KiroInstalledDir)) { New-Item -ItemType Directory -Path $KiroIn
 
 $copied = 0
 $skipped = 0
-$installedPowers = @()
 
 foreach ($power in $powersToInstall) {
     $src = Join-Path $PowersSourceDir $power
@@ -284,18 +308,16 @@ foreach ($power in $powersToInstall) {
     
     if ((Test-Path $dst) -and !$Force) {
         $skipped++
-        $installedPowers += $power
     } else {
         if (Test-Path $dst) { Remove-Item $dst -Recurse -Force }
         Copy-Item $src $dst -Recurse
         $copied++
-        $installedPowers += $power
     }
 }
 
-# Update Kiro registry
-if ($installedPowers.Count -gt 0) {
-    Update-KiroRegistry $installedPowers $KiroInstalledDir
-}
+Write-Host "    Powers: $copied copied, $skipped existing" -ForegroundColor Green
 
-Write-Host "    Powers: $copied copied, $skipped existing (registry updated)" -ForegroundColor Green
+# Update registry if requested (for standalone use)
+if ($UpdateRegistry) {
+    Update-KiroPowersRegistry
+}

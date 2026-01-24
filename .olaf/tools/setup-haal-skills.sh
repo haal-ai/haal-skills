@@ -260,4 +260,15 @@ for clone_path in "${cloned_paths[@]}"; do
     echo ""
 done
 
+# Step 5: Final registry update for all installed powers
+echo "Step 5: Updating Kiro Powers registry..."
+powers_script="$seed_path/.olaf/tools/install-powers.sh"
+if [[ -f "$powers_script" ]]; then
+    chmod +x "$powers_script" 2>/dev/null || true
+    "$powers_script" --update-registry || echo "  WARN: Registry update failed"
+else
+    echo "  No powers script found"
+fi
+echo ""
+
 echo "=== Done ==="
