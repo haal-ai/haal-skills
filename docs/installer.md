@@ -1,155 +1,139 @@
 # Installer
 
-This installer supports **Windsurf**, **Claude**, **GitHub Copilot**, and **Kiro**.
+Installs HAAL skills, powers, and tools to your AI coding assistants.
 
-It is intentionally **script-based**: there is no HAAL CLI and no `haal-skills-sdk`.
+Supports **Windsurf**, **Claude**, **GitHub Copilot**, and **Kiro**.
+
+## What Gets Installed
+
+- **Skills** - AI agent prompts for various tasks (code review, documentation, etc.)
+- **Powers** - Kiro-specific capabilities with steering files
+- **Tools** - Helper scripts in `.olaf/tools/`
+- **Data** - Knowledge base and context files in `.olaf/data/`
 
 ## Prerequisites
 
-- `git` installed (used to clone the seed repo)
-- Either PowerShell (Windows) or `bash` (macOS/Linux/Git Bash)
-- No Python required for installation
-- Optional: `jq` (only used as a faster JSON parser when available)
+- `git` installed
+- PowerShell (Windows) or `bash` (macOS/Linux)
 
 ## Quick Start
 
-### PowerShell (Windows)
+Navigate to your project folder, then run:
 
-Run in your target repository folder:
-
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.ps1" -OutFile "setup-haal-skills.ps1"; .\setup-haal-skills.ps1
-```
-
-Example: install the `basic` collection to Kiro and wipe existing skills first:
+### Windows (PowerShell)
 
 ```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.ps1" -OutFile "setup-haal-skills.ps1"; .\setup-haal-skills.ps1 -Collection basic -Platform kiro -Clean
+irm https://haal-ai.github.io/haal-skills/setup-haal.ps1 | iex
 ```
 
-### Bash (macOS / Linux)
+### macOS / Linux
 
 ```bash
-curl -fsSL "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.sh" -o setup-haal-skills.sh \
-  && bash setup-haal-skills.sh
+curl -fsSL https://haal-ai.github.io/haal-skills/setup-haal.sh | bash
 ```
 
-Example: install the `basic` collection to Kiro and wipe existing skills first:
+That's it! The installer will set up everything in your current folder.
 
-```bash
-curl -fsSL "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.sh" -o setup-haal-skills.sh \
-  && bash setup-haal-skills.sh --collection basic --platform kiro --clean
+To update later, rerun from your `.olaf/tools/` folder:
+```powershell
+.\.olaf\tools\setup-haal.ps1
 ```
 
 ## Options
 
 ### Install a Collection
 
-Collections are predefined sets of competencies:
+Collections are predefined sets of skills:
 
 ```powershell
-.\setup-haal-skills.ps1 -Collection "basic"
+.\setup-haal.ps1 -Collection basic
 ```
 
 ```bash
-bash setup-haal-skills.sh --collection basic
+bash setup-haal.sh --collection basic
 ```
 
-Available collections:
-- `starter` - Minimal set for getting started
-- `basic` - Recommended default set
-- `techie` - Heavier technical toolkit
-- `full` - Full set
-- `all` - All competencies (equivalent to installing everything)
+Available collections: `starter`, `basic`, `techie`, `full`, `all`
 
 ### Install Specific Competencies
 
 ```powershell
-.\setup-haal-skills.ps1 -Competency "developer","git-assistant"
+.\setup-haal.ps1 -Competency developer,git-assistant
 ```
 
 ```bash
-bash setup-haal-skills.sh --competency developer --competency git-assistant
+bash setup-haal.sh --competency developer --competency git-assistant
 ```
 
-Available competencies:
-- `developer`
-- `architect`
-- `api-producers`
-- `api-consumers`
-- `specification`
-- `git-assistant`
-- `session-manager`
-- `prompt-engineer`
-- `technical-writer`
-- `business-analyst`
-- `project-manager`
-- `researcher`
-- `base-skills`
-
-### Combine Collection and Competencies
-
-```powershell
-.\setup-haal-skills.ps1 -Collection "basic" -Competency "technical-writer"
-```
-
-```bash
-bash setup-haal-skills.sh --collection basic --competency technical-writer
-```
+Available competencies: `developer`, `architect`, `api-producers`, `api-consumers`, `specification`, `git-assistant`, `session-manager`, `prompt-engineer`, `technical-writer`, `business-analyst`, `project-manager`, `researcher`, `base-skills`
 
 ### Platform Selection
 
 Install to one platform only:
 
 ```powershell
-.\setup-haal-skills.ps1 -Collection basic -Platform kiro
+.\setup-haal.ps1 -Platform kiro
 ```
 
 ```bash
-bash setup-haal-skills.sh --collection basic --platform kiro
+bash setup-haal.sh --platform kiro
 ```
 
-Supported values: `all`, `kiro`, `claude`, `windsurf`, `github`.
+Supported: `all`, `kiro`, `claude`, `windsurf`, `github`
 
-### Install From a Specific Branch
+### Clean Install
 
-Use `--seed` / `-Seed` to pick a branch:
+Remove existing skills before installing:
 
 ```powershell
-.\setup-haal-skills.ps1 -Seed "haal-ai/haal-skills:integration" -Collection basic -Platform kiro -Clean
+.\setup-haal.ps1 -Clean
 ```
 
 ```bash
-bash setup-haal-skills.sh --seed "haal-ai/haal-skills:integration" --collection basic --platform kiro --clean
+bash setup-haal.sh --clean
 ```
 
-### Install All Skills (Default)
+## Advanced Options
 
-If no collection or competency is specified, all skills are installed.
+### Specify Target Repository
+
+By default, the installer uses your current directory. To install to a different location:
+
+```powershell
+.\setup-haal.ps1 -RepoPath "C:\path\to\your\repo"
+```
+
+```bash
+bash setup-haal.sh --repo-path /path/to/your/repo
+```
+
+### Use a Different Source
+
+By default, skills are downloaded from `haal-ai/haal-skills:main`. To use a different branch or fork:
+
+```powershell
+.\setup-haal.ps1 -Seed "your-org/your-repo:branch"
+```
+
+```bash
+bash setup-haal.sh --seed "your-org/your-repo:branch"
+```
 
 ## What It Does
 
-1. Clones the seed repo (`haal-ai/haal-skills:main` by default) to a temp folder
-2. Optionally clones additional repos listed in `repos-manifest.json` (if present)
-3. Prunes deprecated skills from destinations (if `.olaf/prune-skills.txt` exists)
-4. Resolves skills from collection/competency selection (from `collection-manifest.json` + `competencies/*.json`)
-5. Copies selected skills to the chosen platform folder(s):
-   - `~/.codeium/windsurf/skills/`
-   - `~/.claude/skills/`
-   - `~/.github/skills/`
-   - `~/.kiro/skills/`
-6. Syncs `.olaf/` to your global location (`~/.olaf`)
-7. Optionally syncs `.olaf/` files into your target repo when `--repo-path` / `-RepoPath` is provided
+1. Downloads the HAAL package to a temp folder
+2. Copies skills to your platform folder(s)
+3. Copies powers to Kiro and updates the registry
+4. Syncs tools and data to `~/.olaf` and your project
 
 ## Troubleshooting
 
 ### Git Bash on Windows
 
-If you see `CRYPT_E_NO_REVOCATION_CHECK`, use:
+If you see SSL errors, use:
 
 ```bash
-curl.exe -fsSL --ssl-no-revoke "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal-skills.sh" -o setup-haal-skills.sh \
-  && bash setup-haal-skills.sh
+curl.exe -fsSL --ssl-no-revoke "https://raw.githubusercontent.com/haal-ai/haal-skills/main/.olaf/tools/setup-haal.sh" -o setup-haal.sh && bash setup-haal.sh
 ```
 
 ### Network Errors

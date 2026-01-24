@@ -67,31 +67,29 @@ try_clone_repo() {
     local branch_safe="${branch//\//_}"
     local clone_path="$dest_folder/${repo_name}_${branch_safe}"
     
-    echo "Cloning $repo_spec..."
-    echo "  URL: $repo_url"
-    echo "  Branch: $branch"
+    printf "  Fetching %s..." "$repo_spec"
     
     # Remove existing if present
     rm -rf "$clone_path" 2>/dev/null || true
     
     if git clone --depth 1 --branch "$branch" "$repo_url" "$clone_path" >/dev/null 2>&1; then
-        echo "  OK: ${repo_name}:${branch}"
+        echo " OK"
         echo "$clone_path" > "$result_file"
         return 0
     fi
     
     # Try master if main failed
     if [[ "$branch" == "main" ]]; then
-        echo "  Trying master branch..."
+        printf " trying master..."
         clone_path="$dest_folder/${repo_name}_master"
         if git clone --depth 1 --branch "master" "$repo_url" "$clone_path" >/dev/null 2>&1; then
-            echo "  OK: ${repo_name}:master"
+            echo " OK"
             echo "$clone_path" > "$result_file"
             return 0
         fi
     fi
     
-    echo "  SKIP: $repo_spec (not available)"
+    echo " SKIP (not available)"
     return 1
 }
 
@@ -173,24 +171,20 @@ done
 
 # === Main ===
 
-echo "=== HAAL Skills Multi-Repo Setup ==="
+echo "=== HAAL Setup ==="
+echo "  Installing skills, powers, and tools to your environment"
 echo ""
 
 # Determine seed
-# If not specified, always use the canonical haal-ai/haal-skills repo.
-# Note: try_clone_repo automatically falls back to master when main is unavailable.
 if [[ -z "$SEED" ]]; then
     SEED="haal-ai/haal-skills:main"
 fi
 
-echo "Seed: $SEED"
-echo ""
-
 # Clean temp folder
 clean_folder "$TEMP_BASE_FOLDER"
 
-# Step 1: Clone seed repo
-echo "Step 1: Cloning seed repo..."
+# Download packages
+echo "Downloading skill packages..."
 CLONE_RESULT_FILE=$(mktemp)
 seed_path=""
 if try_clone_repo "$SEED" "$TEMP_BASE_FOLDER" "$CLONE_RESULT_FILE"; then
@@ -199,21 +193,16 @@ fi
 rm -f "$CLONE_RESULT_FILE"
 
 if [[ -z "$seed_path" || ! -d "$seed_path" ]]; then
-    echo "ERROR: Failed to clone seed repo: $SEED" >&2
+    echo "ERROR: Failed to download: $SEED" >&2
     exit 1
 fi
-echo ""
 
-# Step 2: Read repos manifest from seed
-echo "Step 2: Reading repos manifest..."
+# Read repos manifest from seed
 mapfile -t additional_repos < <(read_repos_manifest "$seed_path")
-echo "  Found ${#additional_repos[@]} additional repo(s)"
-echo ""
 
-# Step 3: Clone additional repos
+# Clone additional repos
 cloned_paths=()
 if [[ ${#additional_repos[@]} -gt 0 ]]; then
-    echo "Step 3: Cloning additional repos..."
     for repo in "${additional_repos[@]}"; do
         if [[ -n "$repo" ]]; then
             CLONE_RESULT_FILE=$(mktemp)
@@ -226,16 +215,14 @@ if [[ ${#additional_repos[@]} -gt 0 ]]; then
             rm -f "$CLONE_RESULT_FILE"
         fi
     done
-    echo ""
 fi
 
 # Add seed path last (so it installs last and wins conflicts)
 cloned_paths+=("$seed_path")
-
-# Step 4: Install from bottom to top
-echo "Step 4: Installing skills (bottom to top)..."
-echo "  Order: ${cloned_paths[*]}"
 echo ""
+
+# Install
+echo "Installing..."
 
 install_args=()
 install_args+=(--repo-path "$REPO_PATH")
@@ -257,18 +244,14 @@ for clone_path in "${cloned_paths[@]}"; do
         install_from_clone "$clone_path" "false" "$PLATFORM" "${install_args[@]}"
     fi
     first_clone=false
-    echo ""
 done
 
-# Step 5: Final registry update for all installed powers
-echo "Step 5: Updating Kiro Powers registry..."
+# Final registry update for all installed powers
 powers_script="$seed_path/.olaf/tools/install-powers.sh"
 if [[ -f "$powers_script" ]]; then
     chmod +x "$powers_script" 2>/dev/null || true
     "$powers_script" --update-registry || echo "  WARN: Registry update failed"
-else
-    echo "  No powers script found"
 fi
 echo ""
 
-echo "=== Done ==="
+echo "=== Setup Complete ==="

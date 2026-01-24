@@ -23,8 +23,6 @@ if ([string]::IsNullOrWhiteSpace($RepoPath)) {
     $RepoPath = (Get-Location).Path
 }
 
-Write-Host "DEBUG: RepoPath = '$RepoPath'" -ForegroundColor Magenta
-
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $TempBaseFolder = Join-Path $env:TEMP "haal-skills-repos"
 
@@ -53,36 +51,34 @@ function Try-CloneRepo([string]$RepoSpec, [string]$DestFolder) {
     $branchSafe = $branch -replace '[/\\]', '_'
     $clonePath = Join-Path $DestFolder "${repoName}_${branchSafe}"
     
-    Write-Host "Cloning $RepoSpec..." -ForegroundColor Cyan
-    Write-Host "  URL: $repoUrl"
-    Write-Host "  Branch: $branch"
+    Write-Host "  Fetching $RepoSpec..." -ForegroundColor Gray -NoNewline
     
     # Remove existing clone path if it exists
     if (Test-Path -LiteralPath $clonePath) {
         Remove-Item -LiteralPath $clonePath -Recurse -Force -ErrorAction SilentlyContinue
     }
     
-    # Use Start-Process to avoid stderr issues
-    $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", $branch, $repoUrl, $clonePath -Wait -PassThru -NoNewWindow
+    # Clone silently (redirect all output to null)
+    $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", $branch, $repoUrl, $clonePath -Wait -PassThru -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL"
     
     if ($process.ExitCode -eq 0 -and (Test-Path -LiteralPath $clonePath)) {
-        Write-Host "  OK: ${repoName}:${branch}" -ForegroundColor Green
+        Write-Host " OK" -ForegroundColor Green
         return $clonePath
     }
     
     # Try master if main failed
     if ($branch -eq "main") {
-        Write-Host "  Trying master branch..." -ForegroundColor Yellow
+        Write-Host " trying master..." -ForegroundColor Yellow -NoNewline
         $clonePath = Join-Path $DestFolder "${repoName}_master"
-        $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", "master", $repoUrl, $clonePath -Wait -PassThru -NoNewWindow
+        $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", "master", $repoUrl, $clonePath -Wait -PassThru -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL"
         
         if ($process.ExitCode -eq 0 -and (Test-Path -LiteralPath $clonePath)) {
-            Write-Host "  OK: ${repoName}:master" -ForegroundColor Green
+            Write-Host " OK" -ForegroundColor Green
             return $clonePath
         }
     }
     
-    Write-Host "  SKIP: $RepoSpec (not available)" -ForegroundColor Yellow
+    Write-Host " SKIP (not available)" -ForegroundColor Yellow
     return $null
 }
 
@@ -139,77 +135,61 @@ function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$C
 
 # === Main ===
 
-Write-Host "=== HAAL Skills Multi-Repo Setup ===" -ForegroundColor Cyan
+Write-Host "=== HAAL Setup ===" -ForegroundColor Cyan
+Write-Host "  Installing skills, powers, and tools to your environment"
 Write-Host ""
 
 # Determine seed
-# If not specified, always use the canonical haal-ai/haal-skills repo.
-# Note: Try-CloneRepo automatically falls back to master when main is unavailable.
 if ([string]::IsNullOrWhiteSpace($Seed)) {
     $Seed = "haal-ai/haal-skills:main"
 }
-
-Write-Host "Seed: $Seed"
-Write-Host ""
 
 # Clean temp folder
 Clean-Folder $TempBaseFolder
 
 # Step 1: Clone seed repo
-Write-Host "Step 1: Cloning seed repo..." -ForegroundColor Cyan
+Write-Host "Downloading skill packages..." -ForegroundColor Cyan
 $seedPath = Try-CloneRepo $Seed $TempBaseFolder
 
 if ($null -eq $seedPath) {
-    throw "Failed to clone seed repo: $Seed"
+    throw "Failed to download: $Seed"
 }
-Write-Host ""
 
 # Step 2: Read repos manifest from seed
-Write-Host "Step 2: Reading repos manifest..." -ForegroundColor Cyan
 $additionalRepos = @(Read-ReposManifest $seedPath)
 $repoCount = $additionalRepos.Count
-Write-Host "  Found $repoCount additional repo(s)"
-Write-Host ""
 
 # Step 3: Clone additional repos
 $clonedPaths = @()
 if ($repoCount -gt 0) {
-    Write-Host "Step 3: Cloning additional repos..." -ForegroundColor Cyan
     foreach ($repo in $additionalRepos) {
         $path = Try-CloneRepo $repo $TempBaseFolder
         if ($null -ne $path) {
             $clonedPaths += $path
         }
     }
-    Write-Host ""
 }
 
 # Add seed path last (so it installs last and wins conflicts)
 $clonedPaths += $seedPath
+Write-Host ""
 
 # Step 4: Install from bottom to top
-Write-Host "Step 4: Installing skills (bottom to top)..." -ForegroundColor Cyan
-Write-Host "  Order: $($clonedPaths -join ' -> ')"
-Write-Host ""
+Write-Host "Installing..." -ForegroundColor Cyan
 
 $installArgs = @{}
 $installArgs['RepoPath'] = $RepoPath
 if (![string]::IsNullOrWhiteSpace($Collection)) { $installArgs['Collection'] = $Collection }
 if ($Competency.Count -gt 0) { $installArgs['Competency'] = $Competency }
 
-Write-Host "DEBUG: installArgs.RepoPath = '$($installArgs['RepoPath'])'" -ForegroundColor Magenta
-
 foreach ($clonePath in $clonedPaths) {
     $repoName = Split-Path -Leaf $clonePath
-    Write-Host "Installing from: $repoName" -ForegroundColor Cyan
     # Only first install can clean (if --Clean), subsequent ones never clean
     $cleanThis = $Clean -and ($clonePath -eq $clonedPaths[0])
     Install-FromClone $clonePath $installArgs $cleanThis $Platform
-    Write-Host ""
 }
 
 # Step 5: Final registry update for all installed powers
-Write-Host "Step 5: Updating Kiro Powers registry..." -ForegroundColor Cyan
 $powersScript = Join-Path $seedPath ".olaf\tools\install-powers.ps1"
 if (Test-Path -LiteralPath $powersScript) {
     try {
@@ -217,9 +197,7 @@ if (Test-Path -LiteralPath $powersScript) {
     } catch {
         Write-Host "  WARN: Registry update failed: $_" -ForegroundColor Yellow
     }
-} else {
-    Write-Host "  No powers script found" -ForegroundColor Gray
 }
 Write-Host ""
 
-Write-Host "=== Done ===" -ForegroundColor Green
+Write-Host "=== Setup Complete ===" -ForegroundColor Green

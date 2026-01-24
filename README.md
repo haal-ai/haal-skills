@@ -1,6 +1,6 @@
-# HAAL Skills
+# HAAL Skills & Powers
 
-HAAL using Anthropic skills format - Core skill definitions and implementations using the Anthropic Agent Skills format.
+AI agent skills and powers for **Windsurf**, **Claude**, **GitHub Copilot**, and **Kiro**.
 
 ## 🔗 HAAL AI Organization
 
@@ -8,41 +8,63 @@ This repository is part of the [HAAL AI](../) organization. See the [main README
 
 ### Related Repositories
 
-- **[`haal-ide`](../haal-ide)** - OLAF  based HAAL (now deprecated in favor of Skills)
+- **[`haal-ide`](../haal-ide)** - OLAF based HAAL (now deprecated in favor of Skills)
 - **[`haal-skills-agentic-aws`](../haal-skills-agentic-aws)** - using AWS Strands based Agents with HAAL Skills
 
-## 🧩 What are Agent Skills?
+## 🧩 What's Included?
 
-[Agent Skills](https://agentskills.io) are a simple, open format for giving agents new capabilities and expertise. Skills are folders of instructions, scripts, and resources that agents can discover and use to perform better at specific tasks.
-
-## 📋 Features
-
-- Core skill definitions following Anthropic's Agent Skills format
-- HAAL-specific skill templates and examples
-- Install scripts to deploy skills to supported agent platforms
-- Standardized skill structure for consistency
+- **Skills** - AI agent prompts following the [Agent Skills](https://agentskills.io) format
+- **Powers** - Kiro-specific capabilities with steering files and documentation
+- **Tools** - Helper scripts for installation and management
 
 ## 🚀 Quick Start
 
-```bash
-# Clone the skills repository
-git clone https://github.com/haal-ai/haal-skills.git
-cd haal-skills
+Navigate to your project folder, then run:
 
-# Browse skills
-ls skills/
+### Windows (PowerShell)
 
-# Install a collection of skills to a platform (example: "basic" to Kiro)
-# Options: --platform all|kiro|claude|windsurf|github
-bash .olaf/tools/setup-haal-skills.sh --collection basic --platform kiro --clean
+```powershell
+irm https://haal-ai.github.io/haal-skills/setup-haal.ps1 | iex
 ```
 
-## 📚 Documentation (GitHub Pages)
+### macOS / Linux
 
-This repo publishes skill documentation (descriptions + tutorials) as a GitHub Pages site.
+```bash
+curl -fsSL https://haal-ai.github.io/haal-skills/setup-haal.sh | bash
+```
 
-- Each skill keeps its docs in `/<skill-id>/docs/description.md` and `/<skill-id>/docs/tutorial.md`.
-- The site is generated during the Pages build by copying those files into a single `docs/skills/<skill-id>/...` structure.
+### Options
+
+```bash
+# Install a specific collection
+bash setup-haal.sh --collection basic
+
+# Install to a specific platform only
+bash setup-haal.sh --platform kiro
+
+# Clean install (remove existing skills first)
+bash setup-haal.sh --clean
+```
+
+See [Installer Documentation](docs/installer.md) for all options.
+
+## 📁 Repository Structure
+
+```
+├── skills/           # AI agent skill definitions
+├── powers/           # Kiro powers with steering files
+├── competencies/     # Skill groupings (JSON manifests)
+├── docs/             # Documentation (MkDocs source)
+├── .olaf/
+│   ├── tools/        # Installation scripts
+│   ├── data/         # Knowledge base and context
+│   └── work/         # Working files
+└── collection-manifest.json
+```
+
+## 📚 Documentation
+
+This repo publishes documentation as a GitHub Pages site.
 
 ### Local preview
 

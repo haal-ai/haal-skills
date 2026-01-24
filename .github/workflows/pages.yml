@@ -38,6 +38,11 @@ jobs:
       - name: Build site
         run: mkdocs build --site-dir site
 
+      - name: Add install scripts to site
+        run: |
+          cp .olaf/tools/setup-haal.ps1 site/setup-haal.ps1
+          cp .olaf/tools/setup-haal.sh site/setup-haal.sh
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
