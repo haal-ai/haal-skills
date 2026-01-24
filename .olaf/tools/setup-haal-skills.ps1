@@ -111,10 +111,10 @@ function Install-FromClone([string]$ClonePath, [hashtable]$InstallArgs, [bool]$C
     
     # Build args for install script
     $args = @{ ClonePath = $ClonePath }
-    if ($InstallArgs.ContainsKey('RepoPath') -and $InstallArgs['RepoPath']) { 
+    if ($InstallArgs.ContainsKey('RepoPath') -and ![string]::IsNullOrWhiteSpace($InstallArgs['RepoPath'])) { 
         $args['RepoPath'] = $InstallArgs['RepoPath'] 
     }
-    if ($InstallArgs.ContainsKey('Collection') -and $InstallArgs['Collection']) { 
+    if ($InstallArgs.ContainsKey('Collection') -and ![string]::IsNullOrWhiteSpace($InstallArgs['Collection'])) { 
         $args['Collection'] = $InstallArgs['Collection'] 
     }
     if ($InstallArgs.ContainsKey('Competency') -and $InstallArgs['Competency'] -and $InstallArgs['Competency'].Count -gt 0) { 
