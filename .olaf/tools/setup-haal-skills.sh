@@ -17,7 +17,8 @@ else
     TEMP_BASE_FOLDER="${TMPDIR:-/tmp}/haal-skills-repos"
 fi
 
-REPO_PATH=""
+# Default to current directory if not specified
+REPO_PATH="$(pwd)"
 SEED=""
 COMPETENCIES=()
 COLLECTION=""
@@ -237,9 +238,7 @@ echo "  Order: ${cloned_paths[*]}"
 echo ""
 
 install_args=()
-if [[ -n "$REPO_PATH" ]]; then
-    install_args+=(--repo-path "$REPO_PATH")
-fi
+install_args+=(--repo-path "$REPO_PATH")
 if [[ -n "$COLLECTION" ]]; then
     install_args+=(--collection "$COLLECTION")
 fi

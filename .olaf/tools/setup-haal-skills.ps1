@@ -18,6 +18,11 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# Default RepoPath to current directory if not specified
+if ([string]::IsNullOrWhiteSpace($RepoPath)) {
+    $RepoPath = (Get-Location).Path
+}
+
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $TempBaseFolder = Join-Path $env:TEMP "haal-skills-repos"
 
@@ -186,7 +191,7 @@ Write-Host "  Order: $($clonedPaths -join ' -> ')"
 Write-Host ""
 
 $installArgs = @{}
-if (![string]::IsNullOrWhiteSpace($RepoPath)) { $installArgs['RepoPath'] = $RepoPath }
+$installArgs['RepoPath'] = $RepoPath
 if (![string]::IsNullOrWhiteSpace($Collection)) { $installArgs['Collection'] = $Collection }
 if ($Competency.Count -gt 0) { $installArgs['Competency'] = $Competency }
 
