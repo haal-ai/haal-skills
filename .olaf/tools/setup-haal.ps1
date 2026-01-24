@@ -14,8 +14,6 @@ param(
     [string]$Platform = "all"  # Which platform(s) to install to
 )
 
-
-Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 # Default RepoPath to current directory if not specified
@@ -23,7 +21,6 @@ if ([string]::IsNullOrWhiteSpace($RepoPath)) {
     $RepoPath = (Get-Location).Path
 }
 
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $TempBaseFolder = Join-Path $env:TEMP "haal-skills-repos"
 
 function Clean-Folder([string]$Path) {
