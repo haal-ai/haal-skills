@@ -64,7 +64,6 @@ function Sync-Folder([string]$SourceBase, [string]$SrcRelFolder, [string]$DestBa
     $sourcePath = Join-Path $SourceBase $SrcRelFolder
     
     if (!(Test-Path -LiteralPath $sourcePath)) {
-        Write-Host "  SKIP: $SrcRelFolder (not found)" -ForegroundColor Yellow
         return
     }
     
@@ -98,24 +97,25 @@ function Sync-Folder([string]$SourceBase, [string]$SrcRelFolder, [string]$DestBa
         $copied++
     }
     
-    Write-Host "  $DestRelFolder : $copied copied, $skipped skipped" -ForegroundColor Green
+    Write-Host "      $DestRelFolder : $copied copied, $skipped skipped" -ForegroundColor Gray
 }
 
 function Prune-Files([string[]]$Files, [string]$DestBase) {
+    $pruned = 0
     foreach ($file in $Files) {
         $path = Join-Path $DestBase $file
         if (Test-Path -LiteralPath $path) {
             Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction SilentlyContinue
-            Write-Host "  Pruned: $file" -ForegroundColor Gray
+            $pruned++
         }
     }
+    return $pruned
 }
 
 function Update-GitExclude([string]$DestBase) {
     $gitDir = Join-Path $DestBase ".git"
     if (!(Test-Path -LiteralPath $gitDir)) {
-        Write-Host "  SKIP: Not a git repo" -ForegroundColor Yellow
-        return
+        return 0
     }
     
     $excludeFile = Join-Path $DestBase ".git\info\exclude"
@@ -141,31 +141,23 @@ function Update-GitExclude([string]$DestBase) {
         foreach ($ex in $toAdd) {
             Add-Content -LiteralPath $excludeFile -Value $ex -ErrorAction SilentlyContinue
         }
-        Write-Host "  Added $($toAdd.Count) git exclusions" -ForegroundColor Green
-    } else {
-        Write-Host "  Git exclusions already set" -ForegroundColor Gray
     }
+    return $toAdd.Count
 }
 
 # === Main ===
-
-Write-Host "=== OLAF File Sync ===" -ForegroundColor Cyan
 
 # Resolve paths to absolute
 if (![System.IO.Path]::IsPathRooted($SourcePath)) {
     $SourcePath = (Resolve-Path -LiteralPath $SourcePath -ErrorAction SilentlyContinue).Path
     if (!$SourcePath) {
-        Write-Host "ERROR: Cannot resolve source path" -ForegroundColor Red
+        Write-Host "      ERROR: Cannot resolve source path" -ForegroundColor Red
         exit 1
     }
 }
 
-Write-Host "Source: $SourcePath"
-Write-Host "Destination: $DestPath"
-Write-Host ""
-
 if (!(Test-Path -LiteralPath $SourcePath)) {
-    Write-Host "ERROR: Source path not found" -ForegroundColor Red
+    Write-Host "      ERROR: Source path not found" -ForegroundColor Red
     exit 1
 }
 
@@ -179,20 +171,16 @@ if ($folders.Count -eq 0) {
     $folders = $DefaultFolders
 }
 
-Write-Host "Folders to sync: $($folders -join ', ')" -ForegroundColor Gray
-
-# Step 1: Prune files
-Write-Host "Step 1: Pruning files..." -ForegroundColor Cyan
+# Prune files
 $pruneCount = $pruneFiles.Count
 if ($pruneCount -gt 0) {
-    Prune-Files $pruneFiles $DestPath
-} else {
-    Write-Host "  No files to prune"
+    $pruned = Prune-Files $pruneFiles $DestPath
+    if ($pruned -gt 0) {
+        Write-Host "      Pruned $pruned files" -ForegroundColor Gray
+    }
 }
-Write-Host ""
 
-# Step 2: Sync folders
-Write-Host "Step 2: Syncing folders..." -ForegroundColor Cyan
+# Sync folders
 foreach ($folder in $folders) {
     $relFolder = $folder
     
@@ -206,7 +194,6 @@ foreach ($folder in $folders) {
             # Skip the .olaf part, get subfolders
             $relFolder = ($parts[($olafIdx+1)..($parts.Length-1)]) -join '\'
         } else {
-            Write-Host "  SKIP: Cannot parse path $folder" -ForegroundColor Yellow
             continue
         }
     }
@@ -215,11 +202,9 @@ foreach ($folder in $folders) {
     $destRelFolder = ".olaf\$relFolder"
     Sync-Folder $SourcePath $relFolder $DestPath $destRelFolder $pruneFiles $forceFiles
 }
-Write-Host ""
 
-# Step 3: Update git exclude
-Write-Host "Step 3: Updating git exclude..." -ForegroundColor Cyan
-Update-GitExclude $DestPath
-Write-Host ""
-
-Write-Host "=== Sync Complete ===" -ForegroundColor Green
+# Update git exclude
+$gitAdded = Update-GitExclude $DestPath
+if ($gitAdded -gt 0) {
+    Write-Host "      Git exclusions: $gitAdded added" -ForegroundColor Gray
+}

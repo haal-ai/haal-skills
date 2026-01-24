@@ -83,13 +83,11 @@ function Get-SkillsFromCompetencies([string[]]$CompetencyNames, [string]$ClonePa
         $manifestPath = Join-Path $competenciesPath "$comp.json"
         $manifest = Read-JsonFile $manifestPath
         if ($null -eq $manifest) {
-            Write-Host "  SKIP: Competency '$comp' not found" -ForegroundColor Yellow
             continue
         }
         
         if ($manifest.skills) {
             $skills += $manifest.skills
-            Write-Host "  OK: Competency '$comp' ($($manifest.skills.Count) skills)" -ForegroundColor Green
         }
     }
     return $skills | Select-Object -Unique
@@ -99,18 +97,13 @@ function Get-CompetenciesFromCollection([string]$CollectionName, [string]$CloneP
     $manifestPath = Join-Path $ClonePath "collection-manifest.json"
     $manifest = Read-JsonFile $manifestPath
     if ($null -eq $manifest) {
-        Write-Host "  SKIP: collection-manifest.json not found" -ForegroundColor Yellow
         return @()
     }
     
     if ($manifest.PSObject.Properties.Name -contains $CollectionName) {
-        $competencies = $manifest.$CollectionName
-        Write-Host "  OK: Collection '$CollectionName' ($($competencies.Count) competencies)" -ForegroundColor Green
-        return $competencies
-    } else {
-        Write-Host "  SKIP: Collection '$CollectionName' not found" -ForegroundColor Yellow
-        return @()
+        return $manifest.$CollectionName
     }
+    return @()
 }
 
 function Get-PruneList([string]$ClonePath) {
@@ -157,7 +150,6 @@ function Prune-Skills([string[]]$SkillNames, [string[]]$Destinations) {
             $skillPath = Join-Path $dest $skill
             if (Test-Path -LiteralPath $skillPath) {
                 Remove-Item -LiteralPath $skillPath -Recurse -Force -ErrorAction SilentlyContinue
-                Write-Host "  Pruned: $skill" -ForegroundColor Gray
             }
         }
     }
@@ -167,19 +159,15 @@ function Clean-SkillDestinations([string[]]$Destinations) {
     foreach ($dest in $Destinations) {
         if (Test-Path -LiteralPath $dest) {
             $skillFolders = Get-ChildItem -LiteralPath $dest -Directory -ErrorAction SilentlyContinue
-            $count = 0
             foreach ($folder in $skillFolders) {
                 Remove-Item -LiteralPath $folder.FullName -Recurse -Force -ErrorAction SilentlyContinue
-                $count++
             }
-            Write-Host "  Cleaned $count skills from: $dest" -ForegroundColor Gray
         }
     }
 }
 
 function Copy-SkillsToStaging([string[]]$SkillNames, [string]$ClonePath, [string]$StagingPath) {
     $skillsSource = Get-SkillsPath $ClonePath
-    $copied = 0
     
     foreach ($skill in $SkillNames) {
         $sourcePath = Join-Path $skillsSource $skill
@@ -190,19 +178,14 @@ function Copy-SkillsToStaging([string[]]$SkillNames, [string]$ClonePath, [string
                 Remove-Item -LiteralPath $destPath -Recurse -Force -ErrorAction SilentlyContinue
             }
             Copy-Item -LiteralPath $sourcePath -Destination $destPath -Recurse -ErrorAction SilentlyContinue
-            $copied++
-        } else {
-            Write-Host "  SKIP: Skill '$skill' not found" -ForegroundColor Yellow
         }
     }
-    Write-Host "  Staged $copied skills" -ForegroundColor Green
 }
 
 function Deploy-StagingToDestinations([string]$StagingPath, [string[]]$Destinations) {
     $stagedSkills = Get-ChildItem -LiteralPath $StagingPath -Directory -ErrorAction SilentlyContinue
     
     if ($null -eq $stagedSkills -or $stagedSkills.Count -eq 0) {
-        Write-Host "  WARN: No skills to deploy" -ForegroundColor Yellow
         return
     }
     
@@ -224,13 +207,15 @@ function Deploy-StagingToDestinations([string]$StagingPath, [string[]]$Destinati
             Copy-Item -LiteralPath $skill.FullName -Destination $destSkillPath -Recurse -ErrorAction SilentlyContinue
         }
         
-        Write-Host "  Deployed $($stagedSkills.Count) skills to: $dest" -ForegroundColor Green
+        Write-Host "    $($stagedSkills.Count) skills -> $dest" -ForegroundColor Gray
     }
 }
 
 # === Main execution ===
 
+Write-Host ""
 Write-Host "=== HAAL Skills Install ===" -ForegroundColor Cyan
+Write-Host ""
 
 # Validate clone path
 if (!(Test-Path -LiteralPath $ClonePath)) {
@@ -240,34 +225,34 @@ if (!(Test-Path -LiteralPath $ClonePath)) {
 
 $repoRoot = Resolve-RepoRoot $RepoPath
 
-Write-Host "Clone path: $ClonePath"
-Write-Host "Repo: $repoRoot"
-Write-Host "Collection: $(if ($Collection) { $Collection } else { '(none)' })"
-Write-Host "Competencies: $(if ($Competency.Count -gt 0) { $Competency -join ', ' } else { '(none)' })"
-Write-Host "Mode: $(if ($Clean) { 'Clean install' } else { 'Update only' })"
-Write-Host "Platform: $Platform"
+Write-Host "  Source: $ClonePath"
+Write-Host "  Target: $repoRoot"
+Write-Host "  Collection: $(if ($Collection) { $Collection } else { '(none)' })"
+Write-Host "  Competencies: $(if ($Competency.Count -gt 0) { $Competency -join ', ' } else { '(none)' })"
+Write-Host "  Mode: $(if ($Clean) { 'Clean' } else { 'Update' }), Platform: $Platform"
 Write-Host ""
 
-# Step 0: Clean skill destinations (only if --Clean)
+# Clean skill destinations (only if --Clean)
 if ($Clean) {
-    Write-Host "Step 0: Cleaning skill destinations..." -ForegroundColor Cyan
+    Write-Host "[1/6] Cleaning destinations..." -ForegroundColor Cyan
     Clean-SkillDestinations $SkillDestinations
-    Write-Host ""
+} else {
+    Write-Host "[1/6] Cleaning destinations... skipped" -ForegroundColor Gray
 }
 
-# Step 1: Read prune list and prune skills from destinations
-Write-Host "Step 1: Pruning deprecated skills..." -ForegroundColor Cyan
+# Prune deprecated skills
+Write-Host "[2/6] Pruning deprecated skills..." -ForegroundColor Cyan
 $pruneList = @(Get-PruneList $ClonePath)
 $pruneCount = $pruneList.Count
 if ($pruneCount -gt 0) {
     Prune-Skills $pruneList $SkillDestinations
+    Write-Host "    Pruned $pruneCount skills" -ForegroundColor Gray
 } else {
-    Write-Host "  No skills to prune"
+    Write-Host "    None to prune" -ForegroundColor Gray
 }
-Write-Host ""
 
-# Step 2: Resolve skills to install
-Write-Host "Step 2: Resolving skills..." -ForegroundColor Cyan
+# Resolve skills to install
+Write-Host "[3/6] Resolving skills..." -ForegroundColor Cyan
 $allCompetencies = @()
 
 # From collection
@@ -290,33 +275,25 @@ $allCompCount = $allCompetencies.Count
 if ($allCompCount -gt 0) {
     $skillsToInstall = @(Get-SkillsFromCompetencies $allCompetencies $ClonePath)
 } else {
-    # No selection = all skills
-    Write-Host "  No collection/competency specified, installing all skills"
     $skillsToInstall = @(Get-AllSkills $ClonePath)
 }
 
 $skillCount = $skillsToInstall.Count
-Write-Host "  Skills to install: $skillCount"
-Write-Host ""
+Write-Host "    $skillCount skills to install" -ForegroundColor Gray
 
 if ($skillCount -eq 0) {
     Write-Host "WARN: No skills found to install" -ForegroundColor Yellow
     exit 0
 }
 
-# Step 3: Clean staging and copy selected skills
-Write-Host "Step 3: Staging skills..." -ForegroundColor Cyan
+# Stage and deploy skills
+Write-Host "[4/6] Installing skills..." -ForegroundColor Cyan
 Clean-Folder $TempStagingFolder
 Copy-SkillsToStaging $skillsToInstall $ClonePath $TempStagingFolder
-Write-Host ""
-
-# Step 4: Deploy to all destinations
-Write-Host "Step 4: Deploying skills to destinations..." -ForegroundColor Cyan
 Deploy-StagingToDestinations $TempStagingFolder $SkillDestinations
-Write-Host ""
 
-# Step 5: Copy .olaf folder to global location
-Write-Host "Step 5: Syncing .olaf to global location..." -ForegroundColor Cyan
+# Sync .olaf to global location
+Write-Host "[5/6] Syncing .olaf data..." -ForegroundColor Cyan
 $sourceOlaf = Join-Path $ClonePath ".olaf"
 if (Test-Path -LiteralPath $sourceOlaf) {
     # Ensure destination exists
@@ -347,16 +324,15 @@ if (Test-Path -LiteralPath $sourceOlaf) {
                     $copied++
                 }
             }
-            Write-Host "  .olaf/${folder}: $copied new files" -ForegroundColor Green
+            Write-Host "    .olaf/${folder}: $copied new files" -ForegroundColor Gray
         }
     }
 } else {
-    Write-Host "  SKIP: No .olaf folder in source" -ForegroundColor Yellow
+    Write-Host "    No .olaf folder in source" -ForegroundColor Gray
 }
-Write-Host ""
 
-# Step 6: Install Kiro Powers
-Write-Host "Step 6: Installing Kiro Powers..." -ForegroundColor Cyan
+# Install Kiro Powers
+Write-Host "[6/6] Installing Kiro Powers..." -ForegroundColor Cyan
 $powersScript = Join-Path $ClonePath ".olaf\tools\install-powers.ps1"
 if (Test-Path -LiteralPath $powersScript) {
     try {
@@ -370,30 +346,26 @@ if (Test-Path -LiteralPath $powersScript) {
             $powersArgs['Competency'] = $Competency
         }
         & $powersScript @powersArgs
-        Write-Host "  OK: Kiro Powers installed" -ForegroundColor Green
     } catch {
-        Write-Host "  WARN: Powers install failed: $_" -ForegroundColor Yellow
+        Write-Host "    WARN: Powers install failed: $_" -ForegroundColor Yellow
     }
 } else {
-    Write-Host "  SKIP: Powers install script not found" -ForegroundColor Yellow
+    Write-Host "    No powers to install" -ForegroundColor Gray
 }
-Write-Host ""
 
-# Step 7: Sync to repo if RepoPath specified
+# Sync to repo if RepoPath specified
 if (![string]::IsNullOrWhiteSpace($RepoPath)) {
-    Write-Host "Step 7: Syncing to repo..." -ForegroundColor Cyan
+    Write-Host "  Syncing to repo..." -ForegroundColor Cyan
     $syncScript = Join-Path $ClonePath ".olaf\tools\sync-olaf-files.ps1"
     if (Test-Path -LiteralPath $syncScript) {
         try {
             & $syncScript -SourcePath $OlafDestination -DestPath $repoRoot
-            Write-Host "  OK: .olaf files synced to repo" -ForegroundColor Green
         } catch {
-            Write-Host "  WARN: Sync script failed: $_" -ForegroundColor Yellow
+            Write-Host "    WARN: Sync failed: $_" -ForegroundColor Yellow
         }
-    } else {
-        Write-Host "  SKIP: Sync script not found" -ForegroundColor Yellow
     }
-    Write-Host ""
 }
 
+Write-Host ""
 Write-Host "=== Install Complete ===" -ForegroundColor Green
+Write-Host ""
