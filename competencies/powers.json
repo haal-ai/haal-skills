@@ -1,0 +1,8 @@
+{
+  "name": "powers-config",
+  "description": "Configuration for Kiro Powers installation",
+  "keep_from_registry": [
+    "power-builder",
+    "strands"
+  ]
+}

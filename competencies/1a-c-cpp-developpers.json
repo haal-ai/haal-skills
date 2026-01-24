@@ -1,8 +1,12 @@
 {
   "name": "1a-c-cpp-developpers",
-  "description": "hall enterprise tools and frameworks expertise",
+  "description": "Haal enterprise tools and frameworks expertise for C/C++ developers",
   "skills": [
     "create-otf-variable",
     "get-bms-expertise"
+  ],
+  "powers": [
+    "bms-expertise",
+    "create-otf-variable"
   ]
 }

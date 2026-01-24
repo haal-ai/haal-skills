@@ -405,9 +405,27 @@ echo "Step 5: Syncing .olaf to global location..."
 copy_olaf_folder "$CLONE_PATH"
 echo ""
 
-# Step 6: Sync to repo if RepoPath specified
+# Step 6: Install Kiro Powers
+echo "Step 6: Installing Kiro Powers..."
+powers_script="$CLONE_PATH/.olaf/tools/install-powers.sh"
+if [[ -f "$powers_script" ]]; then
+    chmod +x "$powers_script" 2>/dev/null || true
+    powers_args=("$CLONE_PATH")
+    if [[ -n "$COLLECTION" ]]; then
+        powers_args+=("--collection" "$COLLECTION")
+    fi
+    for comp in "${COMPETENCIES[@]}"; do
+        powers_args+=("--competency" "$comp")
+    done
+    "$powers_script" "${powers_args[@]}" && echo "  OK: Kiro Powers installed" || echo "  WARN: Powers install failed"
+else
+    echo "  SKIP: Powers install script not found"
+fi
+echo ""
+
+# Step 7: Sync to repo if RepoPath specified
 if [[ -n "$REPO_PATH" ]]; then
-    echo "Step 6: Syncing to repo..."
+    echo "Step 7: Syncing to repo..."
     sync_script="$CLONE_PATH/.olaf/tools/sync-olaf-files.sh"
     if [[ -f "$sync_script" ]]; then
         chmod +x "$sync_script" 2>/dev/null || true

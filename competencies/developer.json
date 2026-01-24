@@ -22,5 +22,10 @@
     "review-github-pr",
     "run-implementation-plan",
     "scaffold-quarkus-microservice"
+  ],
+  "powers": [
+    "code-in-go",
+    "code-in-rust",
+    "code-microservice-in-quarkus"
   ]
 }

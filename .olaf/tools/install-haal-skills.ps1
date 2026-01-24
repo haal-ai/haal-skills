@@ -355,9 +355,33 @@ if (Test-Path -LiteralPath $sourceOlaf) {
 }
 Write-Host ""
 
-# Step 6: Sync to repo if RepoPath specified
+# Step 6: Install Kiro Powers
+Write-Host "Step 6: Installing Kiro Powers..." -ForegroundColor Cyan
+$powersScript = Join-Path $ClonePath ".olaf\tools\install-powers.ps1"
+if (Test-Path -LiteralPath $powersScript) {
+    try {
+        $powersArgs = @{
+            SourcePath = $ClonePath
+        }
+        if ($Collection) {
+            $powersArgs['Collection'] = $Collection
+        }
+        if ($Competency.Count -gt 0) {
+            $powersArgs['Competency'] = $Competency
+        }
+        & $powersScript @powersArgs
+        Write-Host "  OK: Kiro Powers installed" -ForegroundColor Green
+    } catch {
+        Write-Host "  WARN: Powers install failed: $_" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  SKIP: Powers install script not found" -ForegroundColor Yellow
+}
+Write-Host ""
+
+# Step 7: Sync to repo if RepoPath specified
 if (![string]::IsNullOrWhiteSpace($RepoPath)) {
-    Write-Host "Step 6: Syncing to repo..." -ForegroundColor Cyan
+    Write-Host "Step 7: Syncing to repo..." -ForegroundColor Cyan
     $syncScript = Join-Path $ClonePath ".olaf\tools\sync-olaf-files.ps1"
     if (Test-Path -LiteralPath $syncScript) {
         try {
