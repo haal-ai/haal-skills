@@ -19,6 +19,17 @@ fi
 
 # Default to current directory if not specified
 REPO_PATH="$(pwd)"
+
+# If we're inside .olaf/tools, go up to repo root
+if [[ "$REPO_PATH" == */.olaf/tools ]] || [[ "$REPO_PATH" == *\.olaf\tools ]]; then
+    REPO_PATH="$(cd "$REPO_PATH/../.." && pwd)"
+fi
+
+# Try to find git root
+if git_root=$(git -C "$REPO_PATH" rev-parse --show-toplevel 2>/dev/null); then
+    REPO_PATH="$git_root"
+fi
+
 SEED=""
 COMPETENCIES=()
 COLLECTION=""

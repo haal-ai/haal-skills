@@ -21,6 +21,21 @@ if ([string]::IsNullOrWhiteSpace($RepoPath)) {
     $RepoPath = (Get-Location).Path
 }
 
+# If we're inside .olaf/tools, go up to repo root
+if ($RepoPath -match '[/\\]\.olaf[/\\]tools$') {
+    $RepoPath = Split-Path -Parent (Split-Path -Parent $RepoPath)
+}
+
+# Try to find git root
+try {
+    Push-Location $RepoPath
+    $gitRoot = (& git rev-parse --show-toplevel 2>$null)
+    if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($gitRoot)) {
+        $RepoPath = $gitRoot.Trim() -replace '/', '\'
+    }
+    Pop-Location
+} catch { }
+
 $TempBaseFolder = Join-Path $env:TEMP "haal-skills-repos"
 
 function Clean-Folder([string]$Path) {

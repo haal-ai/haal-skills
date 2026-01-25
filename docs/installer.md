@@ -35,8 +35,15 @@ curl -fsSL https://haal-ai.github.io/haal-skills/setup-haal.sh | bash
 That's it! The installer will set up everything in your current folder.
 
 To update later, rerun from your `.olaf/tools/` folder:
+
+**Windows:**
 ```powershell
 .\.olaf\tools\setup-haal.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash .olaf/tools/setup-haal.sh
 ```
 
 ## Options
