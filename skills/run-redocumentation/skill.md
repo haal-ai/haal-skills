@@ -62,7 +62,7 @@ Execute automated execution with progress tracking.
 4. **Value Generation:** Each step must contribute NEW staging through direct implementation examination
 
 **Exception Handling - DFD Analysis:**
-- **DFD Competency Exception:** The `dfd/prompts/dfd_main_coordinator.md` competency is **EXEMPT** from fresh assessment protocol
+- **DFD Skill Exception:** The `skills/generate-dfd-from-code/skill.md` skill is **EXEMPT** from fresh assessment protocol
 - **DFD Internal Progression:** DFD uses its own multi-phase system (Phase A→B→C→D) that MUST read its own previous phases
 - **DFD Execution:** Execute DFD as complete self-contained process, then use DFD results for subsequent steps
 - **Step 4.2 Integration:** Use completed DFD artifacts combined with fresh code analysis for enhanced functional specifications
