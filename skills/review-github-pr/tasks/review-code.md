@@ -12,8 +12,6 @@ conditions: ["code_files_found"]
 - `context.code_files_found`: true (condition requirement)
 - `context.code_file_paths`: Array of code file paths
 - `context.pr_number`: PR number for diff fetching
-- `context.timestamp`: Session timestamp
-- `context.pr_diff_file`: Path to diff file
 - `context.code_file_count`: Number of code files detected
 - `context.pr_code_files_file`: Path to code files list file
 **Required Files**: Code files list file (must exist)
@@ -34,8 +32,7 @@ conditions: ["code_files_found"]
    ```bash
    python skills/review-github-pr/tools/gh-pr-analyzer.py \
      --pr [pr_number] \
-     --timestamp [timestamp] \
-     --files-from .olaf/work/staging/pr-reviews/pr-[number]-code-files-[timestamp].txt
+       --files-from [pr_code_files_file]
    ```
 
 2. **Execute Filtered Diff Fetch**:
@@ -43,12 +40,15 @@ conditions: ["code_files_found"]
    - **MANDATORY**: Wait for complete execution (may take 30 seconds for merged PRs using git fallback)
    - Script reads code files list from file
    - Script fetches diff (uses `gh pr diff` or `git show` fallback for merged PRs)
-   - Script updates existing `pr-[number]-diff-[timestamp].txt` file
+   - Script prints the exact output file paths. Capture them from stdout:
+     - `📄 PR Info: ...`
+     - `📄 Diff: ...`
    - Verify script completes successfully before proceeding
-   - Now contains ONLY code file diffs (not documentation)
+   - Diff contains ONLY code file diffs (not documentation)
 
 3. **Verify Diff File Updated**:
-   - Confirm diff file now contains content
+   - Set `context.pr_info_file` and `context.pr_diff_file` from the script output
+   - Confirm the diff file now contains content
    - Read filtered diff content for review
 
 **Step 2: Execute Code Review**

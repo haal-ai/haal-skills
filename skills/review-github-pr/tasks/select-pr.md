@@ -9,7 +9,7 @@ conditions: []
 
 ## Input Context
 **Required Context Variables**: 
-- `timestamp`: Timestamp (if available from environment, optional)
+None
 **Required Files**: None
 **Required Tools**: User interaction
 

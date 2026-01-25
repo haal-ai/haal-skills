@@ -10,7 +10,6 @@ conditions: []
 ## Input Context
 **Required State Variables**: 
 - `context.pr_number`: PR number for file identification
-- `context.timestamp`: Timestamp for file naming pattern
 - `context.pr_info_file`: Path to PR info JSON file
 - `context.pr_diff_file`: Path to PR diff text file
 **Required Files**: Temporary analysis files
@@ -24,17 +23,17 @@ conditions: []
 **CRITICAL**: This cleanup happens BEFORE output generation to allow user to restart with clean state
 
 1. **Identify Files to Remove (EXTRACTION FILES ONLY)**:
-   - PR info file: `pr-[number]-info-[timestamp].json`
-   - PR diff file: `pr-[number]-diff-[timestamp].txt`
-   - Code files list: `pr-[number]-code-files-[timestamp].txt`
+   - PR info file: `pr-[number]-info-*.json`
+   - PR diff file: `pr-[number]-diff-*.txt`
+   - Code files list: `pr-[number]-code-files-*.txt`
    - **NEVER REMOVE**: Review reports (`pr-review-*.md`), environment files (`olaf-env.txt`)
 
 2. **Execute Cleanup Commands**:
    ```powershell
    # Remove ONLY extraction files (JSON, TXT diffs, code lists)
-   Remove-Item ".olaf/work/staging/pr-reviews/pr-[pr_number]-info-*[timestamp]*.json" -Force
-   Remove-Item ".olaf/work/staging/pr-reviews/pr-[pr_number]-diff-*[timestamp]*.txt" -Force
-   Remove-Item ".olaf/work/staging/pr-reviews/pr-[pr_number]-code-files-*[timestamp]*.txt" -Force
+   Remove-Item ".olaf/work/staging/pr-reviews/pr-[pr_number]-info-*.json" -Force -ErrorAction SilentlyContinue
+   Remove-Item ".olaf/work/staging/pr-reviews/pr-[pr_number]-diff-*.txt" -Force -ErrorAction SilentlyContinue
+   Remove-Item ".olaf/work/staging/pr-reviews/pr-[pr_number]-code-files-*.txt" -Force -ErrorAction SilentlyContinue
    ```
 
 3. **Verify Cleanup**:

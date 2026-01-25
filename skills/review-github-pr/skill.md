@@ -19,17 +19,17 @@ metadata:
 
 **STARTUP REQUIREMENT**:
 Task Chain
-Task 1: Select which Pull Request to analyze
-Task 2: Get PR Data from GitHub (metadata and Diff)
-Task 3: Load PR Metadata for analysis
-Task 4: Get analyzer for metadata and do the analysis
-Task 5: Get Diff data for potential analysis
-Task 6: Detect if code files are in the diff
-Task 7: Do code analysis (if code files are present) [CONDITIONAL]
-Task 8: Review Documentation [CONDITIONAL]
-Task 9: Cleanup temporary extraction files
-Task 10: Ask user what output he/she/it wants
-Task 11: Generate Final Report
+- Select which Pull Request to analyze
+- Get PR Data from GitHub (metadata and Diff)
+- Load PR Metadata for analysis
+- Get analyzer for metadata and do the analysis
+- Get Diff data for potential analysis
+- Detect if code files are in the diff
+- Do code analysis (if code files are present) [CONDITIONAL]
+- Review Documentation [CONDITIONAL]
+- Cleanup temporary extraction files
+- Ask user what output he/she/it wants
+- Generate Final Report
 
 ## Task Chain Definition
 
@@ -106,9 +106,10 @@ task_chain:
 
 ## State Management
 
+If you need the current date/time, prefer the available time tools; otherwise fall back to a shell command.
+
 ### Simple Context Passing
 Context is passed between tasks using simple variables:
-- `timestamp`: Session timestamp (YYYYMMDD-HHMMSS)
 - `pr_number`: Selected PR number
 - `pr_info_file`: Path to PR metadata JSON
 - `pr_diff_file`: Path to diff text file  
@@ -137,7 +138,6 @@ For each task in task_chain:
 **EXECUTING TASK: [task_name]**
 
 **Context Available**:
-- Session Timestamp: [timestamp]
 - Previous Results: [available variables]
 
 **Task-Specific Instructions**:

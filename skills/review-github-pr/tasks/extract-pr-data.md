@@ -9,7 +9,6 @@ conditions: []
 
 ## Input Context
 **Required Context Variables**: 
-- `timestamp`: Timestamp for file naming
 - `pr_number`: PR number to extract (if specific mode)
 - `pr_selection_mode`: "specific" or "latest"
 **Required Files**: None
@@ -23,11 +22,11 @@ conditions: []
 1. **Build Command Based on Selection Mode**:
    - For specific PR (METADATA ONLY - optimized): 
      ```bash
-     python skills/review-github-pr/tools/gh-pr-analyzer.py --pr [pr_number] --timestamp [timestamp] --metadata-only
+       python skills/review-github-pr/tools/gh-pr-analyzer.py --pr [pr_number] --metadata-only
      ```
    - For latest open (METADATA ONLY - optimized):
      ```bash
-     python skills/review-github-pr/tools/gh-pr-analyzer.py --latest-open --timestamp [timestamp] --metadata-only
+       python skills/review-github-pr/tools/gh-pr-analyzer.py --latest-open --metadata-only
      ```
 
 2. **Execute Script and Wait for Completion**:
@@ -38,17 +37,17 @@ conditions: []
    - Do NOT proceed until script finishes and files are created
 
 3. **Locate Created Files**:
-   - Script creates 3 files with timestamp:
-     - PR Info: `.olaf/work/staging/pr-reviews/pr-[number]-info-[timestamp].json`
-     - Code Files List: `.olaf/work/staging/pr-reviews/pr-[number]-code-files-[timestamp].txt` (list of code files, empty if none)
-     - Diff file: `.olaf/work/staging/pr-reviews/pr-[number]-diff-[timestamp].txt` (EMPTY in metadata-only mode)
-   - Files are newly created with current timestamp
+    - The script prints the exact file paths to use. Capture them from stdout:
+       - `📝 Code Files List: ...` (metadata-only mode)
+       - `📄 PR Info: ...`
+       - `📄 Diff: ...`
+    - Do NOT construct filenames manually; the script generates a timestamp itself.
 
 4. **Handle Script Failure**:
    - If script fails: STOP execution, report error
    - Do NOT use alternative methods or fallbacks
 
-**Note**: Code files list contains only files with code extensions (.py, .js, .ts, etc.). If empty, no code files in PR. Diff file will be populated later in Task 7 if code files exist.
+**Note**: Code files list contains only files with code extensions (.py, .js, .ts, etc.). If empty, no code files in PR. Diff file will be populated later in the code-review path if code files exist.
 
 ## Output Requirements
 

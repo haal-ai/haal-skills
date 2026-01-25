@@ -12,7 +12,6 @@ conditions: []
 - `context.output_method`: "save" or "display"
 - `context.review_type`: "code" or "documentation"
 - `context.pr_number`: PR number for file naming
-- `context.timestamp`: Timestamp for file naming
 - `context.code_review`: Code review results (if code workflow)
 - `context.doc_review`: Documentation review results (if doc workflow)
 - `context.helper_analysis`: PR metadata and process analysis
@@ -37,7 +36,8 @@ conditions: []
    
    **Option A - Save to File**:
    - Create structured markdown report
-   - Save to: `[staging_dir]pr-reviews/pr-review-[pr_number]-[timestamp].md`
+    - Save to: `[staging_dir]pr-reviews/pr-review-[pr_number]-[timestamp].md`
+       - If `context.timestamp` is not available, generate one using time tools (preferred) or a shell command.
    - Include complete analysis with all details
    - Use GitHub PR review template format
    
