@@ -433,6 +433,14 @@ if [[ -n "$REPO_PATH" ]]; then
     else
         echo "  SKIP: Sync script not found"
     fi
+    
+    # Copy AGENTS.md to repo root if it doesn't exist
+    agents_md_src="$OLAF_DESTINATION/data/AGENTS.md"
+    agents_md_dst="$REPO_ROOT/AGENTS.md"
+    if [[ -f "$agents_md_src" && ! -f "$agents_md_dst" ]]; then
+        cp "$agents_md_src" "$agents_md_dst"
+        echo "  AGENTS.md copied to repo root"
+    fi
     echo ""
 fi
 

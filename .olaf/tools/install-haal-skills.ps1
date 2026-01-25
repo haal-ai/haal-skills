@@ -364,6 +364,14 @@ if (![string]::IsNullOrWhiteSpace($RepoPath)) {
             Write-Host "    WARN: Sync failed: $_" -ForegroundColor Yellow
         }
     }
+    
+    # Copy AGENTS.md to repo root if it doesn't exist
+    $agentsMdSrc = Join-Path $OlafDestination "data\AGENTS.md"
+    $agentsMdDst = Join-Path $repoRoot "AGENTS.md"
+    if ((Test-Path -LiteralPath $agentsMdSrc) -and !(Test-Path -LiteralPath $agentsMdDst)) {
+        Copy-Item -LiteralPath $agentsMdSrc -Destination $agentsMdDst -Force
+        Write-Host "    AGENTS.md copied to repo root" -ForegroundColor Gray
+    }
 }
 
 Write-Host ""
