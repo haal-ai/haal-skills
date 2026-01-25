@@ -18,18 +18,18 @@ metadata:
 - Each task must complete fully before next
 
 **STARTUP REQUIREMENT**:
-Task Chain
-- Select which Pull Request to analyze
-- Get PR Data from GitHub (metadata and Diff)
-- Load PR Metadata for analysis
-- Get analyzer for metadata and do the analysis
-- Get Diff data for potential analysis
-- Detect if code files are in the diff
-- Do code analysis (if code files are present) [CONDITIONAL]
-- Review Documentation [CONDITIONAL]
-- Cleanup temporary extraction files
-- Ask user what output he/she/it wants
-- Generate Final Report
+Numbered Task Chain
+1. Select which Pull Request to analyze
+2. Get PR Data from GitHub (metadata and Diff)
+3. Load PR Metadata for analysis
+4. Get analyzer for metadata and do the analysis
+5. Get Diff data for potential analysis
+6. Detect if code files are in the diff
+7. Do code analysis (if code files are present) [CONDITIONAL]
+8. Review Documentation [CONDITIONAL]
+9. Cleanup temporary extraction files
+10. Ask user what output he/she/it wants
+11. Generate Final Report
 
 ## Task Chain Definition
 
