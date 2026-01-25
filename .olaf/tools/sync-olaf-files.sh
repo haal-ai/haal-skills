@@ -206,10 +206,11 @@ fi
 
 echo "Folders to sync: ${folders[*]}"
 
-# Step 1: Prune files
+# Step 1: Prune files from both destination AND source (to prevent re-copying)
 echo "Step 1: Pruning files..."
 if [[ ${#prune_files_list[@]} -gt 0 ]]; then
     prune_files "$DEST_PATH" "${prune_files_list[@]}"
+    prune_files "$SOURCE_PATH" "${prune_files_list[@]}"
 else
     echo "  No files to prune"
 fi

@@ -176,12 +176,14 @@ if ($folders.Count -eq 0) {
     $folders = $DefaultFolders
 }
 
-# Prune files
+# Prune files from both destination AND source (to prevent re-copying)
 $pruneCount = $pruneFiles.Count
 if ($pruneCount -gt 0) {
-    $pruned = Prune-Files $pruneFiles $DestPath
-    if ($pruned -gt 0) {
-        Write-Host "      Pruned $pruned files" -ForegroundColor Gray
+    $prunedDest = Prune-Files $pruneFiles $DestPath
+    $prunedSrc = Prune-Files $pruneFiles $SourcePath
+    $totalPruned = $prunedDest + $prunedSrc
+    if ($totalPruned -gt 0) {
+        Write-Host "      Pruned $totalPruned files" -ForegroundColor Gray
     }
 }
 
