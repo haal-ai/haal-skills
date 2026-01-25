@@ -1,6 +1,12 @@
 {
   "files_to_prune": [
-    ".olaf/team-delegation.md"
+    ".olaf/team-delegation.md",
+    ".olaf/data/context/context-current.md",
+    ".olaf/data/context/context-default.md",
+    ".olaf/data/context/context-linux-bash.md",
+    ".olaf/data/context/context-macos-zsh.md",
+    ".olaf/data/context/context-windows-powershell.md",
+    ".olaf/data/context/context-olaf-skill-manager.md"
   ],
   "files_to_force_replace": [
     ".windsurf/rules/olaf-bootstrap-skills.md"
