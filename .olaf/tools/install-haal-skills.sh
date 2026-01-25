@@ -427,9 +427,10 @@ echo ""
 if [[ -n "$REPO_PATH" ]]; then
     echo "Step 7: Syncing to repo..."
     sync_script="$CLONE_PATH/.olaf/tools/sync-olaf-files.sh"
+    clone_config="$CLONE_PATH/.olaf/local-file.json"
     if [[ -f "$sync_script" ]]; then
         chmod +x "$sync_script" 2>/dev/null || true
-        "$sync_script" "$OLAF_DESTINATION" "$REPO_ROOT" && echo "  OK: .olaf files synced to repo" || echo "  WARN: Sync script failed"
+        "$sync_script" "$OLAF_DESTINATION" "$REPO_ROOT" "$clone_config" && echo "  OK: .olaf files synced to repo" || echo "  WARN: Sync script failed"
     else
         echo "  SKIP: Sync script not found"
     fi

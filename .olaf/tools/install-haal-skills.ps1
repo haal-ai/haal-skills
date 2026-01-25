@@ -357,9 +357,10 @@ if (Test-Path -LiteralPath $powersScript) {
 if (![string]::IsNullOrWhiteSpace($RepoPath)) {
     Write-Host "  Syncing to repo..." -ForegroundColor Cyan
     $syncScript = Join-Path $ClonePath ".olaf\tools\sync-olaf-files.ps1"
+    $cloneConfig = Join-Path $ClonePath ".olaf\local-file.json"
     if (Test-Path -LiteralPath $syncScript) {
         try {
-            & $syncScript -SourcePath $OlafDestination -DestPath $repoRoot
+            & $syncScript -SourcePath $OlafDestination -DestPath $repoRoot -ConfigFile $cloneConfig
         } catch {
             Write-Host "    WARN: Sync failed: $_" -ForegroundColor Yellow
         }

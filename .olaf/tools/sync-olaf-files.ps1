@@ -3,7 +3,8 @@
 
 param(
     [string]$SourcePath = "",
-    [string]$DestPath = ""
+    [string]$DestPath = "",
+    [string]$ConfigFile = ""  # Optional: path to config file (defaults to source/.olaf/local-file.json)
 )
 
 Set-StrictMode -Version Latest
@@ -22,8 +23,12 @@ if ([string]::IsNullOrWhiteSpace($DestPath)) {
     $DestPath = (Get-Location).Path
 }
 
-# Config file location
-$ConfigPath = Join-Path $SourcePath ".olaf\local-file.json"
+# Config file location (use param if provided, otherwise default)
+if ([string]::IsNullOrWhiteSpace($ConfigFile)) {
+    $ConfigPath = Join-Path $SourcePath ".olaf\local-file.json"
+} else {
+    $ConfigPath = $ConfigFile
+}
 
 # Default folders to sync (relative paths from ~/.olaf)
 $DefaultFolders = @(

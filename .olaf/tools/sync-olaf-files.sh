@@ -6,6 +6,7 @@ set -uo pipefail
 
 SOURCE_PATH="${1:-}"
 DEST_PATH="${2:-}"
+CONFIG_FILE="${3:-}"  # Optional: path to config file
 
 # Determine source (from env var or default to global ~/.olaf)
 if [[ -z "$SOURCE_PATH" ]]; then
@@ -18,6 +19,13 @@ fi
 # Determine destination (current directory or param)
 if [[ -z "$DEST_PATH" ]]; then
     DEST_PATH="$(pwd)"
+fi
+
+# Config file location (use param if provided, otherwise default)
+if [[ -z "$CONFIG_FILE" ]]; then
+    CONFIG_PATH="$SOURCE_PATH/.olaf/local-file.json"
+else
+    CONFIG_PATH="$CONFIG_FILE"
 fi
 
 # Default folders to sync (relative paths from ~/.olaf)
@@ -181,8 +189,7 @@ if [[ ! -d "$SOURCE_PATH" ]]; then
     exit 1
 fi
 
-# Load config
-CONFIG_PATH="$SOURCE_PATH/local-file.json"
+# Load config (CONFIG_PATH already set from parameter or default)
 prune_files_list=()
 while IFS= read -r line; do
     [[ -n "$line" ]] && prune_files_list+=("$line")
