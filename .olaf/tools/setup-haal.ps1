@@ -55,24 +55,31 @@ function Try-CloneRepo([string]$RepoSpec, [string]$DestFolder) {
         Remove-Item -LiteralPath $clonePath -Recurse -Force -ErrorAction SilentlyContinue
     }
     
-    # Clone silently (redirect all output to null)
-    $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", $branch, $repoUrl, $clonePath -Wait -PassThru -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL"
-    
-    if ($process.ExitCode -eq 0 -and (Test-Path -LiteralPath $clonePath)) {
-        Write-Host " OK" -ForegroundColor Green
-        return $clonePath
-    }
-    
-    # Try master if main failed
-    if ($branch -eq "main") {
-        Write-Host " trying master..." -ForegroundColor Yellow -NoNewline
-        $clonePath = Join-Path $DestFolder "${repoName}_master"
-        $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", "master", $repoUrl, $clonePath -Wait -PassThru -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL"
+    # Clone silently using temp files for output
+    $stdOut = [System.IO.Path]::GetTempFileName()
+    $stdErr = [System.IO.Path]::GetTempFileName()
+    try {
+        $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", $branch, $repoUrl, $clonePath -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdOut -RedirectStandardError $stdErr
         
         if ($process.ExitCode -eq 0 -and (Test-Path -LiteralPath $clonePath)) {
             Write-Host " OK" -ForegroundColor Green
             return $clonePath
         }
+        
+        # Try master if main failed
+        if ($branch -eq "main") {
+            Write-Host " trying master..." -ForegroundColor Yellow -NoNewline
+            $clonePath = Join-Path $DestFolder "${repoName}_master"
+            $process = Start-Process -FilePath "git" -ArgumentList "clone", "--depth", "1", "--branch", "master", $repoUrl, $clonePath -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdOut -RedirectStandardError $stdErr
+            
+            if ($process.ExitCode -eq 0 -and (Test-Path -LiteralPath $clonePath)) {
+                Write-Host " OK" -ForegroundColor Green
+                return $clonePath
+            }
+        }
+    } finally {
+        Remove-Item $stdOut -Force -ErrorAction SilentlyContinue
+        Remove-Item $stdErr -Force -ErrorAction SilentlyContinue
     }
     
     Write-Host " SKIP (not available)" -ForegroundColor Yellow
