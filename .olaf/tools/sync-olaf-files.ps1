@@ -42,7 +42,8 @@ $GitExclusions = @(
     "olaf-*/",
     "my-skills-*/",
     ".olaf/work/",
-    ".olaf/data/context/"
+    ".olaf/data/context/",
+    ".agents/"
 )
 
 function Read-Config([string]$Path) {

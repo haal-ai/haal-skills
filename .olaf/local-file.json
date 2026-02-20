@@ -1,7 +1,8 @@
 {
   "files_to_prune": [
     ".olaf/team-delegation.md",
-    ".olaf/data/context"
+    ".olaf/data/context",
+    ".olaf/data/AGENTS.md"
   ],
   "files_to_force_replace": [
     ".windsurf/rules/olaf-bootstrap-skills.md"

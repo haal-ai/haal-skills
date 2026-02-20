@@ -41,6 +41,7 @@ GIT_EXCLUSIONS=(
     "my-skills-*/"
     ".olaf/work/"
     ".olaf/data/context/"
+    ".agents/"
 )
 
 read_json_array() {

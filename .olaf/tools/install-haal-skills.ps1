@@ -5,7 +5,7 @@ param(
     [string[]]$Competency = @(),
     [string]$Collection = "",
     [switch]$Clean,  # If set, delete existing skills first (default: update only)
-    [ValidateSet("all", "kiro", "claude", "windsurf", "github")]
+    [ValidateSet("all", "kiro")]
     [string]$Platform = "all"  # Which platform(s) to install to
 )
 
@@ -16,19 +16,21 @@ $ErrorActionPreference = 'Continue'
 # Fixed temp folder for staging
 $TempStagingFolder = Join-Path $env:TEMP "haal-skills-staging"
 
-# Destination folders for skills
-$AllSkillDestinations = @{
-    "windsurf" = (Join-Path $env:USERPROFILE ".codeium\windsurf\skills")
-    "claude"   = (Join-Path $env:USERPROFILE ".claude\skills")
-    "github"   = (Join-Path $env:USERPROFILE ".github\skills")
+# Global destination folders for skills (user-level)
+$AllGlobalDestinations = @{
     "kiro"     = (Join-Path $env:USERPROFILE ".kiro\skills")
 }
 
-# Select destinations based on platform
+# Repo-level destination (written to target repo, supports Windsurf + GitHub Copilot)
+# Set later once RepoPath is resolved
+
+# Select global destinations based on platform
 if ($Platform -eq "all") {
-    $SkillDestinations = @($AllSkillDestinations.Values)
+    $SkillDestinations = @($AllGlobalDestinations.Values)
+} elseif ($AllGlobalDestinations.ContainsKey($Platform)) {
+    $SkillDestinations = @($AllGlobalDestinations[$Platform])
 } else {
-    $SkillDestinations = @($AllSkillDestinations[$Platform])
+    $SkillDestinations = @()
 }
 
 # Global OLAF folder
@@ -225,6 +227,10 @@ if (!(Test-Path -LiteralPath $ClonePath)) {
 
 $repoRoot = Resolve-RepoRoot $RepoPath
 
+# Add repo-level .agents/skills/ destination (Windsurf + GitHub Copilot)
+$agentsSkillsDest = Join-Path $repoRoot ".agents\skills"
+$SkillDestinations += $agentsSkillsDest
+
 Write-Host "  Source: $ClonePath"
 Write-Host "  Target: $repoRoot"
 Write-Host "  Collection: $(if ($Collection) { $Collection } else { '(none)' })"
@@ -240,8 +246,9 @@ if ($Clean) {
     Write-Host "[1/6] Cleaning destinations... skipped" -ForegroundColor Gray
 }
 
-# Prune deprecated skills
+# Prune deprecated skills + clean our skills from legacy destinations
 Write-Host "[2/6] Pruning deprecated skills..." -ForegroundColor Cyan
+
 $pruneList = @(Get-PruneList $ClonePath)
 $pruneCount = $pruneList.Count
 if ($pruneCount -gt 0) {
@@ -288,6 +295,16 @@ if ($skillCount -eq 0) {
 
 # Stage and deploy skills
 Write-Host "[4/6] Installing skills..." -ForegroundColor Cyan
+
+# Remove our skills from legacy destinations (avoid duplicates)
+$legacyDestinations = @(
+    (Join-Path $env:USERPROFILE ".codeium\windsurf\skills"),
+    (Join-Path $env:USERPROFILE ".claude\skills"),
+    (Join-Path $env:USERPROFILE ".github\skills")
+)
+Prune-Skills $skillsToInstall $legacyDestinations
+Prune-Skills $pruneList $legacyDestinations
+
 Clean-Folder $TempStagingFolder
 Copy-SkillsToStaging $skillsToInstall $ClonePath $TempStagingFolder
 Deploy-StagingToDestinations $TempStagingFolder $SkillDestinations
@@ -366,13 +383,6 @@ if (![string]::IsNullOrWhiteSpace($RepoPath)) {
         }
     }
     
-    # Copy AGENTS.md to repo root if it doesn't exist
-    $agentsMdSrc = Join-Path $OlafDestination "data\AGENTS.md"
-    $agentsMdDst = Join-Path $repoRoot "AGENTS.md"
-    if ((Test-Path -LiteralPath $agentsMdSrc) -and !(Test-Path -LiteralPath $agentsMdDst)) {
-        Copy-Item -LiteralPath $agentsMdSrc -Destination $agentsMdDst -Force
-        Write-Host "    AGENTS.md copied to repo root" -ForegroundColor Gray
-    }
 }
 
 Write-Host ""

@@ -16,13 +16,12 @@ else
     TEMP_STAGING_FOLDER="${TMPDIR:-/tmp}/haal-skills-staging"
 fi
 
-# Destination folders for skills
-declare -A ALL_SKILL_DESTINATIONS=(
-    ["windsurf"]="$HOME/.codeium/windsurf/skills"
-    ["claude"]="$HOME/.claude/skills"
-    ["github"]="$HOME/.github/skills"
+# Global destination folders for skills (user-level)
+declare -A ALL_GLOBAL_DESTINATIONS=(
     ["kiro"]="$HOME/.kiro/skills"
 )
+
+# Repo-level destination set after repo root is resolved
 
 # Global OLAF folder
 OLAF_DESTINATION="$HOME/.olaf"
@@ -40,7 +39,7 @@ show_help() {
     echo "  --collection NAME        Collection name to install"
     echo "  --competency NAME        Competency name (can be repeated)"
     echo "  --clean                  Delete existing skills first (default: update only)"
-    echo "  --platform PLATFORM      Platform: all, kiro, claude, windsurf, github"
+    echo "  --platform PLATFORM      Platform: all, kiro"
     echo "  -h, --help               Show this help message"
 }
 
@@ -80,14 +79,14 @@ if [[ ! -d "$CLONE_PATH" ]]; then
     exit 1
 fi
 
-# Select destinations based on platform
+# Select global destinations based on platform
 SKILL_DESTINATIONS=()
 if [[ "$PLATFORM" == "all" ]]; then
-    for dest in "${ALL_SKILL_DESTINATIONS[@]}"; do
+    for dest in "${ALL_GLOBAL_DESTINATIONS[@]}"; do
         SKILL_DESTINATIONS+=("$dest")
     done
-else
-    SKILL_DESTINATIONS+=("${ALL_SKILL_DESTINATIONS[$PLATFORM]}")
+elif [[ -n "${ALL_GLOBAL_DESTINATIONS[$PLATFORM]:-}" ]]; then
+    SKILL_DESTINATIONS+=("${ALL_GLOBAL_DESTINATIONS[$PLATFORM]}")
 fi
 
 resolve_repo_root() {
@@ -205,7 +204,6 @@ prune_skills() {
         local skill_path="$dest/$skill"
         if [[ -d "$skill_path" ]]; then
             rm -rf "$skill_path" 2>/dev/null || true
-            echo "  Pruned: $skill"
         fi
     done
 }
@@ -292,6 +290,9 @@ echo "=== HAAL Skills Install ==="
 
 REPO_ROOT="$(resolve_repo_root)"
 
+# Add repo-level .agents/skills/ destination (Windsurf + GitHub Copilot)
+SKILL_DESTINATIONS+=("$REPO_ROOT/.agents/skills")
+
 echo "Clone path: $CLONE_PATH"
 echo "Repo: $REPO_ROOT"
 echo "Collection: ${COLLECTION:-(none)}"
@@ -307,8 +308,9 @@ if [[ "$CLEAN" == "true" ]]; then
     echo ""
 fi
 
-# Step 1: Read prune list and prune skills
+# Step 1: Pruning deprecated skills...
 echo "Step 1: Pruning deprecated skills..."
+
 prune_list=$(get_prune_list "$CLONE_PATH")
 if [[ -n "$prune_list" ]]; then
     while IFS= read -r skill; do
@@ -385,6 +387,29 @@ fi
 
 # Step 3: Clean staging and copy selected skills
 echo "Step 3: Staging skills..."
+
+# Remove our skills from legacy destinations (avoid duplicates)
+legacy_dests=(
+    "$HOME/.codeium/windsurf/skills"
+    "$HOME/.claude/skills"
+    "$HOME/.github/skills"
+)
+for skill in "${skills_to_install[@]}"; do
+    for legacy in "${legacy_dests[@]}"; do
+        [[ -d "$legacy/$skill" ]] && rm -rf "$legacy/$skill" 2>/dev/null || true
+    done
+done
+# Also remove pruned skills from legacy
+if [[ -n "${prune_list:-}" ]]; then
+    while IFS= read -r skill; do
+        if [[ -n "$skill" ]]; then
+            for legacy in "${legacy_dests[@]}"; do
+                [[ -d "$legacy/$skill" ]] && rm -rf "$legacy/$skill" 2>/dev/null || true
+            done
+        fi
+    done <<< "$prune_list"
+fi
+
 clean_folder "$TEMP_STAGING_FOLDER"
 staged=0
 for skill in "${skills_to_install[@]}"; do
@@ -435,13 +460,6 @@ if [[ -n "$REPO_PATH" ]]; then
         echo "  SKIP: Sync script not found"
     fi
     
-    # Copy AGENTS.md to repo root if it doesn't exist
-    agents_md_src="$OLAF_DESTINATION/data/AGENTS.md"
-    agents_md_dst="$REPO_ROOT/AGENTS.md"
-    if [[ -f "$agents_md_src" && ! -f "$agents_md_dst" ]]; then
-        cp "$agents_md_src" "$agents_md_dst"
-        echo "  AGENTS.md copied to repo root"
-    fi
     echo ""
 fi
 

@@ -3,3 +3,5 @@
 # Lines starting with # are comments
 
 switch-context
+generate-jsdoc
+generate-external-docs
