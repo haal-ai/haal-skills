@@ -7,6 +7,7 @@ edit_uri: edit/main/docs/
 nav:
   - Home: index.md
   - Installer: installer.md
+  - OpenCode: opencode.md
   - Collections: collections.md
   - Competencies: competencies.md
   - Skills: skills/index.md
