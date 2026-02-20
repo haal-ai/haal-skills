@@ -125,8 +125,17 @@ if ($profileContent -and $profileContent.Contains("function occ")) {
     Add-Content -Path $profileFile -Value "`n# OpenCode - quick connect to GitHub Copilot"
     Add-Content -Path $profileFile -Value $aliasLine
     Write-Host "  Added 'occ' to $profileFile"
-    Write-Host "  Restart your terminal or run '. `$PROFILE' to use it."
 }
+
+# Define occ in the GLOBAL scope so it works immediately after irm | iex
+Set-Item -Path function:global:occ -Value {
+    if (-not (Get-Command opencode -ErrorAction SilentlyContinue)) {
+        $npmDir = "$env:APPDATA\npm"
+        if (Test-Path "$npmDir\opencode.cmd") { $env:Path += ";$npmDir" }
+    }
+    opencode auth login
+}
+Write-Host "  'occ' is ready to use now."
 
 Write-Host ""
 

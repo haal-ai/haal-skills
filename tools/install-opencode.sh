@@ -83,12 +83,15 @@ if [ -n "$SHELL_RC" ]; then
     echo "# OpenCode - quick connect to GitHub Copilot" >> "$SHELL_RC"
     echo "$ALIAS_LINE" >> "$SHELL_RC"
     echo "  Added 'occ' alias to $SHELL_RC"
-    echo "  Run 'source $SHELL_RC' or restart your terminal to use it."
   fi
 else
   echo "  Could not detect shell config file."
   echo "  Add this manually: $ALIAS_LINE"
 fi
+
+# Define occ in the current shell so it works immediately after curl | bash
+eval "$ALIAS_LINE"
+echo "  'occ' is ready to use now."
 
 echo ""
 
