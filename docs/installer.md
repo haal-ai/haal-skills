@@ -46,6 +46,68 @@ To update later, rerun from your `.olaf/tools/` folder:
 bash .olaf/tools/setup-haal.sh
 ```
 
+## Browse Before You Install
+
+Before installing, you can check what's inside a competency or collection.
+
+### List available competencies
+
+Each competency is a JSON file in `competencies/`. To see them all:
+
+```bash
+ls competencies/
+```
+
+```
+api-consumers.json  architect.json  base-skills.json  developer.json  ...
+```
+
+### See what skills are in a competency
+
+```bash
+cat competencies/developer.json
+```
+
+```json
+{
+  "name": "developer",
+  "description": "Developer: code review, analysis, refactoring, and quality improvement",
+  "skills": [
+    "analyze-function-complexity",
+    "assess-code-quality-principles",
+    "augment-code-unit-test",
+    "execute-angular-migration",
+    "plan-angular-migration",
+    "review-code",
+    "scaffold-quarkus-microservice",
+    ...
+  ]
+}
+```
+
+### See what competencies are in a collection
+
+```bash
+cat collection-manifest.json
+```
+
+Collections group competencies together. For example, `starter` includes `developer`, `git-assistant`, and `session-manager`.
+
+### Then install what you need
+
+```bash
+# Install a single competency
+bash setup-haal.sh --competency developer
+
+# Install multiple competencies
+bash setup-haal.sh --competency developer --competency git-assistant
+
+# Or install a whole collection
+bash setup-haal.sh --collection basic
+```
+
+You can also browse the full catalog online at [Competencies](competencies.md) and [Collections](collections.md).
+
 ## Options
 
 ### Install a Collection
