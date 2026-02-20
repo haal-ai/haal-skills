@@ -15,6 +15,13 @@ Before sharing a Skill, verify:
 - [ ] Progressive disclosure used appropriately
 - [ ] Workflows have clear steps
 
+## Portability
+
+- [ ] Only `name`, `description`, `license`, `compatibility`, `metadata` at top-level frontmatter
+- [ ] No vendor-specific top-level fields (`user-invokable`, `argument-hint`, `disable-model-invocation`, etc.)
+- [ ] Custom extensions placed inside `metadata` block
+- [ ] Skill is auto-discoverable (no `disable-model-invocation: true`)
+
 ## Code and Scripts
 
 - [ ] Scripts handle errors explicitly rather than failing silently

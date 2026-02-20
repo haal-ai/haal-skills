@@ -8,6 +8,7 @@ This guide covers best practices for creating effective AI agent skills.
 
 ## Best Practices
 
+- [Portability and Frontmatter](./portability-and-frontmatter.md) — Stick to the open standard, avoid vendor-specific fields
 - [Anti-patterns to Avoid](./anti-patterns.md) — Common mistakes: Windows paths, too many options
 - [Error Handling in Scripts](./error-handling-scripts.md) — Handle errors explicitly, document configuration values
 - [Utility Scripts](./utility-scripts.md) — Pre-made scripts vs generated code

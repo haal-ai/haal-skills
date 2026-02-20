@@ -119,5 +119,5 @@ The `name` and `description` in your Skill's metadata are particularly critical.
 - What the Skill does
 - When it should be used
 
-Some platforms like Claude Code support additional fields like `hints`. If you want your skill to work across multiple platforms, stick to the minimum set (`name`, `description`).
+Some platforms add their own top-level frontmatter fields (VS Code adds `user-invokable`, `argument-hint`, `disable-model-invocation`; Claude Code supports `hints`). Do not use these — they break portability. Place any custom extensions inside the `metadata` block instead. See [Portability and Frontmatter](./portability-and-frontmatter.md) for details.
 
