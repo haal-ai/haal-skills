@@ -32,5 +32,15 @@ site_dir: site
 
 markdown_extensions:
   - admonition
+  - attr_list
   - toc:
       permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+
+extra_css:
+  - css/custom.css
+
+extra_javascript:
+  - js/copy-code.js

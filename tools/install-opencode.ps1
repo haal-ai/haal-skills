@@ -152,8 +152,9 @@ if ($opencodeCmd) {
 Write-Host ""
 Write-Host "=== Setup Complete ===" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "One last step - connect to GitHub Copilot:"
-Write-Host "  Run: occ  (or 'opencode auth login')"
-Write-Host "  Select 'GitHub Copilot' -> authenticate in browser -> done."
+Write-Host "You're ready! Type:" -ForegroundColor Green
 Write-Host ""
-Write-Host "After that, just run 'opencode' in any project. You're set."
+Write-Host "  opencode" -ForegroundColor White
+Write-Host ""
+Write-Host "On first launch, select 'GitHub Copilot' and log in with your GitHub credentials."
+Write-Host "Shortcut: type 'occ' to go straight to the login screen."

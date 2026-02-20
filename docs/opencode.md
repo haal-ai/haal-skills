@@ -1,19 +1,10 @@
 # OpenCode Setup
 
-Install and configure OpenCode with GitHub Copilot as your AI provider.
+Install and configure [OpenCode](https://opencode.ai) with GitHub Copilot as your AI provider.
 
-## What Gets Installed
+## Install
 
-- **OpenCode** - AI coding agent for the terminal
-- **GitHub Copilot provider** - Pre-configured as your AI provider
-- **`occ` shortcut** - Quick command to connect to GitHub Copilot
-
-## Prerequisites
-
-- `npm` or `scoop` installed (for OpenCode)
-- A GitHub Copilot subscription (Pro, Pro+, Business, or Enterprise)
-
-## Quick Start
+Open a terminal and paste the command for your platform:
 
 ### Windows (PowerShell)
 
@@ -27,28 +18,32 @@ irm https://haal-ai.github.io/haal-skills/install-opencode.ps1 | iex
 curl -fsSL https://haal-ai.github.io/haal-skills/install-opencode.sh | bash
 ```
 
-After the script completes, connect to GitHub Copilot:
+The installer will set up OpenCode and configure GitHub Copilot automatically.
+
+## After Install
+
+Once the installer finishes, type:
 
 ```
-occ
+opencode
 ```
 
-Select **GitHub Copilot**, authenticate in your browser, and you're set.
+On first launch, OpenCode will ask you to log in.
+Select **GitHub Copilot**, authenticate in your browser with your GitHub credentials, and you're set.
 
-## What Happens
+!!! note "Quick connect shortcut"
+    You can also type `occ` to go straight to the GitHub Copilot login screen.
+
+## What the Installer Does
 
 1. Installs or updates OpenCode to the latest version
 2. Configures GitHub Copilot as the available provider
-3. Sets a recommended default model
+3. Sets a recommended default model (Claude Sonnet 4)
 4. Creates the `occ` shortcut for quick authentication
 
 ## Daily Use
 
-Once connected, just run `opencode` in any project directory:
-
-```bash
-opencode
-```
+After your initial login, just run `opencode` in any project directory to start coding with AI.
 
 ## Re-running the Installer
 
@@ -69,7 +64,7 @@ GitHub Copilot uses **premium requests**, not tokens:
 | Business | 300 per user |
 | Enterprise | 1,000 per user |
 
-- Default models (GPT-5 mini, GPT-4.1, GPT-4o) are free on paid plans
+- Default models (GPT-5 mini, GPT-4.1, GPT-4o) are included on paid plans
 - Premium models have multipliers (e.g., Claude Sonnet 4 = 1x, Claude Opus 4.5 = 3x)
 - Overage: $0.04 per additional premium request (if budget is set)
 
@@ -77,8 +72,7 @@ GitHub Copilot uses **premium requests**, not tokens:
 
 ### `opencode` not found after install
 
-On Windows with npm, you may need to restart your terminal. The npm global bin
-directory (`%APPDATA%\npm`) must be in your PATH.
+On Windows with npm, restart your terminal. The npm global bin directory (`%APPDATA%\npm`) must be in your PATH.
 
 ### `occ` not recognized
 
@@ -86,3 +80,8 @@ Restart your terminal or reload your shell profile:
 
 - PowerShell: `. $PROFILE`
 - Bash/Zsh: `source ~/.bashrc` or `source ~/.zshrc`
+
+## Prerequisites
+
+- `npm` or `scoop` installed (for OpenCode)
+- A GitHub Copilot subscription (Pro, Pro+, Business, or Enterprise)
