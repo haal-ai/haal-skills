@@ -1,10 +1,10 @@
 ---
 name: extract-meeting-notes
 description: Extract structured meeting notes (summary, actions, issues) from a pasted meeting transcript. Produces a clean Markdown report with author and date metadata.
-argument-hint: "[paste transcript or describe meeting] - extract meeting notes"
 license: Apache-2.0
 metadata:
-  tags: [meeting, transcript, summary, actions, notes]
+  olaf_tags: [meeting, transcript, summary, actions, notes]
+  argument-hint: "[paste transcript or describe meeting] - extract meeting notes"
   copyright: Copyright (c) 2026 pjmp020564
   author: pjmp020564 (on github)
   repository: https://github.com/Amadeus-xDLC/genai.claude-code-evaluation
