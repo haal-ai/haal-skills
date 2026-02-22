@@ -16,6 +16,7 @@
     "find-expert-contact",
     "fix-code-smells",
     "generate-code-mapper-docs",
+    "generate-documented-issue",
     "generate-tech-spec-from-code",
     "improve-cyclomatic-complexity",
     "plan-angular-migration",

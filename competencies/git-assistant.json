@@ -2,6 +2,7 @@
   "name": "git-assistant",
   "description": "Git Assistant: branch management, feature extraction, workflow automation",
   "skills": [
+    "create-discussion",
     "create-feature-for-pr",
     "generate-commits-from-changelog",
     "git-add-commit",

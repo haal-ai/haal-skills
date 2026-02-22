@@ -8,6 +8,8 @@
     "create-changelog-entry",
     "create-decision-record",
     "create-job",
+    "extract-meeting-notes",
+    "email-assistant",
     "create-person-record",
     "find-expert-contact",
     "generate-professional-release-notes",
