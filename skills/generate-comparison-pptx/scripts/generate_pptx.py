@@ -20,8 +20,7 @@ Requirements: pip install python-pptx
 """
 
 from pptx import Presentation
-from pptx.util import Inches, Pt, Emu
-from pptx.dml.color import RGBColor
+from pptx.util import Inches, Pt
 from pptx.enum.dml import MSO_THEME_COLOR
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
@@ -29,6 +28,50 @@ from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 from pptx.chart.data import CategoryChartData
 from pptx.oxml.ns import qn
 from pathlib import Path
+
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+
+def _presentations_root(path: Path):
+    for p in [path, *path.parents]:
+        if p.name == "presentations" and p.parent.name == "work" and p.parent.parent.name == ".olaf":
+            return p
+    return None
+
+
+def _ensure_safe_execution_location():
+    root = _presentations_root(SCRIPT_DIR)
+    if root is None:
+        raise SystemExit(
+            "This file is a TEMPLATE. Do not run it from the installed skill folder. "
+            "Copy it (and template.pptx) to: <repo>/.olaf/work/presentations/<presentation-name>/ "
+            "and run it from there."
+        )
+
+
+# Layout name patterns (case-insensitive substring match)
+LAYOUT_COVER_NAMES = ["cover slide", "cover", "title slide"]
+LAYOUT_TITLE_ONLY_NAMES = ["title only", "title-only"]
+
+
+def _find_layout_strict(prs, name_patterns):
+    for pattern in name_patterns:
+        for layout in prs.slide_layouts:
+            if pattern.lower() in layout.name.lower():
+                return layout
+    names = ", ".join([layout.name for layout in prs.slide_layouts])
+    raise SystemExit(
+        f"Required slide layout not found. Searched patterns: {name_patterns}. Available layouts: {names}"
+    )
+
+
+def get_cover_layout(prs):
+    return _find_layout_strict(prs, LAYOUT_COVER_NAMES)
+
+
+def get_title_only_layout(prs):
+    return _find_layout_strict(prs, LAYOUT_TITLE_ONLY_NAMES)
 
 
 # ╔═══════════════════════════════════════════════════════════════════╗
@@ -93,7 +136,7 @@ METRIC_2_VALUES = [2.7, 3.5, 1.8, 0.7, 0.7]
 METRIC_2_FORMAT = '#,##0.0 "min"'
 METRIC_2_AXIS = "Duration (minutes)"
 
-SLIDE_1_INSIGHT = "💡 Item C = best value  |  Item B = deepest analysis"
+SLIDE_1_INSIGHT = " Item C = best value  |  Item B = deepest analysis"
 
 # --- Slide 2: Multi-dimension grouped bar chart ---
 DIMENSIONS = ["Dim 1", "Dim 2", "Dim 3", "Dim 4", "Dim 5", "Dim 6", "Overall"]
@@ -106,8 +149,8 @@ SCORES = {
 }
 SCORE_MAX = 10
 SLIDE_2_INSIGHTS = [
-    ("⚠️", "Item E scores highest but may be inflated"),
-    ("✅", "Item B scores lowest = most thorough analysis"),
+    ("", "Item E scores highest but may be inflated"),
+    ("", "Item B scores lowest = most thorough analysis"),
 ]
 
 # --- Slide 3: Found/missed stacked bar + key findings ---
@@ -132,7 +175,7 @@ DEPTH_AXIS = "Input Tokens (thousands)"
 
 PROFILES = [
     ("Item B",     "882K tokens • 50+ tool calls\nFinds every issue\nBest for: deep audits", 1),
-    ("Item C ⭐",  "937K tokens • 43+ tool calls\n73% of B's findings at 7% cost\nBest for: routine use", 2),
+    ("Item C ",  "937K tokens • 43+ tool calls\n73% of B's findings at 7% cost\nBest for: routine use", 2),
     ("Item A",     "913K tokens • ~17 tool calls\nGood balance\nBest for: mid-tier needs", 0),
     ("Item D",     "37K tokens • few tool calls\nFast triage\nBest for: smoke tests", 3),
     ("Item E",     "25K tokens • minimal reads\nNot recommended", 4),
@@ -141,7 +184,7 @@ PROFILES = [
 # --- Slide 5: Recommendation tiers ---
 RECOMMENDATIONS = [
     {
-        "title": "🏆  DEFAULT — Item C",
+        "title": "  DEFAULT — Item C",
         "subtitle": "$0.99  •  1.8 min  •  11/15 issues",
         "bullets": [
             "Best ROI: 73% of top findings at 7% cost",
@@ -151,7 +194,7 @@ RECOMMENDATIONS = [
         "accent_idx": 2,  # index into ACCENT_SLOTS
     },
     {
-        "title": "🔬  DEEP — Item B",
+        "title": "  DEEP — Item B",
         "subtitle": "$14.23  •  3.5 min  •  15/15 issues",
         "bullets": [
             "Finds everything with evidence",
@@ -161,7 +204,7 @@ RECOMMENDATIONS = [
         "accent_idx": 1,
     },
     {
-        "title": "⚡  QUICK — Item D",
+        "title": "  QUICK — Item D",
         "subtitle": "$0.03  •  0.7 min  •  4/15 issues",
         "bullets": [
             "Ultra-cheap bulk scanning",
@@ -185,7 +228,7 @@ SOURCES = [
 # If None or file not found, falls back to a blank presentation.
 TEMPLATE_PATH = Path(__file__).parent / "template.pptx"
 
-OUTPUT_PATH = Path(__file__).parent / "comparison.pptx"
+OUTPUT_PATH = SCRIPT_DIR / f"{SCRIPT_DIR.name}.pptx"
 
 
 # ╔═══════════════════════════════════════════════════════════════════╗
@@ -394,6 +437,19 @@ def _get_item_brightness(item_index):
 def style_bar_chart(chart, num_items, data_label_format='#,##0',
                     axis_label=None, max_scale=None):
     """Apply consistent theme-aware styling to a single-series bar chart."""
+    # Make axis lines and gridlines readable on dark templates
+    for ax in [chart.category_axis, chart.value_axis]:
+        try:
+            ax.format.line.width = Pt(1)
+            _apply_theme_color(ax.format.line.color, MSO_THEME_COLOR.LIGHT_1, -0.6)
+        except Exception:
+            pass
+    try:
+        chart.value_axis.major_gridlines.format.line.width = Pt(0.75)
+        _apply_theme_color(chart.value_axis.major_gridlines.format.line.color, MSO_THEME_COLOR.LIGHT_1, -0.85)
+    except Exception:
+        pass
+
     chart.has_legend = False
     chart.style = 2
     plot = chart.plots[0]
@@ -427,8 +483,16 @@ def style_bar_chart(chart, num_items, data_label_format='#,##0',
 def add_slide_header(slide, title, subtitle=""):
     """Add standard title + subtitle to a slide."""
     set_slide_bg(slide)
-    add_text_box(slide, 0.5, 0.3, 12, 0.6, title,
-                 font_size=28, bold=True)
+    title_set = False
+    if slide.placeholders:
+        for ph in slide.placeholders:
+            if ph.placeholder_format.idx == 0:
+                ph.text = title
+                title_set = True
+                break
+    if not title_set:
+        add_text_box(slide, 0.5, 0.3, 12, 0.6, title,
+                     font_size=28, bold=True)
     if subtitle:
         add_text_box(slide, 0.5, 0.85, 12, 0.4, subtitle,
                      font_size=14)
@@ -440,36 +504,31 @@ def add_slide_header(slide, title, subtitle=""):
 
 def build_title_slide(prs):
     """Slide 0: Title with intent, data source, AI-generated note, and item badges."""
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_cover_layout(prs))
     set_slide_bg(slide)
-    add_text_box(slide, 1, 1.4, 11, 1.2, TITLE,
-                 font_size=40, bold=True, alignment=PP_ALIGN.CENTER)
-    add_text_box(slide, 1, 2.8, 11, 0.6, SUBTITLE,
-                 font_size=22, theme_color=MSO_THEME_COLOR.ACCENT_1,
-                 alignment=PP_ALIGN.CENTER)
-    add_text_box(slide, 1, 3.6, 11, 0.5, FOOTER,
-                 font_size=16,
-                 alignment=PP_ALIGN.CENTER)
-    add_text_box(slide, 1, 4.2, 11, 0.4, DATA_SOURCE,
-                 font_size=14,
-                 alignment=PP_ALIGN.CENTER)
+    for ph in slide.placeholders:
+        idx = ph.placeholder_format.idx
+        if idx == 0:  # Title
+            ph.text = TITLE
+        elif idx == 13:  # Subtitle (template-specific)
+            ph.text = SUBTITLE
+        elif idx == 18:  # Lower body area (template-specific)
+            ph.text = f"{FOOTER}\n{DATA_SOURCE}\n{AI_NOTICE}"
     # Item badges
     n = len(ITEMS)
     total_width = n * 1.9
     x_start = (13.333 - total_width) / 2
     for i, name in enumerate(ITEMS):
         tc, br = _get_item_accent(i)
-        add_rounded_rect(slide, x_start + i * 1.9, 5.1, 1.7, 0.5,
+        # Place badges above the footer placeholder area to avoid overlap
+        add_rounded_rect(slide, x_start + i * 1.9, 0.5, 1.7, 0.35,
                          tc, br, name, font_size=14, bold=True)
-    # AI-generated notice
-    add_text_box(slide, 1, 6.2, 11, 0.4, AI_NOTICE,
-                 font_size=11,
-                 alignment=PP_ALIGN.CENTER)
+
 
 
 def build_cost_performance_slide(prs):
     """Slide 1: Two side-by-side bar charts for primary metrics."""
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_title_only_layout(prs))
     add_slide_header(slide, "Cost & Performance at a Glance",
                      "Same conditions, same pipeline")
 
@@ -501,7 +560,7 @@ def build_cost_performance_slide(prs):
 
 def build_quality_scores_slide(prs):
     """Slide 2: Grouped bar chart for multi-dimension scoring."""
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_title_only_layout(prs))
     add_slide_header(slide, "Quality Scores by Dimension",
                      "Lower scores may indicate stricter analysis")
 
@@ -515,6 +574,18 @@ def build_quality_scores_slide(prs):
         Inches(0.5), Inches(1.4), Inches(12.3), Inches(4.5), cd
     )
     chart = cf.chart
+    # Make axis lines and gridlines readable on dark templates
+    for ax in [chart.category_axis, chart.value_axis]:
+        try:
+            ax.format.line.width = Pt(1)
+            _apply_theme_color(ax.format.line.color, MSO_THEME_COLOR.LIGHT_1, -0.6)
+        except Exception:
+            pass
+    try:
+        chart.value_axis.major_gridlines.format.line.width = Pt(0.75)
+        _apply_theme_color(chart.value_axis.major_gridlines.format.line.color, MSO_THEME_COLOR.LIGHT_1, -0.85)
+    except Exception:
+        pass
     chart.style = 2
     plot = chart.plots[0]
     plot.gap_width = 100
@@ -550,7 +621,7 @@ def build_quality_scores_slide(prs):
 
 def build_detection_slide(prs):
     """Slide 3: Stacked bar (found/missed) + key findings cards."""
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_title_only_layout(prs))
     add_slide_header(slide, "Critical Issues Detection",
                      f"{TOTAL_POSSIBLE} real issues — how many did each item find?")
 
@@ -612,7 +683,7 @@ def build_detection_slide(prs):
 
 def build_depth_slide(prs):
     """Slide 4: Depth metric bar chart + profile cards."""
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_title_only_layout(prs))
     add_slide_header(slide, f"Analysis Depth: {DEPTH_LABEL} vs Findings",
                      "More depth = more issues discovered")
 
@@ -651,7 +722,7 @@ def build_depth_slide(prs):
 
 def build_recommendation_slide(prs):
     """Slide 1 (Executive Summary): Tiered recommendation cards."""
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_title_only_layout(prs))
     add_slide_header(slide, "Executive Summary: Which Item When?")
 
     n = len(RECOMMENDATIONS)
@@ -716,7 +787,7 @@ def build_sources_slide(prs):
     """Final slide: Sources & References with clickable hyperlinks."""
     if not SOURCES:
         return
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_title_only_layout(prs))
     add_slide_header(slide, "Sources & References")
 
     body = slide.shapes.add_textbox(
@@ -751,6 +822,7 @@ def build_sources_slide(prs):
 # ╚═══════════════════════════════════════════════════════════════════╝
 
 def main():
+    _ensure_safe_execution_location()
     # Use template if provided, otherwise blank presentation
     if TEMPLATE_PATH and Path(TEMPLATE_PATH).exists():
         prs = Presentation(str(TEMPLATE_PATH))
