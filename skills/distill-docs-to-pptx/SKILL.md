@@ -40,6 +40,14 @@ that communicates the essential information in 4-8 slides. The goal is
 to save the audience from reading 200-800 lines of markdown while
 retaining the critical content.
 
+IMPORTANT: This "skill" is a **process/spec** that guides an agent (LLM) to:
+
+- decide the slide set (count + structure)
+- generate a dedicated `generate_pptx.py` for that presentation
+- run it to produce a `.pptx`
+
+The bundled `scripts/generate_pptx.py` is only a **starter template** and must remain generic.
+
 ## Prerequisites
 
 ```bash
@@ -94,8 +102,41 @@ gives the audience the key takeaway upfront.
 ### Step 3 — Generate the Python script
 
 Create a Python script using the helper functions and design system
-documented below (in the "Reference Script" section). Do NOT reference
-any external file — all helpers are inlined in this skill document.
+documented below (in the "Reference Script" section). All helpers must
+be inlined in the generated script — no imports from external skill files.
+
+IMPORTANT: The files under this skill folder are **templates**. They are **read-only**.
+Do **NOT** edit or run:
+
+- `c:\Users\ppaccaud\.agents\skills\distill-docs-to-pptx\scripts\generate_pptx.py`
+- `c:\Users\ppaccaud\.agents\skills\distill-docs-to-pptx\scripts\template.pptx`
+
+Instead, always generate a new presentation folder in the **repo workspace**:
+
+```
+<repo>/.olaf/work/presentations/<presentation-name>/
+  generate_pptx.py
+  template.pptx
+  <presentation-name>.pptx
+```
+
+The bundled `generate_pptx.py` includes a runtime guard and will refuse to run unless it is located under `.olaf/work/presentations/<presentation-name>/`.
+
+Mandatory script structure:
+
+1. **Copy the bundled template** (`scripts/template.pptx`) into the output
+   folder and set `TEMPLATE_PATH = Path(__file__).resolve().parent / "template.pptx"`
+2. **Use layout helpers** for every slide:
+   - Title slide: `prs.slides.add_slide(get_cover_layout(prs))` and
+     populate placeholders (idx 0 = title, idx 13 = subtitle, idx 18 = footer)
+   - Content slides: `prs.slides.add_slide(get_content_layout(prs))` and
+     call `header(slide, title, subtitle)` which uses the placeholder
+   - Sources/closing: `prs.slides.add_slide(get_closing_layout(prs))`
+3. **Never use `prs.slide_layouts[N]`** — always use `get_*_layout()` helpers
+4. **Never use `RGBColor(...)`** — always use `_apply_theme_color()` with
+   `MSO_THEME_COLOR` constants
+5. **Never use `Presentation()`** without the template — always use
+   `Presentation(str(TEMPLATE_PATH))`
 
 Key rules for distillation slides:
 
@@ -103,14 +144,50 @@ Key rules for distillation slides:
 2. **Cards over paragraphs** — use `card()` helper for grouped info
 3. **Badges for inventories** — colored rounded rects in grids
 4. **Phase flows** — numbered boxes with arrows for pipelines
-5. **Insight boxes** — one-sentence takeaways at the bottom of each slide
+5. **Insight boxes** — every content slide MUST end with a one-sentence
+   takeaway in a tinted rect: `rect(slide, x, y, w, 0.55, ACCENT_*, -0.7, text=..., fc_theme=ACCENT_*)`
 6. **Font sizes**: titles 28pt, card titles 16pt, body 13-14pt, minimum 11pt
 7. **Max 6 bullet points per card** — beyond that, split or summarize
 
+### Step 3.5 — Pre-run checklist
+
+Before running the script, verify ALL of these:
+
+- [ ] `TEMPLATE_PATH` points to the bundled `template.pptx` (NOT `None`)
+- [ ] `template.pptx` has been copied to the output folder
+- [ ] Title slide uses `get_cover_layout(prs)` and populates placeholders
+- [ ] All content slides use `get_title_only_layout(prs)` + `header()`
+- [ ] Sources slide uses `get_closing_layout(prs)`
+- [ ] No `prs.slide_layouts[N]` anywhere in the script
+- [ ] No `RGBColor(...)` anywhere in the script
+- [ ] No `Presentation()` without the template path
+- [ ] Every content slide has an insight box at the bottom
+- [ ] All text uses `MSO_THEME_COLOR` (no hardcoded colors)
+
 ### Step 4 — Run the script
 
+**IMPORTANT: Use simple, single commands only.**  
+Do not use complex PowerShell blocks, nested logic, or multi-line scripts. Execute one command at a time to avoid permission prompts and failures.
+
+Preferred pattern:
 ```bash
-python <path-to-script>
+# 1. Change directory
+cd "<path-to-presentation-folder>"
+
+# 2. Run the Python script
+python generate_pptx.py
+```
+
+The script must be executed from:
+
+```
+<repo>/.olaf/work/presentations/<presentation-name>/generate_pptx.py
+```
+
+By convention (and by default in the template), the PPTX output is:
+
+```
+<repo>/.olaf/work/presentations/<presentation-name>/<presentation-name>.pptx
 ```
 
 Then open:
@@ -160,14 +237,54 @@ CRITICAL: Never use `RGBColor(...)` for slide content. Always use
 so colors follow the theme. Use `brightness` (-1.0 to 1.0) for
 lighter/darker variants of the same theme slot.
 
+Note: It's fine if the Python script imports helper types it doesn't end up using,
+but the **generated** presentation content must never rely on hardcoded RGB values.
+
+## Layout Resolution
+
+Slide layouts are resolved **by name** from the template, not by hardcoded
+index. This avoids breakage when the template's layout order changes.
+
+Three layout roles:
+
+| Role | Purpose | Name patterns (tried in order) |
+|---------|----------------------------------------------|------------------------------------------------|
+| cover | Title/cover slide (first slide) | `"cover slide"`, `"cover"`, `"title slide"` |
+| title-only | Body slides with title placeholder only (REQUIRED for all non-cover slides) | `"title only"`, `"title-only"` |
+| content | Body slides with title + content area (optional fallback in other templates) | `"title, subtitle and content"`, `"title and content"` |
+| closing | Final/outro slide (sources, thank you) | `"closing"`, `"end"`, `"thank"` |
+
+The resolver does a case-insensitive substring match against layout names.
+If no match is found, it falls back to a layout index (0 for cover/closing,
+1 for content).
+
+CRITICAL rules for layout usage:
+
+1. **Title slide** → use `get_cover_layout(prs)` and populate its
+   placeholders (idx 0 = Title, others are template-specific)
+2. **All non-cover slides** → use `get_title_only_layout(prs)` and call `header()`
+   which populates the title placeholder automatically
+3. **Never hardcode layout indices** like `prs.slide_layouts[6]` — always
+   use the `get_*_layout()` helpers
+4. **Always use placeholders for titles** — the `header()` helper finds
+   placeholder idx 0 and sets its text, falling back to a floating text
+   box only if no placeholder exists
+
+If the template does not contain a matching **Title Only** layout, the
+generator script fails fast with a clear error to prevent silent layout drift.
+
 ## Helper Functions
 
 The reference script provides:
 
-- `set_bg(slide)` — set background to theme's DARK_1
+- `_find_layout(prs, name_patterns, fallback_index)` — find layout by name pattern
+- `get_cover_layout(prs)` — get the cover/title slide layout
+- `get_content_layout(prs)` — get the content slide layout
+- `get_closing_layout(prs)` — get the closing/outro slide layout
+- `set_bg(slide)` — **no-op**: background must be inherited from the template/layout.
 - `txt(slide, l, t, w, h, text, sz, theme_color, brightness, bold, align)` — text box; theme_color=None means inherit
 - `rect(slide, l, t, w, h, fill_theme, fill_brightness, text, ...)` — rounded rect; fc_theme=None means inherit
-- `header(slide, title, subtitle)` — slide title + subtitle
+- `header(slide, title, subtitle)` — set title via placeholder (fallback to text box)
 - `card(slide, l, t, w, h, title, lines, accent_theme, tsz, bsz)` — info card with accent bar
 - `_apply_theme_color(color_format, theme_color, brightness)` — apply theme color to any element
 
@@ -230,6 +347,18 @@ the text color through theme inheritance.
 5. **Insight boxes**: Every data-heavy slide should end with a one-line
    "so what?" takeaway in a tinted box.
 
+## Slide Count & Content Density (authoritative)
+
+The number of slides is decided during **script generation** (Step 3), not at runtime.
+The template script is only an example.
+
+Rules:
+
+- Always keep **one idea per slide**
+- If a card needs more than **6 bullets**, split into a new slide
+- Prefer **shapes** (cards/flows/grids) over charts unless the docs contain real numeric series
+- If the source docs are large or multi-file, increase slide count rather than shrinking font sizes
+
 ## Title Slide Requirements
 
 Every presentation must include on the title slide:
@@ -258,24 +387,31 @@ them into the SOURCES list.
 
 ## Template Support
 
-The script supports an optional `.pptx` template file:
+CRITICAL: The generated script MUST ALWAYS use the bundled template.
+A template is bundled with this skill at `scripts/template.pptx` (relative
+to the skill folder). This template provides the dark theme, branded slide
+masters, and proper layout placeholders that make presentations look
+professional.
 
 ```python
-TEMPLATE_PATH = Path("path/to/company-template.pptx")
+# MANDATORY — always resolve to the bundled template
+TEMPLATE_PATH = Path(__file__).resolve().parent / "template.pptx"
 ```
 
-If provided, the presentation inherits the template's theme, slide master,
-and color scheme. This lets companies provide a branded template — the
-generated content adapts to whatever theme colors are defined.
+When generating the Python script, you MUST:
+1. **Copy `template.pptx`** from the skill's `scripts/` folder into the
+   output presentation folder (next to `generate_pptx.py`)
+2. **Set `TEMPLATE_PATH`** to resolve relative to the script's location:
+   `Path(__file__).resolve().parent / "template.pptx"`
+3. **Never set `TEMPLATE_PATH = None`** — this produces an ugly blank
+   presentation with no theme, no dark background, and no branded layouts
 
-If `TEMPLATE_PATH` is None or the file doesn't exist, a blank presentation
-is used (with the default PowerPoint theme).
+The presentation inherits the template's theme, slide master, and color
+scheme. The user can then switch the theme in PowerPoint (Design tab)
+and all colors adapt automatically.
 
-A template is bundled with this skill at `scripts/template.pptx` (relative
-to the skill folder). When generating the Python script, set `TEMPLATE_PATH`
-to resolve relative to the generated script's location, or to `None` if
-the template is not available. The script should gracefully fall back to
-a blank presentation if the template file is not found.
+The script should gracefully fall back to a blank presentation ONLY if
+the template file is missing at runtime (e.g., deleted by the user).
 
 ## Document Properties
 
@@ -347,12 +483,14 @@ documentation into concise, visual slides.
 THEME-AWARE: All colors use PowerPoint theme slots so the user can switch
 the theme in PowerPoint and all colors adapt automatically.
 
+LAYOUT-AWARE: Slide layouts are resolved by name from the template, not by
+hardcoded index. Titles are populated via the layout's built-in placeholders.
+
 Requirements: pip install python-pptx
 """
 
 from pptx import Presentation
 from pptx.util import Inches, Pt
-from pptx.dml.color import RGBColor
 from pptx.enum.dml import MSO_THEME_COLOR
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
@@ -366,6 +504,43 @@ ACCENT_AI        = MSO_THEME_COLOR.ACCENT_3   # Purple / validation
 ACCENT_WARNING   = MSO_THEME_COLOR.ACCENT_4   # Orange / config
 ACCENT_DANGER    = MSO_THEME_COLOR.ACCENT_5   # Red / problems
 ACCENT_INFO      = MSO_THEME_COLOR.ACCENT_6   # Teal / processing
+
+
+# ── Layout resolution ──
+# Layouts are resolved by name (case-insensitive substring match).
+# Customize these patterns if your template uses different naming.
+LAYOUT_COVER_NAMES = ["cover", "title slide"]
+LAYOUT_CONTENT_NAMES = ["title, subtitle and content", "title and content", "title only"]
+LAYOUT_CLOSING_NAMES = ["closing", "end", "thank"]
+
+
+def _find_layout(prs, name_patterns, fallback_index=0):
+    """Find a slide layout by name pattern (case-insensitive substring match).
+    Tries each pattern in order and returns the first matching layout.
+    Falls back to the given index if no name matches.
+    """
+    for pattern in name_patterns:
+        for layout in prs.slide_layouts:
+            if pattern.lower() in layout.name.lower():
+                return layout
+    if fallback_index < len(prs.slide_layouts):
+        return prs.slide_layouts[fallback_index]
+    return prs.slide_layouts[0]
+
+
+def get_cover_layout(prs):
+    """Get the cover/title slide layout."""
+    return _find_layout(prs, LAYOUT_COVER_NAMES, fallback_index=0)
+
+
+def get_content_layout(prs):
+    """Get the content slide layout (title + content area)."""
+    return _find_layout(prs, LAYOUT_CONTENT_NAMES, fallback_index=1)
+
+
+def get_closing_layout(prs):
+    """Get the closing/outro slide layout."""
+    return _find_layout(prs, LAYOUT_CLOSING_NAMES, fallback_index=0)
 
 
 # ── Helpers ──
@@ -423,9 +598,21 @@ def rect(slide, l, t, w, h, fill_theme, fill_brightness=0.0,
 
 
 def header(slide, title, subtitle=""):
-    """Add standard slide title + subtitle."""
+    """Set the slide title via the layout's title placeholder.
+    Falls back to a floating text box if no title placeholder exists.
+    Subtitle is always a floating text box positioned below the title.
+    """
     set_bg(slide)
-    txt(slide, 0.5, 0.3, 12, 0.6, title, sz=28, bold=True)
+    # Try to use the layout's title placeholder (idx 0)
+    title_set = False
+    if slide.placeholders:
+        for ph in slide.placeholders:
+            if ph.placeholder_format.idx == 0:  # Title placeholder
+                ph.text = title
+                title_set = True
+                break
+    if not title_set:
+        txt(slide, 0.5, 0.3, 12, 0.6, title, sz=28, bold=True)
     if subtitle:
         txt(slide, 0.5, 0.85, 12, 0.4, subtitle, sz=14)
 
@@ -475,23 +662,43 @@ def phase_flow(slide, phases, y_top=1.5):
 
 
 def grid_items(slide, items, y_start=1.5, cols=4):
-    """Draw a grid of labeled items with colored dots."""
+    """Draw a grid of labeled items with colored accent dots.
+
+    Each cell uses a dark-tinted accent fill so text remains readable on
+    both light and dark themes.  Name and subtitle are grouped into a
+    single text frame for easy editing in PowerPoint.
+    """
     col_w = 3.0
-    row_h = 0.65
+    row_h = 0.9
     for i, (name, sub, clr) in enumerate(items):
         col = i % cols
         row = i // cols
         x = 0.5 + col * 3.2
-        y = y_start + row * 0.85
-        rect(slide, x, y, col_w, row_h, clr, 0.85)
+        y = y_start + row * 1.1
+        rect(slide, x, y, col_w, row_h, clr, 0.15)
         dot = slide.shapes.add_shape(MSO_SHAPE.OVAL,
-                                      Inches(x + 0.1), Inches(y + 0.2),
-                                      Inches(0.2), Inches(0.2))
+                                      Inches(x + 0.12), Inches(y + 0.18),
+                                      Inches(0.22), Inches(0.22))
         dot.fill.solid()
         _apply_theme_color(dot.fill.fore_color, clr)
         dot.line.fill.background()
-        txt(slide, x + 0.4, y + 0.05, 1.8, 0.3, name, sz=13, bold=True)
-        txt(slide, x + 0.4, y + 0.35, 1.8, 0.25, sub, sz=10)
+        body = slide.shapes.add_textbox(
+            Inches(x + 0.45), Inches(y + 0.1),
+            Inches(col_w - 0.6), Inches(row_h - 0.2))
+        tf = body.text_frame
+        tf.word_wrap = True
+        p_name = tf.paragraphs[0]
+        p_name.text = name
+        p_name.font.size = Pt(14)
+        p_name.font.bold = True
+        p_name.font.name = "Segoe UI"
+        _apply_theme_color(p_name.font.color, MSO_THEME_COLOR.LIGHT_1)
+        p_sub = tf.add_paragraph()
+        p_sub.text = sub
+        p_sub.font.size = Pt(12)
+        p_sub.font.name = "Segoe UI"
+        _apply_theme_color(p_sub.font.color, MSO_THEME_COLOR.LIGHT_1, -0.25)
+        p_sub.space_before = Pt(2)
 
 
 def badge_row(slide, badges, y=5.0):
@@ -510,7 +717,7 @@ def build_sources_slide(prs, sources):
     """Final slide: Sources & References with clickable hyperlinks."""
     if not sources:
         return
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide = prs.slides.add_slide(get_closing_layout(prs))
     header(slide, "Sources & References")
     body = slide.shapes.add_textbox(
         Inches(0.8), Inches(1.4), Inches(11.7), Inches(5.5))
@@ -545,7 +752,7 @@ INTENT = "One-sentence description"
 SOURCE = "Data: distilled from system-architecture.md"
 AI_NOTICE = "AI-generated presentation — content verified by author"
 SOURCES = []
-TEMPLATE_PATH = None  # Set to Path("path/to/template.pptx") if available
+TEMPLATE_PATH = Path(__file__).resolve().parent / "template.pptx"  # MANDATORY
 OUTPUT_PATH = Path("distilled-overview.pptx")
 
 
@@ -559,11 +766,24 @@ def main():
     prs.slide_width = Inches(13.333)
     prs.slide_height = Inches(7.5)
 
-    # Build slides here using the helpers above
-    # build_title_slide(prs)
-    # build_exec_summary(prs)
-    # ...
-    # build_sources_slide(prs, SOURCES)
+    # ── Title slide ──
+    slide = prs.slides.add_slide(get_cover_layout(prs))
+    set_bg(slide)
+    for ph in slide.placeholders:
+        idx = ph.placeholder_format.idx
+        if idx == 0:   ph.text = TITLE
+        elif idx == 13: ph.text = INTENT
+        elif idx == 18: ph.text = f"{SOURCE}\n{AI_NOTICE}"
+
+    # ── Content slides ──
+    # slide = prs.slides.add_slide(get_title_only_layout(prs))
+    # header(slide, "Slide Title")
+    # card(slide, 0.5, 1.4, 5.8, 2.8, "Card Title", ["line1", "line2"], ACCENT_PRIMARY)
+    # rect(slide, 1.5, 4.5, 10.3, 0.55, ACCENT_PRIMARY, -0.7,
+    #      text="Insight takeaway", sz=14, fc_theme=ACCENT_POSITIVE)
+
+    # ── Sources slide ──
+    build_sources_slide(prs, SOURCES)
 
     prs.core_properties.title = TITLE
     prs.core_properties.subject = INTENT
