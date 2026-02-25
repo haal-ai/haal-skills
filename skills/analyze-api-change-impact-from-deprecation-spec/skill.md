@@ -12,15 +12,38 @@ metadata:
 
 if you are in need to get the date and  time, use time tools, fallback to shell command if needed
 
+## What This Skill Does
+
+This skill helps you understand how API changes will affect your consumer applications and services. When your API team publishes deprecation notices or breaking changes, this skill:
+
+🔍 **Analyzes the impact** by scanning your codebase to find all places where the changed API endpoints are used
+📋 **Creates a tasklist** with specific code modifications needed for each impacted consumer
+🧪 **Generates a retest plan** to ensure your changes work correctly after migration
+📊 **Provides a clear report** showing exactly what needs to be changed and tested
+
+**Use this skill when:**
+- API endpoints are being deprecated or removed
+- Request/response formats are changing
+- Authentication or authorization requirements are updated
+- You need to plan consumer migration efforts
+- You want to ensure no consumer code is left behind during API evolution
+
 ## Input Parameters
 You MUST request these parameters if not provided by the user. Present them as a numbered list to ease user response.
-1. **demand_folder**: string - Demand folder under `docs/specifications/` (example: `pet-clinic-01`) (REQUIRED)
-2. **demand_root**: string - Root folder for demands (OPTIONAL - default: `docs/specifications`)
-3. **change_spec_path**: string - Path to a change/deprecation spec markdown (REQUIRED)
-4. **openapi_old_path**: string - Old OpenAPI contract (OPTIONAL)
-5. **openapi_new_path**: string - New OpenAPI contract (OPTIONAL)
-6. **consumer_code_roots**: string[] - Roots to search for consumer usage (OPTIONAL - default: `["apps", "sdks"]`)
-7. **output_dir**: string - Where to write outputs (OPTIONAL - default: `{demand_root}/{demand_folder}/10-consumer-change-impact`)
+
+1. **demand_folder**: string - The name of your project/demand folder located under `docs/specifications/` (example: `pet-clinic-01`). This helps organize the analysis output within your project structure. (REQUIRED)
+
+2. **demand_root**: string - The base directory where your demand folders are stored (OPTIONAL - default: `docs/specifications`)
+
+3. **change_spec_path**: string - Full path to the markdown file containing the API change/deprecation specification. This document should describe what endpoints are changing, how they're changing, and any migration guidance. (REQUIRED)
+
+4. **openapi_old_path**: string - Full path to the previous version of your OpenAPI/Swagger specification (OPTIONAL). Providing this helps the skill understand the exact contract that was in use before the changes.
+
+5. **openapi_new_path**: string - Full path to the new version of your OpenAPI/Swagger specification (OPTIONAL). This helps the skill understand the target contract after the changes.
+
+6. **consumer_code_roots**: string[] - List of directory paths where your consumer code is located (OPTIONAL - default: `["apps", "sdks"]`). The skill will search these directories for API usage. Examples: `["frontend-app", "mobile-sdk", "integration-tests"]`
+
+7. **output_dir**: string - Directory where the impact analysis report will be saved (OPTIONAL - default: `{demand_root}/{demand_folder}/10-consumer-change-impact`). The report will be named with a timestamp to avoid overwriting previous analyses.
 
 ## User Interaction
 You MUST follow these interaction guidelines:
@@ -36,50 +59,81 @@ You MUST validate:
 - `consumer_code_roots` are within the repository
 - `output_dir` is within `{demand_root}/{demand_folder}`
 
-## Process
+## Process Overview
+
+The skill follows a structured 3-phase approach to ensure thorough analysis and clear communication:
+
+### Phase 1: Validation & Understanding
+First, I validate all inputs and read your specifications to understand exactly what's changing.
+
+### Phase 2: Planning & Approval  
+I propose a detailed analysis plan and get your approval before proceeding with code scanning.
+
+### Phase 3: Analysis & Reporting
+I execute the analysis, identify all impacted code, and generate a comprehensive tasklist and retest plan.
+
+---
+
+## Process Details
 
 <!-- <validation_phase> -->
 ### 1) Validation Phase
 You WILL:
-- Validate all required parameters
-- Read in full:
-  - `change_spec_path`
-- If provided, read in full:
-  - `openapi_old_path`
-  - `openapi_new_path`
-- Build a list of impacted endpoints and changes, categorized as:
-  - breaking change
-  - behavior change
-  - deprecated
-  - additive/non-breaking
+- Validate all required parameters and file locations
+- Read and analyze the complete change specification to understand:
+  - Which endpoints are affected
+  - What types of changes are occurring (breaking, behavioral, deprecation, additive)
+  - Migration requirements and timelines
+- If provided, compare OpenAPI old/new contracts to identify:
+  - Removed or modified endpoints
+  - Changed request/response schemas
+  - Updated authentication requirements
+- Build a comprehensive list of impacted endpoints categorized by impact severity:
+  - **breaking change** - Will require code updates in consumers
+  - **behavior change** - May require logic updates
+  - **deprecated** - Will be removed in future, needs migration planning
+  - **additive/non-breaking** - New features, optional to adopt
 <!-- </validation_phase> -->
 
 <!-- <planning_phase> -->
 ### 2) Planning Phase
 You WILL propose (in chat):
-- The impact analysis approach (how you will map endpoints to code usage)
-- The exact output path:
+- **Impact Analysis Strategy**: How I'll map API endpoints to your consumer code
+  - Search patterns (endpoint paths, HTTP methods, operation IDs)
+  - File types to scan (TypeScript, JavaScript, Java, Python, tests, configs)
+  - Client library detection (generated clients, custom wrappers)
+- **Output Location**: Exact path where the report will be saved
   - `{output_dir}/{timestamp}-{demand_folder}-consumer-impact-tasklist.md`
-- The search strategy (files to scan: TS/JS, Java, tests, docs)
+- **Search Scope**: Which directories and file types to include in the analysis
 
-You MUST ask the user to approve the plan before writing any files.
+You MUST get user approval before proceeding to code scanning.
 <!-- </planning_phase> -->
 
 <!-- <execution_phase> -->
 ### 3) Execution Phase (Only after approval)
 You WILL:
-- Search `consumer_code_roots` for impacted endpoint paths, operationIds, and client method names
-- Build an impact map:
-  - change -> endpoint -> code references
-- Generate a tasklist with:
-  - required code modifications
-  - required test updates / new tests
-  - fallback/compat strategies (feature flags, dual contract support) when applicable
-- Generate a retest plan:
-  - impacted journeys
-  - impacted contract tests
+- **Code Discovery**: Search all specified consumer code directories for:
+  - Direct endpoint path references (`/api/v1/users`)
+  - HTTP method calls (`GET /users`, `POST /orders`)
+  - Operation ID references from OpenAPI specs
+  - Generated client method names
+  - API base URL configurations
+- **Impact Mapping**: Create a detailed mapping showing:
+  - Each API change → Affected endpoints → Specific code locations
+  - Severity assessment for each impacted file
+  - Dependencies between different consumer components
+- **Tasklist Generation**: Create actionable tasks for:
+  - **Code Modifications**: Exact changes needed in each consumer
+  - **Test Updates**: Which tests need to be updated or created
+  - **Migration Strategies**: Feature flags, dual contract support, gradual rollout
+  - **Documentation Updates**: API docs, README files, integration guides
+- **Retest Planning**: Generate comprehensive testing strategy:
+  - **Integration Tests**: End-to-end flows that need validation
+  - **Contract Tests**: API consumer contract compliance
+  - **Regression Tests**: Ensure existing functionality still works
+  - **Performance Tests**: Validate no performance degradation
 
-You WILL write a report using the provided template.
+You WILL write a comprehensive report using the provided template.
 <!-- </execution_phase> -->
 
 ## Success Criteria
