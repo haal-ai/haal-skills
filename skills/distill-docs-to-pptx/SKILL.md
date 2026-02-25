@@ -15,6 +15,18 @@ metadata:
 
 # Distill Documentation to PPTX
 
+## ⚠️ **IMPORTANT: NEVER MODIFY SKILL FILES**
+
+**DO NOT EDIT** anything in `skills/distill-docs-to-pptx/` folder:
+- ❌ `scripts/generate_pptx.py` (template only)
+- ❌ `scripts/template.pptx` (template only)
+
+**ALWAYS CREATE PRESENTATIONS IN:**
+- ✅ `.olaf/work/presentations/[presentation-name]/`
+- ✅ Copy template files there, then customize
+
+The skill files are **read-only templates**. Generate presentations in the workspace folder only.
+
 ## When to use this skill
 
 Trigger phrases:

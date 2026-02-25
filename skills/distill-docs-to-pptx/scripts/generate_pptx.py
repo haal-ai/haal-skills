@@ -511,72 +511,110 @@ def add_doc_visual_accents(slide):
 
 
 # ╔═══════════════════════════════════════════════════════════════════╗
-# ║  DATA SECTION — replace with content from your docs               ║
+# ║  DATA SECTION — CUSTOMIZE THIS FOR YOUR PRESENTATION           ║
 # ╚═══════════════════════════════════════════════════════════════════╝
 
-TITLE = "API Consistency Analysis"
-INTENT = "Comprehensive API consistency analysis using code-mapper foundation for improved code quality"
-SOURCE = "Data: distilled from analyze-api-consistency skill documentation (skill.md, description.md, tutorial.md)"
+# === PRESENTATION METADATA ===
+TITLE = "Your Presentation Title"
+INTENT = "One-sentence description of what this presentation covers"
+SOURCE = "Data: distilled from your-documentation.md (N lines)"
 AI_NOTICE = "AI-generated presentation — content verified by author"
 
-# Executive summary: 3 cards (problem / solution / output)
+# === EXECUTIVE SUMMARY (3 cards: problem / solution / output) ===
 EXEC_PROBLEM = [
-    "API inconsistencies confuse developers and break expectations",
-    "Inconsistent naming patterns reduce code discoverability", 
-    "Parameter variations create error-prone APIs",
-    "Manual consistency analysis is time-consuming and error-prone"
+    "Problem statement #1 - what issue are you addressing?",
+    "Problem statement #2 - why does this matter?",
+    "Problem statement #3 - what are the current pain points?"
 ]
 
 EXEC_SOLUTION = [
-    "Automated foundation analysis with code-mapper integration",
-    "Systematic extraction of public API signatures",
-    "Multi-dimensional consistency analysis (naming, parameters, returns)",
-    "Structured reporting with severity classification"
+    "Solution approach #1 - how are you solving the problem?",
+    "Solution approach #2 - what methods or tools are you using?",
+    "Solution approach #3 - what makes your approach effective?"
 ]
 
 EXEC_OUTPUT = [
-    "Comprehensive API consistency report with actionable insights",
-    "Severity-based inconsistency categorization (HIGH/MEDIUM/LOW)",
-    "Canonical pattern recommendations and improvement roadmap",
-    "Risk assessment and phased implementation plan"
+    "Expected outcome #1 - what will be the result?",
+    "Expected outcome #2 - how will things be better?",
+    "Expected outcome #3 - what value will be delivered?"
 ]
 
-# Process: 3 phases (validation / analysis / reporting)
+# === PROCESS OVERVIEW (3 phases) ===
 PROCESS_PHASES = [
-    ("Validation & Foundation", "Check inputs, validate project path, ensure full foundation outputs exist"),
-    ("API Extraction & Analysis", "Extract public signatures, analyze naming/parameter/return patterns, identify inconsistencies"),
-    "Report Generation & Recommendations"
+    ("Phase 1 Name", "Description of what happens in the first phase of your process"),
+    ("Phase 2 Name", "Description of what happens in the second phase of your process"),
+    ("Phase 3 Name", "Description of what happens in the third phase of your process")
 ]
 
-# Component inventory: 4 key capabilities
+# === COMPONENT INVENTORY (4 key capabilities) ===
 COMPONENTS = [
-    ("Foundation Integration", "Full code-mapper analysis with signature extraction", ACCENT_PRIMARY),
-    ("Consistency Analysis", "Multi-dimensional pattern analysis with severity classification", ACCENT_INFO),
-    ("Structured Reporting", "Template-based reports with actionable recommendations", ACCENT_POSITIVE),
-    ("Improvement Roadmap", "Phased approach with risk assessment and rollback planning", ACCENT_WARNING)
+    ("Component 1 Name", "Brief description of what this component does and why it's important", ACCENT_PRIMARY),
+    ("Component 2 Name", "Brief description of what this component does and why it's important", ACCENT_INFO),
+    ("Component 3 Name", "Brief description of what this component does and why it's important", ACCENT_POSITIVE),
+    ("Component 4 Name", "Brief description of what this component does and why it's important", ACCENT_WARNING)
 ]
 
-# Usage example: 4 key steps
+# === USAGE EXAMPLE (4 key steps) ===
 USAGE_STEPS = [
-    "Run full foundation: python scripts/code-mapper/run.py --foundation <project-path>",
-    "Invoke skill with project path and target modules",
-    "Review extracted API signatures and consistency analysis", 
-    "Save structured report with improvement recommendations"
+    "Step 1: First action users should take - be specific and clear",
+    "Step 2: Second action users should take - explain what to do",
+    "Step 3: Third action users should take - provide guidance",
+    "Step 4: Final step - describe how to complete the process"
 ]
 
-# Success criteria: 4 key metrics
+# === SUCCESS CRITERIA (4 key metrics) ===
 SUCCESS_METRICS = [
-    ("Complete Analysis", "All requested modules analyzed with full API coverage"),
-    ("Inconsistency Detection", "Major inconsistencies identified and categorized by severity"),
-    ("Canonical Patterns", "Recommended standard patterns for repository consistency"),
-    ("Actionable Roadmap", "Phased improvement plan with risk assessment")
+    ("Success Metric 1", "Description of how you'll measure this success - be specific"),
+    ("Success Metric 2", "Description of how you'll measure this success - be specific"),
+    ("Success Metric 3", "Description of how you'll measure this success - be specific"),
+    ("Success Metric 4", "Description of how you'll measure this success - be specific")
 ]
 
+# === SOURCES & REFERENCES ===
 SOURCES = [
-    ("HAAL Skills Repository", "https://github.com/haal-ai/haal-skills"),
-    ("Skill Documentation", "skills/analyze-api-consistency/"),
-    ("Code-Mapper Foundation", "scripts/code-mapper/"),
+    ("Source 1 Name", "https://example.com/source1"),
+    ("Source 2 Name", "https://example.com/source2"),
+    ("Source 3 Name", "https://example.com/source3")
 ]
+
+# === CUSTOMIZATION INSTRUCTIONS ===
+"""
+HOW TO USE THIS TEMPLATE:
+
+1. COPY THIS SCRIPT: 
+   - Copy this entire script to .olaf/work/presentations/[your-presentation-name]/
+   - Also copy template.pptx to the same folder
+
+2. CUSTOMIZE THE DATA SECTION ABOVE:
+   - Update TITLE, INTENT, SOURCE with your presentation details
+   - Replace EXEC_PROBLEM/SOLUTION/OUTPUT with your content
+   - Update PROCESS_PHASES with your actual process steps
+   - Modify COMPONENTS with your system's key parts
+   - Change USAGE_STEPS to match your workflow
+   - Update SUCCESS_METRICS with your success measures
+   - Add your actual SOURCES
+
+3. RUN THE SCRIPT:
+   - cd .olaf/work/presentations/[your-presentation-name]/
+   - python generate_pptx.py
+
+4. FIND YOUR PRESENTATION:
+   - Output: [presentation-name].pptx in the same folder
+
+TIPS:
+- Keep descriptions concise but informative
+- Use consistent terminology throughout
+- Focus on value and benefits
+- Make success metrics measurable and specific
+- Include real sources for credibility
+
+COLOR OPTIONS for COMPONENTS:
+- ACCENT_PRIMARY (blue) - for main/core components
+- ACCENT_INFO (green) - for informational components  
+- ACCENT_POSITIVE (orange) - for positive/benefit components
+- ACCENT_WARNING (red) - for warning/caution components
+- ACCENT_AI (purple) - for AI/automation components
+"""
 
 TEMPLATE_PATH = SCRIPT_DIR / "template.pptx"
 
