@@ -2,14 +2,9 @@
 
 AI agent skills and powers for **Windsurf**, **Claude**, **GitHub Copilot**, and **Kiro**.
 
-## 🔗 HAAL AI Organization
-
-This repository is part of the [HAAL AI](../) organization. See the [main README](../README.md) for an overview of all repositories.
-
 ### Related Repositories
 
 - **[`haal-ide`](../haal-ide)** - OLAF based HAAL (now deprecated in favor of Skills)
-- **[`haal-skills-agentic-aws`](../haal-skills-agentic-aws)** - using AWS Strands based Agents with HAAL Skills
 
 ## 🧩 What's Included?
 
