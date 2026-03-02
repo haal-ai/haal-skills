@@ -2,8 +2,11 @@
 
 AI agent skills and powers for **Windsurf**, **Claude**, **GitHub Copilot**, and **Kiro**.
 
+📖 **Full documentation and installation instructions:** **[haal-ai.github.io/haal-skills](https://haal-ai.github.io/haal-skills/)**
+
 ### Related Repositories
 
+- **[`haal-misc`](https://github.com/haal-ai/haal-misc)** - Miscellaneous tools (OpenCode setup, etc.)
 - **[`haal-ide`](../haal-ide)** - OLAF based HAAL (now deprecated in favor of Skills)
 
 ## 🧩 What's Included?
@@ -59,7 +62,7 @@ See [Installer Documentation](docs/installer.md) for all options.
 
 ## 📚 Documentation
 
-This repo publishes documentation as a GitHub Pages site.
+Full documentation and installation instructions are available at **[haal-ai.github.io/haal-skills](https://haal-ai.github.io/haal-skills/)**.
 
 ### Local preview
 
