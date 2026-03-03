@@ -42,8 +42,6 @@ jobs:
         run: |
           cp .olaf/tools/setup-haal.ps1 site/setup-haal.ps1
           cp .olaf/tools/setup-haal.sh site/setup-haal.sh
-          cp tools/install-opencode.ps1 site/install-opencode.ps1
-          cp tools/install-opencode.sh site/install-opencode.sh
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
