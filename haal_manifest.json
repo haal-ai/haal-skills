@@ -1,0 +1,124 @@
+{
+  "version": "1.0",
+  "repoId": "haal-skills",
+  "description": "Official HAAL AI skills registry",
+  "baseUrl": "https://raw.githubusercontent.com/haal-ai/haal-skills/main",
+  "collections": [
+    {
+      "id": "starter",
+      "name": "Starter",
+      "description": "Essential skills for any developer getting started with HAAL",
+      "competencyIds": ["developer", "git-assistant", "session-manager"]
+    },
+    {
+      "id": "basic",
+      "name": "Basic",
+      "description": "Core developer skills plus session and git workflows",
+      "competencyIds": ["developer", "git-assistant", "session-manager", "base-skills"]
+    },
+    {
+      "id": "techie",
+      "name": "Techie",
+      "description": "Full technical stack for senior developers and architects",
+      "competencyIds": ["developer", "architect", "api-producers", "api-consumers", "specification", "git-assistant", "prompt-engineer"]
+    },
+    {
+      "id": "full",
+      "name": "Full",
+      "description": "Complete skill set — all competencies included",
+      "competencyIds": ["developer", "architect", "api-producers", "api-consumers", "specification", "git-assistant", "session-manager", "prompt-engineer", "technical-writer", "base-skills"]
+    },
+    {
+      "id": "all",
+      "name": "All",
+      "description": "Every competency in the registry",
+      "competencyIds": ["1a-c-cpp-developpers", "api-consumers", "api-producers", "architect", "business-analyst", "developer", "git-assistant", "base-skills", "project-manager", "prompt-engineer", "researcher", "session-manager", "specification", "technical-writer"]
+    }
+  ],
+  "competencies": [
+    {
+      "id": "developer",
+      "name": "Developer",
+      "description": "Code review, analysis, refactoring, and quality improvement",
+      "manifestUrl": "competencies/developer.json"
+    },
+    {
+      "id": "architect",
+      "name": "Architect",
+      "description": "Software architecture, design patterns, and system design",
+      "manifestUrl": "competencies/architect.json"
+    },
+    {
+      "id": "api-producers",
+      "name": "API Producers",
+      "description": "Turn business specifications into challenge questions and API-ready inputs",
+      "manifestUrl": "competencies/api-producers.json"
+    },
+    {
+      "id": "api-consumers",
+      "name": "API Consumers",
+      "description": "Review producer contracts, scaffold consumer UI, analyze change impact",
+      "manifestUrl": "competencies/api-consumers.json"
+    },
+    {
+      "id": "specification",
+      "name": "Specification",
+      "description": "Specification review and transformation skills",
+      "manifestUrl": "competencies/specification.json"
+    },
+    {
+      "id": "git-assistant",
+      "name": "Git Assistant",
+      "description": "Branch management, feature extraction, workflow automation",
+      "manifestUrl": "competencies/git-assistant.json"
+    },
+    {
+      "id": "session-manager",
+      "name": "Session Manager",
+      "description": "Session lifecycle and context management",
+      "manifestUrl": "competencies/session-manager.json"
+    },
+    {
+      "id": "prompt-engineer",
+      "name": "Prompt Engineer",
+      "description": "Create, test, convert, and optimize LLM prompts",
+      "manifestUrl": "competencies/prompt-engineer.json"
+    },
+    {
+      "id": "technical-writer",
+      "name": "Technical Writer",
+      "description": "Content creation, presentation planning, and professional documentation",
+      "manifestUrl": "competencies/technical-writer.json"
+    },
+    {
+      "id": "base-skills",
+      "name": "Base Skills",
+      "description": "Kernel skills required for foundational OLAF workflows",
+      "manifestUrl": "competencies/base-skills.json"
+    },
+    {
+      "id": "business-analyst",
+      "name": "Business Analyst",
+      "description": "Requirements analysis, specification management, and user story validation",
+      "manifestUrl": "competencies/business-analyst.json"
+    },
+    {
+      "id": "project-manager",
+      "name": "Project Manager",
+      "description": "Project tracking, task management, and team coordination",
+      "manifestUrl": "competencies/project-manager.json"
+    },
+    {
+      "id": "researcher",
+      "name": "Researcher",
+      "description": "Comprehensive research, analysis, and knowledge synthesis",
+      "manifestUrl": "competencies/researcher.json"
+    },
+    {
+      "id": "1a-c-cpp-developpers",
+      "name": "C/C++ Developer",
+      "description": "HAAL enterprise tools and frameworks expertise for C/C++ developers",
+      "manifestUrl": "competencies/1a-c-cpp-developpers.json"
+    }
+  ]
+}
