@@ -1,0 +1,6 @@
+{
+  "runtimes": ["python>=3.10", "uvx", "gh"],
+  "pip": "requirements.txt",
+  "mcp": ["test-mcp-server"],
+  "notes": "This is a test skill — requirements are illustrative only."
+}
