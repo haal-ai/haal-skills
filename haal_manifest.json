@@ -120,5 +120,15 @@
       "description": "HAAL enterprise tools and frameworks expertise for C/C++ developers",
       "manifestUrl": "competencies/1a-c-cpp-developpers.json"
     }
+  ],
+  "systems": [
+    {
+      "id": "haal-gitpulse",
+      "name": "GitPulse",
+      "description": "Agentic git activity analyser — daily, weekly and monthly commit insights powered by AWS Strands",
+      "repo": "https://github.com/haal-ai/haal-gitpulse",
+      "branch": "main",
+      "tags": ["git", "analytics", "aws-strands", "python"]
+    }
   ]
 }
