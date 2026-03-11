@@ -21,5 +21,8 @@
     "report-my-daily",
     "review-progress",
     "work-on-job"
+  ],
+  "systems": [
+    "haal-gitpulse"
   ]
 }
