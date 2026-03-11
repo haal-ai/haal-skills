@@ -1,15 +1,26 @@
 {
   "name": "Test Competency",
-  "description": "A minimal competency used to validate multi-registry merging",
-  "skills": [
-    "test-skill"
-  ],
+  "description": "A minimal competency used to validate all component types and subfolder routing in the installer",
+  "skills": ["test-skill"],
   "powers": [],
-  "hooks": [],
-  "commands": [],
-  "rules": [],
-  "agents": [],
-  "mcpServers": [
-    "test-mcp-server"
-  ]
+  "hooks": ["test-hook"],
+  "commands": [
+    "test-cmd-common",
+    "test-cmd-kiro",
+    "test-cmd-copilot",
+    "test-cmd-claude",
+    "test-cmd-cursor",
+    "test-cmd-windsurf"
+  ],
+  "rules": [
+    "test-rule-common",
+    "test-rule-kiro",
+    "test-rule-cursor",
+    "test-rule-copilot",
+    "test-rule-windsurf",
+    "test-rule-claude"
+  ],
+  "agents": ["test-agent"],
+  "mcpServers": ["test-mcp-server"],
+  "systems": ["haal-gitpulse"]
 }

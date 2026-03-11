@@ -1,0 +1,13 @@
+{
+  "name": "Test Hook",
+  "version": "1.0.0",
+  "description": "A minimal hook used to validate hook installation flow.",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["*.md"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A markdown file was edited. No action needed — this is a test hook."
+  }
+}
