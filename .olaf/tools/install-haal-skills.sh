@@ -186,7 +186,35 @@ get_prune_list() {
 get_competencies_from_collection() {
     local collection="$1"
     local clone_path="$2"
-    read_json_array "$clone_path/collection-manifest.json" "$collection"
+    local manifest_file="$clone_path/haal_manifest.json"
+
+    if [[ ! -f "$manifest_file" ]]; then
+        return
+    fi
+
+    if command -v jq &>/dev/null; then
+        jq -r --arg col "$collection" \
+            '.collections[]? | select(.id == $col) | .competencyIds[]?' \
+            "$manifest_file" 2>/dev/null | tr -d '\r' || true
+        return
+    fi
+
+    # Bash-only fallback: extract competencyIds for the matching collection.
+    # Works for simple pretty-printed JSON (no nested arrays within competencyIds).
+    local compact
+    compact=$(tr -d '\n\r\t ' < "$manifest_file" 2>/dev/null || true)
+    [[ -z "$compact" ]] && return
+
+    # Find the collection block by id and extract its competencyIds array.
+    local col_escaped
+    col_escaped=$(printf '%s' "$collection" | sed 's/[][\\.^$*]/\\&/g')
+    local ids_block
+    ids_block=$(printf '%s' "$compact" | \
+        grep -oP "\"id\":\"${col_escaped}\"[^}]*\"competencyIds\":\[([^\]]*)\]" | \
+        sed -n 's/.*"competencyIds":\[\([^]]*\)\].*/\1/p' | head -n 1)
+    [[ -z "$ids_block" ]] && return
+
+    printf '%s\n' "$ids_block" | tr ',' '\n' | sed -n 's/^"\(.*\)"$/\1/p' | tr -d '\r' || true
 }
 
 get_skills_from_competency() {

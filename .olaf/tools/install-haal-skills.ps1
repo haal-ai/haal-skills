@@ -96,16 +96,17 @@ function Get-SkillsFromCompetencies([string[]]$CompetencyNames, [string]$ClonePa
 }
 
 function Get-CompetenciesFromCollection([string]$CollectionName, [string]$ClonePath) {
-    $manifestPath = Join-Path $ClonePath "collection-manifest.json"
+    $manifestPath = Join-Path $ClonePath "haal_manifest.json"
     $manifest = Read-JsonFile $manifestPath
-    if ($null -eq $manifest) {
+    if ($null -eq $manifest -or $null -eq $manifest.collections) {
         return @()
     }
-    
-    if ($manifest.PSObject.Properties.Name -contains $CollectionName) {
-        return $manifest.$CollectionName
+
+    $collection = $manifest.collections | Where-Object { $_.id -eq $CollectionName } | Select-Object -First 1
+    if ($null -eq $collection) {
+        return @()
     }
-    return @()
+    return @($collection.competencyIds)
 }
 
 function Get-PruneList([string]$ClonePath) {
