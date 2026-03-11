@@ -8,5 +8,8 @@
   "hooks": [],
   "commands": [],
   "rules": [],
-  "agents": []
+  "agents": [],
+  "mcpServers": [
+    "test-mcp-server"
+  ]
 }
