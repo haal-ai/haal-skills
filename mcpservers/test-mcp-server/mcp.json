@@ -1,0 +1,11 @@
+{
+  "id": "test-mcp-server",
+  "name": "Test MCP Server",
+  "description": "A minimal MCP server used to validate MCP server installation flow",
+  "transport": "stdio",
+  "serverUrl": null,
+  "command": "uvx",
+  "args": ["test-mcp-server@latest"],
+  "env": {},
+  "scope": ["user", "workspace"]
+}
