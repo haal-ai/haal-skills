@@ -1,0 +1,12 @@
+{
+  "name": "Test Competency",
+  "description": "A minimal competency used to validate multi-registry merging",
+  "skills": [
+    "test-skill"
+  ],
+  "powers": [],
+  "hooks": [],
+  "commands": [],
+  "rules": [],
+  "agents": []
+}
