@@ -9,6 +9,7 @@
     "generate-post-from-plan",
     "generate-pptx-from-plan",
     "review-document-jargon",
-    "run-redocumentation"
+    "run-redocumentation",
+    "generate-training-program"
   ]
 }
