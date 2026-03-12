@@ -31,7 +31,7 @@ Full details: [Installer](installer.md)
 - Then review [Competencies](competencies.md) (what’s inside)
 - Browse all published docs under [Skills](skills/index.md)
 
-If you want a curated subset, see [Verified](skills/verified.md) and the full [Catalog](skills/catalog.md).
+See the full [Catalog](skills/catalog.md) for all skills.
 
 ## How it’s organized
 

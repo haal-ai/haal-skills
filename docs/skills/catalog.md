@@ -1,12 +1,6 @@
 # Skills catalog
 
-All skills are grouped into: **Stable**, **Curated**, **To be curated**, and **Listed but missing**.
-
-## Stable
-
-_No stable skills yet._
-
-## Curated
+All 112 skills available in this repository.
 
 - **analyze-contributor-risk** — _No published docs yet_
 - **analyze-function-complexity** — [Description](./analyze-function-complexity/description.md) | [Tutorial](./analyze-function-complexity/tutorial.md)
@@ -44,8 +38,6 @@ _No stable skills yet._
 - **store-conversation-record** — [Description](./store-conversation-record/description.md) | [Tutorial](./store-conversation-record/tutorial.md)
 - **switch-context** — [Description](./switch-context/description.md) | [Tutorial](./switch-context/tutorial.md)
 - **tell-me** — [Description](./tell-me/description.md) | [Tutorial](./tell-me/tutorial.md)
-
-## To be curated
 
 - **align-spec-openapi-code-tests** — [Description](./align-spec-openapi-code-tests/description.md) | [Tutorial](./align-spec-openapi-code-tests/tutorial.md)
 - **analyze-api-change-impact-from-deprecation-spec** — [Description](./analyze-api-change-impact-from-deprecation-spec/description.md) | [Tutorial](./analyze-api-change-impact-from-deprecation-spec/tutorial.md)
@@ -113,7 +105,4 @@ _No stable skills yet._
 - **validate-prompt-value** — [Description](./validate-prompt-value/description.md) | [Tutorial](./validate-prompt-value/tutorial.md)
 - **work-on-job** — [Description](./work-on-job/description.md) | [Tutorial](./work-on-job/tutorial.md)
 
-## Listed but missing
 
-- **create-skill-presentation** — _Listed but no matching skill folder found_ (verified-skills.txt)
-- **esdi** — _Listed but no matching skill folder found_ (verified-skills.txt)
