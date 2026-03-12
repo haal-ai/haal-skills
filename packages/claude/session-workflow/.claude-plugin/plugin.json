@@ -1,0 +1,11 @@
+{
+  "name": "session-workflow",
+  "description": "Session carry-over, carry-on and challenge-me workflows for Claude Code",
+  "version": "1.0.0",
+  "author": {
+    "name": "HAAL AI"
+  },
+  "license": "Apache-2.0",
+  "keywords": ["session", "workflow", "carry-over", "challenge"],
+  "skills": "./skills/"
+}

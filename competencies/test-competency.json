@@ -22,5 +22,6 @@
   ],
   "agents": ["test-agent"],
   "mcpServers": ["test-mcp-server"],
-  "systems": ["haal-gitpulse"]
+  "systems": ["haal-gitpulse"],
+  "packages": ["session-workflow"]
 }
