@@ -3,7 +3,7 @@
   "description": "A minimal competency used to validate all component types and subfolder routing in the installer",
   "skills": ["test-skill"],
   "powers": [],
-  "hooks": ["test-hook"],
+  "hooks": ["test-hook", "test-copilot-hook"],
   "commands": [
     "test-cmd-common",
     "test-cmd-kiro",

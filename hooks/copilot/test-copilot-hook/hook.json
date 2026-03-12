@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "./scripts/security-check.sh",
+        "powershell": "./scripts/security-check.ps1",
+        "timeoutSec": 15
+      }
+    ],
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "echo \"Session started: $(date)\" >> .olaf/work/session.log",
+        "powershell": "Add-Content -Path .olaf/work/session.log -Value \"Session started: $(Get-Date)\"",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
