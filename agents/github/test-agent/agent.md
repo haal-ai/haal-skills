@@ -1,6 +1,6 @@
 ---
 name: test-agent
-description: A minimal agent used to validate GitHub Copilot agent installation flow. Use this agent when testing the haal installer.
+description: Minimal agent for validating haal installer agent installation flow. Focuses on confirming correct file placement in .github/agents/.
 tools: ["read"]
 ---
 
