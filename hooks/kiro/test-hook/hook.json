@@ -1,7 +1,8 @@
 {
+  "enabled": true,
   "name": "Test Hook",
-  "version": "1.0.0",
-  "description": "A minimal hook used to validate hook installation flow.",
+  "description": "A minimal hook used to validate Kiro hook installation. Triggers on markdown file edits and asks the agent to review changes.",
+  "version": "1",
   "when": {
     "type": "fileEdited",
     "patterns": ["*.md"]
