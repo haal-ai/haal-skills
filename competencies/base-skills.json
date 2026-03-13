@@ -1,20 +1,39 @@
 {
   "name": "base-skills",
   "description": "Kernel skills required for foundational OLAF workflows",
-  "skills": [
-    "carry-on-session",
-    "carry-over-session",
-    "challenge-me",
-    "convert-prompt-to-skill",
-    "create-decision-record",
-    "create-job",
-    "create-person-record",
-    "create-skill",
-    "generate-step-by-step-tutorial",
-    "git-add-commit",
-    "help-me-olaf",
-    "should-i-use-ai",
-    "store-conversation-record",
-    "tell-me"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "carry-on-session",
+      "carry-over-session",
+      "challenge-me",
+      "convert-prompt-to-skill",
+      "create-decision-record",
+      "create-job",
+      "create-person-record",
+      "create-skill",
+      "generate-step-by-step-tutorial",
+      "git-add-commit",
+      "help-me-olaf",
+      "should-i-use-ai",
+      "store-conversation-record",
+      "tell-me"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

@@ -1,15 +1,28 @@
 {
   "name": "Test Competency",
   "description": "A minimal competency used to validate multi-registry merging",
-  "skills": [
-    "test-skill"
-  ],
-  "powers": [],
-  "hooks": [],
-  "commands": [],
-  "rules": [],
-  "agents": [],
-  "mcpServers": [
-    "test-mcp-server"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "test-skill"
+    ],
+    "mcpservers": [
+      "test-mcp-server"
+    ],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

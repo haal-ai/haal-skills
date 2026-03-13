@@ -1,9 +1,28 @@
 {
   "name": "session-manager",
   "description": "Session lifecycle and context management",
-  "skills": [
-    "carry-on-session",
-    "carry-over-session",
-    "stash-restart-session"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "carry-on-session",
+      "carry-over-session",
+      "stash-restart-session"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

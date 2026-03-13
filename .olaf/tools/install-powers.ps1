@@ -30,9 +30,28 @@ function Get-PowersFromCompetencies([string[]]$Names) {
     foreach ($comp in $Names) {
         $manifest = Read-JsonFile (Join-Path $CompetenciesDir "$comp.json")
         if ($manifest) {
-            $hasPowers = $manifest.PSObject.Properties.Name -contains 'powers'
-            if ($hasPowers -and $manifest.powers) {
-                $powers += $manifest.powers
+            # Detect schema version: v2 uses tools.kiro.powers, v1 uses top-level powers
+            $schemaVersion = 0
+            if ($manifest.PSObject.Properties.Name -contains 'schemaVersion') {
+                $schemaVersion = [int]$manifest.schemaVersion
+            }
+
+            if ($schemaVersion -ge 2) {
+                # v2: read from tools.kiro.powers
+                if ($manifest.PSObject.Properties.Name -contains 'tools' -and
+                    $null -ne $manifest.tools -and
+                    $manifest.tools.PSObject.Properties.Name -contains 'kiro' -and
+                    $null -ne $manifest.tools.kiro -and
+                    $manifest.tools.kiro.PSObject.Properties.Name -contains 'powers' -and
+                    $manifest.tools.kiro.powers) {
+                    $powers += $manifest.tools.kiro.powers
+                }
+            } else {
+                # v1: read from top-level powers
+                $hasPowers = $manifest.PSObject.Properties.Name -contains 'powers'
+                if ($hasPowers -and $manifest.powers) {
+                    $powers += $manifest.powers
+                }
             }
         }
     }

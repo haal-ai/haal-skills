@@ -1,14 +1,33 @@
 {
   "name": "business-analyst",
   "description": "Business Analyst: requirements analysis, specification management, and user story validation",
-  "skills": [
-    "analyze-business-requirements",
-    "analyze-spec-vs-code",
-    "bootstrap-functional-spec-from-code",
-    "extend-specification",
-    "generate-questionnaire",
-    "improve-spec",
-    "review-prd-spec",
-    "review-user-story"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "analyze-business-requirements",
+      "analyze-spec-vs-code",
+      "bootstrap-functional-spec-from-code",
+      "extend-specification",
+      "generate-questionnaire",
+      "improve-spec",
+      "review-prd-spec",
+      "review-user-story"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

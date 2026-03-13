@@ -1,17 +1,36 @@
 {
   "name": "architect",
   "description": "Generic software architecture, design patterns, and system design",
-  "skills": [
-    "analyze-api-consistency",
-    "analyze-contributor-risk",
-    "analyze-function-complexity",
-    "assess-code-quality-principles",
-    "bootstrap-functional-spec-from-code",
-    "create-practice-from-evidence",
-    "esdi-chain",
-    "generate-design",
-    "generate-implementation-plan",
-    "onboard-me",
-    "transform-raw-spec"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "analyze-api-consistency",
+      "analyze-contributor-risk",
+      "analyze-function-complexity",
+      "assess-code-quality-principles",
+      "bootstrap-functional-spec-from-code",
+      "create-practice-from-evidence",
+      "esdi-chain",
+      "generate-design",
+      "generate-implementation-plan",
+      "onboard-me",
+      "transform-raw-spec"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

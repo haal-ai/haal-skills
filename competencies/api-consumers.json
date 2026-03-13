@@ -1,9 +1,28 @@
 {
   "name": "api-consumers",
   "description": "API Consumers: review producer contracts, scaffold a consumer UI, and analyze change impact.",
-  "skills": [
-    "review-producer-api-as-consumer",
-    "scaffold-angular-frontend-from-spec",
-    "analyze-api-change-impact-from-deprecation-spec"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "review-producer-api-as-consumer",
+      "scaffold-angular-frontend-from-spec",
+      "analyze-api-change-impact-from-deprecation-spec"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

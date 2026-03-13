@@ -1,12 +1,31 @@
 {
   "name": "specification",
   "description": "Specification review and transformation skills",
-  "skills": [
-    "align-spec-openapi-code-tests",
-    "review-human-written-spec",
-    "review-prd-spec",
-    "transform-raw-spec",
-    "improve-spec",
-    "extend-specification"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "align-spec-openapi-code-tests",
+      "review-human-written-spec",
+      "review-prd-spec",
+      "transform-raw-spec",
+      "improve-spec",
+      "extend-specification"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

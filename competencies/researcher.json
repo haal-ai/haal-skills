@@ -1,8 +1,27 @@
 {
   "name": "researcher",
   "description": "Researcher: comprehensive research, analysis, and knowledge synthesis",
-  "skills": [
-    "research-and-report",
-    "search-and-learn"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "research-and-report",
+      "search-and-learn"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

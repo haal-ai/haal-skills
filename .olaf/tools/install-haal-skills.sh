@@ -221,7 +221,31 @@ get_skills_from_competency() {
     local competency="$1"
     local clone_path="$2"
     local manifest_file="$clone_path/competencies/$competency.json"
-    if [[ -f "$manifest_file" ]]; then
+    if [[ ! -f "$manifest_file" ]]; then
+        return
+    fi
+
+    # Detect schema version: v2 uses shared.skills, v1 uses top-level skills
+    local schema_version=0
+    if command -v jq &>/dev/null; then
+        schema_version=$(jq -r '.schemaVersion // 0' "$manifest_file" 2>/dev/null | tr -d '\r' || echo "0")
+    fi
+
+    if [[ "$schema_version" -ge 2 ]]; then
+        # v2: read from shared.skills
+        if command -v jq &>/dev/null; then
+            jq -r '.shared.skills[]? // empty' "$manifest_file" 2>/dev/null | tr -d '\r' || true
+        else
+            # Bash fallback: extract shared.skills array
+            local compact
+            compact=$(tr -d '\n\r\t ' < "$manifest_file" 2>/dev/null || true)
+            local array_contents
+            array_contents=$(printf '%s' "$compact" | sed -n 's/.*"shared":{[^}]*"skills":\[\([^]]*\)\].*/\1/p' | head -n 1)
+            [[ -z "$array_contents" ]] && return
+            printf '%s\n' "$array_contents" | tr ',' '\n' | sed -n 's/^"\(.*\)"$/\1/p' | tr -d '\r' || true
+        fi
+    else
+        # v1: read from top-level skills
         read_json_array "$manifest_file" "skills"
     fi
 }

@@ -1,13 +1,32 @@
 {
   "name": "api-producers",
   "description": "API Producers: turn business specifications into challenge questions and API-ready inputs.",
-  "skills": [
-    "review-human-written-spec",
-    "analyze-db-api-fit",
-    "plan-db-api-remediation",
-    "generate-ddl-and-seed",
-    "scaffold-api-from-spec",
-    "align-spec-openapi-code-tests",
-    "generate-contract-kit"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "review-human-written-spec",
+      "analyze-db-api-fit",
+      "plan-db-api-remediation",
+      "generate-ddl-and-seed",
+      "scaffold-api-from-spec",
+      "align-spec-openapi-code-tests",
+      "generate-contract-kit"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

@@ -1,6 +1,7 @@
 {
   "version": "1.0",
   "repoId": "haal-skills",
+  "competencySchemaVersion": 2,
   "description": "Official HAAL AI skills registry",
   "baseUrl": "https://raw.githubusercontent.com/haal-ai/haal-skills/main",
   "collections": [

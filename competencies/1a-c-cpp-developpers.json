@@ -1,12 +1,30 @@
 {
   "name": "1a-c-cpp-developpers",
   "description": "Haal enterprise tools and frameworks expertise for C/C++ developers",
-  "skills": [
-    "create-otf-variable",
-    "get-bms-expertise"
-  ],
-  "powers": [
-    "bms-expertise",
-    "create-otf-variable"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "create-otf-variable",
+      "get-bms-expertise"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [
+        "bms-expertise",
+        "create-otf-variable"
+      ],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

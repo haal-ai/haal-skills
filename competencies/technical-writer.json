@@ -1,15 +1,34 @@
 {
   "name": "technical-writer",
   "description": "Technical Writer: content creation, presentation planning, and professional documentation",
-  "skills": [
-    "assess-genai-initiative-idea",
-    "create-presentation-and-posts-workflow",
-    "create-presentation-plan",
-    "extract-notes-from-skube-site",
-    "generate-post-from-plan",
-    "generate-pptx-from-plan",
-    "review-document-jargon",
-    "run-redocumentation",
-    "generate-training-program"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "assess-genai-initiative-idea",
+      "create-presentation-and-posts-workflow",
+      "create-presentation-plan",
+      "extract-notes-from-skube-site",
+      "generate-post-from-plan",
+      "generate-pptx-from-plan",
+      "review-document-jargon",
+      "run-redocumentation",
+      "generate-training-program"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

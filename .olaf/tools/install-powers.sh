@@ -52,7 +52,19 @@ fi
 get_powers_from_competency() {
     local comp="$1"
     local manifest="$COMPETENCIES_DIR/$comp.json"
-    if [[ -f "$manifest" ]]; then
+    if [[ ! -f "$manifest" ]]; then
+        return
+    fi
+
+    # Detect schema version: v2 uses tools.kiro.powers, v1 uses top-level powers
+    local schema_version
+    schema_version=$(jq -r '.schemaVersion // 0' "$manifest" 2>/dev/null || echo "0")
+
+    if [[ "$schema_version" -ge 2 ]]; then
+        # v2: read from tools.kiro.powers
+        jq -r '.tools.kiro.powers[]? // empty' "$manifest" 2>/dev/null
+    else
+        # v1: read from top-level powers
         jq -r '.powers[]? // empty' "$manifest" 2>/dev/null
     fi
 }

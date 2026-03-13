@@ -1,12 +1,31 @@
 {
   "name": "git-assistant",
   "description": "Git Assistant: branch management, feature extraction, workflow automation",
-  "skills": [
-    "create-discussion",
-    "create-feature-for-pr",
-    "generate-commits-from-changelog",
-    "git-add-commit",
-    "merge-branch-with-safety",
-    "propose-commit-thread"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "create-discussion",
+      "create-feature-for-pr",
+      "generate-commits-from-changelog",
+      "git-add-commit",
+      "merge-branch-with-safety",
+      "propose-commit-thread"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

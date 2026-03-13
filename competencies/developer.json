@@ -1,34 +1,68 @@
 {
   "name": "developer",
   "description": "Developer: code review, analysis, refactoring, and quality improvement",
-  "skills": [
-    "analyze-function-complexity",
-    "assess-code-quality-principles",
-    "augment-code-unit-test",
-    "check-todos-in-code",
-    "code-in-go",
-    "code-in-rust",
-    "create-practice-from-evidence",
-    "deepen-tech-spec-developer",
-    "detect-test-directives",
-    "evolve-code-iteratively",
-    "execute-angular-migration",
-    "find-expert-contact",
-    "fix-code-smells",
-    "generate-code-mapper-docs",
-    "generate-documented-issue",
-    "generate-tech-spec-from-code",
-    "improve-cyclomatic-complexity",
-    "plan-angular-migration",
-    "review-code",
-    "review-diff",
-    "review-github-pr",
-    "run-implementation-plan",
-    "scaffold-quarkus-microservice"
-  ],
-  "powers": [
-    "code-in-go",
-    "code-in-rust",
-    "code-microservice-in-quarkus"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "analyze-function-complexity",
+      "assess-code-quality-principles",
+      "augment-code-unit-test",
+      "check-todos-in-code",
+      "code-in-go",
+      "code-in-rust",
+      "create-practice-from-evidence",
+      "deepen-tech-spec-developer",
+      "detect-test-directives",
+      "evolve-code-iteratively",
+      "execute-angular-migration",
+      "find-expert-contact",
+      "fix-code-smells",
+      "generate-code-mapper-docs",
+      "generate-documented-issue",
+      "generate-tech-spec-from-code",
+      "improve-cyclomatic-complexity",
+      "plan-angular-migration",
+      "review-code",
+      "review-diff",
+      "review-github-pr",
+      "run-implementation-plan",
+      "scaffold-quarkus-microservice"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [
+        "code-in-go",
+        "code-in-rust",
+        "code-microservice-in-quarkus"
+      ],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "windsurf": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "claude": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "copilot": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    }
+  }
 }

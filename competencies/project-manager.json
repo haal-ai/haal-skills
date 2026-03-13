@@ -1,28 +1,46 @@
 {
   "name": "project-manager",
   "description": "Project Manager: project tracking, task management, and team coordination",
-  "skills": [
-    "analyze-changelog-and-report",
-    "analyze-contributor-risk",
-    "archive-changelog-entries",
-    "create-changelog-entry",
-    "create-decision-record",
-    "create-job",
-    "extract-meeting-notes",
-    "email-assistant",
-    "create-person-record",
-    "execute-upgrade-guide",
-    "find-expert-contact",
-    "generate-professional-release-notes",
-    "generate-tasklist",
-    "generate-upgrade-guide",
-    "generate-validation-report",
-    "measure-ai-impact",
-    "report-my-daily",
-    "review-progress",
-    "work-on-job"
-  ],
-  "systems": [
-    "haal-gitpulse"
-  ]
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "analyze-changelog-and-report",
+      "analyze-contributor-risk",
+      "archive-changelog-entries",
+      "create-changelog-entry",
+      "create-decision-record",
+      "create-job",
+      "extract-meeting-notes",
+      "email-assistant",
+      "create-person-record",
+      "execute-upgrade-guide",
+      "find-expert-contact",
+      "generate-professional-release-notes",
+      "generate-tasklist",
+      "generate-upgrade-guide",
+      "generate-validation-report",
+      "measure-ai-impact",
+      "report-my-daily",
+      "review-progress",
+      "work-on-job"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [
+      "haal-gitpulse"
+    ],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": { "rules": [], "commands": [], "hooks": [] },
+    "windsurf": { "rules": [], "commands": [], "hooks": [] },
+    "claude": { "rules": [], "commands": [], "hooks": [] },
+    "copilot": { "rules": [], "commands": [], "hooks": [] }
+  }
 }

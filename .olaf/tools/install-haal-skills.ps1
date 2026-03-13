@@ -88,8 +88,24 @@ function Get-SkillsFromCompetencies([string[]]$CompetencyNames, [string]$ClonePa
             continue
         }
         
-        if ($manifest.skills) {
-            $skills += $manifest.skills
+        # v2 schema: skills live under shared.skills
+        # v1 schema: skills live at top-level skills array
+        $schemaVersion = 0
+        if ($manifest.PSObject.Properties.Name -contains 'schemaVersion') {
+            $schemaVersion = [int]$manifest.schemaVersion
+        }
+        
+        if ($schemaVersion -ge 2) {
+            if ($manifest.PSObject.Properties.Name -contains 'shared' -and
+                $null -ne $manifest.shared -and
+                $manifest.shared.PSObject.Properties.Name -contains 'skills' -and
+                $manifest.shared.skills) {
+                $skills += $manifest.shared.skills
+            }
+        } else {
+            if ($manifest.PSObject.Properties.Name -contains 'skills' -and $manifest.skills) {
+                $skills += $manifest.skills
+            }
         }
     }
     return $skills | Select-Object -Unique
