@@ -1,0 +1,65 @@
+{
+  "name": "ai-first-standards-ts",
+  "description": "Curated TypeScript coding standards — one rule per file, pick what you need, generate .js linters from each",
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [
+        "rules/repo/kiro/ts-no-set-prototype-of-standard.md",
+        "rules/repo/kiro/ts-use-intersection-types-for-dto-standard.md",
+        "rules/repo/kiro/ts-verb-first-test-names-standard.md",
+        "rules/repo/kiro/ts-single-expect-per-test-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": {
+      "rules": [
+        "rules/repo/cursor/ts-no-set-prototype-of-standard.md",
+        "rules/repo/cursor/ts-use-intersection-types-for-dto-standard.md",
+        "rules/repo/cursor/ts-verb-first-test-names-standard.md",
+        "rules/repo/cursor/ts-single-expect-per-test-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "windsurf": {
+      "rules": [
+        "rules/repo/windsurf/ts-no-set-prototype-of-standard.md",
+        "rules/repo/windsurf/ts-use-intersection-types-for-dto-standard.md",
+        "rules/repo/windsurf/ts-verb-first-test-names-standard.md",
+        "rules/repo/windsurf/ts-single-expect-per-test-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "claude": {
+      "rules": [
+        "rules/repo/claude/ts-no-set-prototype-of-standard.md",
+        "rules/repo/claude/ts-use-intersection-types-for-dto-standard.md",
+        "rules/repo/claude/ts-verb-first-test-names-standard.md",
+        "rules/repo/claude/ts-single-expect-per-test-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "copilot": {
+      "rules": [
+        "rules/repo/copilot/ts-no-set-prototype-of-standard.md",
+        "rules/repo/copilot/ts-use-intersection-types-for-dto-standard.md",
+        "rules/repo/copilot/ts-verb-first-test-names-standard.md",
+        "rules/repo/copilot/ts-single-expect-per-test-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    }
+  }
+}

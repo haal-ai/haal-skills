@@ -1,0 +1,60 @@
+{
+  "name": "ai-first-standards-rust",
+  "description": "Curated Rust coding standards — one rule per file, pick what you need, generate .js linters from each",
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [
+        "rules/repo/kiro/rust-use-thiserror-for-errors-standard.md",
+        "rules/repo/kiro/rust-no-unwrap-in-production-standard.md",
+        "rules/repo/kiro/rust-derive-common-traits-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": {
+      "rules": [
+        "rules/repo/cursor/rust-use-thiserror-for-errors-standard.md",
+        "rules/repo/cursor/rust-no-unwrap-in-production-standard.md",
+        "rules/repo/cursor/rust-derive-common-traits-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "windsurf": {
+      "rules": [
+        "rules/repo/windsurf/rust-use-thiserror-for-errors-standard.md",
+        "rules/repo/windsurf/rust-no-unwrap-in-production-standard.md",
+        "rules/repo/windsurf/rust-derive-common-traits-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "claude": {
+      "rules": [
+        "rules/repo/claude/rust-use-thiserror-for-errors-standard.md",
+        "rules/repo/claude/rust-no-unwrap-in-production-standard.md",
+        "rules/repo/claude/rust-derive-common-traits-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "copilot": {
+      "rules": [
+        "rules/repo/copilot/rust-use-thiserror-for-errors-standard.md",
+        "rules/repo/copilot/rust-no-unwrap-in-production-standard.md",
+        "rules/repo/copilot/rust-derive-common-traits-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    }
+  }
+}

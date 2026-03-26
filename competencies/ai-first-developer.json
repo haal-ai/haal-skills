@@ -1,0 +1,50 @@
+{
+  "name": "ai-first-developer",
+  "description": "AI-First Developer: skills, commands, and workflows for teams evolving from traditional development to heavily AI-assisted processes — includes linting, code review, refactoring, and quality enforcement",
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [
+        "commands/repo/kiro/haal-lint.md"
+      ],
+      "hooks": []
+    },
+    "cursor": {
+      "rules": [],
+      "commands": [
+        "commands/repo/cursor/haal-lint.md"
+      ],
+      "hooks": []
+    },
+    "windsurf": {
+      "rules": [],
+      "commands": [
+        "commands/repo/windsurf/haal-lint.md"
+      ],
+      "hooks": []
+    },
+    "claude": {
+      "rules": [],
+      "commands": [
+        "commands/repo/claude/haal-lint.md"
+      ],
+      "hooks": []
+    },
+    "copilot": {
+      "rules": [],
+      "commands": [
+        "commands/repo/copilot/haal-lint.md"
+      ],
+      "hooks": []
+    }
+  }
+}

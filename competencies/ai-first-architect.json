@@ -1,0 +1,45 @@
+{
+  "name": "ai-first-architect",
+  "description": "AI-First Architect: skills and workflows for teams evolving from traditional development to heavily AI-assisted processes — includes standards definition, linter generation, and architectural guidance",
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [
+      "init-standard-rules",
+      "generate-linters",
+      "create-standard",
+      "update-standard-rules"
+    ],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "windsurf": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "claude": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    },
+    "copilot": {
+      "rules": [],
+      "commands": [],
+      "hooks": []
+    }
+  }
+}

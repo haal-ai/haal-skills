@@ -1,0 +1,60 @@
+{
+  "name": "ai-first-standards-python",
+  "description": "Curated Python coding standards — one rule per file, pick what you need, generate .js linters from each",
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [
+        "rules/repo/kiro/py-use-type-hints-standard.md",
+        "rules/repo/kiro/py-snake-case-naming-standard.md",
+        "rules/repo/kiro/py-aaa-test-pattern-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": {
+      "rules": [
+        "rules/repo/cursor/py-use-type-hints-standard.md",
+        "rules/repo/cursor/py-snake-case-naming-standard.md",
+        "rules/repo/cursor/py-aaa-test-pattern-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "windsurf": {
+      "rules": [
+        "rules/repo/windsurf/py-use-type-hints-standard.md",
+        "rules/repo/windsurf/py-snake-case-naming-standard.md",
+        "rules/repo/windsurf/py-aaa-test-pattern-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "claude": {
+      "rules": [
+        "rules/repo/claude/py-use-type-hints-standard.md",
+        "rules/repo/claude/py-snake-case-naming-standard.md",
+        "rules/repo/claude/py-aaa-test-pattern-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "copilot": {
+      "rules": [
+        "rules/repo/copilot/py-use-type-hints-standard.md",
+        "rules/repo/copilot/py-snake-case-naming-standard.md",
+        "rules/repo/copilot/py-aaa-test-pattern-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    }
+  }
+}

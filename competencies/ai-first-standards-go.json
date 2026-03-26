@@ -1,0 +1,60 @@
+{
+  "name": "ai-first-standards-go",
+  "description": "Curated Go coding standards — one rule per file, pick what you need, generate .js linters from each",
+  "schemaVersion": 2,
+  "shared": {
+    "skills": [],
+    "mcpservers": [],
+    "agents": [],
+    "systems": [],
+    "olafdata": []
+  },
+  "tools": {
+    "kiro": {
+      "powers": [],
+      "rules": [
+        "rules/repo/kiro/go-wrap-errors-with-context-standard.md",
+        "rules/repo/kiro/go-table-driven-tests-standard.md",
+        "rules/repo/kiro/go-use-functional-options-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "cursor": {
+      "rules": [
+        "rules/repo/cursor/go-wrap-errors-with-context-standard.md",
+        "rules/repo/cursor/go-table-driven-tests-standard.md",
+        "rules/repo/cursor/go-use-functional-options-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "windsurf": {
+      "rules": [
+        "rules/repo/windsurf/go-wrap-errors-with-context-standard.md",
+        "rules/repo/windsurf/go-table-driven-tests-standard.md",
+        "rules/repo/windsurf/go-use-functional-options-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "claude": {
+      "rules": [
+        "rules/repo/claude/go-wrap-errors-with-context-standard.md",
+        "rules/repo/claude/go-table-driven-tests-standard.md",
+        "rules/repo/claude/go-use-functional-options-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    },
+    "copilot": {
+      "rules": [
+        "rules/repo/copilot/go-wrap-errors-with-context-standard.md",
+        "rules/repo/copilot/go-table-driven-tests-standard.md",
+        "rules/repo/copilot/go-use-functional-options-standard.md"
+      ],
+      "commands": [],
+      "hooks": []
+    }
+  }
+}
