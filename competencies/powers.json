@@ -11,10 +11,7 @@
   },
   "tools": {
     "kiro": {
-      "powers": [
-        "power-builder",
-        "strands"
-      ],
+      "powers": [],
       "rules": [],
       "commands": [],
       "hooks": []

@@ -8,7 +8,9 @@
       "analyze-spec-vs-code",
       "bootstrap-functional-spec-from-code",
       "extend-specification",
+      "generate-dfd-from-code",
       "generate-questionnaire",
+      "generate-spec-from-dfd",
       "improve-spec",
       "review-prd-spec",
       "review-user-story"

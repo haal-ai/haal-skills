@@ -10,11 +10,15 @@
       "assess-code-quality-principles",
       "bootstrap-functional-spec-from-code",
       "create-practice-from-evidence",
+      "create-standard",
       "esdi-chain",
       "generate-design",
       "generate-implementation-plan",
+      "init-standard-rules",
+      "onboard-local",
       "onboard-me",
-      "transform-raw-spec"
+      "transform-raw-spec",
+      "update-standard-rules"
     ],
     "mcpservers": [],
     "agents": [],
