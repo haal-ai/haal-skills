@@ -10,7 +10,7 @@ metadata:
   provider: Haal AI
 ---
 
-if you are in need to get the date and  time, use time tools, fallback to shell command if needed
+if you are in need to get the date and time, use time tools, fallback to shell command if needed
 
 # Inputs to request from the user
 - evidence_type: one of [file, commit, comment]
@@ -23,11 +23,44 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
 - title_hint: 2–5 words that summarize the practice (e.g., "fast-forward-only")
 
 # Naming and storage rules
+
+## Source of Truth
 - Output folder: `.olaf/data/practices/good-bad`
 - File id (and filename without extension): `{domain}-{language}-{title_hint}` kebab-case
 - Output path: `.olaf/data/practices/good-bad/{id}.md`
 - Template: `templates/practice-template.md` from this skill
 - YAML preamble must include: id, name(title), shortDescription, domain, use_case, language, status, created/updated
+
+## Multi-Tool Deployment
+
+Practices can be deployed to multiple AI tools:
+
+| Tool | Practice Path | Format |
+|------|----------------|--------|
+| **Claude** | `.claude/rules/practices/<id>.md` | Markdown |
+| **Cursor** | `.cursor/rules/practices/<id>.mdc` | Markdown with frontmatter |
+| **Copilot** | `.github/instructions/practice-<id>.instructions.md` | GitHub instructions |
+| **Windsurf** | `.windsurf/rules/practices/<id>.md` | Markdown |
+| **OLAF Central** | `.olaf/data/practices/good-bad/<id>.md` | Markdown (source of truth) |
+
+## Scope: Global vs Workspace vs Per-Repo
+
+Before saving, ask the user:
+
+**"Should this practice apply to:"**
+- **Home (Global)** — All workspaces and repos (save to user home directory)
+- **Workspace** — All repos in current workspace (save to workspace root)
+- **Per-repo** — Only a specific repository (save to repo root)
+
+### Output Paths by Scope
+
+| Scope | OLAF Path | Tool Paths |
+|-------|-----------|------------|
+| **Home (Global)** | `~/.olaf/data/practices/good-bad/` | `~/.claude/`, `~/.cursor/`, etc. |
+| **Workspace** | `<workspace>/.olaf/data/practices/good-bad/` | `<workspace>/.claude/`, `<workspace>/.cursor/`, etc. |
+| **Per-repo** | `<repo>/.olaf/data/practices/good-bad/` | `<repo>/.claude/`, `<repo>/.cursor/`, etc. |
+
+**Default:** Per-repo (current repository)
 
 # Process
 1) Validate inputs are present; if missing, ask for them.
@@ -48,12 +81,20 @@ if you are in need to get the date and  time, use time tools, fallback to shell 
    - created_timestamp: ISO-like `yyyy-MM-dd HH:mm`
 5) Render `practice-template.md` by replacing variables with values.
 6) Propose the final filename and a preview of the document. Ask for confirmation.
-7) On confirmation, write the file to `.olaf/data/practice/good-bad/{id}.md`.
-8) Output the saved path.
+7) On confirmation, write the file to `.olaf/data/practices/good-bad/{id}.md`.
+8) Ask which tools to deploy to:
+   - Claude (.claude/rules/practices/)
+   - Cursor (.cursor/rules/practices/)
+   - Copilot (.github/instructions/)
+   - Windsurf (.windsurf/rules/practices/)
+   - All of the above
+   - None (keep in .olaf/ only)
+9) Deploy to selected tools with appropriate format.
+10) Output the saved paths.
 
 # Output
 - On preview: show the rendered markdown (collapsed if UI supports) and the target path.
-- On save: show the final saved path.
+- On save: show the final saved paths (source of truth + deployed tools).
 
 # Guardrails
 - Never overwrite an existing practice without explicit consent; if exists, propose `{id}-v2.md`.

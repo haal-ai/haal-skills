@@ -30,10 +30,16 @@
       "competencyIds": ["developer", "architect", "api-producers", "api-consumers", "specification", "git-assistant", "session-manager", "prompt-engineer", "technical-writer", "base-skills"]
     },
     {
+      "id": "ai-first",
+      "name": "AI-First",
+      "description": "AI-first standards and linting — architect defines standards and generates linters, developer runs them",
+      "competencyIds": ["ai-first-architect", "ai-first-developer", "ai-first-standards-ts", "ai-first-standards-go", "ai-first-standards-rust", "ai-first-standards-python"]
+    },
+    {
       "id": "all",
       "name": "All",
       "description": "Every competency in the registry",
-      "competencyIds": ["1a-c-cpp-developpers", "api-consumers", "api-producers", "architect", "business-analyst", "developer", "git-assistant", "base-skills", "project-manager", "prompt-engineer", "researcher", "session-manager", "specification", "technical-writer"]
+      "competencyIds": ["1a-c-cpp-developpers", "ai-first-architect", "ai-first-developer", "ai-first-standards-ts", "ai-first-standards-go", "ai-first-standards-rust", "ai-first-standards-python", "api-consumers", "api-producers", "architect", "business-analyst", "developer", "git-assistant", "base-skills", "project-manager", "prompt-engineer", "researcher", "session-manager", "specification", "technical-writer"]
     }
   ],
   "competencies": [
@@ -120,6 +126,42 @@
       "name": "C/C++ Developer",
       "description": "HAAL enterprise tools and frameworks expertise for C/C++ developers",
       "manifestUrl": "competencies/1a-c-cpp-developpers.json"
+    },
+    {
+      "id": "ai-first-architect",
+      "name": "AI-First Architect",
+      "description": "Skills and workflows for teams evolving from traditional development to heavily AI-assisted processes — standards, linters, and architectural guidance",
+      "manifestUrl": "competencies/ai-first-architect.json"
+    },
+    {
+      "id": "ai-first-developer",
+      "name": "AI-First Developer",
+      "description": "Skills, commands, and workflows for teams evolving from traditional development to heavily AI-assisted processes",
+      "manifestUrl": "competencies/ai-first-developer.json"
+    },
+    {
+      "id": "ai-first-standards-ts",
+      "name": "AI-First Standards — TypeScript",
+      "description": "Curated TypeScript coding standards installed as rules into the AI tool and discoverable by generate-linters",
+      "manifestUrl": "competencies/ai-first-standards-ts.json"
+    },
+    {
+      "id": "ai-first-standards-go",
+      "name": "AI-First Standards — Go",
+      "description": "Curated Go coding standards installed as rules into the AI tool and discoverable by generate-linters",
+      "manifestUrl": "competencies/ai-first-standards-go.json"
+    },
+    {
+      "id": "ai-first-standards-rust",
+      "name": "AI-First Standards — Rust",
+      "description": "Curated Rust coding standards installed as rules into the AI tool and discoverable by generate-linters",
+      "manifestUrl": "competencies/ai-first-standards-rust.json"
+    },
+    {
+      "id": "ai-first-standards-python",
+      "name": "AI-First Standards — Python",
+      "description": "Curated Python coding standards installed as rules into the AI tool and discoverable by generate-linters",
+      "manifestUrl": "competencies/ai-first-standards-python.json"
     }
   ],
   "systems": [

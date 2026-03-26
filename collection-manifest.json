@@ -46,5 +46,13 @@
     "prompt-engineer",
     "technical-writer",
     "base-skills"
+  ],
+  "ai-first": [
+    "ai-first-architect",
+    "ai-first-developer",
+    "ai-first-standards-ts",
+    "ai-first-standards-go",
+    "ai-first-standards-rust",
+    "ai-first-standards-python"
   ]
 }
