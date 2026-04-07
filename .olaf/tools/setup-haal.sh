@@ -7,7 +7,12 @@ set -uo pipefail
 # 3. Clone additional repos (skip unavailable)
 # 4. Install from bottom to top (seed wins on conflicts)
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Fix for macOS Bash 3.2 compatibility
+if [[ -n "${BASH_SOURCE:-}" ]]; then
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+else
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+fi
 
 # Use Windows-compatible temp path if on Windows (Git Bash)
 if [[ -n "${USERPROFILE:-}" ]]; then
@@ -208,12 +213,17 @@ if [[ -z "$seed_path" || ! -d "$seed_path" ]]; then
     exit 1
 fi
 
-# Read repos manifest from seed
-mapfile -t additional_repos < <(read_repos_manifest "$seed_path")
+# Read repos manifest from seed (macOS Bash 3.2 compatible)
+additional_repos=()
+while IFS= read -r line; do
+    if [[ -n "$line" ]]; then
+        additional_repos+=("$line")
+    fi
+done < <(read_repos_manifest "$seed_path")
 
 # Clone additional repos
 cloned_paths=()
-if [[ ${#additional_repos[@]} -gt 0 ]]; then
+if [[ ${#additional_repos[@]:-0} -gt 0 ]]; then
     for repo in "${additional_repos[@]}"; do
         if [[ -n "$repo" ]]; then
             CLONE_RESULT_FILE=$(mktemp)
